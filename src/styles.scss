@@ -1,7 +1,21 @@
 @import '../src/app/scss/base/standards';
 
 // 1. Your custom variables and variable overwrites.
-//$global-link-color: #DA7D02;
+//$global-font-family: '';
+
+// Navbar
+$navbar-background: $color-grey;
+
+// Buttons
+$button-primary-background: $color-primary;
+$button-secondary-background: $color-secondary;
+
+$button-primary-color: $color-secondary;
+$button-secondary-color: $color-primary;
+
+// Sections
+$background-primary-background: $color-primary;
+$background-secondary-background: $color-secondary;
 
 // 2. Import default variables and available mixins.
 @import "../node_modules/uikit/src/scss/variables-theme.scss";

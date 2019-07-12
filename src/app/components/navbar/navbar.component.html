@@ -1,0 +1,50 @@
+<nav class="uk-navbar-container" uk-navbar>
+  <div class="uk-navbar-left">
+    <a class="uk-navbar-item uk-logo" routerLink="/">Concerty</a>
+  </div>
+
+  <div class="uk-navbar-right">
+    <ul class="uk-navbar-nav">
+      <li>
+        <a routerLink="concerts">
+          Concerts
+        </a>
+      </li>
+      <li>
+        <a routerLink="artists">
+          Artists
+        </a>
+      </li>
+      <li>
+        <a routerLink="about">
+          About Concerty
+        </a>
+      </li>
+    </ul>
+
+<!--    <div class="uk-navbar-item">-->
+<!--    </div>-->
+
+    <div class="uk-navbar-item">
+      <div class="uk-inline">
+        <button class="uk-button uk-button-primary uk-dark" type="button">
+          ACCOUNT<i class="fal fa-user"></i>
+        </button>
+        <div uk-dropdown>
+          <ul class="uk-nav uk-dropdown-nav">
+            <li class="uk-nav-header">
+              <a href="#">My tickets<i class="fal fa-qrcode"></i></a>
+            </li>
+            <li class="uk-nav-divider"></li>
+            <li class="uk-nav-header">Settings</li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Notifications</a></li>
+            <li class="uk-nav-divider"></li>
+            <li><a href="#">Log out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
