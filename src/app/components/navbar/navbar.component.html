@@ -1,44 +1,32 @@
-<nav class="uk-navbar-container" uk-navbar>
+<nav class="uk-navbar-container uk-padding-small uk-padding-remove-left uk-padding-remove-right" uk-navbar>
   <div class="uk-navbar-left">
-    <a class="uk-navbar-item uk-logo" routerLink="/">Concerty</a>
+    <a class="uk-navbar-item uk-logo logo-style" routerLink="/">CONCERTY</a>
   </div>
 
   <div class="uk-navbar-right">
     <ul class="uk-navbar-nav">
       <li>
-        <a routerLink="concerts">
-          Concerts
-        </a>
+        <a routerLink="concerts" routerLinkActive="uk-active">Concerts</a>
       </li>
       <li>
-        <a routerLink="artists">
-          Artists
-        </a>
+        <a routerLink="artists" routerLinkActive="uk-active">Artists</a>
       </li>
       <li>
-        <a routerLink="about">
-          About Concerty
+        <a routerLink="about" routerLinkActive="uk-active">
+          About&nbsp;<span class="logo-style"> Concerty</span>
         </a>
       </li>
     </ul>
 
-<!--    <div class="uk-navbar-item">-->
-<!--    </div>-->
-
     <div class="uk-navbar-item">
       <div class="uk-inline">
-        <button class="uk-button uk-button-primary uk-dark" type="button">
-          ACCOUNT<i class="fal fa-user"></i>
-        </button>
+        <a class="uk-button uk-button-primary" type="button">
+          <i class="fad fa-user uk-margin-small-right"></i>ACCOUNT
+        </a>
         <div uk-dropdown>
           <ul class="uk-nav uk-dropdown-nav">
-            <li class="uk-nav-header">
-              <a href="#">My tickets<i class="fal fa-qrcode"></i></a>
-            </li>
-            <li class="uk-nav-divider"></li>
-            <li class="uk-nav-header">Settings</li>
-            <li><a href="#">Privacy</a></li>
-            <li><a href="#">Notifications</a></li>
+            <li><a href="#">Tickets</a></li>
+            <li><a href="#">Profile</a></li>
             <li class="uk-nav-divider"></li>
             <li><a href="#">Log out</a></li>
           </ul>

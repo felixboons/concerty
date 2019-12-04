@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  serverUrlPrefix: 'http://www.someURL.com:3000/api/'
 };

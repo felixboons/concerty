@@ -1,5 +1,19 @@
-@import '../../scss/base/standards';
+@import '../../scss/base/colors';
 
+.logo-style {
+  font-weight: bold;
+  font-style: italic;
+
+}
 .uk-logo {
-  color: $color-secondary;
+  color: $color-primary;
+  font-size: 2rem;
+}
+
+li a, .uk-button {
+  font-weight: bold;
+}
+li.uk-nav-header {
+  font-weight: bold;
+  color: $color-primary;
 }

@@ -1,0 +1,58 @@
+@import '../../scss/base/colors';
+
+.company-selling-point {
+  position: relative;
+  text-align: center;
+  background-color: $color-secondary;
+  margin-bottom: 4px;
+  margin-top: 51px; // Account for extra space for absolute positioned icon-wrapper.
+  padding-top: calc(60px * 1.5); // Equal to icon-wrapper top position * 1.5.
+  padding-bottom: 3rem;
+
+  &:nth-child(2) {
+    margin-top: 0;
+    background-color: $color-secondary-2;
+    padding-top: calc(51px * 1.5) // Equal to icon-wrapper top position * 1.5.
+  }
+  &:nth-child(3) {
+    margin-top: 0;
+    background-color: $color-secondary-3;
+    padding-top: calc(51px * 1.5) // Equal to icon-wrapper top position * 1.5.
+  }
+
+  .icon-wrapper {
+    position: absolute;
+    right: 0; bottom: 0; left: 0;
+    top: -46px; // Equal to icon height.
+
+    &:nth-child(2) {
+      top: -51px; // Equal to icon height.
+    }
+    &:nth-child(3) {
+      top: -51px; // Equal to icon height.
+    }
+
+    .icon-box {
+      margin: 0 auto;
+      position: relative;
+      padding: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: $color-primary;
+      border-radius: 100%;
+
+      i {
+        top: 50%; right: 0; bottom: 0; left: 0;
+        transform: translateY(-50%);
+        position: absolute;
+        margin: auto;
+        color: white;
+      }
+    }
+  }
+
+  h2 {
+    color: white;
+    font-weight: bold;
+  }
+}
