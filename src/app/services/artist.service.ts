@@ -9,11 +9,11 @@ import {environment} from '../../environments/environment'
 })
 export class ArtistService {
   private readonly url = environment.serverUrlPrefix + 'artists';
-  artistsObs = new Observable<Artist>();
+  artistObs = new Observable<Artist>();
 
   constructor(private http: HttpClient) { }
 
-  getArtists(): Observable<any> {
+  getArtists(): Observable<Artist[]|any> {
     return this.http
       .get(this.url);
   }

@@ -1,16 +1,19 @@
-<div class="uk-container">
+<div class="uk-container uk-margin-top">
 
   <div class="uk-align-center">
-    <div uk-filter="target: .js-filter"
-         class="uk-margin-small-top uk-align-center">
+    <div uk-filter="target: .js-filter">
       <ul class="uk-subnav uk-subnav-pill">
-        <li *ngFor="let genre of genres"
-            uk-filter-control="tag-blue"><a href="#">{{ genre }}</a></li>
+        <li uk-filter-control><a href="#">All</a></li>
+        <li uk-filter-control=".tag-hip-hop"><a href="#">Hip-Hop</a></li>
+        <li uk-filter-control=".tag-r-b"><a href="#">R&B</a></li>
+        <li uk-filter-control=".tag-pop"><a href="#">Pop</a></li>
+        <li uk-filter-control=".tag-reggae"><a href="#">Reggae</a></li>
+        <li uk-filter-control=".tag-dancehall"><a href="#">Dancehall</a></li>
       </ul>
 
       <ul class="js-filter uk-child-width-1-2 uk-child-width-1-3@m uk-text-center" uk-grid>
         <li  *ngFor="let artist of artists"
-             class="tag-blue">
+             [class]="'tag-' + artist.genre | lowercase">
           <div class="uk-card uk-card-secondary uk-card-body">
                {{ artist.name }}
           </div>

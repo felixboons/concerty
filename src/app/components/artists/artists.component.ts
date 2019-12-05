@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ArtistService} from '../../services/artist.service';
 import {Artist} from '../../models/artist.model';
 import {Genre} from '../../enums/genre.enum';
+import * as UIkit from 'uikit';
 
 @Component({
   selector: 'app-artists',
