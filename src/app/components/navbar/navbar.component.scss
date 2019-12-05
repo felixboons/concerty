@@ -8,7 +8,23 @@
 li a, .uk-button {
   font-weight: bold;
 }
-li.uk-nav-header {
+
+span#navbar-toggle-text {
   font-weight: bold;
-  color: $color-primary;
+}
+
+.register-button:last-child {
+  color: $color-grey;
+
+  &:hover {
+    color: $color-dark-grey;
+  }
+}
+
+.register-button.uk-active {
+  color: $color-dark-grey;
+}
+
+.login-button.uk-active {
+  background-color: #0f7ae5;
 }

@@ -1,24 +1,28 @@
-<nav class="uk-navbar-container uk-padding-small uk-padding-remove-left uk-padding-remove-right" uk-navbar>
+<nav class="uk-navbar-container uk-padding-small uk-padding-remove-left uk-padding-remove-right uk-box-shadow-small" uk-navbar>
   <div class="uk-navbar-left">
     <a class="uk-navbar-item uk-logo logo-style" routerLink="/">CONCERTY</a>
   </div>
 
-  <div class="uk-navbar-right">
+<!--  Desktop -->
+  <div class="uk-navbar-right uk-visible@m">
     <ul class="uk-navbar-nav">
-      <li>
-        <a routerLink="concerts" routerLinkActive="uk-active">Concerts</a>
+      <li routerLink="" routerLinkActive="uk-active" [routerLinkActiveOptions]="{ exact: true }">
+        <a>Home</a>
       </li>
-      <li>
-        <a routerLink="artists" routerLinkActive="uk-active">Artists</a>
+      <li routerLink="concerts" routerLinkActive="uk-active">
+        <a>Concerts</a>
       </li>
-      <li>
-        <a routerLink="about" routerLinkActive="uk-active">
-          About&nbsp;<span class="logo-style"> Concerty</span>
+      <li routerLink="artists" routerLinkActive="uk-active">
+        <a>Artists</a>
+      </li>
+      <li routerLink="about" routerLinkActive="uk-active">
+        <a>
+          About&nbsp;<span class="logo-style">Concerty</span>
         </a>
       </li>
     </ul>
 
-    <div class="uk-navbar-item">
+    <div *ngIf="loggedIn; else loginButton" class="uk-navbar-item">
       <div class="uk-inline">
         <a class="uk-button uk-button-primary" type="button">
           ACCOUNT<i class="fad fa-user uk-margin-small-left"></i>
@@ -33,6 +37,29 @@
         </div>
       </div>
     </div>
-
+    <ng-template #loginButton>
+      <div class="uk-navbar-item">
+        <a routerLink="login" routerLinkActive="uk-active"
+           class="login-button uk-button uk-button-primary">
+          LOG IN<i class="fad fa-user uk-margin-small-left"></i>
+        </a>
+        <a routerLink="register" routerLinkActive="uk-active"
+           class="register-button uk-button uk-button-default uk-margin-small-left">REGISTER</a>
+      </div>
+    </ng-template>
   </div>
+
+<!--  Mobile -->
+  <div class="uk-navbar-right uk-hidden@m">
+    <nav class="uk-navbar uk-navbar-container uk-navbar-transparent uk-margin uk-margin-remove-bottom">
+      <div class="uk-navbar-left">
+        <a href="#offcanvas-nav" class="uk-navbar-toggle uk-height-1-1" uk-toggle>
+          <i class="fad fa-bars fa-lg"></i>
+          <span id="navbar-toggle-text" class="uk-margin-small-left">MENU</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+
 </nav>
+<app-navbar-mobile></app-navbar-mobile>

@@ -1,0 +1,11 @@
+@import '../../scss/base/_colors.scss';
+
+h2 {
+  display: inline-block;
+  padding-right: 10px;
+  border-top: 4px solid $color-secondary;
+  border-right: 4px solid $color-secondary;
+  //border-top-right-radius: 40px;
+  //-webkit-border-top-right-radius: 40px;
+  //-moz-border-radius-topright: 40px;
+}

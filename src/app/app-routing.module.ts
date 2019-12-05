@@ -7,13 +7,10 @@ import {ConcertDetailsComponent} from './components/concerts/concert-details/con
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
-
+import {RegisterComponent} from './components/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: LoginComponent },
-  { path: 'account', component: LoginComponent },
   { path: 'artists', component: ArtistsComponent,
     children: [
       { path: ':key', component: ArtistDetailsComponent }
@@ -25,6 +22,9 @@ const routes: Routes = [
     ]
   },
   { path: 'about', component: AboutComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'account', component: LoginComponent },
 ];
 
 @NgModule({

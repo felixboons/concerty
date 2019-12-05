@@ -1,10 +1,13 @@
 @import 'app/scss/base/colors';
 
-// 1. Overwrites
+// 1. Theme overwrites
 //$global-font-family: '';
 
 // Navbar
-$navbar-background: $color-grey;
+$navbar-background: white;
+$navbar-nav-item-color: $color-grey;
+$navbar-nav-item-active-color: $color-dark-grey;
+$navbar-nav-item-hover-color: $color-dark-grey;
 
 // Buttons
 $button-primary-background: $color-primary;
@@ -13,13 +16,13 @@ $button-primary-color: white;
 $button-secondary-background: $color-secondary;
 $button-secondary-color: white;
 
-
 // Sections
-$background-primary-background: $color-secondary;
-$background-secondary-background: $color-primary;
+$background-primary-background: $color-primary;
+$background-secondary-background: $color-secondary;
 
 // Headers
 $base-heading-color: $color-primary;
+
 
 
 // 2. Import default variables and available mixins.
@@ -30,4 +33,4 @@ $base-heading-color: $color-primary;
 //@mixin hook-card() { color: #000; }
 
 // 4. Import UIkit.
-@import "../node_modules/uikit/src/scss/uikit-theme.scss";
+@import "../node_modules/uikit/src/scss/uikit-theme";

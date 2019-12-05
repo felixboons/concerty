@@ -1,0 +1,28 @@
+@import '../../../scss/base/colors';
+
+li.uk-nav-header {
+  font-weight: bold;
+  color: $color-primary;
+}
+
+#offcanvas-nav {
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.uk-offcanvas-bar {
+  background-color: white;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+
+  li a {
+    font-weight: bold;
+    color: $color-grey;
+
+    &:hover {
+      color: $color-dark-grey;
+    }
+  }
+
+  li.uk-active a {
+    color: $color-dark-grey;
+  }
+}
