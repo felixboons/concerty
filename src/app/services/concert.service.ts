@@ -14,6 +14,7 @@ export class ConcertService {
   constructor(private http: HttpClient) { }
 
   getConcerts(): Observable<Concert[]|any> {
+    console.log(this.url);
     return this.http
       .get(this.url);
   }
