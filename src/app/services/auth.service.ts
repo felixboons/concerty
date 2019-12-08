@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
   private readonly url = environment.serverUrlPrefix + 'auth/login';
-  loginStatus = new Subject<boolean>();
+  isAuthenticatedObs = new Subject<boolean>();
 
   constructor(private http: HttpClient,
               private userService: UserService,
@@ -20,7 +20,7 @@ export class AuthService {
     const token = this.cache.getToken();
 
     if (token) {
-      this.updateLoginStatus(true);
+      this.updateLoginStatus(!!token);
     }
   }
 
@@ -51,12 +51,11 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     const token = this.cache.getToken();
-    console.log(!!token);
     return !!token;
   }
 
   updateLoginStatus(status: boolean): void {
-    this.loginStatus.next(status);
+    this.isAuthenticatedObs.next(status);
   }
 
   private redirectAfterLogin(): void {

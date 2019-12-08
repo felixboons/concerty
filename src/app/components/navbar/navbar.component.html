@@ -22,7 +22,7 @@
       </li>
     </ul>
 
-    <div *ngIf="loggedIn; else loginButton" class="uk-navbar-item">
+    <div *ngIf="isAuthenticated; else loginButton" class="uk-navbar-item">
       <div class="uk-inline">
         <a class="uk-button uk-button-primary" type="button">
           ACCOUNT<i class="fad fa-user uk-margin-small-left"></i>
@@ -42,7 +42,6 @@
         <a routerLink="login" routerLinkActive="uk-active"
            class="login-button uk-button uk-button-primary">
           LOG IN
-          <i class="fad fa-user uk-margin-small-left"></i>
         </a>
         <a routerLink="register" routerLinkActive="uk-active"
            class="register-button uk-button uk-button-default uk-margin-small-left">
@@ -57,7 +56,7 @@
     <nav class="uk-navbar uk-navbar-container uk-navbar-transparent uk-margin uk-margin-remove-bottom">
       <div class="uk-navbar-left">
         <a href="#offcanvas-nav" class="uk-navbar-toggle uk-height-1-1" uk-toggle>
-          <i class="fad fa-bars fa-lg"></i>
+          <i class="far fa-bars fa-lg"></i>
           <span id="navbar-toggle-text" class="uk-margin-small-left">MENU</span>
         </a>
       </div>

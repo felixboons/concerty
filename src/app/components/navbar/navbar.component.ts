@@ -7,13 +7,17 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  loggedIn = false;
+  isAuthenticated = false;
 
   constructor(private authService: AuthService) {
-    this.authService.loginStatus.subscribe(status => this.loggedIn = status);
   }
 
   ngOnInit() {
+    this.isAuthenticated = this.authService.isAuthenticated();
+    this.authService.isAuthenticatedObs.subscribe(status => {
+      console.log(status);
+      this.isAuthenticated = status;
+    });
   }
 
   logout(): void {

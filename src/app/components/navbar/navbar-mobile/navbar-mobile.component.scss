@@ -25,4 +25,16 @@ li.uk-nav-header {
   li.uk-active a {
     color: $color-dark-grey;
   }
+
+  .uk-nav-header {
+    color: $color-primary;
+  }
+
+  .list-item-indent {
+    margin-left: 10px;
+  }
+
+  .uk-nav-divider {
+    border-color: $color-grey;
+  }
 }

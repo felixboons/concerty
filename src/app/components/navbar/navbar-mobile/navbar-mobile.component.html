@@ -6,12 +6,30 @@
         <a>HOME</a>
       </li>
       <li routerLink="concerts" routerLinkActive="uk-active"><a>CONCERTS</a></li>
-      <li routerLink="artists" routerLinkActive="uk-active">
-        <a>ARTISTS</a>
-      </li>
+      <li routerLink="artists" routerLinkActive="uk-active"><a>ARTISTS</a></li>
       <li routerLink="about" routerLinkActive="uk-active">
         <a>ABOUT <span class="logo-style">CONCERTY</span></a>
       </li>
+
+      <li class="uk-nav-header">
+        ACCOUNT
+        <i class="fad fa-user uk-margin-small-left"></i>
+      </li>
+
+<!--      Not authenticated -->
+      <li *ngIf="!isAuthenticated" class="list-item-indent"
+          routerLink="login" routerLinkActive="uk-active"><a>LOG IN</a></li>
+      <li *ngIf="!isAuthenticated" class="list-item-indent"
+          routerLink="register" routerLinkActive="uk-active"><a>REGISTER</a></li>
+
+<!--      Authenticated -->
+      <li *ngIf="isAuthenticated" class="list-item-indent"
+          routerLink="account/tickets" routerLinkActive="uk-active"><a>TICKETS</a></li>
+      <li *ngIf="isAuthenticated" class="list-item-indent"
+          routerLink="account/profile" routerLinkActive="uk-active"><a>PROFILE</a></li>
+      <li class="uk-nav-divider"></li>
+      <li *ngIf="isAuthenticated" class="list-item-indent"
+          (click)="logout()"><a>LOG OUT</a></li>
 
     </ul>
   </div>
