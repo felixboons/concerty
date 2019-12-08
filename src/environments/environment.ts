@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrlPrefix: 'http://localhost:3000/api/'
+  serverUrlPrefix: 'https://concerty-server.herokuapp.com/api/'
+  // serverUrlPrefix: 'http://localhost:3000/api/'
 };
 
 /*

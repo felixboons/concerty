@@ -32,7 +32,7 @@
             <li><a href="#">Tickets</a></li>
             <li><a href="#">Profile</a></li>
             <li class="uk-nav-divider"></li>
-            <li><a href="#">Log out</a></li>
+            <li (click)="logout()"><a>Log out</a></li>
           </ul>
         </div>
       </div>
@@ -41,10 +41,13 @@
       <div class="uk-navbar-item">
         <a routerLink="login" routerLinkActive="uk-active"
            class="login-button uk-button uk-button-primary">
-          LOG IN<i class="fad fa-user uk-margin-small-left"></i>
+          LOG IN
+          <i class="fad fa-user uk-margin-small-left"></i>
         </a>
         <a routerLink="register" routerLinkActive="uk-active"
-           class="register-button uk-button uk-button-default uk-margin-small-left">REGISTER</a>
+           class="register-button uk-button uk-button-default uk-margin-small-left">
+          REGISTER
+        </a>
       </div>
     </ng-template>
   </div>

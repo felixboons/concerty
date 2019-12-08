@@ -1,3 +1,30 @@
 <div class="uk-container uk-margin-large-top uk-margin-large-bottom">
-  <h2 class="uk-heading-small">Log in</h2>
+
+  <div class="uk-grid">
+    <div class="uk-width-1-1 uk-width-1-2@m">
+
+      <h2 class="uk-heading-small">Log in</h2>
+
+      <form [formGroup]="form" (ngSubmit)="login()">
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-1-1 uk-margin-small-bottom">
+            <input class="uk-input" type="email" placeholder="Email"
+                   formControlName="email">
+          </div>
+          <div class="uk-width-1-1 uk-margin-small-bottom">
+            <input class="uk-input" type="password" placeholder="Password"
+                   formControlName="password">
+          </div>
+          <div class="uk-width-1-1">
+            <button [disabled]="form.invalid" class="uk-button uk-button-primary" type="submit">Log in</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <div class="uk-width-1-1 uk-width-1-2@m">
+
+  </div>
 </div>

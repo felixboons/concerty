@@ -14,6 +14,7 @@ import { AboutComponent } from './components/about/about.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NavbarMobileComponent } from './components/navbar/navbar-mobile/navbar-mobile.component';
 import { RegisterComponent } from './components/register/register.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,11 +30,12 @@ import { RegisterComponent } from './components/register/register.component';
     NavbarMobileComponent,
     RegisterComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

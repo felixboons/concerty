@@ -20,6 +20,10 @@ export class CacheService {
     return localStorage.getItem(this.lsKeyToken);
   }
 
+  removeToken(): void {
+    localStorage.removeItem(this.lsKeyToken);
+  }
+
   setArtists(artists: Artist[]): void {
     const value = JSON.stringify(artists);
     localStorage.setItem(this.lsKeyArtists, value);
@@ -30,6 +34,10 @@ export class CacheService {
     return JSON.parse(artists);
   }
 
+  removeArtists(): void {
+    localStorage.removeItem(this.lsKeyArtists);
+  }
+
   setConcerts(concerts: Concert[]): void {
     const value = JSON.stringify(concerts);
     localStorage.setItem(this.lsKeyConcerts, value);
@@ -38,5 +46,9 @@ export class CacheService {
   getConcerts(): Concert[] {
     const concerts = localStorage.getItem(this.lsKeyConcerts);
     return JSON.parse(concerts);
+  }
+
+  removeConcerts(): void {
+    localStorage.removeItem(this.lsKeyConcerts);
   }
 }
