@@ -25,18 +25,52 @@
     <div *ngIf="isAuthenticated; else loginButton" class="uk-navbar-item">
       <div class="uk-inline">
         <a class="uk-button uk-button-primary" type="button">
-          ACCOUNT<i class="fad fa-user uk-margin-small-left"></i>
+          ACCOUNT
         </a>
         <div uk-dropdown>
           <ul class="uk-nav uk-dropdown-nav">
-            <li><a href="#">Tickets</a></li>
-            <li><a href="#">Profile</a></li>
+            <li routerLink="/account/tickets" routerLinkActive="uk-active">
+              <a>
+                <i class="fad fa-qrcode"></i>
+                TICKETS
+              </a>
+            </li>
+            <li routerLink="/account/profile" routerLinkActive="uk-active">
+              <a>
+                <i class="fad fa-user"></i>
+                PROFILE
+              </a>
+            </li>
+
+            <!--      Administrator -->
+            <li *ngIf="isAdministrator" class="uk-nav-divider"></li>
+            <li *ngIf="isAdministrator"
+                routerLink="admin/artists" routerLinkActive="uk-active">
+              <a>
+                <i class="fad fa-user-music"></i>
+                ARTISTS
+              </a>
+            </li>
+            <li *ngIf="isAdministrator"
+                routerLink="admin/concerts" routerLinkActive="uk-active">
+              <a>
+                <i class="fad fa-calendar-alt"></i>
+                CONCERTS
+              </a>
+            </li>
+
             <li class="uk-nav-divider"></li>
-            <li (click)="logout()"><a>Log out</a></li>
+            <li (click)="logout()">
+              <a>
+                <i class="fad fa-sign-out-alt"></i>
+                LOG OUT
+              </a>
+            </li>
           </ul>
         </div>
       </div>
     </div>
+
     <ng-template #loginButton>
       <div class="uk-navbar-item">
         <a routerLink="login" routerLinkActive="uk-active"
@@ -51,7 +85,7 @@
     </ng-template>
   </div>
 
-<!--  Mobile -->
+<!--  Mobile toggle menu -->
   <div class="uk-navbar-right uk-hidden@m">
     <nav class="uk-navbar uk-navbar-container uk-navbar-transparent uk-margin uk-margin-remove-bottom">
       <div class="uk-navbar-left">

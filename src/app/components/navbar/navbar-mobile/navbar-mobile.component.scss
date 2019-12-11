@@ -27,7 +27,7 @@ li.uk-nav-header {
   }
 
   .uk-nav-header {
-    color: $color-primary;
+    color: $color-dark-grey;
   }
 
   .list-item-indent {
@@ -37,4 +37,9 @@ li.uk-nav-header {
   .uk-nav-divider {
     border-color: $color-grey;
   }
+}
+
+.fad {
+  width: 30px;
+  text-align: left;
 }

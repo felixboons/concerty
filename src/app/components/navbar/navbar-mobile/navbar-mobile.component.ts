@@ -8,6 +8,7 @@ import {AuthService} from '../../../_services/auth.service';
 })
 export class NavbarMobileComponent implements OnInit {
   isAuthenticated = false;
+  isAdministrator = true;
 
   constructor(private authService: AuthService) { }
 

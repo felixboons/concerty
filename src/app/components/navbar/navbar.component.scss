@@ -28,3 +28,16 @@ span#navbar-toggle-text {
 .login-button.uk-active {
   background-color: #0f7ae5;
 }
+
+.fad {
+  width: 30px;
+  text-align: left;
+}
+
+.uk-dropdown a {
+  color: $color-grey;
+
+  &:hover {
+    color: $color-dark-grey;
+  }
+}

@@ -11,10 +11,7 @@
         <a>ABOUT <span class="logo-style">CONCERTY</span></a>
       </li>
 
-      <li class="uk-nav-header">
-        ACCOUNT
-        <i class="fad fa-user uk-margin-small-left"></i>
-      </li>
+      <li class="uk-nav-header">ACCOUNT</li>
 
 <!--      Not authenticated -->
       <li *ngIf="!isAuthenticated" class="list-item-indent"
@@ -24,12 +21,45 @@
 
 <!--      Authenticated -->
       <li *ngIf="isAuthenticated" class="list-item-indent"
-          routerLink="account/tickets" routerLinkActive="uk-active"><a>TICKETS</a></li>
+          routerLink="account/tickets" routerLinkActive="uk-active">
+        <a>
+          <i class="fad fa-qrcode"></i>
+          TICKETS
+        </a>
+      </li>
       <li *ngIf="isAuthenticated" class="list-item-indent"
-          routerLink="account/profile" routerLinkActive="uk-active"><a>PROFILE</a></li>
-      <li class="uk-nav-divider"></li>
+          routerLink="account/profile" routerLinkActive="uk-active">
+        <a>
+          <i class="fad fa-user"></i>
+          PROFILE
+        </a>
+      </li>
+
+      <!--      Administrator -->
+      <li class="uk-nav-header">ADMINISTRATOR</li>
+      <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
+          routerLink="admin/artists" routerLinkActive="uk-active">
+        <a>
+          <i class="fad fa-user-music"></i>
+          ARTISTS
+        </a>
+      </li>
+      <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
+          routerLink="admin/concerts" routerLinkActive="uk-active">
+        <a>
+          <i class="fad fa-calendar-alt"></i>
+          CONCERTS
+        </a>
+      </li>
+
+      <li *ngIf="isAuthenticated" class="uk-nav-divider"></li>
       <li *ngIf="isAuthenticated" class="list-item-indent"
-          (click)="logout()"><a>LOG OUT</a></li>
+          (click)="logout()">
+        <a>
+          <i class="fad fa-sign-out-alt"></i>
+          LOG OUT
+        </a>
+      </li>
 
     </ul>
   </div>
