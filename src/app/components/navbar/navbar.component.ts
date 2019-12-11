@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../_services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +15,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.isAuthenticated = this.authService.isAuthenticated();
     this.authService.isAuthenticatedObs.subscribe(status => {
-      console.log(status);
       this.isAuthenticated = status;
     });
   }

@@ -1,0 +1,20 @@
+@import '../../scss/base/colors';
+
+.background-image {
+  background-image: url("../../../assets/images/concert-image-gradient.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right bottom;
+  padding: 30px;
+}
+
+.background-white {
+  background-color: white;
+}
+
+h5.text-color-grey {
+  color: $color-grey;
+  font-weight: normal;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 20px;
+}

@@ -1,7 +1,13 @@
 @import 'app/scss/base/colors';
 
 // 1. Theme overwrites
+
 //$global-font-family: '';
+
+// Headers
+$base-heading-font-family: 'Source Sans Pro', sans-serif;
+$base-heading-color: $color-primary;
+$base-heading-font-weight: 700;
 
 // Navbar
 $navbar-background: white;
@@ -10,6 +16,10 @@ $navbar-nav-item-active-color: $color-dark-grey;
 $navbar-nav-item-hover-color: $color-dark-grey;
 
 // Buttons
+.uk-button {
+  font-weight: bold !important;
+}
+
 $button-primary-background: $color-primary;
 $button-primary-color: white;
 
@@ -19,9 +29,6 @@ $button-secondary-color: white;
 // Sections
 $background-primary-background: $color-primary;
 $background-secondary-background: $color-secondary;
-
-// Headers
-$base-heading-color: $color-primary;
 
 
 
