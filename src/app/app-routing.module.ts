@@ -9,6 +9,9 @@ import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
 import {RegisterComponent} from './components/register/register.component';
 import {AuthGuard} from './auth-guard.module';
+import {AccountComponent} from './components/account/account.component';
+import {TicketsComponent} from './components/account/tickets/tickets.component';
+import {ProfileComponent} from './components/account/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -25,7 +28,11 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'account', component: AboutComponent, canActivate: [AuthGuard] },
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuard],
+    children: [
+      { path: 'tickets', component: TicketsComponent },
+      { path: 'profile', component: ProfileComponent },
+  ]},
 ];
 
 @NgModule({

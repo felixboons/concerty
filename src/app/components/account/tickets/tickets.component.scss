@@ -1,0 +1,20 @@
+@import '../../../scss/base/colors';
+
+h1.uk-heading-small {
+  color: white;
+}
+
+table {
+
+  td {
+    color: white;
+  }
+
+  thead th {
+    color: rgba(255, 255, 255, .7);
+  }
+
+  tr {
+    border-color: rgba(255, 255, 255, .7);
+  }
+}
