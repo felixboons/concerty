@@ -36,7 +36,7 @@
       </li>
 
       <!--      Administrator -->
-      <li class="uk-nav-header">ADMINISTRATOR</li>
+      <li *ngIf="isAuthenticated && isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>
       <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
           routerLink="admin/artists" routerLinkActive="uk-active">
         <a>
