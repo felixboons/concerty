@@ -1,4 +1,17 @@
+@import '../../../../scss/base/_colors.scss';
+$color-light-grey: #c9c9c9;
 
 input.uk-input, select.uk-select, textarea.uk-textarea {
   color: #fff !important;
+}
+
+textarea {
+  min-width: 100%;
+  min-height: 40px;
+}
+
+.uk-button:disabled {
+  border-color: $color-light-grey;
+  color: $color-light-grey;
+  cursor: not-allowed;
 }

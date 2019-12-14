@@ -25,4 +25,8 @@ export class NewArtistComponent implements OnInit {
       genre: new FormControl(null, Validators.required)
     })
   }
+
+  createArtist(): void {
+
+  }
 }

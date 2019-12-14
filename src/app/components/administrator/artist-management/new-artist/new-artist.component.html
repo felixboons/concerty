@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="createArtist()">
   <div class="uk-grid uk-grid-small uk-light">
 
     <div class="uk-width-1-1 uk-margin-small-bottom">
@@ -10,15 +10,19 @@
     <div class="uk-width-auto uk-margin-small-bottom">
       <label for="genre">Genre</label>
         <select class="uk-select" id="genre" formControlName="genre">
-          <option [value]="null" disabled>Choose genre</option>
+          <option *ngIf="form.get('genre').invalid" [value]="null" disabled>Choose genre</option>
           <option>Hip-Hop</option>
         </select>
     </div>
 
     <div class="uk-width-1-1 uk-margin-small-bottom">
-      <label for="biography">Biography</label>
+      <label for="biography" class="uk-display-block">Biography</label>
         <textarea class="uk-textarea" id="biography" maxlength="500" rows="4"
                   formControlName="biography"></textarea>
+    </div>
+
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+      <button class="uk-button uk-button-default" type="submit" [disabled]="form.invalid">Save artist</button>
     </div>
 
   </div>
