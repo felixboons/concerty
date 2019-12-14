@@ -8,12 +8,14 @@ import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
 import {RegisterComponent} from './components/register/register.component';
-import {AuthGuard} from './auth-guard.module';
+import {AuthGuardUser} from './auth-guard-user.module';
+import {AuthGuardAdministrator} from './auth-guard-administrator.module';
 import {AccountComponent} from './components/account/account.component';
 import {TicketsComponent} from './components/account/tickets/tickets.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
 import {ArtistManagementComponent} from './components/administrator/artist-management/artist-management.component';
 import {ConcertManagementComponent} from './components/administrator/concert-management/concert-management.component';
+import {AdministratorComponent} from './components/administrator/administrator.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,12 +32,14 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'account', component: AccountComponent, canActivate: [AuthGuard],
+  { path: 'account', component: AccountComponent, canActivate: [AuthGuardUser],
     children: [
       { path: 'tickets', component: TicketsComponent },
+      { path: 'tickets/:id', component: TicketsComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'profile/:id', component: ProfileComponent },
   ]},
-  { path: 'administrator', component: AccountComponent, canActivate: [AuthGuard],
+  { path: 'administrator', component: AdministratorComponent, canActivate: [AuthGuardAdministrator],
     children: [
       { path: 'artists', component: ArtistManagementComponent },
       { path: 'concerts', component: ConcertManagementComponent },
