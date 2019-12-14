@@ -1,6 +1,29 @@
 <div class="uk-margin-large-top uk-margin-large-bottom">
 
   <h1 class="uk-heading-small">Artist management</h1>
-  <h2>Happening soon!</h2>
+  <h2>New artist</h2>
+  <app-new-artist></app-new-artist>
+
+  <h2>All artists</h2>
+  <table class="uk-table uk-table-small uk-table-striped uk-table-middle table-light uk-light">
+    <thead>
+      <tr class="table-head">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Biography</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let artist of artists">
+        <td class="uk-table-shrink">
+          <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
+        </td>
+        <td class="uk-table-shrink">De Jeugd Van Tegenwoordig</td>
+        <td class="uk-table-shrink uk-text-nowrap">Hip-Hop</td>
+        <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloremque ipsam quasi sint? Eos magnam necessitatibus non? Ab dicta dignissimos ea eius eum ipsam non, nulla saepe tempora, unde voluptates!</td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>

@@ -1,0 +1,25 @@
+<form [formGroup]="form">
+  <div class="uk-grid uk-grid-small uk-light">
+
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+      <label for="name">Name</label>
+        <input type="text" class="uk-input" id="name"
+               formControlName="name">
+    </div>
+
+    <div class="uk-width-auto uk-margin-small-bottom">
+      <label for="genre">Genre</label>
+        <select class="uk-select" id="genre" formControlName="genre">
+          <option [value]="null" disabled>Choose genre</option>
+          <option>Hip-Hop</option>
+        </select>
+    </div>
+
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+      <label for="biography">Biography</label>
+        <textarea class="uk-textarea" id="biography" maxlength="500" rows="4"
+                  formControlName="biography"></textarea>
+    </div>
+
+  </div>
+</form>

@@ -5,29 +5,6 @@ h1, h2 {
   color: white;
 }
 
-table {
-
-  td {
-    color: white;
-  }
-
-  thead th {
-    color: rgba(255, 255, 255, .7);
-  }
-
-  tr {
-    border-color: rgba(255, 255, 255, .7);
-
-    &:nth-child(odd) {
-      background-color: rgba(255, 255, 255, .1);
-    }
-  }
-
-  thead tr {
-    background-color: $color-primary;
-  }
-}
-
 .uk-slider-items li {
   background-color: white;
   border-radius: $border-radius;

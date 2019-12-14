@@ -21,6 +21,7 @@ import {ProfileComponent} from './components/account/profile/profile.component';
 import {AdministratorComponent} from './components/administrator/administrator.component';
 import {ArtistManagementComponent} from './components/administrator/artist-management/artist-management.component';
 import {ConcertManagementComponent} from './components/administrator/concert-management/concert-management.component';
+import {NewArtistComponent} from './components/administrator/artist-management/new-artist/new-artist.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {ConcertManagementComponent} from './components/administrator/concert-man
     TicketsComponent,
     AdministratorComponent,
     ArtistManagementComponent,
-    ConcertManagementComponent
+    ConcertManagementComponent,
+    NewArtistComponent
   ],
     imports: [
         BrowserModule,
