@@ -22,6 +22,8 @@ import {AdministratorComponent} from './components/administrator/administrator.c
 import {ArtistManagementComponent} from './components/administrator/artist-management/artist-management.component';
 import {ConcertManagementComponent} from './components/administrator/concert-management/concert-management.component';
 import {NewArtistComponent} from './components/administrator/artist-management/new-artist/new-artist.component';
+import {NewConcertComponent} from './components/administrator/concert-management/new-concert/new-concert.component';
+import {AngularMyDatePickerModule} from 'angular-mydatepicker';
 
 @NgModule({
   declarations: [
@@ -42,13 +44,15 @@ import {NewArtistComponent} from './components/administrator/artist-management/n
     AdministratorComponent,
     ArtistManagementComponent,
     ConcertManagementComponent,
-    NewArtistComponent
+    NewArtistComponent,
+    NewConcertComponent
   ],
     imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        ReactiveFormsModule
+      BrowserModule,
+      HttpClientModule,
+      AppRoutingModule,
+      ReactiveFormsModule,
+      AngularMyDatePickerModule
     ],
   providers: [],
   bootstrap: [AppComponent]

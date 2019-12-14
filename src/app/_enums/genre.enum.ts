@@ -1,10 +1,10 @@
 export enum Genre {
-  'Hip-Hop',
-  'R-B',
-  'Pop',
-  'Country',
-  'Dancehall',
-  'Reggae',
+  'Hip-Hop' = 'Hip-Hop',
+  'R-B' = 'R&B',
+  'Pop' = 'Pop',
+  'Country' = 'Country',
+  'Dancehall' = 'Dancehall',
+  'Reggae' = 'Raggae',
 }
 
 export namespace Genre {
@@ -15,13 +15,5 @@ export namespace Genre {
     return keysTrimmed.filter(val => {
       return val.length !== 1; // Filter out number values, while keeping the actual keys (UP, RIGHT).
     });
-  }
-
-  export function getDisplayValue(genre: Genre): string {
-    if (Genre[genre].toLowerCase() === 'R-B') {
-      return 'R&B';
-    } else {
-      return Genre[genre];
-    }
   }
 }

@@ -1,6 +1,29 @@
 <div class="uk-margin-large-top uk-margin-large-bottom">
 
   <h1 class="uk-heading-small">Concert management</h1>
-  <h2>Happening soon!</h2>
+  <h2>New concert</h2>
+  <app-new-concert></app-new-concert>
+
+  <h2>All concerts</h2>
+  <table class="uk-table uk-table-small uk-table-striped uk-table-middle table-light uk-light">
+    <thead>
+      <tr class="table-head">
+        <th>Image</th>
+        <th>Title</th>
+        <th class="uk-text-right">Tickets (total)</th>
+        <th class="uk-text-right">Tickets (remaining)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let concert of concerts">
+        <td class="uk-table-shrink">
+          <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
+        </td>
+        <td>15 Jaar De Jeugd</td>
+        <td class="uk-table-shrink uk-text-right">15.000</td>
+        <td class="uk-table-shrink uk-text-right">4.586</td>
+      </tr>
+    </tbody>
+  </table>
 
 </div>
