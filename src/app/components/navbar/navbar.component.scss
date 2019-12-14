@@ -21,6 +21,10 @@ span#navbar-toggle-text {
   }
 }
 
+li.uk-active a {
+  color: black;
+}
+
 .register-button.uk-active {
   color: $color-dark-grey;
 }

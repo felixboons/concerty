@@ -38,14 +38,14 @@
       <!--      Administrator -->
       <li *ngIf="isAuthenticated && isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>
       <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
-          routerLink="admin/artists" routerLinkActive="uk-active">
+          routerLink="/administrator/artists" routerLinkActive="uk-active">
         <a>
           <i class="fad fa-user-music"></i>
           ARTISTS
         </a>
       </li>
       <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
-          routerLink="admin/concerts" routerLinkActive="uk-active">
+          routerLink="/administrator/concerts" routerLinkActive="uk-active">
         <a>
           <i class="fad fa-calendar-alt"></i>
           CONCERTS

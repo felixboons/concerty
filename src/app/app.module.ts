@@ -18,6 +18,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {AccountComponent} from './components/account/account.component';
 import {TicketsComponent} from './components/account/tickets/tickets.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
+import {AdministratorComponent} from './components/administrator/administrator.component';
+import {ArtistManagementComponent} from './components/administrator/artist-management/artist-management.component';
+import {ConcertManagementComponent} from './components/administrator/concert-management/concert-management.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import {ProfileComponent} from './components/account/profile/profile.component';
     RegisterComponent,
     AccountComponent,
     ProfileComponent,
-    TicketsComponent
+    TicketsComponent,
+    AdministratorComponent,
+    ArtistManagementComponent,
+    ConcertManagementComponent
   ],
     imports: [
         BrowserModule,
