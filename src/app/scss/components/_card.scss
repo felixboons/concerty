@@ -1,0 +1,15 @@
+@import '../../scss/base/colors';
+@import '../../scss/base/standards';
+
+.uk-card-default {
+  box-shadow: none;
+}
+
+.uk-card-body, .uk-card {
+  border-radius: $border-radius;
+
+  img {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+}
