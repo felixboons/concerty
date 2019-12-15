@@ -14,4 +14,7 @@ export class ArtistManagementComponent implements OnInit {
   ngOnInit() {
   }
 
+  removeArtist(index: number): boolean {
+    return null;
+  }
 }

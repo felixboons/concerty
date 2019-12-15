@@ -8,19 +8,15 @@
   <div class="uk-modal-dialog uk-padding-large" uk-height-viewport>
     <button class="uk-modal-close-full" type="button" uk-close></button>
 
-    <div class="uk-grid">
+    <form class="uk-search uk-search-large uk-width-1-1">
+      <label class="uk-text-center">Search by ID, title or venue
+        <input class="uk-search-input" type="search" autofocus>
+      </label>
+    </form>
 
-      <form class="uk-search uk-search-large uk-width-1-1">
-        <label class="uk-text-center">Search by ID, title or venue...
-          <input class="uk-search-input" type="search" autofocus>
-        </label>
-      </form>
-
-    </div>
-
-    <table class="uk-table uk-table-small uk-table-striped uk-table-middle table-light uk-light">
+    <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
       <thead>
-      <tr class="table-head">
+      <tr>
         <th>Image</th>
         <th>Title</th>
         <th class="uk-text-right">Tickets (total)</th>

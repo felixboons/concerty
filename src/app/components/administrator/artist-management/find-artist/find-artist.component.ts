@@ -12,4 +12,7 @@ export class FindArtistComponent implements OnInit {
   ngOnInit() {
   }
 
+  removeArtist(index: number): boolean {
+    return null;
+  }
 }

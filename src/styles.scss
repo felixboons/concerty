@@ -1,11 +1,17 @@
+
+// 1. Imports
+@import 'app/scss/components/header';
+@import 'app/scss/base/reset';
+@import 'app/scss/base/standards';
 @import 'app/scss/base/colors';
 
-// 1. Theme overwrites
-
-// Headers
-$base-heading-font-family: 'Source Sans Pro', sans-serif;
-$base-heading-color: $color-primary;
-$base-heading-font-weight: 700;
+@import 'app/scss/components/logo';
+@import 'app/scss/components/header';
+@import 'app/scss/components/anchor';
+@import 'app/scss/components/table';
+@import 'app/scss/components/card';
+@import 'app/scss/components/form';
+@import 'app/scss/components/btn';
 
 // Navbar
 $navbar-background: white;

@@ -1,6 +1,6 @@
 
 <a class="uk-button uk-button-default uk-margin-small-right" href="#modal-full" uk-toggle type="search">
-  <span class="uk-margin-small-right">Search artist by ID, name or genre...</span>
+  <span class="uk-margin-small-right">Search artist by ID, name or genre</span>
   <i class="fad fa-search fa-lg"></i>
 </a>
 
@@ -8,33 +8,33 @@
   <div class="uk-modal-dialog uk-padding-large" uk-height-viewport>
     <button class="uk-modal-close-full" type="button" uk-close></button>
 
-    <div class="uk-grid">
+    <form class="uk-search uk-search-large uk-width-1-1">
+      <label class="uk-text-center">Search by ID, name or genre
+        <input class="uk-search-input" type="search" autofocus>
+      </label>
+    </form>
 
-      <form class="uk-search uk-search-large uk-width-1-1">
-        <label class="uk-text-center">Search by ID, name or genre
-          <input class="uk-search-input" type="search" autofocus>
-        </label>
-      </form>
-
-    </div>
-
-    <table class="uk-table uk-table-small uk-table-striped uk-table-middle table-light">
+    <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
       <thead>
-      <tr class="table-head">
+      <tr>
         <th>Image</th>
         <th>Name</th>
         <th>Genre</th>
         <th>Biography</th>
+        <th>DELETE</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let artist of [].constructor(5)">
+      <tr *ngFor="let artist of [].constructor(5); let i = index">
         <td class="uk-table-shrink">
           <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
         </td>
         <td class="uk-table-shrink">De Jeugd Van Tegenwoordig</td>
         <td class="uk-table-shrink uk-text-nowrap">Hip-Hop</td>
         <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloremque ipsam quasi sint? Eos magnam necessitatibus non? Ab dicta dignissimos ea eius eum ipsam non, nulla saepe tempora, unde voluptates!</td>
+        <td class="uk-table-shrink uk-text-center">
+          <i (click)="removeArtist(i)" class="fad fa-trash-alt"></i>
+        </td>
       </tr>
       </tbody>
     </table>

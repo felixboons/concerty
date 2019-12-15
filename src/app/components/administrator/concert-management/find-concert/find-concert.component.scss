@@ -1,7 +1,7 @@
-@import '../../../../scss/base/colors';
+@import '../../../../scss/base/_colors.scss';
 
-a {
-  border-color: rgba(255, 255, 255, .2);
+a.uk-button {
+  border-color: $color-white-lightest;
   color: $color-white-light;
 
   &:hover {
@@ -26,5 +26,13 @@ table {
 
   td {
     color: $color-grey-dark;
+  }
+
+  i {
+    color: $color-grey-light;
+
+    &:hover {
+      color: $color-grey-dark;
+    }
   }
 }
