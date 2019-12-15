@@ -1,0 +1,87 @@
+<div id="footer" class="uk-padding-large uk-padding-remove-left uk-padding-remove-right uk-light">
+  <div class="uk-container ">
+    <div class="uk-grid uk-margin-large-bottom">
+
+<!--      NAVIGATION -->
+      <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
+        <h5>NAVIGATION</h5>
+        <ul class="uk-list">
+          <li routerLink="" routerLinkActive="uk-active" [routerLinkActiveOptions]="{ exact: true }" >
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Home</a>
+          </li>
+          <li routerLink="/concerts" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Concerts</a>
+          </li>
+          <li routerLink="/artists" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Artists</a>
+          </li>
+        </ul>
+      </div>
+
+<!--      ABOUT CONCERTY -->
+      <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
+        <h5>ABOUT</h5>
+        <ul class="uk-list">
+          <li routerLink="/about" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>About Concerty</a>
+          </li>
+          <li routerLink="/vacancies" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Vacancies</a>
+          </li>
+        </ul>
+      </div>
+
+<!--      ACCOUNT -->
+      <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
+        <h5>ACCOUNT</h5>
+        <ul class="uk-list">
+          <li routerLink="/account/tickets" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Tickets</a>
+          </li>
+          <li routerLink="/account/profile" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Profile</a>
+          </li>
+          <li>
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Log out</a>
+          </li>
+        </ul>
+
+        <h5>ADMINISTRATOR</h5>
+        <ul class="uk-list">
+          <li routerLink="/administrator/artists" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Artists</a>
+          </li>
+          <li routerLink="/administrator/concerts" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Concerts</a>
+          </li>
+        </ul>
+      </div>
+
+<!--      LEGAL -->
+      <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
+        <h5>LEGAL</h5>
+        <ul class="uk-list">
+          <li routerLink="/policies" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Policies</a>
+          </li>
+          <li routerLink="/terms" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Terms & conditions</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+<!--    LOGO/COPYRIGHT SECTION -->
+    <div class="uk-width-1-1">
+      <hr>
+      <div class="uk-margin-top">
+        <a routerLink="/" class="logo-style">CONCERTY</a>
+        <p class="uk-margin-remove-top uk-margin-remove-bottom">
+          {{ '&copy; ' + getCurrentYear() + ' All rights reserved.' }}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>

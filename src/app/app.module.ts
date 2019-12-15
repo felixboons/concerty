@@ -28,6 +28,7 @@ import {EditProfileComponent} from './components/account/profile/edit-profile/ed
 import {ChangePasswordComponent} from './components/account/profile/change-password/change-password.component';
 import {FindArtistComponent} from './components/administrator/artist-management/find-artist/find-artist.component';
 import {FindConcertComponent} from './components/administrator/concert-management/find-concert/find-concert.component';
+import {FooterComponent} from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {FindConcertComponent} from './components/administrator/concert-managemen
     EditProfileComponent,
     ChangePasswordComponent,
     FindArtistComponent,
-    FindConcertComponent
+    FindConcertComponent,
+    FooterComponent,
   ],
     imports: [
       BrowserModule,

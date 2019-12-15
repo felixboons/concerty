@@ -1,0 +1,27 @@
+@import '../../scss/base/colors';
+
+#footer {
+  background-color: $color-grey-dark;
+}
+
+a, i {
+  text-decoration: none;
+  color: $color-white-light !important;
+
+  &:hover {
+    color: white !important;
+  }
+}
+
+li:hover a, li:hover i,
+li.uk-active a, li.uk-active i {
+  color: white !important;
+}
+
+.logo-style {
+  font-size: 42px;
+
+  &:hover {
+    color: white;
+  }
+}
