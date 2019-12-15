@@ -2,8 +2,6 @@
 
 // 1. Theme overwrites
 
-//$global-font-family: '';
-
 // Headers
 $base-heading-font-family: 'Source Sans Pro', sans-serif;
 $base-heading-color: $color-primary;
@@ -11,7 +9,7 @@ $base-heading-font-weight: 700;
 
 // Navbar
 $navbar-background: white;
-$navbar-nav-item-color: $color-grey;
+$navbar-nav-item-color: $color-grey-light;
 $navbar-nav-item-active-color: $color-dark-grey;
 $navbar-nav-item-hover-color: $color-dark-grey;
 

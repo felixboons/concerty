@@ -14,7 +14,7 @@ import { AboutComponent } from './components/about/about.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NavbarMobileComponent } from './components/navbar/navbar-mobile/navbar-mobile.component';
 import { RegisterComponent } from './components/register/register.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountComponent} from './components/account/account.component';
 import {TicketsComponent} from './components/account/tickets/tickets.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
@@ -26,6 +26,7 @@ import {NewConcertComponent} from './components/administrator/concert-management
 import {AngularMyDatePickerModule} from 'angular-mydatepicker';
 import {EditProfileComponent} from './components/account/profile/edit-profile/edit-profile.component';
 import {ChangePasswordComponent} from './components/account/profile/change-password/change-password.component';
+import {FindArtistComponent} from './components/administrator/artist-management/find-artist/find-artist.component';
 
 @NgModule({
   declarations: [
@@ -49,13 +50,15 @@ import {ChangePasswordComponent} from './components/account/profile/change-passw
     NewArtistComponent,
     NewConcertComponent,
     EditProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    FindArtistComponent
   ],
     imports: [
       BrowserModule,
       HttpClientModule,
       AppRoutingModule,
       ReactiveFormsModule,
+      FormsModule,
       AngularMyDatePickerModule
     ],
   providers: [],
