@@ -14,30 +14,32 @@
       </label>
     </form>
 
-    <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
-      <thead>
-      <tr>
-        <th>Image</th>
-        <th>Title</th>
-        <th class="uk-text-right">Tickets (total)</th>
-        <th class="uk-text-right">Tickets (remaining)</th>
-        <th>DELETE</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let concert of [].constructor(12); let i = index">
-        <td class="uk-table-shrink">
-          <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
-        </td>
-        <td>15 Jaar De Jeugd</td>
-        <td class="uk-table-shrink uk-text-right">15.000</td>
-        <td class="uk-table-shrink uk-text-right">4.586</td>
-        <td class="uk-table-shrink uk-text-center">
-          <i (click)="removeConcert(i)" class="fad fa-trash-alt"></i>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="uk-overflow-auto">
+      <table class="uk-table uk-table-small uk-table-striped uk-table-middle uk-margin-top">
+        <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th class="uk-text-right">Tickets (total)</th>
+          <th class="uk-text-right">Tickets (remaining)</th>
+          <th>DELETE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let concert of [].constructor(12); let i = index">
+          <td class="uk-table-shrink">
+            <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
+          </td>
+          <td>15 Jaar De Jeugd</td>
+          <td class="uk-table-shrink uk-text-right">15.000</td>
+          <td class="uk-table-shrink uk-text-right">4.586</td>
+          <td class="uk-table-shrink uk-text-center">
+            <i (click)="removeConcert(i)" class="fad fa-trash-alt"></i>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
 
   </div>
 </div>
