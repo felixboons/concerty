@@ -11,6 +11,7 @@
   <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
     <thead>
       <tr>
+        <th>No.</th>
         <th>Image</th>
         <th>Title</th>
         <th class="uk-text-right">Tickets (total)</th>
@@ -20,10 +21,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let concert of concerts; let i = index">
+        <td class="uk-table-shrink">#10107</td>
         <td class="uk-table-shrink">
           <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
         </td>
-        <td>15 Jaar De Jeugd</td>
+        <td class="uk-table-expand">15 Jaar De Jeugd</td>
         <td class="uk-table-shrink uk-text-right">15.000</td>
         <td class="uk-table-shrink uk-text-right">4.586</td>
         <td class="uk-table-shrink uk-text-center">
