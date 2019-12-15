@@ -15,7 +15,6 @@ export class EditProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.maxYear);
     this.initializeForm();
   }
 
@@ -25,6 +24,10 @@ export class EditProfileComponent implements OnInit {
       lastName: new FormControl(null, [
         Validators.required,
         Validators.maxLength(500)
+      ]),
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.email
       ]),
       day: new FormControl(null, [
         Validators.min(1),

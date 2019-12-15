@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
         Validators.email
       ]),
       password: new FormControl(null, Validators.required),
-      'password-confirm': new FormControl(null, Validators.required),
+      passwordConfirm: new FormControl(null, Validators.required),
     })
   }
 
