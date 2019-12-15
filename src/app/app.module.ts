@@ -24,6 +24,7 @@ import {ConcertManagementComponent} from './components/administrator/concert-man
 import {NewArtistComponent} from './components/administrator/artist-management/new-artist/new-artist.component';
 import {NewConcertComponent} from './components/administrator/concert-management/new-concert/new-concert.component';
 import {AngularMyDatePickerModule} from 'angular-mydatepicker';
+import {EditProfileComponent} from './components/account/profile/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {AngularMyDatePickerModule} from 'angular-mydatepicker';
     ArtistManagementComponent,
     ConcertManagementComponent,
     NewArtistComponent,
-    NewConcertComponent
+    NewConcertComponent,
+    EditProfileComponent
   ],
     imports: [
       BrowserModule,
