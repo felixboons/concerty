@@ -10,8 +10,12 @@ textarea {
   min-height: 40px;
 }
 
-.uk-button:disabled {
-  //border-color: $color-light-grey;
-  //color: $color-light-grey;
-  cursor: not-allowed;
+.uk-button-default {
+  border-color: rgba(255, 255, 255, .2);
+  color: $color-white-light;
+
+  &:hover {
+    border-color: white;
+    color: white;
+  }
 }

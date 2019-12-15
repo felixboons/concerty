@@ -16,10 +16,28 @@ $navbar-nav-item-hover-color: $color-grey-dark;
 // Buttons
 .uk-button {
   font-weight: bold !important;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
-.uk-button:disabled {
-  cursor: not-allowed;
+.uk-button-white {
+  background-color: $color-white-light;
+  color: $color-secondary !important;
+
+  &:disabled {
+    color: $color-grey !important;
+
+    &:hover {
+      background-color: $color-white-light;
+    }
+  }
+
+  &:hover {
+    background-color: white;
+    color: $color-secondary;
+  }
 }
 
 $button-primary-background: $color-primary;

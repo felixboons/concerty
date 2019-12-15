@@ -14,4 +14,7 @@ export class ConcertManagementComponent implements OnInit {
   ngOnInit() {
   }
 
+  removeConcert(index: number): boolean {
+    return null;
+  }
 }

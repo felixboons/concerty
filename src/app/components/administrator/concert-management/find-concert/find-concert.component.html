@@ -1,0 +1,48 @@
+
+<a class="uk-button uk-button-default uk-margin-small-right" href="#modal-full" uk-toggle type="search">
+  <span class="uk-margin-small-right">Search concert by ID, title or venue</span>
+  <i class="fad fa-search fa-lg"></i>
+</a>
+
+<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+  <div class="uk-modal-dialog uk-padding-large" uk-height-viewport>
+    <button class="uk-modal-close-full" type="button" uk-close></button>
+
+    <div class="uk-grid">
+
+      <form class="uk-search uk-search-large uk-width-1-1">
+        <label class="uk-text-center">Search by ID, title or venue...
+          <input class="uk-search-input" type="search" autofocus>
+        </label>
+      </form>
+
+    </div>
+
+    <table class="uk-table uk-table-small uk-table-striped uk-table-middle table-light uk-light">
+      <thead>
+      <tr class="table-head">
+        <th>Image</th>
+        <th>Title</th>
+        <th class="uk-text-right">Tickets (total)</th>
+        <th class="uk-text-right">Tickets (remaining)</th>
+        <th>DELETE</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let concert of [].constructor(12); let i = index">
+        <td class="uk-table-shrink">
+          <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
+        </td>
+        <td>15 Jaar De Jeugd</td>
+        <td class="uk-table-shrink uk-text-right">15.000</td>
+        <td class="uk-table-shrink uk-text-right">4.586</td>
+        <td class="uk-table-shrink uk-text-center">
+          <i (click)="removeConcert(i)" class="fad fa-trash-alt"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+

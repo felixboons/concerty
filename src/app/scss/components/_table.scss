@@ -17,4 +17,14 @@ table.uk-table.table-light {
   td {
     color: white;
   }
+
+  // Clickable icon
+  i {
+    color: $color-white-light;
+
+    &:hover {
+      cursor: pointer;
+      color: white;
+    }
+  }
 }
