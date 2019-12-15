@@ -1,3 +1,24 @@
+@import '../../../../scss/base/colors';
+
 span, i {
   color: white;
+}
+
+input {
+  border-bottom: 1px solid $color-grey-light;
+}
+
+table {
+
+  thead tr th {
+    color: $color-grey-light;
+  }
+
+  tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, .05);
+  }
+
+  td {
+    color: $color-grey-dark;
+  }
 }

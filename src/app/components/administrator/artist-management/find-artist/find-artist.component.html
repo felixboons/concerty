@@ -1,28 +1,41 @@
 
-
 <a class="uk-button uk-button-default uk-margin-small-right" href="#modal-full" uk-toggle type="search">
-  <span class="uk-margin-small-right">Search artist by name or genre...</span>
+  <span class="uk-margin-small-right">Search artist by ID, name or genre...</span>
   <i class="fad fa-search fa-lg"></i>
 </a>
 
 <div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
-  <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+  <div class="uk-modal-dialog uk-padding-large" uk-height-viewport>
     <button class="uk-modal-close-full" type="button" uk-close></button>
-    <form class="uk-search uk-search-large">
-      <input class="uk-search-input uk-text-center" type="search" placeholder="search..." autofocus>
-    </form>
 
-    <table class="uk-table">
+    <div class="uk-grid">
+
+      <form class="uk-search uk-search-large uk-width-1-1">
+        <label class="uk-text-center">Search by ID, name or genre
+          <input class="uk-search-input" type="search" autofocus>
+        </label>
+      </form>
+
+    </div>
+
+    <table class="uk-table uk-table-small uk-table-striped uk-table-middle table-light">
+      <thead>
+      <tr class="table-head">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Biography</th>
+      </tr>
+      </thead>
       <tbody>
-        <tr>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>Something</td>
-        </tr>
-        <tr>
-          <td>Something</td>
-        </tr>
+      <tr *ngFor="let artist of [].constructor(5)">
+        <td class="uk-table-shrink">
+          <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
+        </td>
+        <td class="uk-table-shrink">De Jeugd Van Tegenwoordig</td>
+        <td class="uk-table-shrink uk-text-nowrap">Hip-Hop</td>
+        <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloremque ipsam quasi sint? Eos magnam necessitatibus non? Ab dicta dignissimos ea eius eum ipsam non, nulla saepe tempora, unde voluptates!</td>
+      </tr>
       </tbody>
     </table>
 

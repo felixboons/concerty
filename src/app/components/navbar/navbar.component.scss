@@ -17,7 +17,7 @@ span#navbar-toggle-text {
   color: $color-grey-light;
 
   &:hover {
-    color: $color-dark-grey;
+    color: $color-grey-dark;
   }
 }
 
@@ -26,7 +26,7 @@ li.uk-active a {
 }
 
 .register-button.uk-active {
-  color: $color-dark-grey;
+  color: $color-grey-dark;
 }
 
 .login-button.uk-active {
@@ -42,6 +42,6 @@ li.uk-active a {
   color: $color-grey-light;
 
   &:hover {
-    color: $color-dark-grey;
+    color: $color-grey-dark;
   }
 }
