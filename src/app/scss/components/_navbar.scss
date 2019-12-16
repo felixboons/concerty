@@ -1,0 +1,12 @@
+@import '../base/colors';
+
+$navbar-background: white;
+$navbar-nav-item-color: $color-lightgrey;
+$navbar-nav-item-active-color: $color-darkgrey;
+$navbar-nav-item-hover-color: $color-darkgrey;
+
+.uk-navbar-toggle.uk-button {
+  min-height: auto;
+  height: auto;
+  font-size: 16px;
+}

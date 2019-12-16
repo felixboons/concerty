@@ -1,101 +1,107 @@
-<nav class="uk-navbar-container uk-padding-small uk-padding-remove-left uk-padding-remove-right uk-box-shadow-small" uk-navbar>
-  <div class="uk-navbar-left">
-    <a class="uk-navbar-item uk-logo logo-style" routerLink="/">CONCERTY</a>
-  </div>
+<div class="uk-box-shadow-small">
+  <div class="uk-container">
+    <nav class="uk-navbar-container uk-padding-small uk-padding-remove-left uk-padding-remove-right" uk-navbar>
 
-<!--  Desktop -->
-  <div class="uk-navbar-right uk-visible@m">
-    <ul class="uk-navbar-nav">
-      <li routerLink="" routerLinkActive="uk-active" [routerLinkActiveOptions]="{ exact: true }">
-        <a>Home</a>
-      </li>
-      <li routerLink="concerts" routerLinkActive="uk-active">
-        <a>Concerts</a>
-      </li>
-      <li routerLink="artists" routerLinkActive="uk-active">
-        <a>Artists</a>
-      </li>
-      <li routerLink="about" routerLinkActive="uk-active">
-        <a>
-          About&nbsp;<span class="logo-style">Concerty</span>
-        </a>
-      </li>
-    </ul>
-
-    <div *ngIf="isAuthenticated; else loginButton" class="uk-navbar-item">
-      <div class="uk-inline">
-        <a class="uk-button uk-button-primary" type="button">
-          ACCOUNT
-        </a>
-        <div uk-dropdown>
-          <ul class="uk-nav uk-dropdown-nav">
-            <li routerLink="/account/tickets" routerLinkActive="uk-active">
-              <a>
-                <i class="fad fa-qrcode"></i>
-                TICKETS
-              </a>
-            </li>
-            <li routerLink="/account/profile" routerLinkActive="uk-active">
-              <a>
-                <i class="fad fa-user"></i>
-                PROFILE
-              </a>
-            </li>
-
-            <!--      Administrator -->
-            <li *ngIf="isAdministrator" class="uk-nav-divider"></li>
-            <li *ngIf="isAdministrator"
-                routerLink="/administrator/artists" routerLinkActive="uk-active">
-              <a>
-                <i class="fad fa-user-music"></i>
-                ARTIST MANAGEMENT
-              </a>
-            </li>
-            <li *ngIf="isAdministrator"
-                routerLink="/administrator/concerts" routerLinkActive="uk-active">
-              <a>
-                <i class="fad fa-calendar-alt"></i>
-                CONCERT MANAGEMENT
-              </a>
-            </li>
-
-            <li class="uk-nav-divider"></li>
-            <li (click)="logout()">
-              <a>
-                <i class="fad fa-sign-out-alt"></i>
-                LOG OUT
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <ng-template #loginButton>
-      <div class="uk-navbar-item">
-        <a routerLink="login" routerLinkActive="uk-active"
-           class="login-button uk-button uk-button-primary">
-          LOG IN
-        </a>
-        <a routerLink="register" routerLinkActive="uk-active"
-           class="register-button uk-button uk-button-default uk-margin-small-left">
-          REGISTER
-        </a>
-      </div>
-    </ng-template>
-  </div>
-
-<!--  Mobile toggle menu -->
-  <div class="uk-navbar-right uk-hidden@m">
-    <nav class="uk-navbar uk-navbar-container uk-navbar-transparent uk-margin uk-margin-remove-bottom">
       <div class="uk-navbar-left">
-        <a href="#offcanvas-nav" class="uk-navbar-toggle uk-height-1-1" uk-toggle>
-          <i class="far fa-bars fa-lg"></i>
-          <span id="navbar-toggle-text" class="uk-margin-small-left">MENU</span>
-        </a>
+        <a class="uk-navbar-item uk-logo logo-style uk-padding-remove-left" routerLink="/">CONCERTY</a>
       </div>
+
+    <!--  Desktop -->
+      <div class="uk-navbar-right uk-visible@m">
+        <ul class="uk-navbar-nav">
+          <li routerLink="" routerLinkActive="uk-active" [routerLinkActiveOptions]="{ exact: true }">
+            <a>Home</a>
+          </li>
+          <li routerLink="concerts" routerLinkActive="uk-active">
+            <a>Concerts</a>
+          </li>
+          <li routerLink="artists" routerLinkActive="uk-active">
+            <a>Artists</a>
+          </li>
+    <!--      <li routerLink="about" routerLinkActive="uk-active">-->
+    <!--        <a>-->
+    <!--          About&nbsp;<span class="logo-style">Concerty</span>-->
+    <!--        </a>-->
+    <!--      </li>-->
+        </ul>
+
+        <div *ngIf="isAuthenticated; else loginButton" class="uk-navbar-item uk-padding-remove-right">
+          <div class="uk-inline">
+            <a class="uk-button uk-button-primary" type="button">
+              ACCOUNT
+            </a>
+            <div uk-dropdown>
+              <ul class="uk-nav uk-dropdown-nav">
+                <li routerLink="/account/tickets" routerLinkActive="uk-active">
+                  <a>
+                    <i class="fad fa-qrcode"></i>
+                    TICKETS
+                  </a>
+                </li>
+                <li routerLink="/account/profile" routerLinkActive="uk-active">
+                  <a>
+                    <i class="fad fa-user"></i>
+                    PROFILE
+                  </a>
+                </li>
+
+                <!--      Administrator -->
+                <li *ngIf="isAdministrator" class="uk-nav-divider"></li>
+                <li *ngIf="isAdministrator"
+                    routerLink="/administrator/artists" routerLinkActive="uk-active">
+                  <a>
+                    <i class="fad fa-user-music"></i>
+                    ARTIST MANAGEMENT
+                  </a>
+                </li>
+                <li *ngIf="isAdministrator"
+                    routerLink="/administrator/concerts" routerLinkActive="uk-active">
+                  <a>
+                    <i class="fad fa-calendar-alt"></i>
+                    CONCERT MANAGEMENT
+                  </a>
+                </li>
+
+                <li class="uk-nav-divider"></li>
+                <li (click)="logout()">
+                  <a>
+                    <i class="fad fa-sign-out-alt"></i>
+                    LOG OUT
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #loginButton>
+          <div class="uk-navbar-item uk-padding-remove-right">
+            <a routerLink="login" routerLinkActive="uk-active"
+               class="login-button uk-button uk-button-primary">
+              LOG IN
+            </a>
+            <a routerLink="register" routerLinkActive="uk-active"
+               class="register-button uk-button uk-button-default uk-margin-small-left">
+              REGISTER
+            </a>
+          </div>
+        </ng-template>
+      </div>
+
+    <!--  Mobile toggle menu -->
+      <div class="uk-navbar-right uk-padding-remove-right uk-hidden@m ">
+        <nav class="uk-navbar uk-navbar-container uk-navbar-transparent uk-margin uk-margin-remove-bottom">
+          <div class="uk-navbar-left">
+            <a href="#offcanvas-nav" class="uk-navbar-toggle uk-button uk-button-default" uk-toggle>
+              <i class="fad fa-bars"></i>
+              <span id="navbar-toggle-text">MENU</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+
     </nav>
   </div>
+</div>
 
-</nav>
 <app-navbar-mobile></app-navbar-mobile>

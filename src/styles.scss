@@ -5,6 +5,7 @@
 @import 'app/scss/base/standards';
 @import 'app/scss/base/colors';
 
+@import 'app/scss/components/navbar';
 @import 'app/scss/components/logo';
 @import 'app/scss/components/header';
 @import 'app/scss/components/anchor';
@@ -12,7 +13,6 @@
 @import 'app/scss/components/card';
 @import 'app/scss/components/form';
 @import 'app/scss/components/btn';
-
 
 // Navbar
 $navbar-background: white;
