@@ -1,16 +1,18 @@
 <form [formGroup]="form" (ngSubmit)="createConcert()">
   <div class="uk-grid uk-grid-small uk-light">
 
-    <div class="uk-width-1-1 uk-margin-small-bottom">
+    <div class="uk-width-1-1 uk-width-1-2@s uk-margin-small-bottom">
       <label for="title">Title</label>
         <input type="text" class="uk-input" id="title"
                formControlName="title">
     </div>
 
-    <div class="uk-width-1-1 uk-margin-small-bottom">
+    <div class="uk-width-1-1 uk-width-1-2@s uk-margin-small-bottom">
       <label for="venue">Venue</label>
-        <input type="text" class="uk-input" id="venue"
-               formControlName="venue">
+      <select class="uk-select" id="venue" formControlName="venue">
+        <option *ngIf="form.get('venue').invalid" [value]="null" disabled>Choose venue</option>
+        <option *ngFor="let venue of venues" [value]="venue">{{ Venue[venue] }}</option>
+      </select>
     </div>
 
     <div class="uk-width-1-2 uk-margin-small-bottom">
@@ -32,7 +34,8 @@
     </div>
 
     <!--    ERROR MESSAGE -->
-    <div class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
+    <div *ngIf="form.touched && formInteractedWithAndInvalid() && form.invalid "
+         class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
       <p class="text-error">
         <i class="fad fa-info-circle"></i>
         Please fill out the missing fields.

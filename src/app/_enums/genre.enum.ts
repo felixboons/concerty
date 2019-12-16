@@ -1,10 +1,10 @@
 export enum Genre {
-  'HIPHOP' = 'Hip-Hop',
-  'RB' = 'R&B',
-  'POP' = 'Pop',
-  'COUNTRY' = 'Country',
-  'DANCEHALL' = 'Dancehall',
-  'REGGAE' = 'Reggae',
+  HIP_HOP = 'Hip-Hop',
+  R_B = 'R&B',
+  POP = 'Pop',
+  COUNTRY = 'Country',
+  DANCEHALL = 'Dancehall',
+  REGGAE = 'Reggae',
 }
 
 export namespace Genre {
