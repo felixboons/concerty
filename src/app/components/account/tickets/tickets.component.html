@@ -37,6 +37,7 @@
       <thead>
       <tr>
         <th>No.</th>
+        <th></th>
         <th>Concert</th>
         <th>Date</th>
         <th class="uk-text-right">Price</th>
@@ -44,10 +45,16 @@
       </thead>
       <tbody>
       <tr *ngFor="let ticket of tickets">
-        <td>#12803</td>
-        <td>15 Jaar De Jeugd</td>
-        <td>15 Jan. 2020</td>
-        <td class="uk-text-right">&euro;80</td>
+        <td class="uk-table-shrink uk-text-nowrap">#12803</td>
+        <td class="uk-table-shrink uk-text-nowrap">
+          <a [routerLink]="['/account/tickets', 'fiewjfwIDowjeijf2o']"
+            class="uk-button uk-button-white">
+            SHOW TICKET
+          </a>
+        </td>
+        <td class="uk-table-expand uk-text-nowrap">15 Jaar De Jeugd</td>
+        <td class="uk-table-shrink uk-text-nowrap">15 Jan. 2020</td>
+        <td class="uk-table-shrink uk-text-right uk-text-nowrap">&euro;80</td>
       </tr>
       </tbody>
     </table>
