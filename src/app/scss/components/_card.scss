@@ -2,7 +2,7 @@
 @import '../../scss/base/standards';
 
 .uk-card-default {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .uk-card-body, .uk-card {
@@ -11,5 +11,12 @@
   img {
     border-top-left-radius: $border-radius;
     border-top-right-radius: $border-radius;
+  }
+
+  .uk-label {
+    background-color: white;
+    border-radius: $border-radius;
+    color: $color-primary !important;
+    font-weight: bold;
   }
 }

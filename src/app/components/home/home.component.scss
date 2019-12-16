@@ -1,0 +1,29 @@
+@import '../../scss/base/colors';
+
+.uk-card.uk-card-default {
+  width: 350px; // TODO: how to remove default margin on uk-card?
+                // TODO: It's generated in the li with display: list-item
+  background-color: $color-primary;
+
+  li {
+    display: inline-block !important;
+  }
+
+  .uk-label {
+    background-color: $color-primary;
+    color: white !important;
+  }
+
+  img {
+    width: 100%;
+    height: 200px;
+    //height: auto;
+    background-size: contain;
+    background-color: $color-primary;
+  }
+
+  h3, p, i {
+    color: white;
+  }
+}
+

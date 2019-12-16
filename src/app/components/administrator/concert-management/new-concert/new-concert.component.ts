@@ -26,6 +26,7 @@ export class NewConcertComponent implements OnInit {
     this.initializeForm();
   }
 
+  // TODO: Fine-tune this function, along with the new-artist one.
   formInteractedWithAndInvalid(): boolean {
     for (const c in this.form.controls) {
       const control = this.form.get(c);
