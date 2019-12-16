@@ -31,12 +31,21 @@
                   formControlName="description"></textarea>
     </div>
 
+    <!--    ERROR MESSAGE -->
+    <div class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
+      <p class="text-error">
+        <i class="fad fa-info-circle"></i>
+        Please fill out the missing fields.
+      </p>
+    </div>
+
+    <!--    BUTTONS -->
     <div class="uk-width-1-1 uk-margin-small-bottom">
       <button class="uk-button uk-button-white uk-margin-small-right" type="submit"
               [disabled]="form.invalid">
         Save concert
       </button>
-      <button class="uk-button uk-button-default">Cancel</button>
+      <button (click)="cancel()" class="uk-button uk-button-default">Cancel</button>
     </div>
 
   </div>

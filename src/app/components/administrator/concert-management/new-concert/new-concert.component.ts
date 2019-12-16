@@ -19,6 +19,10 @@ export class NewConcertComponent implements OnInit {
 
   }
 
+  cancel() {
+    this.initializeForm();
+  }
+
   private initializeForm() {
     this.form = new FormGroup({
       title: new FormControl(null, Validators.required),

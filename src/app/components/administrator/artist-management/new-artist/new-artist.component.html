@@ -11,7 +11,7 @@
       <label for="genre">Genre</label>
         <select class="uk-select" id="genre" formControlName="genre">
           <option *ngIf="form.get('genre').invalid" [value]="null" disabled>Choose genre</option>
-          <option *ngFor="let genre of genres" value="genre">{{ Genre[genre] }}</option>
+          <option *ngFor="let genre of genres" [value]="genre">{{ Genre[genre] }}</option>
         </select>
     </div>
 
@@ -19,14 +19,25 @@
       <label for="biography" class="uk-display-block">Biography</label>
         <textarea class="uk-textarea" id="biography" maxlength="500" rows="4"
                   formControlName="biography"></textarea>
+
     </div>
 
+<!--    ERROR MESSAGE -->
+    <div *ngIf="form.touched && formInteractedWithAndInvalid() && form.invalid "
+         class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
+      <p class="text-error">
+        <i class="fad fa-info-circle"></i>
+        Please fill out the missing fields.
+      </p>
+    </div>
+
+<!--    BUTTONS -->
     <div class="uk-width-1-1 uk-margin-small-bottom">
       <button class="uk-button uk-button-white uk-margin-small-right" type="submit"
               [disabled]="form.invalid">
         Save artist
       </button>
-      <button (click)="cancelForm()" class="uk-button uk-button-default">Cancel</button>
+      <button (click)="cancel()" class="uk-button uk-button-default">Cancel</button>
     </div>
 
   </div>

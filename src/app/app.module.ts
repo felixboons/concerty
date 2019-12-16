@@ -29,6 +29,7 @@ import {ChangePasswordComponent} from './components/account/profile/change-passw
 import {FindArtistComponent} from './components/administrator/artist-management/find-artist/find-artist.component';
 import {FindConcertComponent} from './components/administrator/concert-management/find-concert/find-concert.component';
 import {FooterComponent} from './components/footer/footer.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -58,12 +59,13 @@ import {FooterComponent} from './components/footer/footer.component';
     FooterComponent,
   ],
     imports: [
-      BrowserModule,
-      HttpClientModule,
-      AppRoutingModule,
-      ReactiveFormsModule,
-      FormsModule,
-      AngularMyDatePickerModule
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        AngularMyDatePickerModule,
+        CommonModule
     ],
   providers: [],
   bootstrap: [AppComponent]

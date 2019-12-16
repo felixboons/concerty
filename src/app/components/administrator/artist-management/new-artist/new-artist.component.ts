@@ -18,23 +18,39 @@ export class NewArtistComponent implements OnInit {
     this.initializeForm();
   }
 
+  createArtist(): void {
+
+  }
+
+  cancel() {
+    this.initializeForm();
+  }
+
+  formInteractedWithAndInvalid(): boolean {
+    for (const c in this.form.controls) {
+      const control = this.form.get(c);
+
+      // For all controls, except <select><option>
+      if (control.dirty && !control.pristine && control.invalid) {
+        return true;
+      }
+
+      // For <select><option>
+      if (c === 'genre') {
+        return control.touched && control.value === null;
+      }
+    }
+    return false;
+  }
+
   private initializeForm() {
     this.form = new FormGroup({
-      name: new FormControl('Felix Boons', Validators.required),
+      name: new FormControl(null, Validators.required),
       biography: new FormControl(null, [
         Validators.required,
         Validators.maxLength(500)
       ]),
       genre: new FormControl(null, Validators.required)
     })
-  }
-
-  createArtist(): void {
-
-  }
-
-  cancelForm() {
-    // this.form.reset();
-    this.initializeForm();
   }
 }
