@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ArtistService} from '../../_services/artist.service';
 import {Artist} from '../../_models/artist.model';
+import {Genre} from '../../_enums/genre.enum';
 
 @Component({
   selector: 'app-artists',
@@ -9,12 +10,17 @@ import {Artist} from '../../_models/artist.model';
 })
 export class ArtistsComponent implements OnInit {
   artists: Artist[] = [];
+  Genre = Genre;
+  genres = Genre.keys();
 
   constructor(private artistService: ArtistService) {
   }
 
   ngOnInit() {
     this.artistService.getArtists()
-      .subscribe(artists => this.artists = artists);
+      .subscribe(artists => {
+        console.log(artists);
+        this.artists = artists
+      });
   }
 }

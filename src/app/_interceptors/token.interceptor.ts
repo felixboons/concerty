@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {AuthService} from './auth.service';
-import {CacheService} from './cache.service';
+import {AuthService} from '../_services/auth.service';
+import {CacheService} from '../_services/cache.service';
 
 
 // TODO: TEST

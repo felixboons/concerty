@@ -11,7 +11,7 @@
       <label for="genre">Genre</label>
         <select class="uk-select" id="genre" formControlName="genre">
           <option *ngIf="form.get('genre').invalid" [value]="null" disabled>Choose genre</option>
-          <option>Hip-Hop</option>
+          <option *ngFor="let genre of genres" value="genre">{{ Genre[genre] }}</option>
         </select>
     </div>
 
@@ -26,7 +26,7 @@
               [disabled]="form.invalid">
         Save artist
       </button>
-      <button class="uk-button uk-button-default">Cancel</button>
+      <button (click)="cancelForm()" class="uk-button uk-button-default">Cancel</button>
     </div>
 
   </div>

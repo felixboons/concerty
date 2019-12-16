@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Genre} from '../../../../_enums/genre.enum';
 
 @Component({
   selector: 'app-new-artist',
@@ -8,6 +9,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class NewArtistComponent implements OnInit {
   form: FormGroup;
+  Genre = Genre;
+  genres = Genre.keys();
 
   constructor() { }
 
@@ -17,7 +20,7 @@ export class NewArtistComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      name: new FormControl(null, Validators.required),
+      name: new FormControl('Felix Boons', Validators.required),
       biography: new FormControl(null, [
         Validators.required,
         Validators.maxLength(500)
@@ -28,5 +31,10 @@ export class NewArtistComponent implements OnInit {
 
   createArtist(): void {
 
+  }
+
+  cancelForm() {
+    // this.form.reset();
+    this.initializeForm();
   }
 }
