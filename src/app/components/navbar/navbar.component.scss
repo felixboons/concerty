@@ -14,19 +14,19 @@ span#navbar-toggle-text {
 }
 
 .register-button:last-child {
-  color: $color-grey-light;
+  color: $color-lightgrey;
 
   &:hover {
-    color: $color-grey-dark;
+    color: $color-darkgrey;
   }
 }
 
 li.uk-active a {
-  color: $color-grey-dark;
+  color: $color-darkgrey;
 }
 
 .register-button.uk-active {
-  color: $color-grey-dark;
+  color: $color-darkgrey;
 }
 
 .login-button.uk-active {
@@ -39,9 +39,9 @@ li.uk-active a {
 }
 
 .uk-dropdown a {
-  color: $color-grey-light;
+  color: $color-lightgrey;
 
   &:hover {
-    color: $color-grey-dark;
+    color: $color-darkgrey;
   }
 }

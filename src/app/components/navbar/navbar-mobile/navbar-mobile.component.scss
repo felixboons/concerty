@@ -10,24 +10,24 @@ li.uk-nav-header {
 }
 
 .uk-offcanvas-bar {
-  background-color: $color-silver;
+  background-color: white;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
 
   li a {
     font-weight: bold;
-    color: $color-grey-light;
+    color: $color-lightgrey;
 
     &:hover {
-      color: $color-grey-dark;
+      color: $color-darkgrey;
     }
   }
 
   li.uk-active a {
-    color: $color-grey-dark;
+    color: $color-darkgrey;
   }
 
   .uk-nav-header {
-    color: $color-grey-dark;
+    color: $color-darkgrey;
   }
 
   .list-item-indent {
@@ -35,7 +35,7 @@ li.uk-nav-header {
   }
 
   .uk-nav-divider {
-    border-color: $color-grey-light;
+    border-color: $color-lightgrey;
   }
 }
 

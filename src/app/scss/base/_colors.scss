@@ -1,18 +1,16 @@
 
 $color-lightblue: rgb(163, 245, 255);
 
-$color-primary: rgb(30, 135, 240);
-$color-primary: rgb(30, 135, 240);
-$color-secondary: #195187;
-$color-secondary-2: #193e73;
-$color-secondary-3: #192f5f;
+$color-primary: #195187;
+$color-primary-hover: #154471;
+$color-primary-2: #193e73;
+$color-primary-3: #192f5f;
 
-$color-silver: #fafafa;
-
-$color-grey-light: #999;
+$color-lightgrey: #999;
 $color-grey: #7e7e7e;
-$color-grey-dark: #333;
-$color-black: #111;
+$color-grey-2: #393939;
+$color-darkgrey: #333;
 
+// Used on dark backgrounds, i.e. when using .uk-light
 $color-white-lightest: rgba(255, 255, 255, .2);
 $color-white-light: rgba(255, 255, 255, .7);
