@@ -13,50 +13,12 @@
 @import 'app/scss/components/form';
 @import 'app/scss/components/btn';
 
+
 // Navbar
-$navbar-background: $color-silver;
-$navbar-nav-item-color: $color-grey-light;
-$navbar-nav-item-active-color: $color-grey-dark;
-$navbar-nav-item-hover-color: $color-grey-dark;
-
-// Buttons
-.uk-button {
-  font-weight: bold !important;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-}
-
-.uk-button-white {
-  background-color: $color-white-light;
-  color: $color-secondary !important;
-
-  &:disabled {
-    color: $color-grey !important;
-
-    &:hover {
-      background-color: $color-white-light;
-    }
-  }
-
-  &:hover {
-    background-color: white;
-    color: $color-secondary;
-  }
-}
-
-$button-primary-background: $color-primary;
-$button-primary-color: white;
-
-$button-secondary-background: $color-secondary;
-$button-secondary-color: white;
-
-// Sections
-$background-primary-background: $color-primary;
-$background-secondary-background: $color-secondary;
-
-
+$navbar-background: white;
+$navbar-nav-item-color: $color-lightgrey;
+$navbar-nav-item-active-color: $color-darkgrey;
+$navbar-nav-item-hover-color: $color-darkgrey;
 
 // 2. Import default variables and available mixins.
 @import "../node_modules/uikit/src/scss/variables-theme.scss";

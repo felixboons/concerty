@@ -1,5 +1,45 @@
 @import '../../scss/base/colors';
 
+$button-primary-background: $color-primary;
+$button-primary-color: white;
+
+.uk-button-primary.button-preserve-color {
+  background-color: $color-primary !important;
+  color: white !important;
+
+  &:hover {
+    background-color: $color-primary-hover !important;
+  }
+}
+
+
+.uk-button {
+  font-weight: bold !important;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.uk-button-white {
+  background-color: $color-white-light;
+  color: $color-primary !important;
+
+  &:disabled {
+    color: $color-grey !important;
+
+    &:hover {
+      background-color: $color-white-light;
+    }
+  }
+
+  &:hover {
+    background-color: white;
+    color: $color-primary;
+  }
+}
+
+
 .uk-light {
 
   .uk-button-default {
@@ -12,3 +52,4 @@
     }
   }
 }
+

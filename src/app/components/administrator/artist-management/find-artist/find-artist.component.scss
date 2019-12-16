@@ -11,13 +11,13 @@ a.uk-button {
 }
 
 input {
-  border-bottom: 1px solid $color-grey-light;
+  border-bottom: 1px solid $color-lightgrey;
 }
 
 table {
 
   thead tr th {
-    color: $color-grey-light;
+    color: $color-lightgrey;
   }
 
   tr:nth-child(odd) {
@@ -25,14 +25,14 @@ table {
   }
 
   td {
-    color: $color-grey-dark;
+    color: $color-darkgrey;
   }
 
   i {
-    color: $color-grey-light;
+    color: $color-lightgrey;
 
     &:hover {
-      color: $color-grey-dark;
+      color: $color-darkgrey;
     }
   }
 }

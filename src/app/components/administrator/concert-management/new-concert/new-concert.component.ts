@@ -30,8 +30,14 @@ export class NewConcertComponent implements OnInit {
     for (const c in this.form.controls) {
       const control = this.form.get(c);
 
+      // For all controls, except <select><option>
       if (control.dirty && !control.pristine && control.invalid) {
         return true;
+      }
+
+      // For <select><option>
+      if (c === 'venue') {
+        return control.touched && control.value === null;
       }
     }
     return false;
