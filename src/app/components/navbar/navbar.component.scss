@@ -2,39 +2,26 @@
 
 .uk-logo {
   color: $color-primary;
-  font-size: 42px;
-}
-
-a:not(.uk-logo) {
-  font-size: 16px !important;
+  font-size: 28px;
 }
 
 li a, .uk-button {
   font-weight: bold;
 }
 
-span#navbar-toggle-text {
-  font-weight: bold;
-}
-
-.register-button:last-child {
-  color: $color-lightgrey;
-
-  &:hover {
+.uk-navbar-toggle {
+  #navbar-toggle-text, i {
+    font-weight: bold;
     color: $color-darkgrey;
   }
 }
 
-li.uk-active a {
-  color: $color-darkgrey;
-}
-
-.register-button.uk-active {
+.register-button.uk-active, li.uk-active a {
   color: $color-darkgrey;
 }
 
 .login-button.uk-active {
-  background-color: #0f7ae5;
+  background-color: $color-primary;
 }
 
 .fad {
@@ -42,7 +29,7 @@ li.uk-active a {
   text-align: left;
 }
 
-.uk-dropdown a {
+.uk-dropdown a, .register-button:last-child {
   color: $color-lightgrey;
 
   &:hover {
