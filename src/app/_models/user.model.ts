@@ -4,14 +4,18 @@ export class User extends Model {
   private firstName: string;
   private lastName: string;
   private email: string;
+  private password: string;
   private role: number;
   private tickets: [string]; // [Ticket]
 
-  constructor(firstName: string, lastName: string, email: string, role: number, tickets: [string], model: Model) {
-    super(model.getVersion(), model.getCreatedAt(), model.getUpdatedAt());
+  constructor(firstName: string, lastName: string, email: string, password: string, tickets?: [string], role?: number, model?: Model) {
+    super(model ? model.getVersion() : null,
+        model ? model.getCreatedAt() : null,
+        model ? model.getUpdatedAt() : null);
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.password = password;
     this.tickets = tickets;
   }
 
@@ -45,5 +49,9 @@ export class User extends Model {
 
   public setEmail(email: string): void {
     this.email = email;
+  }
+
+  public getPassword(): string {
+    return this.password;
   }
 }

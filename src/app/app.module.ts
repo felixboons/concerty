@@ -11,7 +11,7 @@ import { ConcertDetailsComponent } from './components/concerts/concert-details/c
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NavbarMobileComponent } from './components/navbar/navbar-mobile/navbar-mobile.component';
 import { RegisterComponent } from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -30,6 +30,7 @@ import {FindArtistComponent} from './components/administrator/artist-management/
 import {FindConcertComponent} from './components/administrator/concert-management/find-concert/find-concert.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {CommonModule} from '@angular/common';
+import {TokenInterceptor} from './_interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,9 @@ import {CommonModule} from '@angular/common';
         AngularMyDatePickerModule,
         CommonModule
     ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

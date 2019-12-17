@@ -4,7 +4,6 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {AuthService} from '../_services/auth.service';
 
-
 // TODO: TEST
 
 @Injectable({

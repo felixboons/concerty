@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Genre} from '../../../../_enums/genre.enum';
+import {ArtistService} from '../../../../_services/artist.service';
+import {Artist} from '../../../../_models/artist.model';
 
 @Component({
   selector: 'app-new-artist',
@@ -12,13 +14,17 @@ export class NewArtistComponent implements OnInit {
   Genre = Genre;
   genres = Genre.keys();
 
-  constructor() { }
+  constructor(private artistService: ArtistService) { }
 
   ngOnInit() {
     this.initializeForm();
   }
 
   createArtist(): void {
+    const input = this.form.value;
+    const artist: Artist = new Artist(input.name, input.genre, input.biography);
+
+    const created = this.artistService.createArtist(artist);
 
   }
 

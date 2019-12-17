@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../_services/user.service';
+import {User} from '../../_models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -31,8 +32,9 @@ export class RegisterComponent implements OnInit {
 
   register(): void {
     const input = this.form.value;
+    const user: User = new User(input.firstName, input.lastName, input.email, input.password);
 
-    this.userService.createUser(input.firstName, input.lastName, input.email, input.password)
+    this.userService.createUser(user)
       .then(_ => {
         console.log('ACCOUNT CREATED');
       })

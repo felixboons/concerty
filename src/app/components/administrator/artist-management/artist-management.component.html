@@ -22,14 +22,14 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let artist of [].constructor(5); let i = index">
-        <td class="uk-table-shrink">#521</td>
+      <tr *ngFor="let artist of artists; let i = index">
+        <td class="uk-table-shrink">{{ '#2'}}</td>
         <td class="uk-table-shrink">
           <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
         </td>
-        <td class="uk-table-expand uk-text-nowrap">De Jeugd Van Tegenwoordig</td>
-        <td class="uk-table-shrink uk-text-nowrap">Hip-Hop</td>
-        <td class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur doloremque ipsam quasi sint? Eos magnam necessitatibus non? Ab dicta dignissimos ea eius eum ipsam non, nulla saepe tempora, unde voluptates!</td>
+        <td class="uk-table-expand uk-text-nowrap">{{ artist.name }}</td>
+        <td class="uk-table-shrink uk-text-nowrap">{{ Genre[artist.genre] }}</td>
+        <td class="uk-text-truncate">{{ artist.biography }}</td>
         <td class="uk-table-shrink uk-text-center">
           <i (click)="removeArtist(i)" class="fad fa-trash-alt"></i>
         </td>

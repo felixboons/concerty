@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Artist} from '../../../_models/artist.model';
+import {ArtistService} from '../../../_services/artist.service';
+import {Genre} from '../../../_enums/genre.enum';
 
 @Component({
   selector: 'app-artist-management',
@@ -7,11 +9,13 @@ import {Artist} from '../../../_models/artist.model';
   styleUrls: ['./artist-management.component.scss']
 })
 export class ArtistManagementComponent implements OnInit {
-  artists: Artist[] = [null, null, null, null, null];
+  artists: Artist[] = [];
+  Genre = Genre;
 
-  constructor() { }
+  constructor(private artistService: ArtistService) { }
 
   ngOnInit() {
+    this.artistService.getArtists().subscribe(artists => this.artists = artists);
   }
 
   removeArtist(index: number): boolean {

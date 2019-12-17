@@ -5,9 +5,6 @@ import {environment} from '../../environments/environment';
 import {AuthService} from '../_services/auth.service';
 import {CacheService} from '../_services/cache.service';
 
-
-// TODO: TEST
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +14,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.cache.getToken();
-    console.log(`Token is given with headers of request'`);
-
     const isValidApiUrl = request.url.startsWith(environment.serverUrlPrefix);
     if (token && isValidApiUrl) {
       request = request.clone({
@@ -26,8 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
-    console.log(request);
-
+    console.log(`Authentication header is added to HTTP request`);
     return next.handle(request);
   }
 }
