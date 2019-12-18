@@ -20,12 +20,11 @@ export class AllArtistsComponent implements OnInit {
   }
 
   onChangePage(pageOfItems: Array<any>) {
-    // update current page of items
     this.pageOfArtists = pageOfItems;
   }
 
-  removeArtist(index: number): void {
-    this.artistService.deleteArtist(index);
+  removeArtist(_id: string): void {
+    this.artistService.deleteArtist(_id);
   }
 
   getLastDigitsOfId(id: string, digits = 5): string {

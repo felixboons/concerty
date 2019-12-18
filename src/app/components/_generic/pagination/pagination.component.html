@@ -2,7 +2,7 @@
 <ul *ngIf="pager.pages && pager.pages.length" class="uk-pagination uk-flex-right">
   <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
     <a (click)="setPage(pager.currentPage - 1)" class="page-link">
-      <i class="fad fa-angle-left"></i>
+      <i class="fad fa-chevron-double-left fa-sm"></i>
     </a>
   </li>
 
@@ -33,7 +33,7 @@
 
   <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
     <a (click)="setPage(pager.currentPage + 1)" class="page-link">
-      <i class="fad fa-angle-right"></i>
+      <i class="fad fa-chevron-double-right fa-sm"></i>
     </a>
   </li>
 </ul>

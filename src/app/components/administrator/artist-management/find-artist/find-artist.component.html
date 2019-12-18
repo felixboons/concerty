@@ -27,7 +27,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let artist of artists; let i = index">
+        <tr *ngFor="let artist of artists">
           <td class="uk-table-shrink">#{{ getLastDigitsOfId(artist._id) }}</td>
           <td class="uk-table-shrink">
             <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
@@ -36,7 +36,7 @@
           <td class="uk-table-shrink uk-text-truncate">{{ artist.biography }}</td>
           <td class="uk-table-shrink uk-text-nowrap">{{ Genre[artist.genre] }}</td>
           <td class="uk-table-shrink uk-text-center">
-            <i (click)="removeArtist(i)" class="fad fa-trash-alt"></i>
+            <i (click)="removeArtist(artist._id)" class="fad fa-trash-alt"></i>
           </td>
         </tr>
         </tbody>

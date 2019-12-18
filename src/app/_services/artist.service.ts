@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Artist} from '../_models/artist.model';
 import {catchError, map} from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class ArtistService {
     });
   }
 
-  createArtist(artist: Artist): boolean {
+  createArtist(artist: Artist): void {
     const body = {
       name: artist.name,
       genre: artist.genre,
@@ -38,27 +38,30 @@ export class ArtistService {
       .then(artist => {
         this.artists.unshift(artist);
         this.artistsSubject.next(this.artists);
-
-        return true;
       })
       .catch(reason => {
         console.log(reason);
-        return false;
       });
-
-    return false;
   }
 
-  deleteArtist(index: number): void {
-    const artistId = this.artists[index]._id;
-    const url = this.url + '/' + artistId;
+  deleteArtist(_id: string): void {
+    const url = this.url + '/' + _id;
 
     this.http.delete(url).toPromise()
-      .then(artist => {
+      .then((artist: Artist) => {
+        let index;
+
+        this.artists.forEach((value, i) => {
+          if (artist._id === value._id) {
+            index = i;
+          }
+        });
+
         this.artists.splice(index, 1);
+        this.artistsSubject.next(this.artists);
       })
       .catch(err => {
-        return false;
+
       });
 
   }
@@ -68,7 +71,7 @@ export class ArtistService {
       .get(this.url)
       .pipe(
         map((response: Artist[]) => response
-      ), catchError(error => throwError('Server responded with unexpected object type'))
-      )
+        ), catchError(error => throwError('Server responded with unexpected object type'))
+      );
   }
 }

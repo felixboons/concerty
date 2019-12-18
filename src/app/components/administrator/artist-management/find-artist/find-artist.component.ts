@@ -17,8 +17,8 @@ export class FindArtistComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeArtist(index: number): void {
-    this.artistService.deleteArtist(index);
+  removeArtist(_id: string): void {
+    this.artistService.deleteArtist(_id);
   }
 
   getLastDigitsOfId(id: string, digits = 5): string {

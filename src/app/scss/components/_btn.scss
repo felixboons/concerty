@@ -13,6 +13,14 @@ $button-primary-color: white;
 
 .uk-light {
 
+  .uk-button-default {
+    border-color: $color-white-lightest !important;
+
+    &:hover {
+      border-color: $color-white-light !important;
+    }
+  }
+
   .uk-button-primary:not(:disabled) {
     border: none !important;
     background-color: white !important;
