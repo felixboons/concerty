@@ -26,7 +26,11 @@ export class NewConcertComponent implements OnInit {
     this.initializeForm();
   }
 
-  setDateValue(date: Date) {
+  markDatepickerAsTouched(): void {
+    this.form.controls['date'].markAsTouched();
+  }
+
+  setDateValue(date: Date): void {
     this.form.get('date').setValue(date);
   }
 
@@ -40,8 +44,13 @@ export class NewConcertComponent implements OnInit {
       }
 
       // For <select><option>
-      if (c === 'venue') {
-        return control.touched && control.value === null;
+      if (c === 'venue' && control.touched && control.value === null) {
+        return true;
+      }
+
+      // For <mat-datepicker>
+      if (c === 'date' && control.touched && control.invalid) {
+        return true;
       }
     }
 

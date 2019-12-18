@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 export class DatepickerComponent implements OnInit {
   today: Date = new Date();
   @Output() dateValueChanged = new EventEmitter<Date>();
+  @Output() datepickerTouched = new EventEmitter();
 
   constructor() { }
 
@@ -26,5 +27,9 @@ export class DatepickerComponent implements OnInit {
 
     // Handler when all assets (including images) are loaded
     $(window).on("load", () => $('.mat-datepicker-toggle').append(iconElement));
+  }
+
+  markDatepickerAsTouched(): void {
+    this.datepickerTouched.emit();
   }
 }

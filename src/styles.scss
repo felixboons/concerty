@@ -28,12 +28,11 @@ $tastic-tickets-client-theme: mat-light-theme($tastic-tickets-client-primary, $t
 
 
 // 1. Imports
-@import 'app/scss/components/header';
-@import 'app/scss/base/reset';
 @import 'app/scss/base/standards';
 @import 'app/scss/base/colors';
 
 @import 'app/scss/components/navbar';
+@import 'app/scss/components/header';
 @import 'app/scss/components/logo';
 @import 'app/scss/components/header';
 @import 'app/scss/components/anchor';
