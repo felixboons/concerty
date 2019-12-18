@@ -47,6 +47,16 @@ $navbar-nav-item-color: $color-lightgrey;
 $navbar-nav-item-active-color: $color-darkgrey;
 $navbar-nav-item-hover-color: $color-darkgrey;
 
+// Pill
+$subnav-pill-item-background: $color-grey;
+$subnav-pill-item-color: white;
+
+.uk-subnav-pill li.uk-active a,
+.uk-subnav-pill li.uk-active:hover a {
+  background-color: $color-primary !important;
+  color: white !important;
+}
+
 // 2. Import default variables and available mixins.
 @import "../node_modules/uikit/src/scss/variables-theme.scss";
 @import "../node_modules/uikit/src/scss/mixins-theme.scss";
