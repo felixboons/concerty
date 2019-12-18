@@ -15,6 +15,7 @@
           <th>No.</th>
           <th>Image</th>
           <th>Title</th>
+          <th>Description</th>
           <th class="uk-text-right">Tickets (remaining)</th>
           <th class="uk-text-right">Tickets (total)</th>
           <th>Delete</th>
@@ -26,7 +27,8 @@
           <td class="uk-table-shrink">
             <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
           </td>
-          <td class="uk-table-expand">{{ concert.title }}</td>
+          <td class="uk-table-expand uk-text-nowrap">{{ concert.title }}</td>
+          <td class="uk-table-shrink uk-text-truncate uk-text-nowrap">{{ concert.description }}</td>
           <td class="uk-table-shrink uk-text-right">{{ concert.ticketsRemaining }}</td>
           <td class="uk-table-shrink uk-text-right">{{ concert.ticketsTotal }}</td>
           <td class="uk-table-shrink uk-text-center">

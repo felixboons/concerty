@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Concert} from '../_models/concert.mode';
@@ -11,7 +11,7 @@ import {catchError, map} from 'rxjs/operators';
 export class ConcertService {
   private readonly url = environment.serverUrlPrefix + 'concerts';
   private concerts: Concert[] = [];
-  concertsSubject = new Subject<Concert[]>();
+  concertsSubject = new BehaviorSubject<Concert[]>(null);
 
   constructor(private http: HttpClient) {
     this.getConcerts().subscribe(concerts => {

@@ -15,6 +15,10 @@ export class FindConcertComponent implements OnInit {
   ngOnInit() {
   }
 
+  getLastDigitsOfId(id: string, digits = 5): string {
+    return id.substring(id.length - digits, id.length);
+  }
+
   removeConcert(index: number): void {
     this.concertRemoved.emit(index);
   }

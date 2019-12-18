@@ -1,0 +1,44 @@
+@import '../../../../../scss/base/colors';
+
+::ng-deep {
+
+  // Remove underline.
+  .mat-form-field-underline {
+    display: none;
+  }
+
+  // Remove material icon
+  button.mat-icon-button {
+    display: none !important;
+  }
+
+  // Add input styling.
+  .mat-form-field-flex {
+    background-color: rgba(255, 255, 255, .1);
+    border: 1px solid $color-white-lightest !important;
+  }
+
+  .mat-datepicker-toggle {
+    color: $color-white-light;
+  }
+
+  .mat-form-field-infix {
+    border-top: 0 !important;
+    padding: 10px !important;
+    color: white !important;
+
+    &:hover i, .mat-datepicker-toggle:hover {
+      color: white;
+    }
+  }
+
+  .mat-form-field-wrapper {
+    font-family: 'Segoe UI', sans-serif;
+    padding-bottom: 0 !important;
+  }
+
+  .mat-datepicker-content {
+    border-radius: 0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}

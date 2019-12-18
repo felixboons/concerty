@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Artist} from '../_models/artist.model';
 import {catchError, map} from 'rxjs/operators';
@@ -13,7 +13,7 @@ import {catchError, map} from 'rxjs/operators';
 export class ArtistService {
   private readonly url = environment.serverUrlPrefix + 'artists';
   private artists: Artist[] = [];
-  artistsSubject = new Subject<Artist[]>();
+  artistsSubject = new BehaviorSubject<Artist[]>(null);
 
   constructor(private http: HttpClient) {
     this.getArtists().subscribe(artists => {

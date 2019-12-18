@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Venue} from '../../../../_enums/venue.enum';
+import {ConcertService} from '../../../../_services/concert.service';
+import {Concert} from '../../../../_models/concert.mode';
 
 @Component({
   selector: 'app-new-concert',
@@ -8,25 +10,36 @@ import {Venue} from '../../../../_enums/venue.enum';
   styleUrls: ['./new-concert.component.scss']
 })
 export class NewConcertComponent implements OnInit {
-  form: FormGroup;
   Venue = Venue;
   venues = Venue.keys();
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private concertService: ConcertService) { }
 
   ngOnInit() {
     this.initializeForm();
   }
 
   createConcert(): void {
-
+    const input = this.form.value;
+    const concert: Concert = new Concert(input.title, input.venue, input.date,
+      input.tickets, input.price, input.description);
+    this.concertService.createConcert(concert);
+    this.initializeForm();
   }
 
   cancel() {
     this.initializeForm();
   }
 
-  // TODO: Fine-tune this function, along with the new-artist one.
+  markDatepickerAsTouched(): void {
+    this.form.controls['date'].markAsTouched();
+  }
+
+  setDateValue(date: Date): void {
+    this.form.get('date').setValue(date);
+  }
+
   formInteractedWithAndInvalid(): boolean {
     for (const c in this.form.controls) {
       const control = this.form.get(c);
@@ -37,10 +50,16 @@ export class NewConcertComponent implements OnInit {
       }
 
       // For <select><option>
-      if (c === 'venue') {
-        return control.touched && control.value === null;
+      if (c === 'venue' && control.touched && control.value === null) {
+        return true;
+      }
+
+      // For <mat-datepicker>
+      if (c === 'date' && control.touched && control.invalid) {
+        return true;
       }
     }
+
     return false;
   }
 
@@ -51,17 +70,17 @@ export class NewConcertComponent implements OnInit {
       tickets: new FormControl(null, [
         Validators.required,
         Validators.min(1),
-        Validators.max(1_000_000),
+        Validators.max(1000000),
       ]),
+      date: new FormControl(null, Validators.required),
       price: new FormControl(null, [
         Validators.required,
         Validators.min(0.01),
-        Validators.max(1_000_000),
+        Validators.max(1000000),
       ]),
-      // date: new FormControl(null, Validators.required),
       description: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(500),
+        Validators.maxLength(500)
       ])
     })
   }

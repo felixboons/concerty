@@ -16,8 +16,8 @@
         <th>No.</th>
         <th>Image</th>
         <th>Name</th>
-        <th>Genre</th>
         <th>Biography</th>
+        <th>Genre</th>
         <th>Delete</th>
       </tr>
       </thead>
@@ -28,8 +28,8 @@
           <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
         </td>
         <td class="uk-table-expand uk-text-nowrap">{{ artist.name }}</td>
+        <td class="uk-table-shrink uk-text-truncate">{{ artist.biography }}</td>
         <td class="uk-table-shrink uk-text-nowrap">{{ Genre[artist.genre] }}</td>
-        <td class="uk-text-truncate">{{ artist.biography }}</td>
         <td class="uk-table-shrink uk-text-center">
           <i (click)="removeArtist(i)" class="fad fa-trash-alt"></i>
         </td>

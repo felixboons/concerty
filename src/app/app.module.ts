@@ -1,19 +1,19 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ArtistsComponent } from './components/artists/artists.component';
-import { ArtistDetailsComponent } from './components/artists/artist-details/artist-details.component';
-import { ConcertsComponent } from './components/concerts/concerts.component';
-import { ConcertDetailsComponent } from './components/concerts/concert-details/concert-details.component';
-import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { AboutComponent } from './components/about/about.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {ArtistsComponent} from './components/artists/artists.component';
+import {ArtistDetailsComponent} from './components/artists/artist-details/artist-details.component';
+import {ConcertsComponent} from './components/concerts/concerts.component';
+import {ConcertDetailsComponent} from './components/concerts/concert-details/concert-details.component';
+import {LoginComponent} from './components/login/login.component';
+import {HomeComponent} from './components/home/home.component';
+import {AboutComponent} from './components/about/about.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { NavbarMobileComponent } from './components/navbar/navbar-mobile/navbar-mobile.component';
-import { RegisterComponent } from './components/register/register.component';
+import {NavbarMobileComponent} from './components/navbar/navbar-mobile/navbar-mobile.component';
+import {RegisterComponent} from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AccountComponent} from './components/account/account.component';
 import {TicketsComponent} from './components/account/tickets/tickets.component';
@@ -31,6 +31,9 @@ import {FindConcertComponent} from './components/administrator/concert-managemen
 import {FooterComponent} from './components/footer/footer.component';
 import {CommonModule} from '@angular/common';
 import {TokenInterceptor} from './_interceptors/token.interceptor';
+import {MatDatepickerModule, MatInputModule, MatNativeDateModule} from '@angular/material';
+import {DatepickerComponent} from './components/administrator/concert-management/new-concert/datepicker/datepicker.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -58,19 +61,26 @@ import {TokenInterceptor} from './_interceptors/token.interceptor';
     FindArtistComponent,
     FindConcertComponent,
     FooterComponent,
+    DatepickerComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        AngularMyDatePickerModule,
-        CommonModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatInputModule
+  ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
-    ],
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'NL-nl' }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+}

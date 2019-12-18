@@ -10,9 +10,9 @@ import {Artist} from '../../../../_models/artist.model';
   styleUrls: ['./new-artist.component.scss']
 })
 export class NewArtistComponent implements OnInit {
-  form: FormGroup;
   Genre = Genre;
   genres = Genre.keys();
+  form: FormGroup;
 
   constructor(private artistService: ArtistService) { }
 
@@ -35,14 +35,14 @@ export class NewArtistComponent implements OnInit {
     for (const c in this.form.controls) {
       const control = this.form.get(c);
 
-      // For all controls, except <select><option>
-      if (control.dirty && !control.pristine && control.invalid) {
+      // For <select><option>
+      if (c === 'genre' && control.touched && control.value === null) {
         return true;
       }
 
-      // For <select><option>
-      if (c === 'genre') {
-        return control.touched && control.value === null;
+      // For all other controls (Only inputs, in this case. IDK if other form elements work.
+      if (control.dirty && !control.pristine && control.invalid) {
+        return true;
       }
     }
     return false;
