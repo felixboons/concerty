@@ -15,6 +15,7 @@ export class ConcertService {
 
   constructor(private http: HttpClient) {
     this.getConcerts().subscribe(concerts => {
+      concerts.reverse();
       this.concerts = concerts;
       this.concertsSubject.next(concerts);
     });
@@ -35,7 +36,7 @@ export class ConcertService {
         ), catchError(error => throwError('Server responded with unexpected object type'))
       ).toPromise()
       .then(concert => {
-        this.concerts.push(concert);
+        this.concerts.unshift(concert);
         this.concertsSubject.next(this.concerts);
         return true;
       })
