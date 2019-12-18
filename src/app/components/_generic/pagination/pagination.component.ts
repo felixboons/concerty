@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@an
 
 // @ts-ignore
 import paginate from 'jw-paginate';
+import {ArtistService} from '../../../_services/artist.service';
 
 @Component({
   selector: 'app-pagination',
@@ -12,15 +13,21 @@ export class PaginationComponent implements OnInit {
   @Input() items: Array<any> = [];
   @Output() changePage = new EventEmitter<any>(true);
   @Input() initialPage = 1;
-  @Input() pageSize = 1;
+  @Input() pageSize = 4;
   @Input() maxPages;
 
   pager: any = {};
   layoutThreshold = 5;
 
-  constructor() { }
+  constructor(private artistService: ArtistService) { }
 
   ngOnInit() {
+    this.artistService.artistsSubject.subscribe(_ => {
+      this.initializePages();
+    })
+  }
+
+  initializePages(): void {
     if (this.items && this.items.length) {
       this.setPage(this.initialPage);
     }
@@ -34,20 +41,19 @@ export class PaginationComponent implements OnInit {
       }
 
       if (changes.items.currentValue !== changes.items.previousValue) {
-        console.log('onChanges');
         this.setPage(this.initialPage);
+        this.initializePages();
       }
     }
   }
 
-  private setPage(page: number) {
+  setPage(page: number) {
     // get new pager object for specified page
     this.pager = paginate(this.items.length, page, this.pageSize, this.maxPages);
 
     // get new page of items from items array
-    var pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    const pageOfItems = this.items.slice(this.pager.startIndex, this.pager.endIndex + 1);
 
-    // call change page function in parent component
     this.changePage.emit(pageOfItems);
   }
 }

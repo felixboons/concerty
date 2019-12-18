@@ -38,6 +38,7 @@ export class ArtistService {
       .then(artist => {
         this.artists.unshift(artist);
         this.artistsSubject.next(this.artists);
+
         return true;
       })
       .catch(reason => {
