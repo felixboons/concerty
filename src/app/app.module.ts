@@ -33,6 +33,8 @@ import {TokenInterceptor} from './_interceptors/token.interceptor';
 import {MatDatepickerModule, MatInputModule, MatNativeDateModule} from '@angular/material';
 import {DatepickerComponent} from './components/administrator/concert-management/new-concert/datepicker/datepicker.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AllArtistsComponent} from './components/administrator/artist-management/all-artists/all-artists.component';
+import {PaginationComponent} from './components/_generic/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FindArtistComponent,
     FindConcertComponent,
     FooterComponent,
-    DatepickerComponent
+    DatepickerComponent,
+    AllArtistsComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
