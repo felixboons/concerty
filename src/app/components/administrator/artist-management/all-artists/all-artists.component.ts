@@ -31,5 +31,4 @@ export class AllArtistsComponent implements OnInit {
   getLastDigitsOfId(id: string, digits = 5): string {
     return id.substring(id.length - digits, id.length);
   }
-
 }

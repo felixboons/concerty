@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArtistService} from '../../../../_services/artist.service';
 import {Artist} from '../../../../_models/artist.model';
+import {Genre} from '../../../../_enums/genre.enum';
 
 @Component({
   selector: 'app-find-artist',
@@ -9,6 +10,7 @@ import {Artist} from '../../../../_models/artist.model';
 })
 export class FindArtistComponent implements OnInit {
   @Input() artists: Artist[] = [];
+  Genre = Genre;
 
   constructor(private artistService: ArtistService) { }
 
@@ -17,5 +19,9 @@ export class FindArtistComponent implements OnInit {
 
   removeArtist(index: number): void {
     this.artistService.deleteArtist(index);
+  }
+
+  getLastDigitsOfId(id: string, digits = 5): string {
+    return id.substring(id.length - digits, id.length);
   }
 }

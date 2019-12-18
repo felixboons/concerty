@@ -3,15 +3,6 @@
 $button-primary-background: $color-primary;
 $button-primary-color: white;
 
-.uk-button-primary.button-preserve-color {
-  background-color: $color-primary !important;
-  color: white !important;
-
-  &:hover {
-    background-color: $color-primary-hover !important;
-  }
-}
-
 .uk-button {
   font-weight: bold !important;
 }
@@ -38,6 +29,15 @@ $button-primary-color: white;
     border: none !important;
     box-sizing: border-box;
     background-color: $color-white-light;
+  }
+
+  .uk-button-primary.button-preserve-color {
+    background-color: $color-primary !important;
+    color: white !important;
+
+    &:hover {
+      background-color: $color-primary-hover !important;
+    }
   }
 }
 
