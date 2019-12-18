@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ArtistService} from '../../../../_services/artist.service';
+import {Artist} from '../../../../_models/artist.model';
 
 @Component({
   selector: 'app-find-artist',
@@ -7,6 +8,7 @@ import {ArtistService} from '../../../../_services/artist.service';
   styleUrls: ['./find-artist.component.scss']
 })
 export class FindArtistComponent implements OnInit {
+  @Input() artists: Artist[] = [];
 
   constructor(private artistService: ArtistService) { }
 

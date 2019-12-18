@@ -15,10 +15,14 @@ export class ArtistManagementComponent implements OnInit {
   constructor(private artistService: ArtistService) { }
 
   ngOnInit() {
-    this.artistService.artistsObs.subscribe(artists => this.artists = artists);
+    this.artistService.artistsSubject.subscribe(artists => this.artists = artists);
   }
 
   removeArtist(index: number): void {
     this.artistService.deleteArtist(index);
+  }
+
+  getLastDigitsOfId(id: string, digits = 5): string {
+    return id.substring(id.length - digits, id.length);
   }
 }

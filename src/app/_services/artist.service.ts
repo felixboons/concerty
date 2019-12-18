@@ -13,12 +13,12 @@ import {catchError, map} from 'rxjs/operators';
 export class ArtistService {
   private readonly url = environment.serverUrlPrefix + 'artists';
   private artists: Artist[] = [];
-  artistsObs = new Subject<Artist[]>();
+  artistsSubject = new Subject<Artist[]>();
 
   constructor(private http: HttpClient) {
     this.getArtists().subscribe(artists => {
       this.artists = artists;
-      this.artistsObs.next(artists);
+      this.artistsSubject.next(artists);
     });
   }
 
@@ -32,11 +32,11 @@ export class ArtistService {
     this.http.post(this.url, body)
       .pipe(
         map((response: Artist) => response
-        ), catchError(error => throwError('Something went wrong!'))
+        ), catchError(error => throwError('Server responded with unexpected object type'))
       ).toPromise()
       .then(artist => {
         this.artists.push(artist);
-        this.artistsObs.next(this.artists);
+        this.artistsSubject.next(this.artists);
         return true;
       })
       .catch(reason => {
@@ -66,7 +66,7 @@ export class ArtistService {
       .get(this.url)
       .pipe(
         map((response: Artist[]) => response
-      ), catchError(error => throwError('Something went wrong!'))
+      ), catchError(error => throwError('Server responded with unexpected object type'))
       )
   }
 }

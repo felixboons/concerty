@@ -13,7 +13,7 @@ export class ConcertsComponent implements OnInit {
   constructor(private concertService: ConcertService) { }
 
   ngOnInit() {
-    this.concertService.getConcerts()
+    this.concertService.concertsSubject
       .subscribe(concerts => this.concerts = concerts);
   }
 

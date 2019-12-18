@@ -2,7 +2,7 @@
 
   <h1 class="uk-heading-small">Concert management</h1>
   <h2>Find concert</h2>
-  <app-find-concert></app-find-concert>
+  <app-find-concert [concerts]="concerts" (concertRemoved)="removeConcert($event)"></app-find-concert>
 
   <h2>New concert</h2>
   <app-new-concert></app-new-concert>
@@ -22,13 +22,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let concert of concerts; let i = index">
-          <td class="uk-table-shrink">#10107</td>
+          <td class="uk-table-shrink">#{{ getLastDigitsOfId(concert._id) }}</td>
           <td class="uk-table-shrink">
             <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
           </td>
-          <td class="uk-table-expand">15 Jaar De Jeugd</td>
-          <td class="uk-table-shrink uk-text-right">4.586</td>
-          <td class="uk-table-shrink uk-text-right">15.000</td>
+          <td class="uk-table-expand">{{ concert.title }}</td>
+          <td class="uk-table-shrink uk-text-right">{{ concert.ticketsRemaining }}</td>
+          <td class="uk-table-shrink uk-text-right">{{ concert.ticketsTotal }}</td>
           <td class="uk-table-shrink uk-text-center">
             <i (click)="removeConcert(i)" class="fad fa-trash-alt"></i>
           </td>
