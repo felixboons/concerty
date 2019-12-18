@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Venue} from '../../../../_enums/venue.enum';
+import {ConcertService} from '../../../../_services/concert.service';
+import {Concert} from '../../../../_models/concert.mode';
 
 @Component({
   selector: 'app-new-concert',
@@ -8,18 +10,22 @@ import {Venue} from '../../../../_enums/venue.enum';
   styleUrls: ['./new-concert.component.scss']
 })
 export class NewConcertComponent implements OnInit {
-  form: FormGroup;
   Venue = Venue;
   venues = Venue.keys();
+  form: FormGroup;
 
-  constructor() { }
+  constructor(private concertService: ConcertService) { }
 
   ngOnInit() {
     this.initializeForm();
   }
 
   createConcert(): void {
-
+    const input = this.form.value;
+    const concert: Concert = new Concert(input.title, input.venue, input.date,
+      input.tickets, input.price, input.description);
+    this.concertService.createConcert(concert);
+    this.initializeForm();
   }
 
   cancel() {

@@ -10,9 +10,9 @@ import {Artist} from '../../../../_models/artist.model';
   styleUrls: ['./new-artist.component.scss']
 })
 export class NewArtistComponent implements OnInit {
-  form: FormGroup;
   Genre = Genre;
   genres = Genre.keys();
+  form: FormGroup;
 
   constructor(private artistService: ArtistService) { }
 

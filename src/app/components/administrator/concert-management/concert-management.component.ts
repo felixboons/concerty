@@ -17,8 +17,6 @@ export class ConcertManagementComponent implements OnInit {
   }
 
   removeConcert(index: number): void {
-    console.log(index);
-    console.log(index);
     this.concertService.deleteConcert(index);
   }
 
