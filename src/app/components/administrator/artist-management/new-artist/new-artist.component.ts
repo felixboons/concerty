@@ -23,9 +23,8 @@ export class NewArtistComponent implements OnInit {
   createArtist(): void {
     const input = this.form.value;
     const artist: Artist = new Artist(input.name, input.genre, input.biography);
-
-    const created = this.artistService.createArtist(artist);
-
+    this.artistService.createArtist(artist);
+    this.initializeForm();
   }
 
   cancel() {

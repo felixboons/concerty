@@ -12,44 +12,32 @@ $button-primary-color: white;
   }
 }
 
-
 .uk-button {
   font-weight: bold !important;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
 }
 
-.uk-button-white {
-  background-color: $color-white-light;
-  color: $color-primary !important;
-
-  &:disabled {
-    color: $color-grey !important;
-
-    &:hover {
-      background-color: $color-white-light;
-    }
-  }
-
-  &:hover {
-    background-color: white;
-    color: $color-primary;
-  }
+.uk-button:disabled {
+  cursor: not-allowed;
 }
-
 
 .uk-light {
 
-  .uk-button-default {
-    border-color: rgba(255, 255, 255, .2) !important;
-    color: $color-white-light !important;
+  .uk-button-primary:not(:disabled) {
+    border: none !important;
+    background-color: white !important;
+    color: $color-darkgrey !important;
 
     &:hover {
-      border-color: white !important;
       color: white !important;
+      background-color: $color-white-lightest !important;
     }
+  }
+
+  .uk-button-primary:disabled,
+  .uk-button-primary:disabled:hover {
+    border: none !important;
+    box-sizing: border-box;
+    background-color: $color-white-light;
   }
 }
 

@@ -5,6 +5,8 @@ import {environment} from '../../environments/environment';
 import {Artist} from '../_models/artist.model';
 import {catchError, map} from 'rxjs/operators';
 
+// TODO: Find a neater implementation to map server response to Artist.
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,6 @@ export class ArtistService {
 
   constructor(private http: HttpClient) {
     this.getArtists().subscribe(artists => {
-      console.log(artists);
       this.artists = artists;
       this.artistsObs.next(artists);
     });
@@ -48,7 +49,6 @@ export class ArtistService {
 
   deleteArtist(index: number): void {
     const artistId = this.artists[index]._id;
-    console.log(artistId);
     const url = this.url + '/' + artistId;
 
     this.http.delete(url).toPromise()

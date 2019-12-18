@@ -1,15 +1,5 @@
 @import '../../../../scss/base/_colors.scss';
 
-a.uk-button {
-  border-color: $color-white-lightest;
-  color: $color-white-light;
-
-  &:hover {
-    border-color: $color-white-light;
-    color: white;
-  }
-}
-
 input {
   border-bottom: 1px solid $color-lightgrey;
 }
