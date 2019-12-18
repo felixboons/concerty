@@ -1,0 +1,33 @@
+
+<div class="uk-overflow-auto">
+  <table class="uk-overflow-auto uk-table uk-table-small uk-table-striped uk-table-middle">
+    <thead>
+    <tr>
+      <th>No.</th>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Biography</th>
+      <th>Genre</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let artist of pageOfArtists; let i = index">
+      <td class="uk-table-shrink">#{{ getLastDigitsOfId(artist._id) }}</td>
+      <td class="uk-table-shrink">
+        <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
+      </td>
+      <td class="uk-table-expand uk-text-nowrap">{{ artist.name }}</td>
+      <td class="uk-table-shrink uk-text-truncate">{{ artist.biography }}</td>
+      <td class="uk-table-shrink uk-text-nowrap">{{ Genre[artist.genre] }}</td>
+      <td class="uk-table-shrink uk-text-center">
+        <i (click)="removeArtist(i)" class="fad fa-trash-alt"></i>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <app-pagination [items]="artists"
+                  (changePage)="onChangePage($event)">
+  </app-pagination>
+</div>
