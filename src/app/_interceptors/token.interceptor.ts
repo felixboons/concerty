@@ -21,7 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
       });
     }
 
-    console.log(`Authentication header is added to HTTP request`);
+    // console.log(`Authentication header is added to HTTP request`);
     return next.handle(request);
   }
 }

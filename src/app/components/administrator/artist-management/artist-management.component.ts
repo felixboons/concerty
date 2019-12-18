@@ -15,10 +15,10 @@ export class ArtistManagementComponent implements OnInit {
   constructor(private artistService: ArtistService) { }
 
   ngOnInit() {
-    this.artistService.getArtists().subscribe(artists => this.artists = artists);
+    this.artistService.artistsObs.subscribe(artists => this.artists = artists);
   }
 
-  removeArtist(index: number): boolean {
-    return null;
+  removeArtist(index: number): void {
+    this.artistService.deleteArtist(index);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ArtistService} from '../../../../_services/artist.service';
 
 @Component({
   selector: 'app-find-artist',
@@ -7,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FindArtistComponent implements OnInit {
 
-  constructor() { }
+  constructor(private artistService: ArtistService) { }
 
   ngOnInit() {
   }
 
-  removeArtist(index: number): boolean {
-    return null;
+  removeArtist(index: number): void {
+    this.artistService.deleteArtist(index);
   }
 }

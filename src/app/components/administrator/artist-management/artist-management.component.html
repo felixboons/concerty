@@ -23,7 +23,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let artist of artists; let i = index">
-        <td class="uk-table-shrink">{{ '#2'}}</td>
+        <td class="uk-table-shrink">#{{ artist._id.substring(artist._id.length - 5, artist._id.length) }}</td>
         <td class="uk-table-shrink">
           <img class="uk-preserve-width" src="./assets/images/joyner.jpg" width="50" alt="">
         </td>

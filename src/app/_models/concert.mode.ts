@@ -1,7 +1,7 @@
 import {Artist} from './artist.model';
-import {Model} from './model.abstract-model';
 
-export class Concert extends Model {
+export class Concert {
+  id: string;
   title: string;
   venue: string;
   date: Date;
@@ -10,9 +10,9 @@ export class Concert extends Model {
   ticketsRemaining: number;
   artists: Artist[];
 
-  constructor(title: string, venue: string, date: Date, price: number,
-              ticketsTotal: number, ticketsRemaining: number, artists: Artist[], model: Model) {
-    super(model.getVersion(), model.getCreatedAt(), model.getUpdatedAt());
+  constructor(id: string, title: string, venue: string, date: Date, price: number,
+              ticketsTotal: number, ticketsRemaining: number, artists: Artist[]) {
+    this.id = id;
     this.title = title;
     this.venue = venue;
     this.date = date;

@@ -17,7 +17,7 @@ export class ArtistsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.artistService.getArtists()
+    this.artistService.artistsObs
       .subscribe(artists => {
         console.log(artists);
         this.artists = artists

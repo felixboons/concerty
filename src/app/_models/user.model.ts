@@ -1,6 +1,5 @@
-import {Model} from './model.abstract-model';
-
-export class User extends Model {
+export class User {
+  private id: string;
   private firstName: string;
   private lastName: string;
   private email: string;
@@ -8,19 +7,20 @@ export class User extends Model {
   private role: number;
   private tickets: [string]; // [Ticket]
 
-  constructor(firstName: string, lastName: string, email: string, password: string, tickets?: [string], role?: number, model?: Model) {
-    super(model ? model.getVersion() : null,
-        model ? model.getCreatedAt() : null,
-        model ? model.getUpdatedAt() : null);
+  constructor(firstName: string, lastName: string, email: string, password: string, id?: string) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
-    this.tickets = tickets;
+    this.id = id;
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   public getName(): string {
-    return `${ this.firstName } ${ this.lastName }`;
+    return `${this.firstName} ${this.lastName}`;
   }
 
   public getFirstName(): string {
