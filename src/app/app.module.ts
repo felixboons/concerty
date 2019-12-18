@@ -23,7 +23,6 @@ import {ArtistManagementComponent} from './components/administrator/artist-manag
 import {ConcertManagementComponent} from './components/administrator/concert-management/concert-management.component';
 import {NewArtistComponent} from './components/administrator/artist-management/new-artist/new-artist.component';
 import {NewConcertComponent} from './components/administrator/concert-management/new-concert/new-concert.component';
-import {AngularMyDatePickerModule} from 'angular-mydatepicker';
 import {EditProfileComponent} from './components/account/profile/edit-profile/edit-profile.component';
 import {ChangePasswordComponent} from './components/account/profile/change-password/change-password.component';
 import {FindArtistComponent} from './components/administrator/artist-management/find-artist/find-artist.component';
@@ -70,14 +69,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    BrowserAnimationsModule,
     MatInputModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: LOCALE_ID, useValue: 'NL-nl' }
+    // { provide: LOCALE_ID, useValue: 'NL-nl' }
+    { provide: LOCALE_ID, useValue: 'EN-en' }
   ],
   bootstrap: [AppComponent]
 })
