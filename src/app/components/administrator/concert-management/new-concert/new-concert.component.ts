@@ -31,13 +31,8 @@ export class NewConcertComponent implements OnInit {
   }
 
   formInteractedWithAndInvalid(): boolean {
-    const keys = this.form.controls;
-    console.log(keys);
-
-
-    for (const key in keys) {
-      const control = this.form.get(key);
-      console.log(control.value);
+    for (const c in this.form.controls) {
+      const control = this.form.get(c);
 
       // For all controls, except <select><option>
       if (control.dirty && !control.pristine && control.invalid) {
@@ -45,7 +40,7 @@ export class NewConcertComponent implements OnInit {
       }
 
       // For <select><option>
-      if (key === 'venue') {
+      if (c === 'venue') {
         return control.touched && control.value === null;
       }
     }

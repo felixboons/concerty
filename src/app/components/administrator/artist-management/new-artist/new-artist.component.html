@@ -23,7 +23,7 @@
     </div>
 
 <!--    ERROR MESSAGE -->
-    <div *ngIf="form.touched && formInteractedWithAndInvalid() && form.invalid "
+    <div *ngIf="formInteractedWithAndInvalid()"
          class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
       <p class="text-error">
         <i class="fad fa-info-circle"></i>
