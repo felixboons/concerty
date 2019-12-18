@@ -26,7 +26,6 @@ $tastic-tickets-client-theme: mat-light-theme($tastic-tickets-client-primary, $t
 // that you are using.
 @include angular-material-theme($tastic-tickets-client-theme);
 
-
 // 1. Imports
 @import 'app/scss/base/standards';
 @import 'app/scss/base/colors';

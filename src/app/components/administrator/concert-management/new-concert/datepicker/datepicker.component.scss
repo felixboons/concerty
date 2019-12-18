@@ -7,7 +7,7 @@
     display: none;
   }
 
-  // Remove material icon
+  // Remove material icon.
   button.mat-icon-button {
     display: none !important;
   }
@@ -18,10 +18,12 @@
     border: 1px solid $color-white-lightest !important;
   }
 
+  // Color icon
   .mat-datepicker-toggle {
     color: $color-white-light;
   }
 
+  // More input styling.
   .mat-form-field-infix {
     border-top: 0 !important;
     padding: 10px !important;
@@ -32,13 +34,20 @@
     }
   }
 
+  // Change font & remove padding.
   .mat-form-field-wrapper {
     font-family: 'Segoe UI', sans-serif;
     padding-bottom: 0 !important;
   }
 
+  // Remove radius & add shadow.
   .mat-datepicker-content {
     border-radius: 0 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  // Change selected year/month/day background color.
+  td.mat-calendar-body-active .mat-calendar-body-cell-content.mat-calendar-body-selected {
+    background-color: $color-primary;
   }
 }
