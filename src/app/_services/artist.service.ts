@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, Subject} from 'rxjs';
-import {environment} from '../../environments/environment'
+import {Observable, Subject, throwError} from 'rxjs';
+import {environment} from '../../environments/environment';
 import {Artist} from '../_models/artist.model';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,14 @@ export class ArtistService {
       biography: artist.biography
     };
 
-    this.http.post(this.url, body).toPromise()
+    this.http.post(this.url, body)
+      .pipe(
+        map((response: Artist) => response
+        ), catchError(error => throwError('Something went wrong!'))
+      ).toPromise()
       .then(artist => {
-        if (artist instanceof Artist) {
-          this.artists.push(artist);
-          this.artistsObs.next(this.artists);
-        }
+        this.artists.push(artist);
+        this.artistsObs.next(this.artists);
         return true;
       })
       .catch(reason => {
@@ -48,10 +50,9 @@ export class ArtistService {
     const artistId = this.artists[index]._id;
     console.log(artistId);
     const url = this.url + '/' + artistId;
-    console.log(url);
 
     this.http.delete(url).toPromise()
-      .then(_ => {
+      .then(artist => {
         this.artists.splice(index, 1);
       })
       .catch(err => {
@@ -60,8 +61,12 @@ export class ArtistService {
 
   }
 
-  private getArtists(): Observable<Artist[]|any> {
+  private getArtists(): Observable<Artist[]> {
     return this.http
-      .get(this.url);
+      .get(this.url)
+      .pipe(
+        map((response: Artist[]) => response
+      ), catchError(error => throwError('Something went wrong!'))
+      )
   }
 }
