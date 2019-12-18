@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -69,7 +69,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularMyDatePickerModule,
     CommonModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -77,7 +76,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: LOCALE_ID, useValue: 'NL-nl' }
   ],
   bootstrap: [AppComponent]
 })

@@ -26,9 +26,18 @@ export class NewConcertComponent implements OnInit {
     this.initializeForm();
   }
 
+  setDateValue(date: Date) {
+    this.form.get('date').setValue(date);
+  }
+
   formInteractedWithAndInvalid(): boolean {
-    for (const c in this.form.controls) {
-      const control = this.form.get(c);
+    const keys = this.form.controls;
+    console.log(keys);
+
+
+    for (const key in keys) {
+      const control = this.form.get(key);
+      console.log(control.value);
 
       // For all controls, except <select><option>
       if (control.dirty && !control.pristine && control.invalid) {
@@ -36,10 +45,11 @@ export class NewConcertComponent implements OnInit {
       }
 
       // For <select><option>
-      if (c === 'venue') {
+      if (key === 'venue') {
         return control.touched && control.value === null;
       }
     }
+
     return false;
   }
 
@@ -50,17 +60,17 @@ export class NewConcertComponent implements OnInit {
       tickets: new FormControl(null, [
         Validators.required,
         Validators.min(1),
-        Validators.max(1_000_000),
+        Validators.max(1000000),
       ]),
+      date: new FormControl(null, Validators.required),
       price: new FormControl(null, [
         Validators.required,
         Validators.min(0.01),
-        Validators.max(1_000_000),
+        Validators.max(1000000),
       ]),
-      // date: new FormControl(null, Validators.required),
       description: new FormControl(null, [
         Validators.required,
-        Validators.maxLength(500),
+        Validators.maxLength(500)
       ])
     })
   }

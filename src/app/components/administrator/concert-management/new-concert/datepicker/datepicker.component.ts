@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as $ from 'jquery';
 
 @Component({
@@ -8,11 +8,17 @@ import * as $ from 'jquery';
 })
 export class DatepickerComponent implements OnInit {
   today: Date = new Date();
+  @Output() dateValueChanged = new EventEmitter<Date>();
 
   constructor() { }
 
   ngOnInit() {
     this.insertFontAwesomeIcon();
+  }
+
+  setDateValue(data: any): void {
+    const date = data.target.value;
+    this.dateValueChanged.emit(date);
   }
 
   private insertFontAwesomeIcon(): void {
@@ -21,5 +27,4 @@ export class DatepickerComponent implements OnInit {
     // Handler when all assets (including images) are loaded
     $(window).on("load", () => $('.mat-datepicker-toggle').append(iconElement));
   }
-
 }

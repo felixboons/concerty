@@ -2,7 +2,8 @@
 <mat-form-field class="uk-width-1-1">
   <input matInput [matDatepicker]="datepicker" [min]="today" id="datepicker"
          (focus)="datepicker.open()"
-         (onClick)="datepicker.open()">
+         (onClick)="datepicker.open()"
+         (dateChange)="setDateValue($event)">
   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
   <mat-datepicker #datepicker startView="year"></mat-datepicker>
 
