@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-datepicker',
@@ -11,6 +12,14 @@ export class DatepickerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.insertFontAwesomeIcon();
+  }
+
+  private insertFontAwesomeIcon(): void {
+    const iconElement = "<i class=\"fad fa-calendar-day fa-lg uk-margin-small-right\" (click)=\"datepicker.open()\"></i>";
+
+    // Handler when all assets (including images) are loaded
+    $(window).on("load", () => $('.mat-datepicker-toggle').append(iconElement));
   }
 
 }
