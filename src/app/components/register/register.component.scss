@@ -1,1 +1,26 @@
-@import '../../scss/base/_colors.scss';
+@import '../../scss/base/colors';
+@import '../../scss/base/standards';
+
+.background-image {
+  min-height: calc(100vh - 110px); // Reduce 100% view height by navbar height (110px).
+  box-sizing: border-box;
+  padding: 30px;
+
+  background-image: url("../../../assets/images/concert-image-gradient.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right bottom;
+}
+
+.background-white {
+  background-color: white;
+  box-shadow: $box-shadow;
+}
+
+h5.text-color-grey {
+  color: $color-grey;
+  font-weight: normal;
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 20px;
+  margin-right: 0;
+}

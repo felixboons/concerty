@@ -1,45 +1,43 @@
-<div class="uk-container-fluid background-image">
+<div class="background-image">
   <div class="uk-container">
-    <div class="uk-padding-large uk-padding-remove-left uk-padding-remove-right">
-
-      <div class="uk-grid">
-        <div class="uk-width-1-1 uk-width-1-2@m background-white uk-padding-large">
-
-          <h1 class="uk-heading-small">Log in</h1>
-
-          <form [formGroup]="form" (ngSubmit)="login()">
-            <div class="uk-grid uk-grid-small">
-              <div class="uk-width-1-1 uk-margin-small-bottom">
-                <input class="uk-input" type="email" placeholder="Email" autofocus
-                       formControlName="email">
-              </div>
-              <div class="uk-width-1-1 uk-margin-small-bottom">
-                <input class="uk-input" type="password" placeholder="Password"
-                       formControlName="password">
-              </div>
-              <div class="uk-width-1-1">
-                <button [disabled]="form.invalid"
-                        class="uk-button uk-button-primary uk-width-1-1" type="submit">Log in</button>
-              </div>
-              <div class="uk-margin-small-top uk-position-relative">
-                <a class="uk-button uk-button-text">Recover password</a>
-              </div>
-            </div>
-          </form>
-
-          <h5 class="uk-heading-line uk-text-center text-color-grey"><span>OR</span></h5>
-
-          <div class="uk-text-center">
-            <a routerLink="/register" class="uk-button uk-button-secondary uk-width-1-1">create account</a>
-          </div>
-
-        </div>
-      </div>
-
+    <div class="uk-grid">
       <div class="uk-width-1-1 uk-width-1-2@m">
 
       </div>
 
+      <div class="uk-width-1-1 uk-width-1-2@m">
+        <div class="uk-padding-large uk-padding-remove-left">
+          <div class="background-white uk-padding-large">
+
+            <h1 class="uk-heading-small">Log in</h1>
+            <form [formGroup]="form" (ngSubmit)="login()">
+              <div class="uk-grid uk-grid-small">
+                <div class="uk-width-1-1 uk-margin-small-bottom">
+                  <input class="uk-input" type="email" placeholder="Email" autofocus
+                         formControlName="email">
+                </div>
+                <div class="uk-width-1-1 uk-margin-small-bottom">
+                  <input class="uk-input" type="password" placeholder="Password"
+                         formControlName="password">
+                </div>
+                <div class="uk-width-1-1">
+                  <button [disabled]="form.invalid"
+                          class="uk-button uk-button-primary uk-width-1-1" type="submit">Log in</button>
+                </div>
+                <div>
+                  <a class="uk-button uk-button-text">Recover password</a>
+                </div>
+              </div>
+            </form>
+
+            <h5 class="uk-heading-line uk-text-center text-color-grey"><span>OR</span></h5>
+            <div class="uk-text-center">
+              <a routerLink="/register" class="uk-button uk-button-secondary uk-width-1-1">create account</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>
