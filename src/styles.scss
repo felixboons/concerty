@@ -59,7 +59,8 @@ $subnav-pill-item-color: white;
 
 
 // USER-SELECT
-.uk-overlay, .uk-card {
+.uk-card,
+.uk-overlay h3 {
   user-select: none;
 }
 

@@ -1,5 +1,13 @@
 @import '../../scss/base/colors';
 
-.bg-admin {
-  background-color: $color-grey-2;
+.bg-secondary-gradient {
+  // IE6+ compatible. Credits to https://cssgradient.io/.
+  background: $color-primary;
+  background: -moz-linear-gradient(150deg, rgba(25,81,135,1) 0%, rgba(25,47,95,1) 100%);
+  background: -webkit-linear-gradient(150deg, rgba(25,81,135,1) 0%, rgba(25,47,95,1) 100%);
+  background: linear-gradient(150deg, rgba(25,81,135,1) 0%, rgba(25,47,95,1) 100%);
+  //filter: progid:DXImageTransform.Microsoft.gradient(
+  //    startColorstr = "#195187",
+  //    endColorstr = "#434343",
+  //    GradientType = 1);
 }

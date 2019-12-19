@@ -2,6 +2,10 @@
 
 #footer {
   background-color: $color-darkgrey;
+  //background: -moz-linear-gradient(-30deg, rgba(51,51,51,1) 0%, rgba(67,67,67,1) 100%);
+  //background: -webkit-linear-gradient(-30deg, rgba(51,51,51,1) 0%, rgba(67,67,67,1) 100%);
+  //background: linear-gradient(-30deg, rgba(51,51,51,1) 0%, rgba(67,67,67,1) 100%);
+  //filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#333333",endColorstr="#434343",GradientType=1);
 }
 
 a, i {
