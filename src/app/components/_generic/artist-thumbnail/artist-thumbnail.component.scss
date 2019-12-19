@@ -1,2 +1,36 @@
 @import '../../../scss/base/standards';
 
+img {
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+}
+
+.uk-overlay {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  border-radius: $border-radius;
+  background-color: rgba(34, 34, 34, 0);
+  transition: all .1s;
+
+  .overlay-content-wrapper {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+ }
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    .overlay-content-wrapper {
+      visibility: visible;
+    }
+    .uk-overlay {
+      background-color: rgba(34, 34, 34, .8);
+    }
+  }
+}

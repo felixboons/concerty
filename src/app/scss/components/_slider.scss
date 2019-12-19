@@ -4,24 +4,4 @@
 // Required to see the box-shadow underneath cards.
 .slider-item-wrapper {
   padding-bottom: 15px !important;
-
-  img {
-    border-radius: $border-radius;
-    box-shadow: $box-shadow !important;
-  }
-
-  li {
-    box-shadow: $box-shadow !important;
-
-    .uk-overlay {
-      border-radius: $border-radius;
-      width: 100%;
-      text-align: center;
-      //visibility: hidden;
-
-      &:hover {
-        visibility: visible;
-      }
-    }
-  }
 }

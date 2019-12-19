@@ -1,9 +1,11 @@
 
-<div class="thumbnail">
-  <div class="uk-inline">
-    <img src="./assets/images/tydolla.png" alt="">
-    <div class="uk-overlay uk-overlay-primary uk-position-center uk-height-1-1">
-      <h3 class="">{{ artist.name }}</h3>
+<div class="uk-inline clickable">
+  <img src="./assets/images/tydolla.png" alt="">
+  <div class="uk-overlay uk-overlay-primary uk-position-center uk-height-1-1">
+    <div class="overlay-content-wrapper">
+      <h3 class="uk-margin-remove-top uk-text-nowrap">{{ artist.name }}</h3>
+      <a [routerLink]="['/artists', artist._id]"
+        class="uk-button uk-button-primary uk-text-nowrap uk-light">SHOW ARTIST</a>
     </div>
   </div>
 </div>

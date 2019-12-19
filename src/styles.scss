@@ -57,6 +57,12 @@ $subnav-pill-item-color: white;
   color: white !important;
 }
 
+
+// USER-SELECT
+.uk-overlay, .uk-card {
+  user-select: none;
+}
+
 // 2. Import default variables and available mixins.
 @import "../node_modules/uikit/src/scss/variables-theme.scss";
 @import "../node_modules/uikit/src/scss/mixins-theme.scss";
