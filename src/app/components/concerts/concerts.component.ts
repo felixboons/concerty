@@ -10,7 +10,6 @@ import {Venue} from '../../_enums/venue.enum';
 })
 export class ConcertsComponent implements OnInit {
   concerts: Concert[] = [];
-
   Venue = Venue;
   venues = Venue.keys();
 

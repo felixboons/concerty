@@ -8,6 +8,7 @@ import {Artist} from '../../../_models/artist.model';
 })
 export class ArtistThumbnailComponent implements OnInit {
   @Input() artist: Artist;
+  @Input() hoverToOverlay: boolean = true;
 
   constructor() {
   }

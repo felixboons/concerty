@@ -22,15 +22,28 @@ img {
   }
  }
 
-.clickable {
+.no-hover {
+  cursor: pointer;
+
+  .uk-overlay {
+    background-color: rgba(34, 34, 34, .8);
+  }
+
+  .overlay-content-wrapper {
+    visibility: visible;
+  }
+}
+
+.hoverable {
   cursor: pointer;
 
   &:hover {
-    .overlay-content-wrapper {
-      visibility: visible;
-    }
     .uk-overlay {
       background-color: rgba(34, 34, 34, .8);
+    }
+
+    .overlay-content-wrapper {
+      visibility: visible;
     }
   }
 }

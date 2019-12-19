@@ -19,7 +19,14 @@ export class ConcertThumbnailComponent implements OnInit {
     return new DateHelper().getPrettyDate(date);
   }
 
-  getDaysRemaining(date: Date): number {
-    return new DateHelper().getDaysRemaining(date);
+  getDaysRemaining(date: Date): string {
+    const daysRemaining = new DateHelper().getDaysRemaining(date);
+    console.log(daysRemaining);
+
+    switch(true) {
+      case (daysRemaining <= 0): return 'ENDED';
+      case (daysRemaining === 1): return 'TOMORROW';
+      default: return `IN ${daysRemaining} DAYS`;
+    }
   }
 }

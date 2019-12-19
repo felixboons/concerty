@@ -1,8 +1,9 @@
 
-<div class="uk-inline clickable">
+<div class="uk-inline"
+[ngClass]="hoverToOverlay ? 'hoverable' : 'no-hover'">
   <img src="./assets/images/tydolla.png" alt="">
   <div class="uk-overlay uk-overlay-primary uk-position-center uk-height-1-1">
-    <div class="overlay-content-wrapper">
+    <div class="overlay-content-wrapper" [ngClass]="hoverToOverlay ? 'hover-to-overlay' : ''">
       <h3 class="uk-margin-remove-top">{{ artist.name }}</h3>
       <a [routerLink]="['/artists', artist._id]"
         class="uk-button uk-button-primary uk-text-nowrap uk-light">SHOW ARTIST</a>

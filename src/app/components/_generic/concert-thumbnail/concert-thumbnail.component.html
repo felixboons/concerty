@@ -5,8 +5,7 @@
   </div>
   <div class="uk-card-body">
     <div class="uk-card-badge uk-label">
-      {{ getDaysRemaining(concert.date) === 1 ? 'TOMORROW' :
-        'IN ' + getDaysRemaining(concert.date) + ' DAYS' }}
+      {{ getDaysRemaining(concert.date) }}
     </div>
     <h3 class="uk-card-title uk-margin-small-bottom">{{ concert.title }}</h3>
     <p class="uk-margin-remove-top">
