@@ -1,7 +1,8 @@
 @import '../../scss/base/colors';
+@import '../../scss/base/standards';
 
 .background-image {
-  background-image: url("../../../assets/images/concert-2.png");
+  background-image: url("../../../assets/images/concert-image-gradient.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right bottom;
@@ -10,6 +11,7 @@
 
 .background-white {
   background-color: white;
+  box-shadow: $box-shadow;
 }
 
 h5.text-color-grey {
