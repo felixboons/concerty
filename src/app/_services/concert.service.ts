@@ -52,8 +52,16 @@ export class ConcertService {
     const url = this.url + '/' + _id;
 
     this.http.delete(url).toPromise()
-      .then(concert => {
+      .then((concert: Concert) => {
+        let index;
+
+        this.concerts.forEach((value, i) => {
+          if (concert._id === value._id) {
+            index = i;
+          }
+        });
         this.concerts.splice(index, 1);
+        this.concertsSubject.next(this.concerts);
       })
       .catch(err => {
         return false;

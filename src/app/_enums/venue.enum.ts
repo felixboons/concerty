@@ -1,8 +1,13 @@
 export enum Venue {
+  MSG = 'Madison Square Garden',
   ZIGGO_DOME = 'Ziggo Dome',
-  BRABANTHALLEN = 'Brabanthallen',
+  HONDA_CENTER = 'Honda Center',
+  MB_SUPERDOME = 'Mercedes-Benz Superdome',
+  BKIA = 'Bukit Kiara Indoor Arena',
+  KGC_YUM_CENTER = 'KFC Yum! Center',
   POPPODIUM_013 = '013 Poppodium',
-  PARADISO = 'Paradiso'
+  PARADISO = 'Paradiso',
+  BRABANTHALLEN = 'Brabanthallen'
 }
 
 export namespace Venue {

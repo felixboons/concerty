@@ -1,0 +1,16 @@
+
+<div class="uk-card uk-card-default">
+  <div class="uk-card-media-top">
+    <img src="./assets/images/drake-concert.jpg" alt="">
+  </div>
+  <div class="uk-card-body">
+    <div class="uk-card-badge uk-label uk-padding-small">{{ getDaysRemaining() }}</div>
+    <h3 class="uk-card-title uk-margin-small-bottom">{{ concert.title }}</h3>
+    <p class="uk-margin-remove-top">
+      <i class="fad fa-calendar-day uk-margin-small-right"></i>
+      {{ getPrettyDate(concert.date) }}
+    </p>
+    <a [routerLink]="['/concerts', 'feiuafjsomeIDjfoiewjfa']"
+       class="uk-button uk-button-primary">SHOW CONCERT</a>
+  </div>
+</div>

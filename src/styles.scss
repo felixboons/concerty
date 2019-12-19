@@ -46,6 +46,11 @@ $navbar-nav-item-color: $color-lightgrey;
 $navbar-nav-item-active-color: $color-darkgrey;
 $navbar-nav-item-hover-color: $color-darkgrey;
 
+// Slider
+.uk-slider, .uk-slider-container {
+  overflow: visible !important;
+}
+
 // Pill
 $subnav-pill-item-background: $color-lightgrey;
 $subnav-pill-item-color: white;

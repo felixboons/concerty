@@ -1,5 +1,5 @@
 
-<ul *ngIf="pager.pages && pager.pages.length" class="uk-pagination uk-flex-right">
+<ul *ngIf="pager.pages && pager.pages.length && pager.totalPages > 1" class="uk-pagination uk-flex-right">
   <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
     <a (click)="setPage(pager.currentPage - 1)" class="page-link">
       <i class="fad fa-chevron-double-left fa-sm"></i>
