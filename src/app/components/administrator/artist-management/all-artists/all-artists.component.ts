@@ -13,11 +13,9 @@ export class AllArtistsComponent implements OnInit {
   pageOfArtists: Artist[] = [];
   Genre = Genre;
 
-  constructor(private artistService: ArtistService) {
-  }
+  constructor(private artistService: ArtistService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onChangePage(pageOfItems: Array<any>) {
     this.pageOfArtists = pageOfItems;

@@ -48,9 +48,8 @@ export class ConcertService {
     return false;
   }
 
-  deleteConcert(index: number): void {
-    const concertId = this.concerts[index]._id;
-    const url = this.url + '/' + concertId;
+  deleteConcert(_id: string): void {
+    const url = this.url + '/' + _id;
 
     this.http.delete(url).toPromise()
       .then(concert => {

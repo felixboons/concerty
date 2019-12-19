@@ -10,23 +10,26 @@
 
     <form class="uk-search uk-search-large uk-width-1-1">
       <label class="uk-text-center">Search by ID, title or venue
-        <input class="uk-search-input" type="search" autofocus>
+        <input [(ngModel)]="input" [ngModelOptions]="{standalone: true}"
+               (keyup)="search()"
+               class="uk-search-input" type="search" autofocus>
       </label>
     </form>
 
     <div class="uk-overflow-auto">
       <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
         <thead>
-          <tr>
-            <th>No.</th>
-            <th>Image</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th class="uk-text-right">Tickets (remaining)</th>
-            <th class="uk-text-right">Tickets (total)</th>
-            <th>Delete</th>
-          </tr>
+        <tr>
+          <th>No.</th>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Venue</th>
+          <th>Description</th>
+          <th class="uk-text-right">Tickets (remaining)</th>
+          <th class="uk-text-right">Tickets (total)</th>
+          <th>Delete</th>
+        </tr>
         </thead>
         <tbody>
         <tr *ngFor="let concert of concerts; let i = index">
@@ -35,18 +38,18 @@
             <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
           </td>
           <td class="uk-table-expand uk-text-nowrap">{{ concert.title }}</td>
-          <td class="uk-table-shrink uk-text-nowrap">{{ concert.date }}</td>
+          <td class="uk-table-shrink uk-text-nowrap">{{ getPrettyDate(concert.date) }}</td>
+          <td class="uk-table-shrink uk-text-nowrap">{{ Venue[concert.venue] }}</td>
           <td class="uk-table-shrink uk-text-truncate uk-text-nowrap">{{ concert.description }}</td>
           <td class="uk-table-shrink uk-text-right">{{ concert.ticketsRemaining }}</td>
           <td class="uk-table-shrink uk-text-right">{{ concert.ticketsTotal }}</td>
           <td class="uk-table-shrink uk-text-center">
-            <i (click)="removeConcert(i)" class="fad fa-trash-alt"></i>
+            <i (click)="removeConcert(concert._id)" class="fad fa-trash-alt"></i>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
-
 
   </div>
 </div>

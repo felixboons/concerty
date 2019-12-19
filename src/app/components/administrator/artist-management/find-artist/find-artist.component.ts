@@ -35,14 +35,14 @@ export class FindArtistComponent implements OnInit {
     if (this.input !== '') {
       const input = this.input.toLowerCase();
 
-      this.artists = this.artists.filter(artist => {
+      this.artists = this.artistsCopy.filter(artist => {
         return FindArtistComponent.idMatchesInput(artist._id, input) ||
           FindArtistComponent.nameMatchesInput(artist.name, input) ||
           FindArtistComponent.genreMatchesInput(artist.genre, input);
       });
     } else {
 
-      // Show all artists.
+      // Show all concerts.
       this.artists = this.artistsCopy;
     }
   }
