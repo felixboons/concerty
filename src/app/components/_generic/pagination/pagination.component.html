@@ -1,39 +1,41 @@
+<div class="uk-margin-small-top">
+  <ul *ngIf="pager.pages && pager.pages.length && pager.totalPages > 1" class="uk-pagination uk-flex-right">
 
-<ul *ngIf="pager.pages && pager.pages.length && pager.totalPages > 1" class="uk-pagination uk-flex-right">
-  <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
-    <a (click)="setPage(pager.currentPage - 1)" class="page-link">
-      <i class="fad fa-chevron-double-left fa-sm"></i>
-    </a>
-  </li>
+    <li [ngClass]="{'disabled': pager.currentPage === 1}" class="page-item first-item">
+      <a (click)="setPage(1)" class="page-link">
+        <i class="fad fa-arrow-to-left fa-sm"
+           [style.color]="pager.currentPage === 1 ? 'white' : ''">
+        </i>
+      </a>
+    </li>
 
-  <li *ngIf="maxPages > layoutThreshold"
-      [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
-    <a (click)="setPage(1)" class="page-link">1</a>
-  </li>
+    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+      <a (click)="setPage(pager.currentPage - 1)" class="page-link">
+        <i class="fad fa-angle-left fa-sm"
+           [style.color]="pager.currentPage === 1 ? 'white' : ''">
+        </i>
+      </a>
+    </li>
 
-  <li *ngIf="maxPages > layoutThreshold" class="uk-disabled"><span>...</span></li>
+    <li *ngFor="let page of pager.pages"
+        [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+      <a (click)="setPage(page)" class="page-link">{{page}}</a>
+    </li>
 
+    <li [ngClass]="{'disabled': pager.currentPage === pager.totalPages}" class="page-item next-item">
+      <a (click)="setPage(pager.currentPage + 1)" class="page-link">
+        <i class="fad fa-angle-right fa-sm"
+           [style.color]="pager.currentPage === maxPages ? 'white' : ''">
+        </i>
+      </a>
+    </li>
 
-  <li *ngIf="pager.currentPage - 1 > 0" class="page-item number-item">
-    <a (click)="setPage(pager.currentPage - 1)" class="page-link">{{ pager.currentPage - 1 }}</a>
-  </li>
-  <li class="page-item number-item active">
-    <a (click)="setPage(pager.currentPage)" class="page-link">{{ pager.currentPage }}</a>
-  </li>
-  <li *ngIf="pager.currentPage + 1 <= maxPages" class="page-item number-item">
-    <a (click)="setPage(pager.currentPage + 1)" class="page-link">{{ pager.currentPage + 1 }}</a>
-  </li>
-
-  <li *ngIf="maxPages > layoutThreshold" class="uk-disabled"><span>...</span></li>
-
-  <li *ngIf="maxPages > layoutThreshold"
-      [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
-    <a (click)="setPage(pager.totalPages)" class="page-link">{{ maxPages }}</a>
-  </li>
-
-  <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
-    <a (click)="setPage(pager.currentPage + 1)" class="page-link">
-      <i class="fad fa-chevron-double-right fa-sm"></i>
-    </a>
-  </li>
-</ul>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+      <a (click)="setPage(pager.totalPages)" class="page-link">
+        <i class="fad fa-arrow-to-right fa-sm"
+           [style.color]="pager.currentPage === maxPages ? 'white' : ''">
+        </i>
+      </a>
+    </li>
+  </ul>
+</div>

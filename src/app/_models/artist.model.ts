@@ -1,11 +1,12 @@
 import {Genre} from '../_enums/genre.enum';
 
 export class Artist {
-  private id: string;
-  private _name: string;
-  private _biography: string;
-  private _genre: Genre;
-  private _imageUrl: string;
+  private readonly id: string;
+  private readonly _reatedAt: Date;
+  private readonly _name: string;
+  private readonly _biography: string;
+  private readonly _genre: Genre;
+  private readonly _imageUrl: string;
 
   constructor(name: string, genre: Genre, biography: string, id?: string) {
     this._name = name;
@@ -32,5 +33,9 @@ export class Artist {
 
   get imageUrl(): string {
     return this._imageUrl;
+  }
+
+  get createdAt(): Date {
+    return this._reatedAt;
   }
 }

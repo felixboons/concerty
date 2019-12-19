@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {ArtistService} from '../../../_services/artist.service';
 
 // @ts-ignore
 import paginate from 'jw-paginate';
-import {ArtistService} from '../../../_services/artist.service';
 
 @Component({
   selector: 'app-pagination',
@@ -17,7 +17,6 @@ export class PaginationComponent implements OnInit {
   @Input() maxPages;
 
   pager: any = {};
-  layoutThreshold = 5;
 
   constructor(private artistService: ArtistService) { }
 

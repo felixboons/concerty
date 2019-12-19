@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Concert} from '../../_models/concert.mode';
 import {ConcertService} from '../../_services/concert.service';
 import {DateHelper} from '../../_helpers/date-helper';
+import {Artist} from '../../_models/artist.model';
+import {ArtistService} from '../../_services/artist.service';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +14,34 @@ export class HomeComponent implements OnInit {
   concerts: Concert[] = [];
   upcomingConcerts: Concert[] = [];
 
-  constructor(private concertService: ConcertService) { }
+  artists: Artist[] = [];
+  recentlyAddedArtists: Artist[] = [];
+
+  constructor(private concertService: ConcertService,
+              private artistService: ArtistService) {
+  }
 
   ngOnInit() {
+    this.subscribeToConcerts();
+    this.subscribeToArtists();
+  }
+
+  private subscribeToConcerts() {
     this.concertService.concertsSubject
       .subscribe(concerts => {
         if (concerts) {
           this.concerts = concerts;
           this.initializeUpcomingConcerts();
+        }
+      });
+  }
 
+  private subscribeToArtists() {
+    this.artistService.artistsSubject
+      .subscribe(artists => {
+        if (artists) {
+          this.artists = artists;
+          this.initializeRecentlyAddedArtists();
         }
       });
   }
@@ -31,6 +52,17 @@ export class HomeComponent implements OnInit {
     for (const concert of this.concerts) {
       if (dateHelper.isUpcoming(concert.date)) {
         this.upcomingConcerts.push(concert);
+      }
+    }
+  }
+
+  private initializeRecentlyAddedArtists() {
+    const dateHelper = new DateHelper();
+
+    for (const artist of this.artists) {
+      if (dateHelper.isRecentlyAdded(artist.createdAt)) {
+        this.recentlyAddedArtists.push(artist);
+
       }
     }
   }

@@ -37,6 +37,7 @@ import {AllArtistsComponent} from './components/administrator/artist-management/
 import {PaginationComponent} from './components/_generic/pagination/pagination.component';
 import {AllConcertsComponent} from './components/administrator/concert-management/all-concerts/all-concerts.component';
 import {ConcertThumbnailComponent} from './components/_generic/concert-thumbnail/concert-thumbnail.component';
+import {ArtistThumbnailComponent} from './components/_generic/artist-thumbnail/artist-thumbnail.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {ConcertThumbnailComponent} from './components/_generic/concert-thumbnail
     AllArtistsComponent,
     PaginationComponent,
     AllConcertsComponent,
-    ConcertThumbnailComponent
+    ConcertThumbnailComponent,
+    ArtistThumbnailComponent
   ],
   imports: [
     BrowserModule,
