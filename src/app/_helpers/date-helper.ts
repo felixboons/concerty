@@ -7,7 +7,7 @@ export class DateHelper {
   }
 
   getDaysRemaining(date: Date): number {
-    return moment().diff(date, 'days');
+    return moment(date).diff(moment(), 'days');
   }
 
   isUpcoming(date: Date): boolean {

@@ -9,7 +9,7 @@ import {DateHelper} from '../../_helpers/date-helper';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  concerts: Concert[] =[];
+  concerts: Concert[] = [];
   upcomingConcerts: Concert[] = [];
 
   constructor(private concertService: ConcertService) { }
@@ -17,8 +17,11 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.concertService.concertsSubject
       .subscribe(concerts => {
-        this.concerts = concerts;
-        this.initializeUpcomingConcerts();
+        if (concerts) {
+          this.concerts = concerts;
+          this.initializeUpcomingConcerts();
+
+        }
       });
   }
 

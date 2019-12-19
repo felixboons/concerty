@@ -15,9 +15,11 @@ export class ConcertService {
 
   constructor(private http: HttpClient) {
     this.getConcerts().subscribe(concerts => {
-      concerts.reverse();
-      this.concerts = concerts;
-      this.concertsSubject.next(concerts);
+      if (concerts) {
+        concerts.reverse();
+        this.concerts = concerts;
+        this.concertsSubject.next(concerts);
+      }
     });
   }
 
@@ -25,10 +27,13 @@ export class ConcertService {
     const body = {
       title: concert.title,
       venue: concert.venue,
+      date: concert.date,
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
       description: concert.description
     };
+    console.log(concert);
+    console.log(body);
 
     this.http.post(this.url, body)
       .pipe(

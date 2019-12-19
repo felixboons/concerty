@@ -11,8 +11,8 @@ export class Concert {
   private _ticketsRemaining: number;
   private _artists: Artist[];
 
-  constructor(title: string, venue: string, price: number, ticketsTotal: number, description: string,
-              id?: string, ticketsRemaining?: number, date?: Date, artists?: Artist[]) {
+  constructor(title: string, venue: string, date: Date, price: number, ticketsTotal: number, description: string,
+              id?: string, ticketsRemaining?: number, artists?: Artist[]) {
     this._title = title;
     this._venue = venue;
     this._date = date;
