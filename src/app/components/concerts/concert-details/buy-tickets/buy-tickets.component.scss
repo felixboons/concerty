@@ -1,0 +1,14 @@
+@import '../../../../scss/base/colors';
+@import '../../../../scss/base/standards';
+
+#buy-tickets {
+  background: $color-darkgrey;
+  box-shadow: $box-shadow;
+}
+
+@media all and (max-width: 639px) {
+
+  td {
+    white-space: normal;
+  }
+}

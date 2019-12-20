@@ -1,17 +1,23 @@
 
 <div class="uk-grid">
-  <div class="uk-width-1-1 uk-width-2-3@m">
-    <img src="./assets/images/concert.jpg" alt="">
+  <div class="uk-width-1-1 uk-width-2-3@l">
+    <img src="./assets/images/concert.jpg" [alt]="concert.title" class="uk-margin-medium-bottom">
   </div>
 
-
-
-  <div class="uk-width-1-1 uk-width-1-3@m">
+  <div class="uk-width-1-1 uk-width-1-3@l">
     <h1 class="uk-heading-small uk-margin-small-bottom">{{ concert.title }}</h1>
-    <p class="uk-margin-remove-top">
-      <i class="fad fa-calendar-day uk-margin-small-right"></i>
-      {{ getPrettyDate(concert.date) }}
-    </p>
-    <p>&euro;{{ concert.price }},-</p>
+    <p><i class="fad fa-map-marked-alt"></i>{{ concert.venue }}</p>
+    <p><i class="fad fa-calendar-day"></i>{{ getPrettyDate(concert.date) }}</p>
+    <p class="uk-text-justify uk-margin-remove-bottom">{{ concert.description }}</p>
   </div>
+
+  <div class="uk-width-1-1 uk-margin-medium-top">
+    <app-buy-tickets [concert]="concert"></app-buy-tickets>
+  </div>
+
+  <div class="uk-width-1-1 uk-margin-medium-top">
+    <h2>Lineup</h2>
+    <app-artist-thumbnail [artist]="concert['artist']"></app-artist-thumbnail>
+  </div>
+
 </div>

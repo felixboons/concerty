@@ -38,6 +38,7 @@ import {PaginationComponent} from './components/_generic/pagination/pagination.c
 import {AllConcertsComponent} from './components/administrator/concert-management/all-concerts/all-concerts.component';
 import {ConcertThumbnailComponent} from './components/_generic/concert-thumbnail/concert-thumbnail.component';
 import {ArtistThumbnailComponent} from './components/_generic/artist-thumbnail/artist-thumbnail.component';
+import {BuyTicketsComponent} from './components/concerts/concert-details/buy-tickets/buy-tickets.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import {ArtistThumbnailComponent} from './components/_generic/artist-thumbnail/a
     PaginationComponent,
     AllConcertsComponent,
     ConcertThumbnailComponent,
-    ArtistThumbnailComponent
+    ArtistThumbnailComponent,
+    BuyTicketsComponent
   ],
   imports: [
     BrowserModule,
