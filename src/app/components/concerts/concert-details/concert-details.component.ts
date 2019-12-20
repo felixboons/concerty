@@ -3,6 +3,7 @@ import {ConcertService} from '../../../_services/concert.service';
 import {Concert} from '../../../_models/concert.model';
 import {ActivatedRoute} from '@angular/router';
 import {DateHelper} from '../../../_helpers/date-helper';
+import {Venue} from '../../../_enums/venue.enum';
 
 @Component({
   selector: 'app-concert-details',
@@ -10,6 +11,7 @@ import {DateHelper} from '../../../_helpers/date-helper';
   styleUrls: ['./concert-details.component.scss']
 })
 export class ConcertDetailsComponent implements OnInit {
+  Venue = Venue;
   concert: Concert;
 
   constructor(private concertService: ConcertService,

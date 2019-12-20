@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Concert} from '../../../../_models/concert.model';
+import {CurrencyHelper} from '../../../../_helpers/currency-helper';
 
 @Component({
   selector: 'app-buy-tickets',
@@ -17,5 +18,9 @@ export class BuyTicketsComponent implements OnInit {
 
   buyTicket(): void {
 
+  }
+
+  getPrettyPrice(price: number): string {
+    return new CurrencyHelper().getPrettyPrice(price);
   }
 }
