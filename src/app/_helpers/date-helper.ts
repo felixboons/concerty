@@ -7,8 +7,12 @@ export class DateHelper {
     return moment(date).format('LL');
   }
 
-  getDaysRemaining(date: Date): number {
-    return moment(date).diff(moment(), 'days') + 1;
+  getMinutesRemaining(date: Date): number {
+    return moment(date).diff(moment(), 'minutes');
+  }
+
+  toDays(minutes: number): number {
+    return minutes / (60 * 24)
   }
 
   isUpcoming(date: Date): boolean {

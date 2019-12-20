@@ -20,12 +20,17 @@ export class ConcertThumbnailComponent implements OnInit {
   }
 
   getDaysRemaining(date: Date): string {
-    const daysRemaining = new DateHelper().getDaysRemaining(date);
-    console.log(daysRemaining);
+    const concertDuration = 180; // In minutes. (Should be pulled from concert data.)
+    const dateHelper = new DateHelper();
+    const minutesRemaining = dateHelper.getMinutesRemaining(date);
+    const daysRemaining = Math.round(dateHelper.toDays(minutesRemaining));
+
+    console.log(minutesRemaining);
 
     switch(true) {
-      case (daysRemaining <= 0): return 'ENDED';
-      case (daysRemaining === 1): return 'TOMORROW';
+      case (minutesRemaining + concertDuration < 0): return 'ENDED';
+      case (minutesRemaining < 0): return 'HAPPENING';
+      case (daysRemaining === 0): return 'TOMORROW';
       default: return `IN ${daysRemaining} DAYS`;
     }
   }
