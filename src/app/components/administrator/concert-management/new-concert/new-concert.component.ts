@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Venue} from '../../../../_enums/venue.enum';
 import {ConcertService} from '../../../../_services/concert.service';
-import {Concert} from '../../../../_models/concert.mode';
+import {Concert} from '../../../../_models/concert.model';
 
 @Component({
   selector: 'app-new-concert',
@@ -23,8 +23,13 @@ export class NewConcertComponent implements OnInit {
   createConcert(): void {
     const input = this.form.value;
     console.log(input);
-    const concert: Concert = new Concert(input.title, input.venue, input.date,
-      input.tickets, input.price, input.description);
+    const concert: Concert = new Concert(
+      input.title,
+      input.venue,
+      input.date,
+      input.price,
+      input.tickets,
+      input.description);
     this.concertService.createConcert(concert);
     this.initializeForm();
   }

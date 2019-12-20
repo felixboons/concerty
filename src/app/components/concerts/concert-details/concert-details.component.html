@@ -1,1 +1,17 @@
-<p>concert-details works!</p>
+
+<div class="uk-grid">
+  <div class="uk-width-1-1 uk-width-2-3@m">
+    <img src="./assets/images/concert.jpg" alt="">
+  </div>
+
+
+
+  <div class="uk-width-1-1 uk-width-1-3@m">
+    <h1 class="uk-heading-small uk-margin-small-bottom">{{ concert.title }}</h1>
+    <p class="uk-margin-remove-top">
+      <i class="fad fa-calendar-day uk-margin-small-right"></i>
+      {{ getPrettyDate(concert.date) }}
+    </p>
+    <p>&euro;{{ concert.price }},-</p>
+  </div>
+</div>

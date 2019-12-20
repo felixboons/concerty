@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Concert} from '../../../../_models/concert.mode';
+import {Concert} from '../../../../_models/concert.model';
 import {Artist} from '../../../../_models/artist.model';
 import {DateHelper} from '../../../../_helpers/date-helper';
 import {ConcertService} from '../../../../_services/concert.service';

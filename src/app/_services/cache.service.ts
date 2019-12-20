@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Artist} from '../_models/artist.model';
-import {Concert} from '../_models/concert.mode';
+import {Concert} from '../_models/concert.model';
 
 @Injectable({
   providedIn: 'root'

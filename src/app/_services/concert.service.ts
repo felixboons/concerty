@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Concert} from '../_models/concert.mode';
+import {Concert} from '../_models/concert.model';
 import {catchError, map} from 'rxjs/operators';
 import {CacheService} from './cache.service';
 
