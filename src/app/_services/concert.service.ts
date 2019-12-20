@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Concert} from '../_models/concert.mode';
 import {catchError, map} from 'rxjs/operators';
+import {CacheService} from './cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,27 @@ export class ConcertService {
   private concerts: Concert[] = [];
   concertsSubject = new BehaviorSubject<Concert[]>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private cache: CacheService) {
+    this.readConcertsFromCache();
+
     this.getConcerts().subscribe(concerts => {
       if (concerts) {
         concerts.reverse();
         this.concerts = concerts;
         this.concertsSubject.next(concerts);
+        this.cache.setConcerts(concerts);
       }
     });
+  }
+
+  getConcert(_id: string): Concert {
+    for (const concert of this.concerts) {
+      if (concert._id === _id) {
+        return concert;
+      }
+    }
+    return null;
   }
 
   createConcert(concert: Concert): boolean {
@@ -81,5 +95,12 @@ export class ConcertService {
         map((response: Concert[]) => response
         ), catchError(error => throwError('Server responded with unexpected object array type'))
       );
+  }
+
+  private readConcertsFromCache(): void {
+    const concerts = this.cache.getConcerts();
+    if (concerts) {
+      this.concerts = concerts;
+    }
   }
 }

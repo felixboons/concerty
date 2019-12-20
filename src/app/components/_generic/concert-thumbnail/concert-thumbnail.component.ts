@@ -25,8 +25,6 @@ export class ConcertThumbnailComponent implements OnInit {
     const minutesRemaining = dateHelper.getMinutesRemaining(date);
     const daysRemaining = Math.round(dateHelper.toDays(minutesRemaining));
 
-    console.log(minutesRemaining);
-
     switch(true) {
       case (minutesRemaining + concertDuration < 0): return 'ENDED';
       case (minutesRemaining < 0): return 'HAPPENING';
