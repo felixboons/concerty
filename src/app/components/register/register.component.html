@@ -1,47 +1,38 @@
-<div class="background-image">
-  <div class="uk-container">
-    <div class="uk-grid">
-      <div class="uk-width-1-1 uk-width-1-2@m">
+<div class="background-image uk-padding">
 
-        <div class="uk-padding-large uk-padding-remove-right">
-          <div class="background-white uk-padding-large">
+  <div class="custom-card-wrapper uk-padding-large uk-padding-remove-right uk-padding-remove-left">
+    <div class="custom-card">
 
-            <h1 class="uk-heading-small">Register</h1>
-            <form [formGroup]="form" (ngSubmit)="register()">
-              <div class="uk-grid uk-grid-small">
-                <div class="uk-width-1-2@s uk-margin-small-bottom">
-                  <input class="uk-input" type="text" placeholder="First name"
-                        formControlName="firstName">
-                </div>
-                <div class="uk-width-1-2@s uk-margin-small-bottom">
-                  <input class="uk-input" type="text" placeholder="Last name"
-                         formControlName="lastName">
-                </div>
-                <div class="uk-width-1-1 uk-margin-small-bottom">
-                  <input class="uk-input" type="email" placeholder="Email"
-                         formControlName="email">
-                </div>
-                <div class="uk-width-1-1 uk-margin-small-bottom">
-                  <input class="uk-input" type="password" placeholder="Password"
-                         formControlName="password">
-                </div>
-                <div class="uk-width-1-1 uk-margin-small-bottom">
-                  <input class="uk-input" type="password" placeholder="Confirm password"
-                         formControlName="passwordConfirm">
-                </div>
-                <div class="uk-width-1-1">
-                  <button [disabled]="form.invalid" class="uk-button uk-button-primary uk-width-1-1" type="submit">Register</button>
-                </div>
-              </div>
-            </form>
-
+      <form [formGroup]="form" (ngSubmit)="register()">
+        <h1 class="uk-heading-small">Register</h1>
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-1-2@s uk-margin-small-bottom">
+            <input class="uk-input" type="text" placeholder="First name"
+                  formControlName="firstName">
+          </div>
+          <div class="uk-width-1-2@s uk-margin-small-bottom">
+            <input class="uk-input" type="text" placeholder="Last name"
+                   formControlName="lastName">
+          </div>
+          <div class="uk-width-1-1 uk-margin-small-bottom">
+            <input class="uk-input" type="email" placeholder="Email"
+                   formControlName="email">
+          </div>
+          <div class="uk-width-1-1 uk-margin-small-bottom">
+            <input class="uk-input" type="password" placeholder="Password"
+                   formControlName="password">
+          </div>
+          <div class="uk-width-1-1 uk-margin-small-bottom">
+            <input class="uk-input" type="password" placeholder="Confirm password"
+                   formControlName="passwordConfirm">
+          </div>
+          <div class="uk-width-1-1">
+            <button [disabled]="form.invalid" class="uk-button uk-button-primary uk-width-1-1" type="submit">Register</button>
           </div>
         </div>
+      </form>
 
-      </div>
-      <div class="uk-width-1-1 uk-width-1-2@m">
-
-      </div>
     </div>
   </div>
+
 </div>

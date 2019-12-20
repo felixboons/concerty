@@ -1,10 +1,13 @@
 @import '../../scss/base/colors';
 @import '../../scss/base/standards';
 
+form {
+  padding: 70px;
+}
+
 .background-image {
   min-height: calc(100vh - 110px); // Reduce 100% view height by navbar height (110px).
   box-sizing: border-box;
-  padding: 30px;
 
   background-image: url("../../../assets/images/concert-image-gradient.png");
   background-repeat: no-repeat;
@@ -12,9 +15,13 @@
   background-position: right bottom;
 }
 
-.background-white {
-  background-color: white;
-  box-shadow: $box-shadow;
+.custom-card-wrapper {
+  max-width: 800px !important;
+
+  .custom-card {
+    background-color: white;
+    box-shadow: $box-shadow;
+  }
 }
 
 h5.text-color-grey {
@@ -23,4 +30,12 @@ h5.text-color-grey {
   font-family: 'Segoe UI', sans-serif;
   margin-top: 20px;
   margin-right: 0;
+}
+
+
+@media all and (max-width: 959px) {
+
+  form {
+    padding: 45px;
+  }
 }
