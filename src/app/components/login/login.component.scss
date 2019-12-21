@@ -11,6 +11,7 @@ form {
 
   background-image: url("../../../assets/images/concert-image-gradient.png");
   background-repeat: no-repeat;
+  //background-size: contain;
   background-size: cover;
   background-position: right bottom;
 }
@@ -30,6 +31,10 @@ h5.text-color-grey {
   font-family: 'Segoe UI', sans-serif;
   margin-top: 20px;
   margin-right: 0;
+
+  span:before, span:after {
+    border-bottom-width: 1px !important;
+  }
 }
 
 
