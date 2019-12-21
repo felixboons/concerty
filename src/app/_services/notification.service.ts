@@ -24,12 +24,11 @@ export class NotificationService {
           </p>
         </div>`;
 
-    this.showNotification(elementMarkup, 'primary');
+    this.showNotification(elementMarkup);
   }
 
-  private showNotification(elementMarkup: string, status: string): void {
+  private showNotification(elementMarkup: string): void {
     const options = {
-      status: status,
       pos: 'bottom-left',
       timeout: this.timeout
     };

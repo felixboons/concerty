@@ -3,8 +3,12 @@
 
 .uk-notification {
 
-  .uk-notification-message-primary {
+  .uk-notification-message {
     box-shadow: $box-shadow-ultra !important;
+
+    i {
+      color: $color-primary;
+    }
 
     span {
       color: $color-darkgrey !important;
