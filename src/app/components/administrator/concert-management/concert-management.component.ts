@@ -9,11 +9,16 @@ import {ConcertService} from '../../../_services/concert.service';
 })
 export class ConcertManagementComponent implements OnInit {
   concerts: Concert[] = [];
+  selectedConcert: Concert = null;
 
   constructor(private concertService: ConcertService) {
   }
 
   ngOnInit() {
     this.concertService.concertsSubject.subscribe(concerts => this.concerts = concerts);
+  }
+
+  concertSelected(concert: Concert): void {
+    this.selectedConcert = concert;
   }
 }

@@ -31,7 +31,7 @@ import {FooterComponent} from './components/footer/footer.component';
 import {CommonModule} from '@angular/common';
 import {TokenInterceptor} from './_interceptors/token.interceptor';
 import {MatDatepickerModule, MatInputModule, MatNativeDateModule} from '@angular/material';
-import {DatepickerComponent} from './components/administrator/concert-management/new-concert/datepicker/datepicker.component';
+import {DatepickerComponent} from './components/_generic/datepicker/datepicker.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AllArtistsComponent} from './components/administrator/artist-management/all-artists/all-artists.component';
 import {PaginationComponent} from './components/_generic/pagination/pagination.component';
@@ -39,6 +39,7 @@ import {AllConcertsComponent} from './components/administrator/concert-managemen
 import {ConcertThumbnailComponent} from './components/_generic/concert-thumbnail/concert-thumbnail.component';
 import {ArtistThumbnailComponent} from './components/_generic/artist-thumbnail/artist-thumbnail.component';
 import {BuyTicketsComponent} from './components/concerts/concert-details/buy-tickets/buy-tickets.component';
+import {EditConcertComponent} from './components/administrator/concert-management/edit-concert/edit-concert.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import {BuyTicketsComponent} from './components/concerts/concert-details/buy-tic
     AllConcertsComponent,
     ConcertThumbnailComponent,
     ArtistThumbnailComponent,
-    BuyTicketsComponent
+    BuyTicketsComponent,
+    EditConcertComponent
   ],
   imports: [
     BrowserModule,

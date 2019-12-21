@@ -1,4 +1,4 @@
-@import '../../scss/base/_colors.scss';
+@import '../../scss/base/colors';
 
 table.uk-table {
 
@@ -22,5 +22,13 @@ table.uk-table {
       cursor: pointer;
       color: white;
     }
+  }
+}
+
+.uk-light {
+
+  .uk-table.clickable tr:hover {
+    cursor: pointer;
+    background-color: $color-lightblue-transparent;
   }
 }

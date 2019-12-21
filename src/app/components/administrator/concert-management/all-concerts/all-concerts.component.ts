@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Concert} from '../../../../_models/concert.model';
 import {ConcertService} from '../../../../_services/concert.service';
 import {DateHelper} from '../../../../_helpers/date-helper';
@@ -11,6 +11,7 @@ import {Venue} from '../../../../_enums/venue.enum';
 })
 export class AllConcertsComponent implements OnInit {
   @Input() concerts: Concert[] = [];
+  @Output() concertSelected = new EventEmitter<Concert>();
   pageOfConcerts: Concert[] = [];
   Venue = Venue;
 
@@ -34,5 +35,9 @@ export class AllConcertsComponent implements OnInit {
 
   getPrettyDate(date: Date): string {
     return new DateHelper().getPrettyDate(date);
+  }
+
+  selectConcert(concert: Concert): void {
+    this.concertSelected.emit(concert);
   }
 }

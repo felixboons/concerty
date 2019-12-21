@@ -7,7 +7,18 @@
   <h2>New concert</h2>
   <app-new-concert></app-new-concert>
 
+  <h2>Edit concert</h2>
+  <div *ngIf="selectedConcert; else editConcertInfo">
+    <app-edit-concert [concert]="selectedConcert"></app-edit-concert>
+  </div>
+  <ng-template #editConcertInfo>
+    <p class="text-error">
+      <i class="fad fa-info-circle uk-margin-small-right"></i>
+      <span>Select a concert to edit it.</span>
+    </p>
+  </ng-template>
+
   <h2>All concerts</h2>
-  <app-all-concerts [concerts]="concerts"></app-all-concerts>
+  <app-all-concerts [concerts]="concerts" (concertSelected)="concertSelected($event)"></app-all-concerts>
 
 </div>
