@@ -8,7 +8,7 @@
     <h1 class="uk-heading-small uk-margin-small-bottom">{{ concert.title }}</h1>
     <p><i class="fad fa-map-marked-alt"></i>{{ Venue[concert.venue] }}</p>
     <p><i class="fad fa-calendar-day"></i>{{ getPrettyDate(concert.date) }}</p>
-    <p class="uk-text-justify uk-margin-remove-bottom">{{ concert.description }}</p>
+    <p class="uk-text-justify uk-margin-remove-bottom uk-margin-top">{{ concert.description }}</p>
   </div>
 
   <div class="uk-width-1-1 uk-margin-medium-top">
@@ -16,8 +16,8 @@
   </div>
 
   <div class="uk-width-1-1 uk-margin-medium-top">
-    <h2>Lineup</h2>
-    <app-artist-thumbnail [artist]="concert['artist']"></app-artist-thumbnail>
+<!--    <h2>Lineup</h2>-->
+<!--    <app-artist-thumbnail [artist]="concert['artist']"></app-artist-thumbnail>-->
   </div>
 
 </div>

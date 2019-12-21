@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Concert} from '../../../_models/concert.model';
 import {DateHelper} from '../../../_helpers/date-helper';
+import {Venue} from '../../../_enums/venue.enum';
 
 @Component({
   selector: 'app-concert-thumbnail',
@@ -9,6 +10,7 @@ import {DateHelper} from '../../../_helpers/date-helper';
 })
 export class ConcertThumbnailComponent implements OnInit {
   @Input() concert: Concert;
+  Venue = Venue;
 
   constructor() { }
 

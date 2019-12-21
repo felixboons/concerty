@@ -1,0 +1,13 @@
+@import '../../scss/base/colors';
+@import '../../scss/base/standards';
+
+.uk-notification {
+
+  .uk-notification-message-primary {
+    box-shadow: $box-shadow-ultra !important;
+
+    span {
+      color: $color-darkgrey !important;
+    }
+  }
+}

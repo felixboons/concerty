@@ -8,10 +8,8 @@
       {{ getDaysRemaining(concert.date) }}
     </div>
     <h3 class="uk-card-title uk-margin-small-bottom">{{ concert.title }}</h3>
-    <p class="uk-margin-remove-top">
-      <i class="fad fa-calendar-day uk-margin-small-right"></i>
-      {{ getPrettyDate(concert.date) }}
-    </p>
+    <p><i class="fad fa-map-marked-alt"></i>{{ Venue[concert.venue] }}</p>
+    <p><i class="fad fa-calendar-day"></i>{{ getPrettyDate(concert.date) }}</p>
     <a [routerLink]="['/concerts', concert._id]"
        class="uk-button uk-button-primary">SHOW CONCERT</a>
   </div>
