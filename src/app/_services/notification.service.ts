@@ -5,7 +5,7 @@ import * as UIkit from 'UIkit';
   providedIn: 'root'
 })
 export class NotificationService {
-  private timeout = 1000000;
+  private timeout = 5000;
 
   constructor() { }
 
