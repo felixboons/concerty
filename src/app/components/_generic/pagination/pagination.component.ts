@@ -1,34 +1,41 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ArtistService} from '../../../_services/artist.service';
 
 // @ts-ignore
 import paginate from 'jw-paginate';
+import {ConcertService} from '../../../_services/concert.service';
+import {Concert} from '../../../_models/concert.model';
+import {Artist} from '../../../_models/artist.model';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
   @Input() items: Array<any> = [];
   @Output() changePage = new EventEmitter<any>(true);
   @Input() initialPage = 1;
   @Input() pageSize = 4;
   @Input() maxPages;
-
   pager: any = {};
 
-  constructor(private artistService: ArtistService) { }
+  constructor(private artistService: ArtistService,
+              private concertService: ConcertService) { }
 
   ngOnInit() {
-    this.artistService.artistsSubject.subscribe(_ => {
-      this.initializePages();
-    })
+    this.artistService.artistsSubject
+      .subscribe(_ => this.initializePages());
+    this.concertService.concertsSubject
+      .subscribe(_ => this.initializePages());
   }
 
   initializePages(): void {
+    console.log('initializing pages');
     if (this.items && this.items.length) {
       this.setPage(this.initialPage);
+      // this.setPage(this.pager.currentPage);
     }
   }
 
@@ -40,7 +47,6 @@ export class PaginationComponent implements OnInit {
       }
 
       if (changes.items.currentValue !== changes.items.previousValue) {
-        this.setPage(this.initialPage);
         this.initializePages();
       }
     }

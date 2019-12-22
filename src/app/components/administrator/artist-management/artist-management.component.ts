@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Artist} from '../../../_models/artist.model';
 import {ArtistService} from '../../../_services/artist.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-artist-management',

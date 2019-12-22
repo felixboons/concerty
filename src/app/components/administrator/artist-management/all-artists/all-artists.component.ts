@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Artist} from '../../../../_models/artist.model';
 import {ArtistService} from '../../../../_services/artist.service';
 import {Genre} from '../../../../_enums/genre.enum';
-import {Concert} from '../../../../_models/concert.model';
 
 @Component({
   selector: 'app-all-artists',
@@ -17,7 +16,8 @@ export class AllArtistsComponent implements OnInit {
 
   constructor(private artistService: ArtistService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   onChangePage(pageOfItems: Array<Artist>) {
     this.pageOfArtists = pageOfItems;
