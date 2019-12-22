@@ -25,14 +25,18 @@ export class ConcertManagementComponent implements OnInit {
   concertSelected(concert: Concert): void {
     this.selectedConcert = concert;
     this.selectedConcertIndex = this.concerts.indexOf(this.selectedConcert);
-    this.toggleAccordionSections();
+
+    // Tiny delay to smoothen accordion animation.
+    setTimeout(() => {
+      this.toggleAccordionSections();
+    }, 10);
   }
 
   editConcertCanceled(): void {
     this.selectedConcert = null;
   }
 
-  private toggleAccordionSections(closeAll): void {
+  private toggleAccordionSections(): void {
     const accordionElement = $('.uk-accordion')[0];
     const newComponentClassName = accordionElement.children[1].className;
     const editComponentClassName = accordionElement.children[2].className;

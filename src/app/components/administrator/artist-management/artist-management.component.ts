@@ -25,7 +25,11 @@ export class ArtistManagementComponent implements OnInit {
   artistSelected(artist: Artist): void {
     this.selectedArtist = artist;
     this.selectedArtistIndex = this.artists.indexOf(this.selectedArtist);
-    this.toggleAccordionSections();
+
+    // Tiny delay to smoothen accordion animation.
+    setTimeout(() => {
+      this.toggleAccordionSections();
+    }, 10);
   }
 
   editArtistCanceled(): void {
