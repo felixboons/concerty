@@ -1,0 +1,10 @@
+@import '../../../../scss/base/_colors.scss';
+
+input.uk-input, select.uk-select, textarea.uk-textarea {
+  color: #fff !important;
+}
+
+textarea {
+  min-width: 100%;
+  min-height: 40px;
+}

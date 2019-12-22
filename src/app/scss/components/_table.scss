@@ -4,28 +4,31 @@ table.uk-table {
 
   thead tr {
     background-color: inherit !important;
-
-    th {
-      color: $color-white-light;
-    }
-  }
-
-  td {
-    color: white;
-  }
-
-  // Clickable remove icon
-  i.fad {
-    color: $color-white-light;
-
-    &:hover {
-      cursor: pointer;
-      color: white;
-    }
   }
 }
 
 .uk-light {
+
+  .uk-table {
+
+    td {
+      color: white;
+    }
+
+    th {
+      color: $color-white-light;
+    }
+
+    // Clickable remove icon
+    i.fad {
+      cursor: pointer;
+      color: $color-white-light;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
 
   .uk-table.clickable tr:hover {
     cursor: pointer;

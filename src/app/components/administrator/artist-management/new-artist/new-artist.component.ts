@@ -32,14 +32,13 @@ export class NewArtistComponent implements OnInit {
   }
 
   formInteractedWithAndInvalid(): boolean {
+    // tslint:disable-next-line:forin
     for (const c in this.form.controls) {
       const control = this.form.get(c);
-
       // For <select><option>
       if (c === 'genre' && control.touched && control.value === null) {
         return true;
       }
-
       // For all other controls (Only inputs, in this case. IDK if other form elements work.
       if (control.dirty && !control.pristine && control.invalid) {
         return true;
@@ -56,6 +55,6 @@ export class NewArtistComponent implements OnInit {
         Validators.maxLength(500)
       ]),
       genre: new FormControl(null, Validators.required)
-    })
+    });
   }
 }

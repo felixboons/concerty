@@ -11,14 +11,14 @@ import {NotificationService} from '../../../../_services/notification.service';
 export class BuyTicketsComponent implements OnInit {
   @Input() concert: Concert;
 
-  constructor(private notificationService: NotificationService) { }
+  constructor(private notifier: NotificationService) { }
 
   ngOnInit() {
   }
 
   buyTicket(): void {
-    const successMessage = 'Ticket(s) successfully purchased';
-    this.notificationService.showSuccessNotification(successMessage, this.concert._id);
+    const message = 'Successfully purchased ticket(s)';
+    this.notifier.showSuccessNotification(message, this.concert._id);
   }
 
   getPrettyPrice(price: number): string {

@@ -5,33 +5,53 @@ import * as UIkit from 'UIkit';
   providedIn: 'root'
 })
 export class NotificationService {
-  private timeout = 5000;
+  private timeout = 7000;
 
   constructor() { }
 
   showSuccessNotification(message: string, _id?: string): void {
-    // Navigation only works with href, not routerLink. That means... the page has to reload. DANG IT.
-    const navigationalButtonMarkup = `
-      <a href=\"/account/tickets/${_id}\"
-         class="uk-button uk-button-primary uk-display-block uk-margin-small-top">GO TO TICKET</a>`;
+    let navigationalButtonMarkup;
 
-    const elementMarkup = `
-        <div class="uk-padding-small">
-          <p class="uk-margin-remove-bottom">
-            <i class="fad fa-check-circle uk-margin-small-right"></i>
-            <span style="font-size: 16px">${message}</span>
-            ${navigationalButtonMarkup}
-          </p>
-        </div>`;
+    if (_id) {
+      // Navigation only works with href, not routerLink. That means... the page has to reload. DANG IT.
+      navigationalButtonMarkup = `
+        <a href=\"/account/tickets/${_id}\"
+           class="uk-button uk-button-primary uk-display-block notification-button">GO TO TICKET</a>
+      `;
+    }
 
-    this.showNotification(elementMarkup);
+    const notificationMarkup = `
+      <table class="uk-table uk-table-middle uk-margin-remove-bottom">
+        <tr>
+          <td class="uk-table-shrink"><i class="fad fa-exclamation-circle uk-margin-small-right"></i></td>
+          <td class="uk-padding-remove-left">${message}</td>
+        </tr>
+      </table>
+      ${navigationalButtonMarkup ? navigationalButtonMarkup : ''}
+    `;
+
+    this.showNotification('primary', notificationMarkup);
   }
 
-  private showNotification(elementMarkup: string): void {
+  showErrorNotification(message: string) {
+    const notificationMarkup = `
+      <table class="uk-table uk-table-middle uk-margin-remove-bottom">
+        <tr>
+          <td class="uk-table-shrink"><i class="fad fa-exclamation-circle uk-margin-small-right"></i></td>
+          <td class="uk-padding-remove-left">${message}</td>
+        </tr>
+      </table>
+    `;
+
+    this.showNotification('danger', notificationMarkup);
+  }
+
+  private showNotification(status: string, notificationMarkup: string): void {
     const options = {
+      status: status,
       pos: 'bottom-left',
       timeout: this.timeout
     };
-    UIkit.notification(elementMarkup, options);
+    UIkit.notification(notificationMarkup, options);
   }
 }

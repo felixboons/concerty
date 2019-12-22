@@ -5,8 +5,6 @@ import {environment} from '../../environments/environment';
 import {Artist} from '../_models/artist.model';
 import {catchError, map} from 'rxjs/operators';
 
-// TODO: Find a neater implementation to map server response to Artist.
-
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +40,9 @@ export class ArtistService {
       .catch(reason => {
         console.log(reason);
       });
+  }
+
+  editArtist(artist: any, index: number): void {
   }
 
   deleteArtist(_id: string): void {

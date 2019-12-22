@@ -40,6 +40,7 @@ import {ConcertThumbnailComponent} from './components/_generic/concert-thumbnail
 import {ArtistThumbnailComponent} from './components/_generic/artist-thumbnail/artist-thumbnail.component';
 import {BuyTicketsComponent} from './components/concerts/concert-details/buy-tickets/buy-tickets.component';
 import {EditConcertComponent} from './components/administrator/concert-management/edit-concert/edit-concert.component';
+import {EditArtistComponent} from './components/administrator/artist-management/edit-artist/edit-artist.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {EditConcertComponent} from './components/administrator/concert-managemen
     ConcertThumbnailComponent,
     ArtistThumbnailComponent,
     BuyTicketsComponent,
-    EditConcertComponent
+    EditConcertComponent,
+    EditArtistComponent,
   ],
   imports: [
     BrowserModule,

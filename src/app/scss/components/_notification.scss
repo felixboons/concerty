@@ -4,14 +4,20 @@
 .uk-notification {
 
   .uk-notification-message {
-    box-shadow: $box-shadow-ultra !important;
-
-    i {
-      color: $color-primary;
-    }
-
-    span {
-      color: $color-darkgrey !important;
-    }
+    font-size: 18px;
+    color: $color-darkgrey;
+    box-shadow: $box-shadow-ultra;
   }
+
+  .uk-notification-message-primary i {
+    color: $color-primary;
+  }
+
+  .uk-notification-message-danger i {
+    color: $color-danger;
+  }
+}
+
+.notification-button {
+  margin: 0 12px 12px !important;
 }

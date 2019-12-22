@@ -6,6 +6,7 @@ import {Concert} from '../_models/concert.model';
 import {catchError, map} from 'rxjs/operators';
 import {CacheService} from './cache.service';
 import {log} from 'util';
+import {NotificationService} from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class ConcertService {
   concertsSubject = new BehaviorSubject<Concert[]>(null);
 
   constructor(private http: HttpClient,
-              private cache: CacheService) {
+              private cache: CacheService,
+              private notifier: NotificationService) {
     this.readConcertsFromCache();
 
     this.getConcerts().subscribe(concerts => {
@@ -55,42 +57,12 @@ export class ConcertService {
       .then(concert => {
         this.concerts.unshift(concert);
         this.concertsSubject.next(this.concerts);
+        this.notify('Successfully created concert');
       })
-      .catch(reason => console.log(reason));
-  }
-
-  deleteConcert(_id: string): void {
-    const url = this.url + '/' + _id;
-
-    this.http.delete(url).toPromise()
-      .then((concert: Concert) => {
-        let index;
-
-        this.concerts.forEach((value, i) => {
-          if (concert._id === value._id) {
-            index = i;
-          }
-        });
-        this.concerts.splice(index, 1);
-        this.concertsSubject.next(this.concerts);
-      })
-      .catch(err => console.log(err));
-  }
-
-  private getConcerts(): Observable<Concert[] | any> {
-    return this.http
-      .get(this.url)
-      .pipe(
-        map((response: Concert[]) => response
-        ), catchError(error => throwError('Server responded with unexpected object array type'))
-      );
-  }
-
-  private readConcertsFromCache(): void {
-    const concerts = this.cache.getConcerts();
-    if (concerts) {
-      this.concerts = concerts;
-    }
+      .catch(err => {
+        this.notify('Failed to create concert', false);
+        console.log(err);
+      });
   }
 
   editConcert(concert: Concert, index: number): void {
@@ -112,11 +84,58 @@ export class ConcertService {
         console.log(concert);
         this.concerts[index] = concert;
         this.concertsSubject.next(this.concerts);
+        this.notify('Successfully edited concert');
       })
-      .catch(err => log(err));
+      .catch(err => {
+        this.notify('Failed to edit concert', false);
+        console.log(err);
+      });
   }
 
-  private showNotification(): void {
+  deleteConcert(_id: string): void {
+    const url = this.url + '/' + _id;
 
+    this.http.delete(url).toPromise()
+      .then((concert: Concert) => {
+        let index;
+
+        this.concerts.forEach((value, i) => {
+          if (concert._id === value._id) {
+            index = i;
+          }
+        });
+        this.concerts.splice(index, 1);
+        this.concertsSubject.next(this.concerts);
+        this.notify('Successfully deleted concert');
+      })
+      .catch(err => {
+        this.notify('Failed to delete concert', false);
+        console.log(err);
+      });
+  }
+
+  private getConcerts(): Observable<Concert[] | any> {
+    return this.http
+      .get(this.url)
+      .pipe(
+        map((response: Concert[]) => response
+        ), catchError(error => throwError('Server responded with unexpected object array type'))
+      );
+  }
+
+  private readConcertsFromCache(): void {
+    const concerts = this.cache.getConcerts();
+    if (concerts) {
+      this.concerts = concerts;
+    }
+  }
+
+  private notify(message: string, success = true): void {
+    console.log('notify');
+    if (success) {
+      this.notifier.showSuccessNotification(message);
+    } else {
+      this.notifier.showErrorNotification(message);
+    }
   }
 }
