@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Artist} from '../_models/artist.model';
 import {catchError, map} from 'rxjs/operators';
+import {NotificationService} from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class ArtistService {
   private artists: Artist[] = [];
   artistsSubject = new BehaviorSubject<Artist[]>(null);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private notifier: NotificationService) {
     this.getArtists().subscribe(artists => {
       artists.reverse();
       this.artists = artists;
@@ -29,10 +31,12 @@ export class ArtistService {
     };
 
     this.http.post(this.url, body)
-      .pipe(
-        map((response: Artist) => response
-        ), catchError(error => throwError('Server responded with unexpected object type'))
-      ).toPromise()
+      .pipe(map((response: Artist) => response),
+        catchError(err => {
+          this.notify('Something went wrong');
+          return throwError('Server responded with unexpected object type');
+        }))
+      .toPromise()
       .then(artist => {
         this.artists.unshift(artist);
         this.artistsSubject.next(this.artists);
@@ -43,6 +47,30 @@ export class ArtistService {
   }
 
   editArtist(artist: any, index: number): void {
+    const body = {
+      name: artist.name,
+      genre: artist.genre,
+      biography: artist.biography,
+    };
+
+    const url = this.url + '/' + artist._id;
+    this.http.put(url, body)
+      .pipe(map((response: Artist) => response),
+        catchError(err => {
+          this.notify('Something went wrong');
+          return throwError('Server responded with unexpected object type');
+        }))
+      .toPromise()
+      .then(artist => {
+        console.log(artist);
+        this.artists[index] = artist;
+        this.artistsSubject.next(this.artists);
+        this.notify('Successfully edited artist');
+      })
+      .catch(err => {
+        this.notify('Failed to edit artist', false);
+        console.log(err);
+      });
   }
 
   deleteArtist(_id: string): void {
@@ -64,15 +92,24 @@ export class ArtistService {
       .catch(err => {
 
       });
-
   }
 
   private getArtists(): Observable<Artist[]> {
     return this.http
       .get(this.url)
-      .pipe(
-        map((response: Artist[]) => response
-        ), catchError(error => throwError('Server responded with unexpected object type'))
+      .pipe(map((response: Artist[]) => response),
+        catchError(err => {
+          this.notify('Something went wrong', false);
+          return throwError('Server responded with unexpected object type');
+        })
       );
+  }
+
+  private notify(message: string, success = true): void {
+    if (success) {
+      this.notifier.showSuccessNotification(message);
+    } else {
+      this.notifier.showErrorNotification(message);
+    }
   }
 }

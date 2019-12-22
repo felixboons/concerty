@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Concert} from '../_models/concert.model';
 import {catchError, map} from 'rxjs/operators';
 import {CacheService} from './cache.service';
-import {log} from 'util';
 import {NotificationService} from './notification.service';
 
 @Injectable({
@@ -52,7 +51,10 @@ export class ConcertService {
 
     this.http.post(this.url, body)
       .pipe(map((response: Concert) => response),
-        catchError(error => throwError('Server responded with unexpected object type')))
+        catchError(err => {
+          this.notify('Something went wrong');
+          return throwError('Server responded with unexpected object type');
+        }))
       .toPromise()
       .then(concert => {
         this.concerts.unshift(concert);
@@ -60,8 +62,8 @@ export class ConcertService {
         this.notify('Successfully created concert');
       })
       .catch(err => {
-        this.notify('Failed to create concert', false);
         console.log(err);
+        this.notify('Failed to create concert', false);
       });
   }
 
@@ -78,7 +80,10 @@ export class ConcertService {
     const url = this.url + '/' + concert._id;
     this.http.put(url, body)
       .pipe(map((response: Concert) => response),
-        catchError(error => throwError('Server responded with unexpected object type')))
+        catchError(err => {
+          this.notify('Something went wrong');
+          return throwError('Server responded with unexpected object type');
+        }))
       .toPromise()
       .then(concert => {
         console.log(concert);
@@ -87,8 +92,8 @@ export class ConcertService {
         this.notify('Successfully edited concert');
       })
       .catch(err => {
-        this.notify('Failed to edit concert', false);
         console.log(err);
+        this.notify('Failed to edit concert', false);
       });
   }
 
@@ -109,17 +114,19 @@ export class ConcertService {
         this.notify('Successfully deleted concert');
       })
       .catch(err => {
-        this.notify('Failed to delete concert', false);
         console.log(err);
+        this.notify('Failed to delete concert', false);
       });
   }
 
   private getConcerts(): Observable<Concert[] | any> {
     return this.http
       .get(this.url)
-      .pipe(
-        map((response: Concert[]) => response
-        ), catchError(error => throwError('Server responded with unexpected object array type'))
+      .pipe(map((response: Concert[]) => response),
+        catchError(err => {
+          this.notify('Something went wrong', false);
+          return throwError('Server responded with unexpected object array type');
+        })
       );
   }
 
@@ -131,7 +138,6 @@ export class ConcertService {
   }
 
   private notify(message: string, success = true): void {
-    console.log('notify');
     if (success) {
       this.notifier.showSuccessNotification(message);
     } else {
