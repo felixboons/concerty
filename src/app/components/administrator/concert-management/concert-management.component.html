@@ -9,7 +9,7 @@
 
   <h2>Edit concert</h2>
   <div *ngIf="selectedConcert; else editConcertInfo">
-    <app-edit-concert [concert]="selectedConcert" (formCanceled)="editConcertCanceled()"></app-edit-concert>
+    <app-edit-concert [concert]="selectedConcert" [index]="selectedConcertIndex" (formCanceled)="editConcertCanceled()"></app-edit-concert>
   </div>
   <ng-template #editConcertInfo>
     <p class="text-info">

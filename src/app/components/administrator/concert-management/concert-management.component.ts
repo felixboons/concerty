@@ -10,6 +10,7 @@ import {ConcertService} from '../../../_services/concert.service';
 export class ConcertManagementComponent implements OnInit {
   concerts: Concert[] = [];
   selectedConcert: Concert = null;
+  selectedConcertIndex: number = null;
 
   constructor(private concertService: ConcertService) {
   }
@@ -20,9 +21,10 @@ export class ConcertManagementComponent implements OnInit {
 
   concertSelected(concert: Concert): void {
     this.selectedConcert = concert;
+    this.selectedConcertIndex = this.concerts.indexOf(this.selectedConcert);
   }
 
-  editConcertCanceled() {
+  editConcertCanceled(): void {
     this.selectedConcert = null;
   }
 }

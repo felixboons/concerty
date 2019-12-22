@@ -11,6 +11,7 @@ import {Concert} from '../../../../_models/concert.model';
 })
 export class EditConcertComponent implements OnInit, OnChanges {
   @Input() concert: Concert = null;
+  @Input() index: number;
   @Output() formCanceled = new EventEmitter();
   Venue = Venue;
   venues = Venue.keys();
@@ -34,8 +35,9 @@ export class EditConcertComponent implements OnInit, OnChanges {
       input.date,
       input.price,
       input.tickets,
-      input.description);
-    this.concertService.createConcert(concert);
+      input.description,
+      this.concert._id);
+    this.concertService.editConcert(concert, this.index);
     this.initializeForm();
   }
 
@@ -43,12 +45,12 @@ export class EditConcertComponent implements OnInit, OnChanges {
     this.formCanceled.emit();
   }
 
-  markDatepickerAsTouched(): void {
-    this.form.controls['date'].markAsTouched();
-  }
-
   setDateValue(date: Date): void {
     this.form.get('date').setValue(date);
+  }
+
+  markDatepickerAsTouched(): void {
+    this.form.controls['date'].markAsTouched();
   }
 
   formInteractedWithAndInvalid(): boolean {

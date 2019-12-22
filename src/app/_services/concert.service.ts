@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {Concert} from '../_models/concert.model';
 import {catchError, map} from 'rxjs/operators';
 import {CacheService} from './cache.service';
+import {log} from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class ConcertService {
     return null;
   }
 
-  createConcert(concert: Concert): boolean {
+  createConcert(concert: Concert): void {
     const body = {
       title: concert.title,
       venue: concert.venue,
@@ -46,25 +47,16 @@ export class ConcertService {
       ticketsTotal: concert.ticketsTotal,
       description: concert.description
     };
-    console.log(concert);
-    console.log(body);
 
     this.http.post(this.url, body)
-      .pipe(
-        map((response: Concert) => response
-        ), catchError(error => throwError('Server responded with unexpected object type'))
-      ).toPromise()
+      .pipe(map((response: Concert) => response),
+        catchError(error => throwError('Server responded with unexpected object type')))
+      .toPromise()
       .then(concert => {
         this.concerts.unshift(concert);
         this.concertsSubject.next(this.concerts);
-        return true;
       })
-      .catch(reason => {
-        console.log(reason);
-        return false;
-      });
-
-    return false;
+      .catch(reason => console.log(reason));
   }
 
   deleteConcert(_id: string): void {
@@ -82,10 +74,7 @@ export class ConcertService {
         this.concerts.splice(index, 1);
         this.concertsSubject.next(this.concerts);
       })
-      .catch(err => {
-        return false;
-      });
-
+      .catch(err => console.log(err));
   }
 
   private getConcerts(): Observable<Concert[] | any> {
@@ -102,5 +91,32 @@ export class ConcertService {
     if (concerts) {
       this.concerts = concerts;
     }
+  }
+
+  editConcert(concert: Concert, index: number): void {
+    const body = {
+      title: concert.title,
+      venue: concert.venue,
+      date: concert.date,
+      price: concert.price,
+      ticketsTotal: concert.ticketsTotal,
+      description: concert.description
+    };
+
+    const url = this.url + '/' + concert._id;
+    this.http.put(url, body)
+      .pipe(map((response: Concert) => response),
+        catchError(error => throwError('Server responded with unexpected object type')))
+      .toPromise()
+      .then(concert => {
+        console.log(concert);
+        this.concerts[index] = concert;
+        this.concertsSubject.next(this.concerts);
+      })
+      .catch(err => log(err));
+  }
+
+  private showNotification(): void {
+
   }
 }

@@ -18,8 +18,8 @@ export class NotificationService {
     const elementMarkup = `
         <div class="uk-padding-small">
           <p class="uk-margin-remove-bottom">
-            <i class="fad fa-check-circle fa-lg uk-margin-small-right"></i>
-            <span class="uk-text-large">${message}</span>
+            <i class="fad fa-check-circle uk-margin-small-right"></i>
+            <span style="font-size: 16px">${message}</span>
             ${navigationalButtonMarkup}
           </p>
         </div>`;
