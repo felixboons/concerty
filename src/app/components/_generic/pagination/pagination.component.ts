@@ -32,10 +32,8 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   initializePages(): void {
-    console.log('initializing pages');
     if (this.items && this.items.length) {
-      this.setPage(this.initialPage);
-      // this.setPage(this.pager.currentPage);
+      this.setPage(this.pager.currentPage);
     }
   }
 
