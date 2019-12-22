@@ -1,10 +1,13 @@
 @import '../../scss/base/colors';
 
-table.uk-table {
+table.uk-table thead tr {
+  cursor: default !important;
+  background-color: inherit !important;
+}
 
-  thead tr {
-    background-color: inherit !important;
-  }
+.uk-table.clickable tr:hover {
+  cursor: pointer;
+  background-color: $color-lightblue-transparent !important;
 }
 
 .uk-light {
@@ -19,8 +22,7 @@ table.uk-table {
       color: $color-white-light;
     }
 
-    // Clickable remove icon
-    i.fad {
+    i {
       cursor: pointer;
       color: $color-white-light;
 
@@ -31,7 +33,6 @@ table.uk-table {
   }
 
   .uk-table.clickable tr:hover {
-    cursor: pointer;
     background-color: $color-lightblue-transparent;
   }
 }

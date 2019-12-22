@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ArtistService} from '../../../../_services/artist.service';
 import {Artist} from '../../../../_models/artist.model';
 import {Genre} from '../../../../_enums/genre.enum';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-find-artist',
@@ -9,6 +10,7 @@ import {Genre} from '../../../../_enums/genre.enum';
   styleUrls: ['./find-artist.component.scss']
 })
 export class FindArtistComponent implements OnInit {
+  @Output() artistSelected = new EventEmitter<Artist>();
   @Input() artists: Artist[] = [];
   artistsCopy: Artist[] = [];
   Genre = Genre;
@@ -24,6 +26,11 @@ export class FindArtistComponent implements OnInit {
 
   getLastDigitsOfId(id: string, digits = 5): string {
     return id.substring(id.length - digits, id.length);
+  }
+
+  selectArtist(artist: Artist): void {
+    this.artistSelected.emit(artist);
+    $('.uk-close').click();
   }
 
   search(): void {

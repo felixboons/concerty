@@ -13,7 +13,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let artist of pageOfArtists"
-        (click)="selectConcert(artist)">
+        (click)="selectArtist(artist)">
       <td class="uk-table-shrink">#{{ getLastDigitsOfId(artist._id) }}</td>
       <td class="uk-table-shrink">
         <img class="uk-preserve-width" src="./assets/images/tydolla.png" width="50" alt="">

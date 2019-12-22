@@ -31,7 +31,7 @@ export class AllArtistsComponent implements OnInit {
     return id.substring(id.length - digits, id.length);
   }
 
-  selectConcert(artist: Artist): void {
+  selectArtist(artist: Artist): void {
     this.artistSelected.emit(artist);
   }
 }

@@ -10,7 +10,7 @@
 
     <form class="uk-search uk-search-large uk-width-1-1">
       <label class="uk-text-center">Search by ID, name or genre
-        <input [(ngModel)]="input" [ngModelOptions]="{standalone: true}"
+        <input [(ngModel)]="input" [ngModelOptions]="{ standalone: true }"
                (keyup)="search()"
                class="uk-search-input" type="search" autofocus>
       </label>
@@ -29,7 +29,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let artist of artists">
+        <tr *ngFor="let artist of artists"
+            (click)="selectArtist(artist)">
           <td class="uk-table-shrink">#{{ getLastDigitsOfId(artist._id) }}</td>
           <td class="uk-table-shrink">
             <img class="uk-preserve-width" src="./assets/images/tydolla.png" width="50" alt="">
