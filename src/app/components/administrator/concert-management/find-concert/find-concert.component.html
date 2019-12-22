@@ -9,7 +9,9 @@
     <button class="uk-modal-close-full" type="button" uk-close></button>
 
     <form class="uk-search uk-search-large uk-width-1-1">
-      <label class="uk-text-center">Search by ID, title or venue
+      <label class="uk-text-center">
+        <i class="fad fa-info-circle uk-margin-small-right"></i>
+        Search by ID, title or venue
         <input [(ngModel)]="input" [ngModelOptions]="{ standalone: true }"
                (keyup)="search()"
                class="uk-search-input" type="search" autofocus>
