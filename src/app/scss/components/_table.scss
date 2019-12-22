@@ -1,16 +1,27 @@
 @import '../../scss/base/colors';
 
-table.uk-table thead tr {
+
+table.uk-table thead tr,
+table.uk-table.clickable thead tr,
+table.uk-table.clickable thead tr:hover
+{
   cursor: default !important;
   background-color: inherit !important;
 }
 
-.uk-table.clickable tr:hover {
-  cursor: pointer;
-  background-color: $color-lightblue-transparent !important;
+.uk-table.clickable {
+
+  tr:hover {
+    cursor: pointer;
+    background-color: $color-lightblue-transparent !important;
+  }
 }
 
 .uk-light {
+
+  .uk-table.clickable tr:hover {
+    background-color: $color-lightblue-transparent;
+  }
 
   .uk-table {
 
@@ -30,9 +41,5 @@ table.uk-table thead tr {
         color: white;
       }
     }
-  }
-
-  .uk-table.clickable tr:hover {
-    background-color: $color-lightblue-transparent;
   }
 }

@@ -1,8 +1,9 @@
 <div class="uk-margin-large-top uk-margin-large-bottom uk-light">
-
   <h1 class="uk-heading-small">Concert management</h1>
+
   <h2>Find concert</h2>
-  <app-find-concert [concerts]="concerts"></app-find-concert>
+  <app-find-concert [concerts]="concerts"
+                    (concertSelected)="concertSelected($event)"></app-find-concert>
 
   <h2>New concert</h2>
   <app-new-concert></app-new-concert>
@@ -21,5 +22,4 @@
 
   <h2>All concerts</h2>
   <app-all-concerts [concerts]="concerts" (concertSelected)="concertSelected($event)"></app-all-concerts>
-
 </div>
