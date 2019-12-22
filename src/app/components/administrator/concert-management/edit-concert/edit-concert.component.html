@@ -16,7 +16,8 @@
     </div>
 
     <div class="uk-width-1-1 uk-margin-small-bottom">
-      <app-datepicker (dateValueChanged)="setDateValue($event)"
+      <app-datepicker [date]="concert.date"
+                      (dateValueChanged)="setDateValue($event)"
                       (datepickerTouched)="markDatepickerAsTouched()"></app-datepicker>
     </div>
 

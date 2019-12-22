@@ -1,11 +1,9 @@
 <label for="datepicker">Date</label>
 <mat-form-field class="uk-width-1-1">
-  <input matInput [matDatepicker]="datepicker" [min]="today" id="datepicker"
+  <input matInput [matDatepicker]="datepicker" [min]="today" id="datepicker" [(ngModel)]="date"
          (focus)="datepicker.open(); markDatepickerAsTouched()"
          (onClick)="datepicker.open(); markDatepickerAsTouched()"
          (dateChange)="setDateValue($event)">
   <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
-  <mat-datepicker #datepicker startView="year"></mat-datepicker>
-
-
+  <mat-datepicker #datepicker startView="year" [startAt]="date"></mat-datepicker>
 </mat-form-field>

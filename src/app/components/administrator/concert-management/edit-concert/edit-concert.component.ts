@@ -77,23 +77,23 @@ export class EditConcertComponent implements OnInit, OnChanges {
     const concert = this.concert;
 
     this.form = new FormGroup({
-      title: new FormControl(concert ? this.concert.title : null, Validators.required),
-      venue: new FormControl(concert ? this.concert.venue: null, Validators.required),
-      tickets: new FormControl(concert ? this.concert.ticketsTotal : null, [
+      title: new FormControl(concert ? concert.title : null, Validators.required),
+      venue: new FormControl(concert ? concert.venue: null, Validators.required),
+      tickets: new FormControl(concert ? concert.ticketsTotal : null, [
         Validators.required,
         Validators.min(1),
         Validators.max(1000000),
       ]),
-      date: new FormControl(concert ? this.concert.date : null, Validators.required),
-      price: new FormControl(concert ? this.concert.price : null, [
+      date: new FormControl(concert ? concert.date : null, Validators.required),
+      price: new FormControl(concert ? concert.price : null, [
         Validators.required,
         Validators.min(0.01),
         Validators.max(1000000),
       ]),
-      description: new FormControl(concert ? this.concert.description : null, [
+      description: new FormControl(concert ? concert.description : null, [
         Validators.required,
         Validators.maxLength(500)
       ])
-    })
+    });
   }
 }
