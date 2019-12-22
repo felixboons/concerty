@@ -33,16 +33,18 @@ export class ArtistService {
     this.http.post(this.url, body)
       .pipe(map((response: Artist) => response),
         catchError(err => {
-          this.notify('Something went wrong');
+          this.notify('Something went wrong', false);
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
       .then(artist => {
         this.artists.unshift(artist);
         this.artistsSubject.next(this.artists);
+        this.notify('Successfully created artist');
       })
-      .catch(reason => {
-        console.log(reason);
+      .catch(err => {
+        console.log(err);
+        this.notify('Failed to create artist', false);
       });
   }
 
@@ -57,7 +59,7 @@ export class ArtistService {
     this.http.put(url, body)
       .pipe(map((response: Artist) => response),
         catchError(err => {
-          this.notify('Something went wrong');
+          this.notify('Something went wrong', false);
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()

@@ -52,7 +52,7 @@ export class ConcertService {
     this.http.post(this.url, body)
       .pipe(map((response: Concert) => response),
         catchError(err => {
-          this.notify('Something went wrong');
+          this.notify('Something went wrong', false);
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
@@ -81,7 +81,7 @@ export class ConcertService {
     this.http.put(url, body)
       .pipe(map((response: Concert) => response),
         catchError(err => {
-          this.notify('Something went wrong');
+          this.notify('Something went wrong', false);
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
