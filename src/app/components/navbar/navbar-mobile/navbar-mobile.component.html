@@ -34,24 +34,6 @@
           PROFILE
         </a>
       </li>
-
-      <!--      Administrator -->
-      <li *ngIf="isAuthenticated && isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>
-      <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
-          routerLink="/administrator/artists" routerLinkActive="uk-active">
-        <a>
-          <i class="fad fa-user-music"></i>
-          ARTIST MANAGEMENT
-        </a>
-      </li>
-      <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
-          routerLink="/administrator/concerts" routerLinkActive="uk-active">
-        <a>
-          <i class="fad fa-calendar-alt"></i>
-          CONCERT MANAGEMENT
-        </a>
-      </li>
-
       <li *ngIf="isAuthenticated" class="uk-nav-divider"></li>
       <li *ngIf="isAuthenticated" class="list-item-indent"
           (click)="logout()">
@@ -59,6 +41,17 @@
           <i class="fad fa-sign-out-alt"></i>
           LOG OUT
         </a>
+      </li>
+
+      <!--      Administrator -->
+      <li *ngIf="isAuthenticated && isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>
+      <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
+          routerLink="/administrator/artists" routerLinkActive="uk-active">
+        <a><i class="fad fa-user-music"></i>ARTIST MANAGEMENT</a>
+      </li>
+      <li *ngIf="isAuthenticated && isAdministrator" class="list-item-indent"
+          routerLink="/administrator/concerts" routerLinkActive="uk-active">
+        <a><i class="fad fa-calendar-alt"></i>CONCERT MANAGEMENT</a>
       </li>
 
     </ul>

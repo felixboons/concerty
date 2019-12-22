@@ -18,11 +18,6 @@
           <li routerLink="artists" routerLinkActive="uk-active">
             <a>Artists</a>
           </li>
-    <!--      <li routerLink="about" routerLinkActive="uk-active">-->
-    <!--        <a>-->
-    <!--          About&nbsp;<span class="logo-style">Concerty</span>-->
-    <!--        </a>-->
-    <!--      </li>-->
         </ul>
 
         <div *ngIf="isAuthenticated; else loginButton" class="uk-navbar-item uk-padding-remove-right">
@@ -45,29 +40,21 @@
                   </a>
                 </li>
 
-                <!--      Administrator -->
-                <li *ngIf="isAdministrator" class="uk-nav-divider"></li>
-                <li *ngIf="isAdministrator"
-                    routerLink="/administrator/artists" routerLinkActive="uk-active">
-                  <a>
-                    <i class="fad fa-user-music"></i>
-                    ARTIST MANAGEMENT
-                  </a>
-                </li>
-                <li *ngIf="isAdministrator"
-                    routerLink="/administrator/concerts" routerLinkActive="uk-active">
-                  <a>
-                    <i class="fad fa-calendar-alt"></i>
-                    CONCERT MANAGEMENT
-                  </a>
-                </li>
-
                 <li class="uk-nav-divider"></li>
                 <li (click)="logout()">
                   <a>
                     <i class="fad fa-sign-out-alt"></i>
                     LOG OUT
                   </a>
+                </li>
+
+                <!--      Administrator -->
+                <li *ngIf="isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>
+                <li *ngIf="isAdministrator" routerLink="/administrator/artists" routerLinkActive="uk-active">
+                  <a><i class="fad fa-user-music"></i>ARTIST MANAGEMENT</a>
+                </li>
+                <li *ngIf="isAdministrator" routerLink="/administrator/concerts" routerLinkActive="uk-active">
+                  <a><i class="fad fa-calendar-alt"></i>CONCERT MANAGEMENT</a>
                 </li>
               </ul>
             </div>

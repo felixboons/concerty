@@ -31,8 +31,11 @@ li a, .uk-button {
 
 .uk-dropdown a, .register-button:last-child {
   color: $color-lightgrey;
-
   &:hover {
     color: $color-darkgrey;
   }
+}
+
+.uk-nav-header {
+  font-weight: bold;
 }
