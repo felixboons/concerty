@@ -1,12 +1,9 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ArtistService} from '../../../_services/artist.service';
+import {ConcertService} from '../../../_services/concert.service';
 
 // @ts-ignore
 import paginate from 'jw-paginate';
-import {ConcertService} from '../../../_services/concert.service';
-import {Concert} from '../../../_models/concert.model';
-import {Artist} from '../../../_models/artist.model';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-pagination',
@@ -14,15 +11,16 @@ import {Observable} from 'rxjs';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input() items: Array<any> = [];
   @Output() changePage = new EventEmitter<any>(true);
+  @Input() items: Array<any> = [];
   @Input() initialPage = 1;
-  @Input() pageSize = 4;
+  @Input() pageSize = 6;
   @Input() maxPages;
   pager: any = {};
 
   constructor(private artistService: ArtistService,
-              private concertService: ConcertService) { }
+              private concertService: ConcertService) {
+  }
 
   ngOnInit() {
     this.artistService.artistsSubject

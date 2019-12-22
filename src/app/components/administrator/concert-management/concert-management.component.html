@@ -1,24 +1,44 @@
 <div class="uk-margin-large-top uk-margin-large-bottom uk-light">
   <h1 class="uk-heading-small">Concert management</h1>
 
-  <h2>Find concert</h2>
-  <app-find-concert [concerts]="concerts"
-                    (concertSelected)="concertSelected($event)"></app-find-concert>
+  <ul class="uk-accordion" uk-accordion="multiple: true">
+    <li class="uk-open">
+      <a class="uk-accordion-title" href="#">
+        <h2>Find concert</h2>
+      </a>
+      <div class="uk-accordion-content uk-margin-bottom uk-margin-remove-top">
+        <app-find-concert [concerts]="concerts"
+                          (concertSelected)="concertSelected($event)"></app-find-concert>
+      </div>
+    </li>
 
-  <h2>New concert</h2>
-  <app-new-concert></app-new-concert>
+    <li>
+      <a class="uk-accordion-title" href="#">
+        <h2>New concert</h2>
+      </a>
+      <div class="uk-accordion-content uk-margin-bottom uk-margin-remove-top">
+        <app-new-concert></app-new-concert>
+      </div>
+    </li>
 
-  <h2>Edit concert</h2>
-  <div *ngIf="selectedConcert; else editConcertInfo">
-    <app-edit-concert [concert]="selectedConcert" [index]="selectedConcertIndex"
-                      (formCanceled)="editConcertCanceled()"></app-edit-concert>
-  </div>
-  <ng-template #editConcertInfo>
-    <p class="text-info">
-      <i class="fad fa-info-circle uk-margin-small-right"></i>
-      <span>Select a concert to edit it.</span>
-    </p>
-  </ng-template>
+    <li>
+      <a class="uk-accordion-title" href="#">
+        <h2>Edit concert</h2>
+      </a>
+      <div class="uk-accordion-content uk-margin-bottom uk-margin-remove-top">
+        <div *ngIf="selectedConcert; else editConcertInfo">
+          <app-edit-concert [concert]="selectedConcert" [index]="selectedConcertIndex"
+                            (formCanceled)="editConcertCanceled()"></app-edit-concert>
+        </div>
+        <ng-template #editConcertInfo>
+          <p class="text-info">
+            <i class="fad fa-info-circle uk-margin-small-right"></i>
+            <span>Select a concert to edit it.</span>
+          </p>
+        </ng-template>
+      </div>
+    </li>
+  </ul>
 
   <h2>All concerts</h2>
   <app-all-concerts [concerts]="concerts" (concertSelected)="concertSelected($event)"></app-all-concerts>
