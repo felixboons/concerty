@@ -39,6 +39,7 @@ export class EditConcertComponent implements OnInit, OnChanges {
       this.concert._id);
     this.concertService.editConcert(concert, this.index);
     this.initializeForm();
+    this.formCanceled.emit();
   }
 
   cancel() {

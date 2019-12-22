@@ -1,58 +1,41 @@
-<form [formGroup]="form" (ngSubmit)="editConcert()">
+<form [formGroup]="form" (ngSubmit)="editArtist()">
   <div class="uk-grid uk-grid-small uk-light">
 
-    <div class="uk-width-1-1 uk-width-1-2@s uk-margin-small-bottom">
-      <label for="title">Title</label>
-        <input type="text" class="uk-input" id="title"
-               formControlName="title">
+    <div class="uk-width-1-1 uk-margin-small-bottom">
+      <label for="name">Name</label>
+      <input type="text" class="uk-input" id="name"
+             formControlName="name">
     </div>
 
-    <div class="uk-width-1-1 uk-width-1-2@s uk-margin-small-bottom">
-      <label for="venue">Venue</label>
-      <select class="uk-select" id="venue" formControlName="venue">
-        <option *ngIf="form.get('venue').invalid" [value]="null" disabled>Choose venue</option>
-        <option *ngFor="let venue of venues" [value]="venue">{{ Venue[venue] }}</option>
+    <div class="uk-width-auto uk-margin-small-bottom">
+      <label for="genre">Genre</label>
+      <select class="uk-select" id="genre" formControlName="genre">
+        <option *ngIf="form.get('genre').invalid" [value]="null" disabled>Choose genre</option>
+        <option *ngFor="let genre of genres" [value]="genre">{{ Genre[genre] }}</option>
       </select>
     </div>
 
     <div class="uk-width-1-1 uk-margin-small-bottom">
-      <app-datepicker [date]="concert.date"
-                      (dateValueChanged)="setDateValue($event)"
-                      (datepickerTouched)="markDatepickerAsTouched()"></app-datepicker>
-    </div>
+      <label for="biography" class="uk-display-block">Biography</label>
+      <textarea class="uk-textarea" id="biography" maxlength="500" rows="4"
+                formControlName="biography"></textarea>
 
-    <div class="uk-width-1-2 uk-margin-small-bottom">
-      <label for="tickets">Amount of tickets</label>
-        <input type="number" step="1000" class="uk-input" id="tickets"
-               formControlName="tickets">
-    </div>
-
-    <div class="uk-width-1-2 uk-margin-small-bottom">
-      <label for="price">Ticket price</label>
-        <input type="number" step="10" class="uk-input" id="price"
-               formControlName="price">
-    </div>
-
-    <div class="uk-width-1-1 uk-margin-small-bottom">
-      <label for="description" class="uk-display-block">Description</label>
-        <textarea class="uk-textarea" id="description" maxlength="500" rows="4"
-                  formControlName="description"></textarea>
     </div>
 
     <!--    ERROR MESSAGE -->
     <div *ngIf="formInteractedWithAndInvalid()"
          class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
       <p class="text-error">
-        <i class="fad fa-info-circle uk-margin-small-right"></i>
-        <span>Please fill out the missing fields.</span>
+        <i class="fad fa-info-circle"></i>
+        Please fill out the missing fields.
       </p>
     </div>
 
     <!--    BUTTONS -->
     <div class="uk-width-1-1 uk-margin-small-bottom">
-      <button class="uk-button uk-button-primary uk-margin-small-right"
+      <button class="uk-button uk-button-primary uk-margin-small-right" type="submit"
               [disabled]="form.invalid">
-        Save concert
+        Save artist
       </button>
       <button (click)="cancel()" class="uk-button uk-button-default">Cancel</button>
     </div>

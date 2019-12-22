@@ -2,7 +2,7 @@ import {Genre} from '../_enums/genre.enum';
 
 export class Artist {
   private readonly id: string;
-  private readonly _reatedAt: Date;
+  private readonly _createdAt: Date;
   private readonly _name: string;
   private readonly _biography: string;
   private readonly _genre: Genre;
@@ -36,6 +36,6 @@ export class Artist {
   }
 
   get createdAt(): Date {
-    return this._reatedAt;
+    return this._createdAt;
   }
 }

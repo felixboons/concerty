@@ -31,24 +31,18 @@ export class EditArtistComponent implements OnInit, OnChanges {
   editArtist(): void {
     const input = this.form.value;
     const artist: Artist = new Artist(
-      input.title,
-      input.venue,
-      input.date,
+      input.name,
+      input.genre,
+      input.biography,
+      this.artist._id
     );
     this.artistService.editArtist(artist, this.index);
     this.initializeForm();
+    this.formCanceled.emit();
   }
 
   cancel() {
     this.formCanceled.emit();
-  }
-
-  setDateValue(date: Date): void {
-    this.form.get('date').setValue(date);
-  }
-
-  markDatepickerAsTouched(): void {
-    this.form.controls['date'].markAsTouched();
   }
 
   formInteractedWithAndInvalid(): boolean {
@@ -68,7 +62,6 @@ export class EditArtistComponent implements OnInit, OnChanges {
         return true;
       }
     }
-
     return false;
   }
 

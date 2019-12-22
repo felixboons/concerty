@@ -7,6 +7,18 @@
   <h2>New artist</h2>
   <app-new-artist></app-new-artist>
 
+  <h2>Edit artist</h2>
+  <div *ngIf="selectedArtist; else editArtistInfo">
+    <app-edit-artist [artist]="selectedArtist" [index]="selectedArtistIndex"
+                     (formCanceled)="editArtistCanceled()"></app-edit-artist>
+  </div>
+  <ng-template #editArtistInfo>
+    <p class="text-info">
+      <i class="fad fa-info-circle uk-margin-small-right"></i>
+      <span>Select a concert to edit it.</span>
+    </p>
+  </ng-template>
+
   <h2>All artists</h2>
-  <app-all-artists [artists]="artists"></app-all-artists>
+  <app-all-artists [artists]="artists" (artistSelected)="artistSelected($event)"></app-all-artists>
 </div>

@@ -21,7 +21,7 @@ export class AllConcertsComponent implements OnInit {
   ngOnInit() {
   }
 
-  onChangePage(pageOfItems: Array<any>) {
+  onChangePage(pageOfItems: Array<Concert>) {
     this.pageOfConcerts = pageOfItems;
   }
 

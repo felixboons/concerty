@@ -16,7 +16,8 @@ export class ConcertManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.concertService.concertsSubject.subscribe(concerts => this.concerts = concerts);
+    this.concertService.concertsSubject
+      .subscribe(concerts => this.concerts = concerts);
   }
 
   concertSelected(concert: Concert): void {

@@ -86,7 +86,6 @@ export class ConcertService {
         }))
       .toPromise()
       .then(concert => {
-        console.log(concert);
         this.concerts[index] = concert;
         this.concertsSubject.next(this.concerts);
         this.notify('Successfully edited concert');
@@ -119,7 +118,7 @@ export class ConcertService {
       });
   }
 
-  private getConcerts(): Observable<Concert[] | any> {
+  private getConcerts(): Observable<Concert[]> {
     return this.http
       .get(this.url)
       .pipe(map((response: Concert[]) => response),

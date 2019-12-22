@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Artist} from '../../../../_models/artist.model';
 import {ArtistService} from '../../../../_services/artist.service';
 import {Genre} from '../../../../_enums/genre.enum';
+import {Concert} from '../../../../_models/concert.model';
 
 @Component({
   selector: 'app-all-artists',
@@ -9,6 +10,7 @@ import {Genre} from '../../../../_enums/genre.enum';
   styleUrls: ['./all-artists.component.scss']
 })
 export class AllArtistsComponent implements OnInit {
+  @Output() artistSelected = new EventEmitter<Artist>();
   @Input() artists: Artist[] = [];
   pageOfArtists: Artist[] = [];
   Genre = Genre;
@@ -17,7 +19,7 @@ export class AllArtistsComponent implements OnInit {
 
   ngOnInit() { }
 
-  onChangePage(pageOfItems: Array<any>) {
+  onChangePage(pageOfItems: Array<Artist>) {
     this.pageOfArtists = pageOfItems;
   }
 
@@ -27,5 +29,9 @@ export class AllArtistsComponent implements OnInit {
 
   getLastDigitsOfId(id: string, digits = 5): string {
     return id.substring(id.length - digits, id.length);
+  }
+
+  selectConcert(artist: Artist): void {
+    this.artistSelected.emit(artist);
   }
 }
