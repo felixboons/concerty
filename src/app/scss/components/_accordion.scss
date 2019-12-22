@@ -1,0 +1,10 @@
+@import '../base/colors';
+
+ul.uk-accordion {
+  margin-top: 40px;
+
+  li {
+    margin-bottom: 30px;
+    border-bottom: 1px solid $color-white-lightest;
+  }
+}

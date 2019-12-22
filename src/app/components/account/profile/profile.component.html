@@ -1,10 +1,25 @@
+
 <div class="uk-margin-large-top uk-margin-large-bottom uk-light">
   <h1 class="uk-heading-small">Profile</h1>
 
-  <h2>Edit profile</h2>
-  <app-edit-profile></app-edit-profile>
+  <ul class="uk-accordion" uk-accordion="collapsible: false">
+    <li>
+      <a class="uk-accordion-title" href="#">
+        <h2>Edit profile</h2>
+      </a>
+      <div class="uk-accordion-content uk-margin-bottom uk-margin-remove-top">
+        <app-edit-profile></app-edit-profile>
+      </div>
+    </li>
 
-  <h2>Change password</h2>
-  <app-change-password></app-change-password>
+    <li>
+      <a class="uk-accordion-title" href="#">
+        <h2>Change password</h2>
+      </a>
+      <div class="uk-accordion-content uk-margin-bottom uk-margin-remove-top">
+        <app-change-password></app-change-password>
+      </div>
+    </li>
+  </ul>
 
 </div>
