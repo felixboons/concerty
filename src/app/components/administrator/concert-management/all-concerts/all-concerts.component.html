@@ -14,7 +14,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let concert of concerts; let i = index"
+    <tr *ngFor="let concert of pageOfConcerts; let i = index"
         (click)="selectConcert(concert)">
       <td class="uk-table-shrink">#{{ getLastDigitsOfId(concert._id) }}</td>
       <td class="uk-table-shrink">

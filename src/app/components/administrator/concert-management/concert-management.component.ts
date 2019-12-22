@@ -21,4 +21,8 @@ export class ConcertManagementComponent implements OnInit {
   concertSelected(concert: Concert): void {
     this.selectedConcert = concert;
   }
+
+  editConcertCanceled() {
+    this.selectedConcert = null;
+  }
 }

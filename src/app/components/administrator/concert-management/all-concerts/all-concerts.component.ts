@@ -10,8 +10,8 @@ import {Venue} from '../../../../_enums/venue.enum';
   styleUrls: ['./all-concerts.component.scss']
 })
 export class AllConcertsComponent implements OnInit {
-  @Input() concerts: Concert[] = [];
   @Output() concertSelected = new EventEmitter<Concert>();
+  @Input() concerts: Concert[] = [];
   pageOfConcerts: Concert[] = [];
   Venue = Venue;
 

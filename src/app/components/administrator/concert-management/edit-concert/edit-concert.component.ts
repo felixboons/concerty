@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Venue} from '../../../../_enums/venue.enum';
 import {ConcertService} from '../../../../_services/concert.service';
@@ -11,6 +11,7 @@ import {Concert} from '../../../../_models/concert.model';
 })
 export class EditConcertComponent implements OnInit, OnChanges {
   @Input() concert: Concert = null;
+  @Output() formCanceled = new EventEmitter();
   Venue = Venue;
   venues = Venue.keys();
   form: FormGroup;
@@ -39,7 +40,7 @@ export class EditConcertComponent implements OnInit, OnChanges {
   }
 
   cancel() {
-    this.form.reset();
+    this.formCanceled.emit();
   }
 
   markDatepickerAsTouched(): void {
