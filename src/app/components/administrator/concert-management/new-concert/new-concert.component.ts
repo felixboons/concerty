@@ -22,7 +22,6 @@ export class NewConcertComponent implements OnInit {
 
   createConcert(): void {
     const input = this.form.value;
-    console.log(input);
     const concert: Concert = new Concert(
       input.title,
       input.venue,
@@ -31,7 +30,7 @@ export class NewConcertComponent implements OnInit {
       input.tickets,
       input.description);
     this.concertService.createConcert(concert);
-    this.initializeForm();
+    this.form.reset();
   }
 
   cancel() {
