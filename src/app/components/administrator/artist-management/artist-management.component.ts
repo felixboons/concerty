@@ -25,14 +25,14 @@ export class ArtistManagementComponent implements OnInit {
   artistSelected(artist: Artist): void {
     this.selectedArtist = artist;
     this.selectedArtistIndex = this.artists.indexOf(this.selectedArtist);
-    this.toggleAccordionItems();
+    this.toggleAccordionSections();
   }
 
   editArtistCanceled(): void {
     this.selectedArtist = null;
   }
 
-  private toggleAccordionItems(): void {
+  private toggleAccordionSections(): void {
     const accordionElement = $('.uk-accordion')[0];
     const newComponentClassName = accordionElement.children[1].className;
     const editComponentClassName = accordionElement.children[2].className;
