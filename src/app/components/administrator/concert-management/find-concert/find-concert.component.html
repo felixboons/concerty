@@ -32,7 +32,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let concert of concerts; let i = index">
+        <tr *ngFor="let concert of concerts"
+            (click)="selectConcert(concert)">
           <td class="uk-table-shrink">#{{ getLastDigitsOfId(concert._id) }}</td>
           <td class="uk-table-shrink">
             <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
