@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Venue} from '../../../../_enums/venue.enum';
 import {ConcertService} from '../../../../_services/concert.service';
 import {Concert} from '../../../../_models/concert.model';
+import {Artist} from '../../../../_models/artist.model';
+import {ArtistService} from '../../../../_services/artist.service';
 
 @Component({
   selector: 'app-new-concert',
@@ -13,11 +15,22 @@ export class NewConcertComponent implements OnInit {
   Venue = Venue;
   venues = Venue.keys();
   form: FormGroup;
+  artists: Artist[] = [];
+  selectedArtists: Artist[] = [];
 
-  constructor(private concertService: ConcertService) { }
+  constructor(private concertService: ConcertService,
+              private artistService: ArtistService) {
+    this.artistService.artistsSubject
+      .subscribe(artists => this.artists = artists);
+  }
 
   ngOnInit() {
     this.initializeForm();
+  }
+
+  addArtistToConcert(artist: Artist): void {
+    this.selectedArtists.push(artist);
+    console.log(this.selectedArtists);
   }
 
   createConcert(): void {

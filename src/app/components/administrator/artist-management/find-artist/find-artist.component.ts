@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ArtistService} from '../../../../_services/artist.service';
 import {Artist} from '../../../../_models/artist.model';
 import {Genre} from '../../../../_enums/genre.enum';
-import * as $ from 'jquery';
 import {SearchHelper} from '../../../../_helpers/searchHelper';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-find-artist',
@@ -11,14 +11,16 @@ import {SearchHelper} from '../../../../_helpers/searchHelper';
   styleUrls: ['./find-artist.component.scss']
 })
 export class FindArtistComponent implements OnInit {
-  @Output() artistSelected = new EventEmitter<Artist>();
+  @Output() artistSelectedToEdit = new EventEmitter<Artist>();
+  @Output() artistSelectedToAdd = new EventEmitter<Artist>();
+  @Input() clickToAdd = false;
   @Input() artists: Artist[] = [];
   artistsCopy: Artist[] = [];
-  // @Input()
   Genre = Genre;
   input: string;
 
-  constructor(private artistService: ArtistService) { }
+  constructor(private artistService: ArtistService) {
+  }
 
   ngOnInit() { }
 
@@ -31,7 +33,13 @@ export class FindArtistComponent implements OnInit {
   }
 
   selectArtist(artist: Artist): void {
-    this.artistSelected.emit(artist);
+    if (this.clickToAdd) {
+      this.artistSelectedToAdd.emit(artist);
+    } else {
+      this.artistSelectedToEdit.emit(artist);
+    }
+
+    // Close search component.
     $('.uk-close').click();
   }
 

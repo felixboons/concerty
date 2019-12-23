@@ -5,6 +5,8 @@ import {ConcertService} from '../../../../_services/concert.service';
 import {Venue} from '../../../../_enums/venue.enum';
 import * as $ from 'jquery';
 import {SearchHelper} from '../../../../_helpers/searchHelper';
+import {ArtistService} from '../../../../_services/artist.service';
+import {Artist} from '../../../../_models/artist.model';
 
 @Component({
   selector: 'app-find-concert',
@@ -20,7 +22,8 @@ export class FindConcertComponent implements OnInit {
 
   constructor(private concertService: ConcertService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   getLastDigitsOfId(id: string, digits = 5): string {
     return id.substring(id.length - digits, id.length);

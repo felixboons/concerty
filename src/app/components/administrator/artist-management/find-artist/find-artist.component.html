@@ -1,25 +1,31 @@
 
-<a class="uk-button uk-button-primary uk-margin-small-right" href="#modal-full" uk-toggle type="search">
-  <span class="uk-margin-small-right">Search artist by ID, name or genre</span>
-  <i class="fad fa-search fa-lg"></i>
+<a *ngIf="!clickToAdd" href="#find-artist-modal" uk-toggle type="search"
+   class="uk-button uk-button-primary">
+  Search artist by ID, name or genre
+  <i class="fad fa-search uk-margin-small-left"></i>
+</a>
+<a *ngIf="clickToAdd" href="#find-artist-modal" uk-toggle type="search"
+   class="uk-button uk-button-primary">
+  Add artists to concert
+  <i class="fad fa-plus-circle uk-margin-small-left"></i>
 </a>
 
-<div id="modal-full" class="uk-modal-full uk-modal" uk-modal>
+<div id="find-artist-modal" class="uk-modal-full uk-modal" uk-modal>
   <div class="uk-modal-dialog uk-padding-large" uk-height-viewport>
     <button class="uk-modal-close-full" type="button" uk-close></button>
 
     <form class="uk-search uk-search-large uk-width-1-1">
       <label class="uk-text-center">
         <i class="fad fa-info-circle uk-margin-small-right"></i>
-        Search by ID, name or genre
+        Search by ID, name or genre.
         <input [(ngModel)]="input" [ngModelOptions]="{ standalone: true }"
                (keyup)="search()"
                class="uk-search-input" type="search" autofocus>
       </label>
     </form>
 
-    <div class="uk-overflow-auto">
-      <table class="uk-overflow-auto uk-table uk-table-small uk-table-striped uk-table-middle clickable">
+    <div class="uk-overflow-auto uk-margin-top">
+      <table class="uk-table uk-table-small uk-table-striped uk-table-middle clickable">
         <thead>
         <tr>
           <th>No.</th>
