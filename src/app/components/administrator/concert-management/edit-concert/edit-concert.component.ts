@@ -5,6 +5,7 @@ import {ConcertService} from '../../../../_services/concert.service';
 import {Concert} from '../../../../_models/concert.model';
 import {Artist} from '../../../../_models/artist.model';
 import {ArtistService} from '../../../../_services/artist.service';
+import {NotificationService} from '../../../../_services/notification.service';
 
 @Component({
   selector: 'app-edit-concert',
@@ -22,7 +23,8 @@ export class EditConcertComponent implements OnInit, OnChanges {
   selectedArtists: Artist[] = [];
 
   constructor(private concertService: ConcertService,
-              private artistService: ArtistService) { }
+              private artistService: ArtistService,
+              private notifier: NotificationService) { }
 
   ngOnInit() {
     this.artistService.artistsSubject
@@ -36,6 +38,14 @@ export class EditConcertComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.initializeForm();
     this.selectedArtists = this.concert.artists;
+  }
+
+  addArtistToConcert(artist: Artist): void {
+    if (!this.selectedArtists.includes(artist)) {
+      this.selectedArtists.push(artist);
+    } else {
+      this.notifier.showWarningNotification('This artist was already added to the lineup');
+    }
   }
 
   editConcert(): void {
