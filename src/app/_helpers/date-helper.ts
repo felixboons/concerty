@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
 export class DateHelper {
-  private readonly recentlyAddedThreshold = 5;
+  private readonly recentlyAddedThreshold = 7; // AKA one week.
 
   isRecentlyAdded(date: Date): boolean {
     const diff = moment().diff(date, 'days');
