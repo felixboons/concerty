@@ -77,8 +77,7 @@ export class ConcertService {
       description: concert.description
     };
 
-    const url = this.url + '/' + concert._id;
-    this.http.put(url, body)
+    this.http.put(this.url + '/' + concert._id, body)
       .pipe(map((response: Concert) => response),
         catchError(err => {
           this.notify('Something went wrong', false);

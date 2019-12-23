@@ -43,6 +43,8 @@ $tastic-tickets-client-theme: mat-light-theme($tastic-tickets-client-primary, $t
 @import 'app/scss/components/notification';
 @import 'app/scss/components/accordion';
 
+@import 'app/scss/behaviour/user-select';
+
 // Navbar
 $navbar-background: white;
 $navbar-nav-item-color: $color-lightgrey;
@@ -68,12 +70,6 @@ $tooltip-border-radius: none;
 }
 
 
-
-// USER-SELECT
-.uk-card,
-.uk-overlay h3 {
-  user-select: none;
-}
 
 // 2. Import default variables and available mixins.
 @import "../node_modules/uikit/src/scss/variables-theme.scss";

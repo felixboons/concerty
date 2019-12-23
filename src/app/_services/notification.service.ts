@@ -23,7 +23,7 @@ export class NotificationService {
     const notificationMarkup = `
       <table class="uk-table uk-table-middle uk-margin-remove-bottom">
         <tr>
-          <td class="uk-table-shrink"><i class="fad fa-check-circle"></i></td>
+          <td class="uk-table-shrink"><i class="fad fa-check-circle  fa-lg"></i></td>
           <td class="uk-padding-remove-left">${message}</td>
         </tr>
       </table>
@@ -37,7 +37,7 @@ export class NotificationService {
     const notificationMarkup = `
       <table class="uk-table uk-table-middle uk-margin-remove-bottom">
         <tr>
-          <td class="uk-table-shrink"><i class="fad fa-exclamation-circle"></i></td>
+          <td class="uk-table-shrink"><i class="fad fa-exclamation-circle fa-lg"></i></td>
           <td class="uk-padding-remove-left">${message}</td>
         </tr>
       </table>
@@ -50,7 +50,7 @@ export class NotificationService {
     const notificationMarkup = `
       <table class="uk-table uk-table-middle uk-margin-remove-bottom">
         <tr>
-          <td class="uk-table-shrink"><i class="fad fa-times-circle"></i></td>
+          <td class="uk-table-shrink"><i class="fad fa-times-circle  fa-lg"></i></td>
           <td class="uk-padding-remove-left">${message}</td>
         </tr>
       </table>

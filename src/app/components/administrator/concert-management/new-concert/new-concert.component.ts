@@ -34,7 +34,7 @@ export class NewConcertComponent implements OnInit {
     if (!this.selectedArtists.includes(artist)) {
       this.selectedArtists.push(artist);
     } else {
-      this.notifier.showWarningNotification('This artist was already added to the list.');
+      this.notifier.showWarningNotification('This artist was already added to the lineup');
     }
   }
 

@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Venue} from '../../../../_enums/venue.enum';
 import {ConcertService} from '../../../../_services/concert.service';
 import {Concert} from '../../../../_models/concert.model';
+import {Artist} from '../../../../_models/artist.model';
+import {ArtistService} from '../../../../_services/artist.service';
 
 @Component({
   selector: 'app-edit-concert',
@@ -10,21 +12,30 @@ import {Concert} from '../../../../_models/concert.model';
   styleUrls: ['./edit-concert.component.scss']
 })
 export class EditConcertComponent implements OnInit, OnChanges {
-  @Input() concert: Concert = null;
-  @Input() index: number;
-  @Output() formCanceled = new EventEmitter();
   Venue = Venue;
   venues = Venue.keys();
+  @Output() formCanceled = new EventEmitter();
+  @Input() concert: Concert = null;
+  @Input() index: number;
   form: FormGroup;
+  artists: Artist[] = [];
+  selectedArtists: Artist[] = [];
 
-  constructor(private concertService: ConcertService) { }
+  constructor(private concertService: ConcertService,
+              private artistService: ArtistService) { }
 
   ngOnInit() {
-    this.initializeForm();
+    this.artistService.artistsSubject
+      .subscribe(artists => {
+        this.selectedArtists = this.concert.artists;
+        this.artists = artists;
+        this.initializeForm();
+      });
   }
 
   ngOnChanges() {
     this.initializeForm();
+    this.selectedArtists = this.concert.artists;
   }
 
   editConcert(): void {
@@ -57,23 +68,19 @@ export class EditConcertComponent implements OnInit, OnChanges {
   formInteractedWithAndInvalid(): boolean {
     for (const c in this.form.controls) {
       const control = this.form.get(c);
-
       // For all controls, except <select><option>
       if (control.dirty && !control.pristine && control.invalid) {
         return true;
       }
-
       // For <select><option>
       if (c === 'venue' && control.touched && control.value === null) {
         return true;
       }
-
       // For <mat-datepicker>
       if (c === 'date' && control.touched && control.invalid) {
         return true;
       }
     }
-
     return false;
   }
 
