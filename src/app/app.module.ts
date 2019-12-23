@@ -41,6 +41,9 @@ import {ArtistThumbnailComponent} from './components/_generic/artist-thumbnail/a
 import {BuyTicketsComponent} from './components/concerts/concert-details/buy-tickets/buy-tickets.component';
 import {EditConcertComponent} from './components/administrator/concert-management/edit-concert/edit-concert.component';
 import {EditArtistComponent} from './components/administrator/artist-management/edit-artist/edit-artist.component';
+import {ArtistListComponent} from './components/_generic/artist-list/artist-list.component';
+import {PrettyDatePipe} from './_pipes/pretty-date.pipe';
+import {PrettyIdPipe} from './_pipes/pretty-id.pipe';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import {EditArtistComponent} from './components/administrator/artist-management/
     BuyTicketsComponent,
     EditConcertComponent,
     EditArtistComponent,
+    ArtistListComponent,
+    PrettyDatePipe,
+    PrettyIdPipe,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +94,7 @@ import {EditArtistComponent} from './components/administrator/artist-management/
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

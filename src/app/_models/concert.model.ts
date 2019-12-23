@@ -13,14 +13,14 @@ export class Concert {
   private _artists: Artist[];
 
   constructor(title: string, venue: Venue, date: Date, price: number, ticketsTotal: number, description: string,
-              id?: string, ticketsRemaining?: number, artists?: Artist[]) {
+              _id?: string, ticketsRemaining?: number, artists?: Artist[]) {
     this._title = title;
     this._venue = venue;
     this._date = date;
     this._ticketsTotal = ticketsTotal;
     this._price = price;
     this._description = description;
-    this.id = id;
+    this.id = _id;
     this._ticketsRemaining = ticketsRemaining;
     this._artists = artists;
   }

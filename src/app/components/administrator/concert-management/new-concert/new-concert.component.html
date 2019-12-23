@@ -40,8 +40,9 @@
 
     <div class="uk-width-1-1 uk-margin-small-bottom">
       <label class="uk-display-block">Artist lineup (optional)</label>
-      <app-find-artist [artists]="artists" [clickToAdd]="true"
+      <app-find-artist [artists]="selectedArtists" [clickToAdd]="true"
                        (artistSelectedToAdd)="addArtistToConcert($event)"></app-find-artist>
+      <app-artist-list [artists]="artists"></app-artist-list>
     </div>
 
     <!--    ERROR MESSAGE -->

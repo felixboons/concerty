@@ -8,11 +8,11 @@ export class Artist {
   private readonly _genre: Genre;
   private readonly _imageUrl: string;
 
-  constructor(name: string, genre: Genre, biography: string, id?: string) {
+  constructor(name: string, genre: Genre, biography: string, _id?: string) {
     this._name = name;
     this._biography = biography;
     this._genre = genre;
-    this.id = id;
+    this.id = _id;
   }
 
   get _id(): string {
