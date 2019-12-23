@@ -5,6 +5,7 @@ import {ConcertService} from '../../../../_services/concert.service';
 import {Concert} from '../../../../_models/concert.model';
 import {Artist} from '../../../../_models/artist.model';
 import {ArtistService} from '../../../../_services/artist.service';
+import {NotificationService} from '../../../../_services/notification.service';
 
 @Component({
   selector: 'app-new-concert',
@@ -19,7 +20,8 @@ export class NewConcertComponent implements OnInit {
   selectedArtists: Artist[] = [];
 
   constructor(private concertService: ConcertService,
-              private artistService: ArtistService) {
+              private artistService: ArtistService,
+              private notifier: NotificationService) {
     this.artistService.artistsSubject
       .subscribe(artists => this.artists = artists);
   }
@@ -29,8 +31,11 @@ export class NewConcertComponent implements OnInit {
   }
 
   addArtistToConcert(artist: Artist): void {
-    this.selectedArtists.push(artist);
-    console.log(this.selectedArtists);
+    if (!this.selectedArtists.includes(artist)) {
+      this.selectedArtists.push(artist);
+    } else {
+      this.notifier.showWarningNotification('This artist was already added to the list.');
+    }
   }
 
   createConcert(): void {
@@ -47,6 +52,7 @@ export class NewConcertComponent implements OnInit {
   }
 
   cancel() {
+    this.selectedArtists = [];
     this.form.reset();
   }
 

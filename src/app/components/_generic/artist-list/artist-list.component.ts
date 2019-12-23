@@ -18,7 +18,9 @@ export class ArtistListComponent implements OnInit {
 
   ngOnInit() { }
 
-  removeArtist(_id: string): void {
+  removeArtist(index: number): void {
+    this.artists.splice(index, 1);
+
     // this.artistService.deleteArtist(_id);
   }
 }

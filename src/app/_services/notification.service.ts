@@ -33,11 +33,24 @@ export class NotificationService {
     this.showNotification('primary', notificationMarkup);
   }
 
-  showErrorNotification(message: string) {
+  showWarningNotification(message: string): void {
     const notificationMarkup = `
       <table class="uk-table uk-table-middle uk-margin-remove-bottom">
         <tr>
           <td class="uk-table-shrink"><i class="fad fa-exclamation-circle"></i></td>
+          <td class="uk-padding-remove-left">${message}</td>
+        </tr>
+      </table>
+    `;
+
+    this.showNotification('warning', notificationMarkup);
+  }
+
+  showErrorNotification(message: string): void {
+    const notificationMarkup = `
+      <table class="uk-table uk-table-middle uk-margin-remove-bottom">
+        <tr>
+          <td class="uk-table-shrink"><i class="fad fa-times-circle"></i></td>
           <td class="uk-padding-remove-left">${message}</td>
         </tr>
       </table>

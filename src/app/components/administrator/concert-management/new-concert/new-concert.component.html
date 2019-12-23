@@ -38,11 +38,19 @@
                   formControlName="description"></textarea>
     </div>
 
-    <div class="uk-width-1-1 uk-margin-small-bottom">
-      <label class="uk-display-block">Artist lineup (optional)</label>
-      <app-find-artist [artists]="selectedArtists" [clickToAdd]="true"
+
+    <!--    ARTIST LINEUP SELECTION -->
+    <div class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
+      <div class="uk-margin-small-bottom">
+        <h4 uk-tooltip="title: Optional. Artists can be added later as well.; pos: top-left"
+            class="uk-display-inline">
+          <i class="fad fa-question-circle fa-sm"></i>
+          &nbsp;Artist lineup
+        </h4>
+      </div>
+      <app-find-artist [artists]="artists" [clickToAdd]="true"
                        (artistSelectedToAdd)="addArtistToConcert($event)"></app-find-artist>
-      <app-artist-list [artists]="artists"></app-artist-list>
+      <app-artist-list [artists]="selectedArtists"></app-artist-list>
     </div>
 
     <!--    ERROR MESSAGE -->
@@ -54,7 +62,7 @@
       </p>
     </div>
 
-    <!--    BUTTONS -->
+    <!--    ACTION BUTTONS -->
     <div class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
       <button class="uk-button uk-button-primary uk-margin-small-right"
               [disabled]="form.invalid">

@@ -1,4 +1,4 @@
-@import '../../../../scss/base/_colors.scss';
+@import '../../../../scss/base/colors';
 
 input.uk-input, select.uk-select, textarea.uk-textarea {
   color: #fff !important;
@@ -7,4 +7,16 @@ input.uk-input, select.uk-select, textarea.uk-textarea {
 textarea {
   min-width: 100%;
   min-height: 40px;
+}
+
+h4 {
+  cursor: pointer;
+
+  i {
+    color: $color-white-light;
+  }
+}
+
+h4:hover i {
+  color: white !important;
 }
