@@ -59,6 +59,15 @@ $subnav-pill-item-color: white;
   color: white !important;
 }
 
+// Tooltip
+$tooltip-background: white;
+$tooltip-color: $color-darkgrey;
+$tooltip-border-radius: none;
+.uk-tooltip {
+  padding: 15px !important;
+}
+
+
 
 // USER-SELECT
 .uk-card,
