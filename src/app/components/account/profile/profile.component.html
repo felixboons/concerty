@@ -20,8 +20,19 @@
         <app-change-password></app-change-password>
       </div>
     </li>
-  </ul>
 
-  <a (click)="logout()" class="uk-button uk-button-primary">Log out</a>
+    <li>
+      <a class="uk-accordion-title" href="#">
+        <h2>Log out</h2>
+      </a>
+      <div class="uk-accordion-content uk-margin-bottom uk-margin-remove-top">
+
+        <a (click)="logout()" class="uk-button uk-button-primary">
+          Log out
+          <i class="fad fa-sign-out-alt uk-margin-small-left"></i>
+        </a>
+      </div>
+    </li>
+  </ul>
 
 </div>
