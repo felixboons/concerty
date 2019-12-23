@@ -3,6 +3,7 @@ import {Venue} from '../_enums/venue.enum';
 
 export class Concert {
   private id: string;
+  private _createdAt: Date;
   private _title: string;
   private _venue: Venue;
   private _date: Date;
@@ -59,5 +60,9 @@ export class Concert {
 
   get artists(): Artist[] {
     return this._artists;
+  }
+
+  get createdAt(): Date {
+    return this._createdAt;
   }
 }

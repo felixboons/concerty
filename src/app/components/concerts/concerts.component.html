@@ -3,7 +3,16 @@
   <router-outlet></router-outlet>
 
   <h1 class="uk-heading-small uk-margin-remove-top">Concerts</h1>
-  <h2>Discover concerts</h2>
+  <h2>Recently announced</h2>
+  <div class="uk-slider" uk-slider="finite: true">
+    <div class="slider-item-wrapper">
+      <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m">
+        <li *ngFor="let concert of recentlyAddedConcerts" class="uk-margin-right">
+          <app-concert-thumbnail [concert]="concert"></app-concert-thumbnail>
+        </li>
+      </ul>
+    </div>
+  </div>
 
   <h2>All concerts</h2>
   <div class="uk-align-center">

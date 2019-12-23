@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Concert} from '../../_models/concert.model';
 import {ConcertService} from '../../_services/concert.service';
 import {Venue} from '../../_enums/venue.enum';
+import {DateHelper} from '../../_helpers/date-helper';
 
 @Component({
   selector: 'app-concerts',
@@ -10,15 +11,27 @@ import {Venue} from '../../_enums/venue.enum';
 })
 export class ConcertsComponent implements OnInit {
   concerts: Concert[] = [];
-  Venue = Venue;
-  venues = Venue.keys();
+  recentlyAddedConcerts: Concert[] = [];
 
   constructor(private concertService: ConcertService) { }
 
   ngOnInit() {
     this.concertService.concertsSubject
-      .subscribe(concerts => this.concerts = concerts);
+      .subscribe(concerts => {
+        this.concerts = concerts;
+        if (concerts) {
+          this.initializeRecentlyAddedConcerts();
+        }
+      });
   }
 
+  private initializeRecentlyAddedConcerts() {
+    const dateHelper = new DateHelper();
 
+    for (const concert of this.concerts) {
+      if (dateHelper.isRecentlyAdded(concert.createdAt)) {
+        this.recentlyAddedConcerts.push(concert);
+      }
+    }
+  }
 }
