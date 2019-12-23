@@ -34,14 +34,6 @@
           PROFILE
         </a>
       </li>
-      <li *ngIf="isAuthenticated" class="uk-nav-divider"></li>
-      <li *ngIf="isAuthenticated" class="list-item-indent"
-          (click)="logout()">
-        <a>
-          <i class="fad fa-sign-out-alt"></i>
-          LOG OUT
-        </a>
-      </li>
 
       <!--      Administrator -->
       <li *ngIf="isAuthenticated && isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>

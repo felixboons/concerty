@@ -40,14 +40,6 @@
                   </a>
                 </li>
 
-                <li class="uk-nav-divider"></li>
-                <li (click)="logout()">
-                  <a>
-                    <i class="fad fa-sign-out-alt"></i>
-                    LOG OUT
-                  </a>
-                </li>
-
                 <!--      Administrator -->
                 <li *ngIf="isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>
                 <li *ngIf="isAdministrator" routerLink="/administrator/artists" routerLinkActive="uk-active">

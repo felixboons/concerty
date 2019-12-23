@@ -19,8 +19,4 @@ export class NavbarComponent implements OnInit {
       this.isAuthenticated = status;
     });
   }
-
-  logout(): void {
-    this.authService.logout();
-  }
 }
