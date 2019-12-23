@@ -16,12 +16,12 @@
     <tbody>
     <tr *ngFor="let concert of pageOfConcerts; let i = index"
         (click)="selectConcert(concert)">
-      <td class="uk-table-shrink">#{{ getLastDigitsOfId(concert._id) }}</td>
+      <td class="uk-table-shrink">#{{ concert._id | prettyId }}</td>
       <td class="uk-table-shrink">
         <img class="uk-preserve-width" src="./assets/images/concert.jpg" width="50" alt="">
       </td>
       <td class="uk-table-expand uk-text-nowrap">{{ concert.title }}</td>
-      <td class="uk-table-shrink uk-text-nowrap">{{ getPrettyDate(concert.date) }}</td>
+      <td class="uk-table-shrink uk-text-nowrap">{{ concert.date | prettyDate }}</td>
       <td class="uk-table-shrink uk-text-nowrap">{{ Venue[concert.venue] }}</td>
       <td class="uk-table-shrink uk-text-right">{{ concert.ticketsRemaining }}</td>
       <td class="uk-table-shrink uk-text-right">{{ concert.ticketsTotal }}</td>

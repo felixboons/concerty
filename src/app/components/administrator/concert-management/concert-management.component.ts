@@ -27,7 +27,12 @@ export class ConcertManagementComponent implements OnInit {
     this.selectedConcertIndex = this.concerts.indexOf(this.selectedConcert);
 
     // Tiny delay to smoothen accordion animation.
-    setTimeout(() => this.toggleAccordionSections(), 10);
+    if (concert) {
+      setTimeout(() => this.toggleAccordionSections(), 10);
+    } else {
+      // Concert is not selected, but removed.
+      this.editConcertCanceled();
+    }
   }
 
   editConcertCanceled(): void {

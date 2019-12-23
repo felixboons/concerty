@@ -5,11 +5,11 @@
   </div>
   <div class="uk-card-body uk-text-left">
     <div class="uk-card-badge uk-label">
-      {{ getDaysRemaining(concert.date) }}
+      {{ concert.date | prettyDaysRemaining }}
     </div>
     <h3 class="uk-card-title uk-margin-small-bottom">{{ concert.title }}</h3>
     <p><i class="fad fa-map-marked-alt"></i>{{ Venue[concert.venue] }}</p>
-    <p><i class="fad fa-calendar-day"></i>{{ getPrettyDate(concert.date) }}</p>
+    <p><i class="fad fa-calendar-day"></i>{{ concert.date | prettyDate }}</p>
     <a [routerLink]="['/concerts', concert._id]"
        class="uk-button uk-button-primary">SHOW CONCERT</a>
   </div>

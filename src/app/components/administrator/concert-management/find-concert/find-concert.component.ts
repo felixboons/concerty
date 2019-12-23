@@ -4,7 +4,7 @@ import {DateHelper} from '../../../../_helpers/date-helper';
 import {ConcertService} from '../../../../_services/concert.service';
 import {Venue} from '../../../../_enums/venue.enum';
 import * as $ from 'jquery';
-import {SearchHelper} from '../../../../_helpers/searchHelper';
+import {SearchHelper} from '../../../../_helpers/search-helper';
 
 @Component({
   selector: 'app-find-concert',
@@ -22,14 +22,6 @@ export class FindConcertComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  getLastDigitsOfId(id: string, digits = 5): string {
-    return id.substring(id.length - digits, id.length);
-  }
-
-  getPrettyDate(date: Date): string {
-    return new DateHelper().getPrettyDate(date);
   }
 
   removeConcert(_id: string): void {

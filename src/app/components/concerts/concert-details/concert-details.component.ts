@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ConcertService} from '../../../_services/concert.service';
 import {Concert} from '../../../_models/concert.model';
 import {ActivatedRoute} from '@angular/router';
-import {DateHelper} from '../../../_helpers/date-helper';
 import {Venue} from '../../../_enums/venue.enum';
 
 @Component({
@@ -15,18 +14,15 @@ export class ConcertDetailsComponent implements OnInit {
   concert: Concert;
 
   constructor(private concertService: ConcertService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.route.params
       .subscribe(params => {
-      const _id = params.key;
-      this.concert = this.concertService.getConcert(_id);
-    });
-  }
-
-  getPrettyDate(date: Date): string {
-    return new DateHelper().getPrettyDate(date);
+        const _id = params.key;
+        this.concert = this.concertService.getConcert(_id);
+      });
   }
 
 }

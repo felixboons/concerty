@@ -12,7 +12,7 @@
       </div>
     </li>
 
-    <li class="uk-open">
+    <li>
       <a class="uk-accordion-title" href="#">
         <h2>New concert</h2>
       </a>
@@ -41,5 +41,6 @@
   </ul>
 
   <h2>All concerts</h2>
-  <app-all-concerts [concerts]="concerts" (concertSelected)="concertSelected($event)"></app-all-concerts>
+  <app-all-concerts [concerts]="concerts"
+                    (concertSelected)="concertSelected($event)"></app-all-concerts>
 </div>

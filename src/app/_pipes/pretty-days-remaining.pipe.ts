@@ -2,11 +2,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {DateHelper} from '../_helpers/date-helper';
 
 @Pipe({
-  name: 'prettyDate'
+  name: 'prettyDaysRemaining'
 })
-export class PrettyDatePipe implements PipeTransform {
+export class PrettyDaysRemainingPipe implements PipeTransform {
 
   transform(date: Date, ...args: any[]): string {
-    return DateHelper.getPrettyDate(date);
+    return DateHelper.getPrettyDaysRemaining(date);
   }
 }

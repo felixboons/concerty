@@ -47,10 +47,8 @@ export class HomeComponent implements OnInit {
   }
 
   private initializeUpcomingConcerts() {
-    const dateHelper = new DateHelper();
-
     for (const concert of this.concerts) {
-      if (dateHelper.isUpcoming(concert.date)) {
+      if (DateHelper.isUpcoming(concert.date)) {
         this.upcomingConcerts.push(concert);
       }
     }

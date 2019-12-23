@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {ArtistService} from '../../../../_services/artist.service';
 import {Artist} from '../../../../_models/artist.model';
 import {Genre} from '../../../../_enums/genre.enum';
-import {SearchHelper} from '../../../../_helpers/searchHelper';
+import {SearchHelper} from '../../../../_helpers/search-helper';
 import * as $ from 'jquery';
 
 @Component({
@@ -30,8 +30,6 @@ export class FindArtistComponent implements OnInit {
   }
 
   selectArtist(artist: Artist): void {
-    console.log('selectArtist in find-artist');
-    console.log(artist);
     if (this.clickToAdd) {
       this.artistSelectedToAdd.emit(artist);
     } else {

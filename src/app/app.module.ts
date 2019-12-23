@@ -44,6 +44,7 @@ import {EditArtistComponent} from './components/administrator/artist-management/
 import {ArtistListComponent} from './components/_generic/artist-list/artist-list.component';
 import {PrettyDatePipe} from './_pipes/pretty-date.pipe';
 import {PrettyIdPipe} from './_pipes/pretty-id.pipe';
+import {PrettyDaysRemainingPipe} from './_pipes/pretty-days-remaining.pipe';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {PrettyIdPipe} from './_pipes/pretty-id.pipe';
     ArtistListComponent,
     PrettyDatePipe,
     PrettyIdPipe,
+    PrettyDaysRemainingPipe,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
   <div class="uk-width-1-1 uk-width-1-3@l">
     <h1 class="uk-heading-small uk-margin-small-bottom">{{ concert.title }}</h1>
     <p><i class="fad fa-map-marked-alt"></i>{{ Venue[concert.venue] }}</p>
-    <p><i class="fad fa-calendar-day"></i>{{ getPrettyDate(concert.date) }}</p>
+    <p><i class="fad fa-calendar-day"></i>{{ concert.date | prettyDate }}</p>
     <p class="uk-text-justify uk-margin-remove-bottom uk-margin-top">{{ concert.description }}</p>
   </div>
 

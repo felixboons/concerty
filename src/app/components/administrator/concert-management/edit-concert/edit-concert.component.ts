@@ -41,7 +41,6 @@ export class EditConcertComponent implements OnInit, OnChanges {
   }
 
   addArtistToConcert(artist: Artist): void {
-    console.log(artist);
     if (!this.selectedArtists.includes(artist)) {
       this.selectedArtists.push(artist);
     } else {
