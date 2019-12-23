@@ -3,6 +3,7 @@ import {ArtistService} from '../../../../_services/artist.service';
 import {Artist} from '../../../../_models/artist.model';
 import {Genre} from '../../../../_enums/genre.enum';
 import * as $ from 'jquery';
+import {SearchHelper} from '../../../../_helpers/searchHelper';
 
 @Component({
   selector: 'app-find-artist',
@@ -13,6 +14,7 @@ export class FindArtistComponent implements OnInit {
   @Output() artistSelected = new EventEmitter<Artist>();
   @Input() artists: Artist[] = [];
   artistsCopy: Artist[] = [];
+  // @Input()
   Genre = Genre;
   input: string;
 
@@ -38,34 +40,6 @@ export class FindArtistComponent implements OnInit {
       this.artistsCopy = this.artists;
     }
 
-    // Only when there is valid input -> search.
-    if (this.input !== '') {
-      const input = this.input.toLowerCase();
-
-      this.artists = this.artistsCopy.filter(artist => {
-        return FindArtistComponent.idMatchesInput(artist._id, input) ||
-          FindArtistComponent.nameMatchesInput(artist.name, input) ||
-          FindArtistComponent.genreMatchesInput(artist.genre, input);
-      });
-    } else {
-
-      // Show all concerts.
-      this.artists = this.artistsCopy;
-    }
-  }
-
-  private static idMatchesInput(id: string, input: string): boolean {
-    id = id.toLowerCase();
-    return id.indexOf(input) > -1;
-  }
-
-  private static nameMatchesInput(name: string, input: string): boolean {
-    name = name.toLowerCase();
-    return name.indexOf(input) > -1;
-  }
-
-  private static genreMatchesInput(genre: Genre, input: string): boolean {
-    const genreString = Genre[genre].toLowerCase();
-    return genreString.indexOf(input) > -1;
+    this.artists = SearchHelper.searchArtists(this.input, this.artistsCopy);
   }
 }
