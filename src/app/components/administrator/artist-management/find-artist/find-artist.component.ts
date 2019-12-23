@@ -13,6 +13,7 @@ import * as $ from 'jquery';
 export class FindArtistComponent implements OnInit {
   @Output() artistSelectedToEdit = new EventEmitter<Artist>();
   @Output() artistSelectedToAdd = new EventEmitter<Artist>();
+  @Input() uniqueModalId: string;
   @Input() clickToAdd = false;
   @Input() artists: Artist[] = [];
   artistsCopy: Artist[] = [];
@@ -28,11 +29,9 @@ export class FindArtistComponent implements OnInit {
     this.artistService.deleteArtist(_id);
   }
 
-  getLastDigitsOfId(id: string, digits = 5): string {
-    return id.substring(id.length - digits, id.length);
-  }
-
   selectArtist(artist: Artist): void {
+    console.log('selectArtist in find-artist');
+    console.log(artist);
     if (this.clickToAdd) {
       this.artistSelectedToAdd.emit(artist);
     } else {

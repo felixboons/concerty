@@ -49,7 +49,7 @@
           &nbsp;Artist lineup
         </h4>
       </div>
-      <app-find-artist [artists]="artists" [clickToAdd]="true"
+      <app-find-artist [artists]="artists" [clickToAdd]="true" [uniqueModalId]="'find-artist-modal-edit'"
                        (artistSelectedToAdd)="addArtistToConcert($event)"></app-find-artist>
       <app-artist-list [artists]="selectedArtists"></app-artist-list>
     </div>

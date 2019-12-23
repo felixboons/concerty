@@ -1,16 +1,16 @@
 
-<a *ngIf="!clickToAdd" href="#find-artist-modal" uk-toggle type="search"
+<a *ngIf="!clickToAdd" [href]="'#' + uniqueModalId" uk-toggle type="search"
    class="uk-button uk-button-primary">
   Search artist by ID, name or genre
   <i class="fad fa-search uk-margin-small-left"></i>
 </a>
-<a *ngIf="clickToAdd" href="#find-artist-modal" uk-toggle type="search"
+<a *ngIf="clickToAdd" [href]="'#' + uniqueModalId" uk-toggle type="search"
    class="uk-button uk-button-primary">
   Add artist to concert lineup
   <i class="fad fa-plus-circle uk-margin-small-left"></i>
 </a>
 
-<div id="find-artist-modal" class="uk-modal-full uk-modal" uk-modal>
+<div [id]="uniqueModalId" class="uk-modal-full uk-modal" uk-modal>
   <div class="uk-modal-dialog uk-padding-large" uk-height-viewport>
     <button class="uk-modal-close-full" type="button" uk-close></button>
 
@@ -39,7 +39,7 @@
         <tbody>
         <tr *ngFor="let artist of artists"
             (click)="selectArtist(artist)">
-          <td class="uk-table-shrink">#{{ getLastDigitsOfId(artist._id) }}</td>
+          <td class="uk-table-shrink">#{{ artist._id | prettyId }}</td>
           <td class="uk-table-shrink">
             <img class="uk-preserve-width" src="./assets/images/tydolla.png" width="50" alt="">
           </td>
