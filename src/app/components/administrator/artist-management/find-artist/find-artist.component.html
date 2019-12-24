@@ -10,7 +10,7 @@
   <i class="fad fa-plus-circle uk-margin-small-left"></i>
 </a>
 
-<div [id]="uniqueModalId" class="uk-modal-full uk-modal" uk-modal>
+<div [id]="uniqueModalId" class="uk-modal-full uk-modal uk-height-1-1" uk-modal>
   <div class="uk-modal-dialog uk-padding-large" uk-height-viewport>
     <button class="uk-modal-close-full" type="button" uk-close></button>
 
@@ -18,6 +18,7 @@
       <label class="uk-text-center">
         <i class="fad fa-info-circle uk-margin-small-right"></i>
         Search by ID, name or genre.
+        {{ clickToAdd ? 'Select an artist to add it to the lineup.' : 'Select an artist to edit it.'  }}
         <input [(ngModel)]="input" [ngModelOptions]="{ standalone: true }"
                (keyup)="search()"
                class="uk-search-input" type="search" autofocus>

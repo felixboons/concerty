@@ -43,11 +43,7 @@
     <!--    ARTIST LINEUP SELECTION -->
     <div class="uk-width-1-1 uk-margin-small-top uk-margin-small-bottom">
       <div class="uk-margin-small-bottom">
-        <h4 uk-tooltip="title: Optional - artists can be added later as well.; pos: top-left; animation: uk-animation-fade"
-            class="uk-display-inline">
-          <i class="fad fa-question-circle fa-sm"></i>
-          &nbsp;Artist lineup
-        </h4>
+        <h4>&nbsp;Artist lineup</h4>
       </div>
       <app-find-artist [artists]="artists" [clickToAdd]="true" [uniqueModalId]="'find-artist-modal-edit'"
                        (artistSelectedToAdd)="addArtistToConcert($event)"></app-find-artist>

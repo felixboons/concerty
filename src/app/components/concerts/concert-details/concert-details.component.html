@@ -1,5 +1,5 @@
 
-<div class="uk-grid">
+<div class="uk-grid uk-margin-large-bottom">
   <div class="uk-width-1-1 uk-width-2-3@l">
     <img src="./assets/images/concert.jpg" [alt]="concert.title" class="uk-margin-medium-bottom">
   </div>
@@ -16,8 +16,8 @@
   </div>
 
   <div class="uk-width-1-1 uk-margin-medium-top">
-<!--    <h2>Lineup</h2>-->
-<!--    <app-artist-thumbnail [artist]="concert['artist']"></app-artist-thumbnail>-->
+    <h2>Lineup</h2>
+    <app-artist-thumbnail [artist]="concert.artists[0]"></app-artist-thumbnail>
   </div>
 
 </div>
