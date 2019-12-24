@@ -66,6 +66,10 @@ export class Concert {
     return this._ticketsRemaining;
   }
 
+  set artists(artists: Artist[]) {
+    this.artists = artists;
+  }
+
   get artists(): Artist[] {
     return this._artists;
   }

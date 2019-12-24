@@ -3,6 +3,7 @@ import {ConcertService} from '../../../_services/concert.service';
 import {Concert} from '../../../_models/concert.model';
 import {ActivatedRoute} from '@angular/router';
 import {Venue} from '../../../_enums/venue.enum';
+import {ArtistService} from '../../../_services/artist.service';
 
 @Component({
   selector: 'app-concert-details',
@@ -14,6 +15,7 @@ export class ConcertDetailsComponent implements OnInit {
   concert: Concert;
 
   constructor(private concertService: ConcertService,
+              private artistService: ArtistService,
               private route: ActivatedRoute) {
   }
 
@@ -22,7 +24,7 @@ export class ConcertDetailsComponent implements OnInit {
       .subscribe(params => {
         const _id = params.key;
         this.concert = this.concertService.getConcert(_id);
+        console.log(this.concert.artists);
       });
   }
-
 }

@@ -14,6 +14,6 @@ export class ArtistThumbnailComponent implements OnInit {
   }
 
   ngOnInit() {
+    // console.log(this.artist);
   }
-
 }
