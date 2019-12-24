@@ -4,12 +4,19 @@
 #buy-tickets {
   background: $color-darkgrey;
   box-shadow: $box-shadow;
-  //border-radius: $border-radius;
 }
 
-@media all and (max-width: 639px) {
+input {
+  min-width: 100px;
+}
 
-  td {
-    white-space: normal;
+@media all and (max-width: 959px) {
+
+  .uk-table-responsive td.uk-text-nowrap {
+    width: calc(100% - 20px) !important;
   }
+}
+
+.no-divider {
+  border-top: none !important;
 }

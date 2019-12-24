@@ -9,5 +9,4 @@ export class PrettyIdPipe implements PipeTransform {
   transform(id: string, ...args: any[]): string {
     return id.substring(id.length - this.digits, id.length);
   }
-
 }

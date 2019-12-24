@@ -45,6 +45,7 @@ import {ArtistListComponent} from './components/_generic/artist-list/artist-list
 import {PrettyDatePipe} from './_pipes/pretty-date.pipe';
 import {PrettyIdPipe} from './_pipes/pretty-id.pipe';
 import {PrettyDaysRemainingPipe} from './_pipes/pretty-days-remaining.pipe';
+import {PrettyPricePipe} from './_pipes/pretty-price.pipe';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import {PrettyDaysRemainingPipe} from './_pipes/pretty-days-remaining.pipe';
     PrettyDatePipe,
     PrettyIdPipe,
     PrettyDaysRemainingPipe,
+    PrettyPricePipe,
   ],
   imports: [
     BrowserModule,
