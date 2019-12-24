@@ -20,7 +20,6 @@ export class ConcertsComponent implements OnInit {
       .subscribe(concerts => {
         this.concerts = concerts;
         if (concerts) {
-          console.log(concerts);
           this.initializeRecentlyAddedConcerts();
         }
       });

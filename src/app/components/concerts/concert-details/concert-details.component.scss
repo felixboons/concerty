@@ -1,6 +1,15 @@
 @import '../../../scss/base/colors';
 @import '../../../scss/base/standards';
 
+.bg-darkgrey {
+  background: $color-darkgrey;
+  //background-color: $color-primary;
+}
+
+img {
+  //border-radius: $border-radius;
+}
+
 p {
   margin: 10px 0;
 }

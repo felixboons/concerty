@@ -50,7 +50,6 @@ export class BuyTicketsComponent implements OnInit {
 
   private getTotalTicketAmount() {
     for (const ticketAmount in this.ticketAmounts) {
-      console.log(ticketAmount);
       this.totalTicketPrice += +ticketAmount
     }
   }

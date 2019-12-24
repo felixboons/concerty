@@ -20,7 +20,6 @@ export class DateHelper {
 
   static isRecentlyAdded(date: Date, recentlyAddedThreshold = 7): boolean {
     const diff = moment().diff(date, 'days');
-    console.log(diff);
     return diff < recentlyAddedThreshold;
   }
 

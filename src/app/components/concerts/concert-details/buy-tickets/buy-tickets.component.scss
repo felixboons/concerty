@@ -1,9 +1,9 @@
 @import '../../../../scss/base/colors';
 @import '../../../../scss/base/standards';
 
-#buy-tickets {
-  background: $color-darkgrey;
-  box-shadow: $box-shadow;
+.bg-primary {
+  background-color: $color-primary;
+  //background: $color-darkgrey;
 }
 
 input {
