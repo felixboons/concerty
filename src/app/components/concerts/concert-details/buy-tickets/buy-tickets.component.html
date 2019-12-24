@@ -6,7 +6,7 @@
     <tbody>
     <tr *ngFor="let type of ticketTypes">
       <td class="uk-text-nowrap">{{ TicketType[type] }}</td>
-      <td class="uk-text-nowrap">{{ getTicketPrice(TicketType[type], concert.price) | prettyPrice }}</td>
+      <td class="uk-text-nowrap">{{ getTicketPrice(getTicketType(type), concert.price) | prettyPrice }}</td>
       <td class="uk-text-nowrap">
         <input [(ngModel)]="ticketAmounts[type]" [ngModelOptions]="{ standalone: true }"
                (input)="updateTickets()"

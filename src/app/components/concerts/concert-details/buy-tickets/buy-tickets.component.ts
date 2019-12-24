@@ -53,4 +53,8 @@ export class BuyTicketsComponent implements OnInit {
       this.totalTicketPrice += +ticketAmount
     }
   }
+
+  getTicketType(type: string): TicketType {
+    return TicketType[type];
+  }
 }

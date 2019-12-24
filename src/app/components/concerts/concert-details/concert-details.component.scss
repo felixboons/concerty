@@ -20,3 +20,15 @@ i {
     margin-bottom: 0 !important;
   }
 }
+
+.uk-label-copy {
+  position: absolute;
+  margin-top: 30px;
+  margin-left: 30px;
+  padding: 10px 15px;
+  background-color: white;
+  border-radius: $border-radius;
+  font-size: 14px;
+  font-weight: bold;
+  color: $color-darkgrey;
+}

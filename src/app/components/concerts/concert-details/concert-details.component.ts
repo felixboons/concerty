@@ -24,7 +24,6 @@ export class ConcertDetailsComponent implements OnInit {
       .subscribe(params => {
         const _id = params.key;
         this.concert = this.concertService.getConcert(_id);
-        console.log(this.concert.artists);
       });
   }
 }

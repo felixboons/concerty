@@ -168,7 +168,6 @@ export class ConcertService {
 
       _concerts[i].artists = artists;
     }
-    console.log(_concerts);
     return _concerts;
   }
 }
