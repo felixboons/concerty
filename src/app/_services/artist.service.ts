@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {environment} from '../../environments/environment';
-import {Artist} from '../_models/artist.model';
 import {catchError, map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 import {NotificationService} from './notification.service';
+import {Artist} from '../_models/artist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,15 @@ export class ArtistService {
       this.artists = artists;
       this.artistsSubject.next(artists);
     });
+  }
+
+  getArtist(_id: string): Artist {
+    for (const artist of this.artists) {
+      if (artist._id === _id) {
+        return artist;
+      }
+    }
+    return null;
   }
 
   createArtist(artist: Artist): void {

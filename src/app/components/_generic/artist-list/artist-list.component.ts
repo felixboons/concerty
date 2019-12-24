@@ -16,7 +16,6 @@ export class ArtistListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.artists);
   }
 
   removeArtist(index: number): void {
