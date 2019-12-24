@@ -31,6 +31,6 @@
   </div>
 </div>
 
-<div class="uk-width-1-1">
+<div *ngIf="isUpcoming" class="uk-width-1-1">
   <app-buy-tickets [concert]="concert"></app-buy-tickets>
 </div>
