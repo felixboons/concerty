@@ -1,12 +1,6 @@
 import * as moment from 'moment';
 
 export class DateHelper {
-  private readonly recentlyAddedThreshold = 7; // AKA one week.
-
-  isRecentlyAdded(date: Date): boolean {
-    const diff = moment().diff(date, 'days');
-    return diff < this.recentlyAddedThreshold;
-  }
 
   static getPrettyDate(date: Date): string {
     return moment(date).format('LL');
@@ -22,6 +16,12 @@ export class DateHelper {
       case (daysRemaining === 0): return 'TOMORROW';
       default: return `IN ${daysRemaining} DAYS`;
     }
+  }
+
+  static isRecentlyAdded(date: Date, recentlyAddedThreshold = 7): boolean {
+    const diff = moment().diff(date, 'days');
+    console.log(diff);
+    return diff < recentlyAddedThreshold;
   }
 
   static isUpcoming(date: Date): boolean {

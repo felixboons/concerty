@@ -55,12 +55,9 @@ export class HomeComponent implements OnInit {
   }
 
   private initializeRecentlyAddedArtists() {
-    const dateHelper = new DateHelper();
-
     for (const artist of this.artists) {
-      if (dateHelper.isRecentlyAdded(artist.createdAt)) {
+      if (DateHelper.isRecentlyAdded(artist.createdAt)) {
         this.recentlyAddedArtists.push(artist);
-
       }
     }
   }

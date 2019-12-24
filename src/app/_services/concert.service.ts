@@ -13,7 +13,7 @@ import {NotificationService} from './notification.service';
 export class ConcertService {
   private readonly url = environment.serverUrlPrefix + 'concerts';
   private concerts: Concert[] = [];
-  concertsSubject = new BehaviorSubject<Concert[]>(null);
+  concertsSubject = new BehaviorSubject<Concert[]>(this.concerts);
 
   constructor(private http: HttpClient,
               private cache: CacheService,

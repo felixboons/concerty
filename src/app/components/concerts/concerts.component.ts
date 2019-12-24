@@ -20,16 +20,16 @@ export class ConcertsComponent implements OnInit {
       .subscribe(concerts => {
         this.concerts = concerts;
         if (concerts) {
+          console.log(concerts);
           this.initializeRecentlyAddedConcerts();
         }
       });
   }
 
   private initializeRecentlyAddedConcerts() {
-    const dateHelper = new DateHelper();
-
     for (const concert of this.concerts) {
-      if (dateHelper.isRecentlyAdded(concert.createdAt)) {
+      if (DateHelper.isUpcoming(concert.date) &&
+          DateHelper.isRecentlyAdded(concert.createdAt)) {
         this.recentlyAddedConcerts.push(concert);
       }
     }
