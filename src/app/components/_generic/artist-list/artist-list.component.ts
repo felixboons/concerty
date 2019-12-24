@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Artist} from '../../../_models/artist.model';
-import {ArtistService} from '../../../_services/artist.service';
 import {Genre} from '../../../_enums/genre.enum';
 
 @Component({
@@ -13,14 +12,14 @@ export class ArtistListComponent implements OnInit {
   @Input() artists: Artist[] = [];
   Genre = Genre;
 
-  constructor(private artistService: ArtistService) {
+  constructor() {
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    console.log(this.artists);
+  }
 
   removeArtist(index: number): void {
     this.artists.splice(index, 1);
-
-    // this.artistService.deleteArtist(_id);
   }
 }

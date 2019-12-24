@@ -50,20 +50,14 @@ export class EditConcertComponent implements OnInit, OnChanges {
 
   editConcert(): void {
     const input = this.form.value;
-    const concert: Concert = new Concert(
-      input.title,
-      input.venue,
-      input.date,
-      input.price,
-      input.tickets,
-      input.description,
-      this.concert._id);
+    const concert: Concert = new Concert(input.title, input.venue, input.date,
+      input.price, input.tickets, input.description, this.selectedArtists, this.concert._id);
     this.concertService.editConcert(concert, this.index);
     this.initializeForm();
-    this.formCanceled.emit();
+    this.cancelAndReset();
   }
 
-  cancel() {
+  cancelAndReset() {
     this.formCanceled.emit();
   }
 

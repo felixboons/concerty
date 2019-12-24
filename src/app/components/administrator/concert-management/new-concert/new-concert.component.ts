@@ -40,18 +40,13 @@ export class NewConcertComponent implements OnInit {
 
   createConcert(): void {
     const input = this.form.value;
-    const concert: Concert = new Concert(
-      input.title,
-      input.venue,
-      input.date,
-      input.price,
-      input.tickets,
-      input.description);
+    const concert: Concert = new Concert(input.title, input.venue, input.date,
+      input.price, input.tickets, input.description, this.selectedArtists);
     this.concertService.createConcert(concert);
-    this.form.reset();
+    this.cancelAndReset();
   }
 
-  cancel() {
+  cancelAndReset() {
     this.selectedArtists = [];
     this.form.reset();
   }

@@ -40,18 +40,21 @@ export class ConcertService {
   }
 
   createConcert(concert: Concert): void {
+    const artistIds = Concert.getArtistIds(concert.artists);
     const body = {
       title: concert.title,
       venue: concert.venue,
       date: concert.date,
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
-      description: concert.description
+      description: concert.description,
+      artists: artistIds,
     };
 
     this.http.post(this.url, body)
       .pipe(map((response: Concert) => response),
         catchError(err => {
+          console.log(err);
           this.notify('Something went wrong', false);
           return throwError('Server responded with unexpected object type');
         }))
@@ -68,18 +71,21 @@ export class ConcertService {
   }
 
   editConcert(concert: Concert, index: number): void {
+    const artistIds = Concert.getArtistIds(concert.artists);
     const body = {
       title: concert.title,
       venue: concert.venue,
       date: concert.date,
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
-      description: concert.description
+      description: concert.description,
+      artists: artistIds,
     };
 
     this.http.put(this.url + '/' + concert._id, body)
       .pipe(map((response: Concert) => response),
         catchError(err => {
+          console.log(err);
           this.notify('Something went wrong', false);
           return throwError('Server responded with unexpected object type');
         }))
