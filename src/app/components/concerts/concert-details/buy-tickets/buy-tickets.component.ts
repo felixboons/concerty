@@ -9,13 +9,11 @@ import {TicketType} from '../../../../_enums/ticket-type.enum';
   styleUrls: ['./buy-tickets.component.scss']
 })
 export class BuyTicketsComponent implements OnInit {
-  @Input() concert: Concert;
   TicketType = TicketType;
   ticketTypes = TicketType.keys();
+  @Input() concert: Concert;
   ticketAmounts = {};
   totalTicketPrice = 0;
-
-  // Ticket type with respective name and price would be saved in a concert instead.
 
   constructor(private notifier: NotificationService) {
   }
@@ -32,9 +30,7 @@ export class BuyTicketsComponent implements OnInit {
     this.notifier.showSuccessNotification(message, this.concert._id);
   }
 
-  updateTickets(data): void {
-    // TODO: Only set price when data changed from previous data. NO DOUBLES.
-    console.log(data);
+  updateTickets(): void {
     this.setTotalPrice();
   }
 
@@ -43,6 +39,8 @@ export class BuyTicketsComponent implements OnInit {
   }
 
   private setTotalPrice(): void {
+    this.totalTicketPrice = 0;
+
     for (const type in this.ticketAmounts) {
       const ticketPrice = this.getTicketPrice(TicketType[type], this.concert.price);
       const amount = this.ticketAmounts[type];

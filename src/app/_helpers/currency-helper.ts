@@ -1,7 +1,11 @@
-
 export class CurrencyHelper {
 
   getPrettyPrice(price: number): string {
-    return price.toFixed(2);
+    const format = new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      maximumFractionDigits: 2
+      });
+    return format.format(price);
   }
 }
