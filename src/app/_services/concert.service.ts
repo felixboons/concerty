@@ -24,10 +24,10 @@ export class ConcertService {
     this.getConcerts()
       .subscribe(concerts => {
         if (concerts.length > 0) {
+          concerts.reverse();
           concerts = this.replaceArtistIdsWithArtists(concerts);
-          this.concerts = concerts;
-          this.concertsSubject.next(concerts);
-          this.cache.setConcerts(concerts);
+          this.updateConcerts(concerts);
+          console.log(concerts);
         }
       });
   }
@@ -42,7 +42,7 @@ export class ConcertService {
   }
 
   createConcert(concert: Concert): void {
-    const artistIds = Concert.getArtistIds(concert.artists);
+    const artistIds = Concert.getArtistIds(concert.artists); // Should do this in constructor.
     const body = {
       title: concert.title,
       venue: concert.venue,
@@ -62,8 +62,9 @@ export class ConcertService {
         }))
       .toPromise()
       .then(concert => {
+        concert = this.replaceArtistIdWithArtist(concert);
         this.concerts.unshift(concert);
-        this.concertsSubject.next(this.concerts);
+        this.updateConcerts(this.concerts);
         this.notify('Successfully created concert');
       })
       .catch(err => {
@@ -73,7 +74,7 @@ export class ConcertService {
   }
 
   editConcert(concert: Concert, index: number): void {
-    // const artistIds = Concert.getArtistIds(concert.artists);
+    const artistIds = Concert.getArtistIds(concert.artists);
     const body = {
       title: concert.title,
       venue: concert.venue,
@@ -81,7 +82,7 @@ export class ConcertService {
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
       description: concert.description,
-      artists: concert.artists,
+      artists: artistIds
     };
 
     this.http.put(this.url + '/' + concert._id, body)
@@ -93,8 +94,9 @@ export class ConcertService {
         }))
       .toPromise()
       .then(concert => {
+        concert = this.replaceArtistIdWithArtist(concert);
         this.concerts[index] = concert;
-        this.concertsSubject.next(this.concerts);
+        this.updateConcerts(this.concerts);
         this.notify('Successfully edited concert');
       })
       .catch(err => {
@@ -108,6 +110,7 @@ export class ConcertService {
 
     this.http.delete(url).toPromise()
       .then((concert: Concert) => {
+        concert = this.replaceArtistIdWithArtist(concert);
         let index;
 
         this.concerts.forEach((value, i) => {
@@ -116,13 +119,19 @@ export class ConcertService {
           }
         });
         this.concerts.splice(index, 1);
-        this.concertsSubject.next(this.concerts);
+        this.updateConcerts(this.concerts);
         this.notify('Successfully deleted concert');
       })
       .catch(err => {
         console.log(err);
         this.notify('Failed to delete concert', false);
       });
+  }
+
+  private updateConcerts(concerts: Concert[]): void {
+    this.concerts = concerts;
+    this.cache.setConcerts(concerts);
+    this.concertsSubject.next(concerts);
   }
 
   private getConcerts(): Observable<Concert[]> {
@@ -159,13 +168,26 @@ export class ConcertService {
       const _artists = [];
 
       for (const artistId of _concert.artists) {
-        const artist = this.artistService.getArtist(artistId.toString());
+        const artist = this.artistService.getArtist(artistId.toString()); // Fool the compiler with .toString()
         _artists.push(artist);
       }
       _concert.artists = _artists;
       _concerts.push(_concert);
     }
 
-    return _concerts.reverse();
+    return _concerts;
+  }
+
+  private replaceArtistIdWithArtist(concert: Concert): Concert {
+    const _concert = concert;
+    const _artists = [];
+
+    for (const artistId of concert.artists) {
+      const artist = this.artistService.getArtist(artistId.toString()); // Fool the compiler with .toString()
+      _artists.push(artist);
+    }
+
+    _concert.artists = _artists;
+    return _concert;
   }
 }
