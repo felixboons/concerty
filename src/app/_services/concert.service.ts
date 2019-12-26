@@ -24,8 +24,7 @@ export class ConcertService {
     this.getConcerts()
       .subscribe(concerts => {
         if (concerts.length > 0) {
-          console.log(concerts);
-          concerts.reverse();
+          concerts = this.replaceArtistIdsWithArtists(concerts);
           this.concerts = concerts;
           this.concertsSubject.next(concerts);
           this.cache.setConcerts(concerts);
@@ -43,7 +42,7 @@ export class ConcertService {
   }
 
   createConcert(concert: Concert): void {
-    // const artistIds = Concert.getArtistIds(concert.artists);
+    const artistIds = Concert.getArtistIds(concert.artists);
     const body = {
       title: concert.title,
       venue: concert.venue,
@@ -51,7 +50,7 @@ export class ConcertService {
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
       description: concert.description,
-      artists: concert.artists
+      artists: artistIds
     };
 
     this.http.post(this.url, body)
@@ -150,5 +149,23 @@ export class ConcertService {
     } else {
       this.notifier.showErrorNotification(message);
     }
+  }
+
+  private replaceArtistIdsWithArtists(concerts: Concert[]): Concert[] {
+    const _concerts = [];
+
+    for (const concert of concerts) {
+      const _concert = concert;
+      const _artists = [];
+
+      for (const artistId of _concert.artists) {
+        const artist = this.artistService.getArtist(artistId.toString());
+        _artists.push(artist);
+      }
+      _concert.artists = _artists;
+      _concerts.push(_concert);
+    }
+
+    return _concerts.reverse();
   }
 }

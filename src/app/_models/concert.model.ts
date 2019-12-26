@@ -11,7 +11,7 @@ export class Concert {
   private readonly _price: number;
   private readonly _description: string;
   private readonly _ticketsRemaining: number;
-  private readonly _artists: Artist[];
+  private _artists: Artist[];
 
   constructor(title: string, venue: Venue, date: Date, price: number, ticketsTotal: number,
               description: string, artists: Artist[], _id?: string, ticketsRemaining?: number) {
@@ -64,6 +64,10 @@ export class Concert {
 
   get ticketsRemaining(): number {
     return this._ticketsRemaining;
+  }
+
+  set artists(value: Artist[]) {
+    this._artists = value;
   }
 
   get artists(): Artist[] {

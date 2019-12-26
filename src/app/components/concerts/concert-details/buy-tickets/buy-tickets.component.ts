@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Concert} from '../../../../_models/concert.model';
 import {NotificationService} from '../../../../_services/notification.service';
 import {TicketType} from '../../../../_enums/ticket-type.enum';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-buy-tickets',
