@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Concert} from '../../../../_models/concert.model';
 import {NotificationService} from '../../../../_services/notification.service';
 import {TicketType} from '../../../../_enums/ticket-type.enum';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-buy-tickets',
@@ -19,19 +20,21 @@ export class BuyTicketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    for (const type of this.ticketTypes) {
-      this.ticketAmounts[type] = 0;
-    }
+    this.initializeTickets();
   }
 
   buyTicket(): void {
     const ticketAmount = this.getTotalTicketAmount();
-    const message = 'Successfully purchased ticket(s)';
-    this.notifier.showSuccessNotification(message, this.concert._id);
+    this.notifier.showSuccessNotification('Successfully purchased ticket(s)', this.concert._id);
+    this.resetTicketValues();
   }
 
   updateTickets(): void {
     this.setTotalPrice();
+  }
+
+  getTicketType(type: string): TicketType {
+    return TicketType[type];
   }
 
   getTicketPrice(ticketType: TicketType, concertPrice: number): number {
@@ -54,7 +57,14 @@ export class BuyTicketsComponent implements OnInit {
     }
   }
 
-  getTicketType(type: string): TicketType {
-    return TicketType[type];
+  private initializeTickets() {
+    for (const type of this.ticketTypes) {
+      this.ticketAmounts[type] = 0;
+    }
+  }
+
+  private resetTicketValues() {
+    this.totalTicketPrice = 0;
+    this.initializeTickets();
   }
 }

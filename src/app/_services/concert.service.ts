@@ -7,7 +7,6 @@ import {catchError, map} from 'rxjs/operators';
 import {CacheService} from './cache.service';
 import {NotificationService} from './notification.service';
 import {ArtistService} from './artist.service';
-import {Artist} from '../_models/artist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +21,16 @@ export class ConcertService {
               private cache: CacheService,
               private notifier: NotificationService) {
     this.readConcertsFromCache();
-
-    this.getConcerts().subscribe(concerts => {
-      if (concerts.length > 0) {
-        concerts = this.transformConcerts(concerts);
-        this.concerts = concerts;
-        this.concertsSubject.next(concerts);
-        this.cache.setConcerts(concerts);
-      }
-    });
+    this.getConcerts()
+      .subscribe(concerts => {
+        if (concerts.length > 0) {
+          console.log(concerts);
+          concerts.reverse();
+          this.concerts = concerts;
+          this.concertsSubject.next(concerts);
+          this.cache.setConcerts(concerts);
+        }
+      });
   }
 
   getConcert(_id: string): Concert {
@@ -43,7 +43,7 @@ export class ConcertService {
   }
 
   createConcert(concert: Concert): void {
-    const artistIds = Concert.getArtistIds(concert.artists);
+    // const artistIds = Concert.getArtistIds(concert.artists);
     const body = {
       title: concert.title,
       venue: concert.venue,
@@ -51,7 +51,7 @@ export class ConcertService {
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
       description: concert.description,
-      artists: artistIds,
+      artists: concert.artists
     };
 
     this.http.post(this.url, body)
@@ -150,24 +150,5 @@ export class ConcertService {
     } else {
       this.notifier.showErrorNotification(message);
     }
-  }
-
-  private transformConcerts(concerts: Concert[]): Concert[] {
-    concerts.reverse();
-    let _concerts: Concert[] = concerts;
-
-    for (let i = 0; i < concerts.length; i++) {
-      const artistIds = concerts[i].artists;
-      let artists: Artist[] = [];
-
-      for (let j = 0; j < artistIds.length; j++) {
-        const artistId = artistIds[j].toString();
-        const artist = this.artistService.getArtist(artistId);
-        artists.push(artist);
-      }
-
-      _concerts[i].artists = artists;
-    }
-    return _concerts;
   }
 }

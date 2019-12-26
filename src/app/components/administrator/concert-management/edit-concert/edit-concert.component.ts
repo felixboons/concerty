@@ -31,21 +31,12 @@ export class EditConcertComponent implements OnInit, OnChanges {
       .subscribe(artists => {
         this.artists = artists;
         this.initializeForm();
-        this.initializeSelectedArtists();
       });
-  }
-
-  private initializeSelectedArtists(): void {
-    this.selectedArtists = [];
-    for (const artistId of this.concert.artists) {
-      this.selectedArtists.push(this.artistService.getArtist(artistId.toString()));
-    }
   }
 
   ngOnChanges() {
     this.initializeForm();
     this.selectedArtists = this.concert.artists;
-    this.initializeSelectedArtists();
   }
 
   addArtistToConcert(artist: Artist): void {

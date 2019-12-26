@@ -23,15 +23,6 @@ export class ArtistService {
     });
   }
 
-  getArtist(_id: string): Artist {
-    for (const artist of this.artists) {
-      if (artist._id === _id) {
-        return artist;
-      }
-    }
-    return null;
-  }
-
   createArtist(artist: Artist): void {
     const body = {
       name: artist.name,

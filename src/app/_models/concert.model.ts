@@ -2,16 +2,16 @@ import {Artist} from './artist.model';
 import {Venue} from '../_enums/venue.enum';
 
 export class Concert {
-  private id: string;
-  private _createdAt: Date;
-  private _title: string;
-  private _venue: Venue;
-  private _date: Date;
-  private _ticketsTotal: number;
-  private _price: number;
-  private _description: string;
-  private _ticketsRemaining: number;
-  private _artists: Artist[];
+  private readonly id: string;
+  private readonly _createdAt: Date;
+  private readonly _title: string;
+  private readonly _venue: Venue;
+  private readonly _date: Date;
+  private readonly _ticketsTotal: number;
+  private readonly _price: number;
+  private readonly _description: string;
+  private readonly _ticketsRemaining: number;
+  private readonly _artists: Artist[];
 
   constructor(title: string, venue: Venue, date: Date, price: number, ticketsTotal: number,
               description: string, artists: Artist[], _id?: string, ticketsRemaining?: number) {
@@ -64,10 +64,6 @@ export class Concert {
 
   get ticketsRemaining(): number {
     return this._ticketsRemaining;
-  }
-
-  set artists(artists: Artist[]) {
-    this.artists = artists;
   }
 
   get artists(): Artist[] {
