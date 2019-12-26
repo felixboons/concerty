@@ -146,10 +146,7 @@ export class ConcertService {
   }
 
   private readConcertsFromCache(): void {
-    const concerts = this.cache.getConcerts();
-    if (concerts) {
-      this.concerts = concerts;
-    }
+    this.concerts = this.cache.getConcerts();
   }
 
   private notify(message: string, success = true): void {

@@ -5,6 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {NotificationService} from './notification.service';
 import {Artist} from '../_models/artist.model';
+import {CacheService} from './cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,14 @@ export class ArtistService {
   artistsSubject = new BehaviorSubject<Artist[]>(null);
 
   constructor(private http: HttpClient,
+              private cache: CacheService,
               private notifier: NotificationService) {
+    this.readArtistsFromCache();
     this.getArtists().subscribe(artists => {
       artists.reverse();
       this.artists = artists;
       this.artistsSubject.next(artists);
+      this.cache.setArtists(artists);
     });
   }
 
@@ -48,6 +52,7 @@ export class ArtistService {
       .then(artist => {
         this.artists.unshift(artist);
         this.artistsSubject.next(this.artists);
+        this.cache.setArtists(this.artists);
         this.notify('Successfully created artist');
       })
       .catch(err => {
@@ -75,6 +80,7 @@ export class ArtistService {
         console.log(artist);
         this.artists[index] = artist;
         this.artistsSubject.next(this.artists);
+        this.cache.setArtists(this.artists);
         this.notify('Successfully edited artist');
       })
       .catch(err => {
@@ -98,10 +104,15 @@ export class ArtistService {
 
         this.artists.splice(index, 1);
         this.artistsSubject.next(this.artists);
+        this.cache.setArtists(this.artists);
       })
       .catch(err => {
 
       });
+  }
+
+  private readArtistsFromCache(): void {
+    this.artists = this.cache.getArtists();
   }
 
   private getArtists(): Observable<Artist[]> {
