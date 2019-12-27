@@ -27,7 +27,6 @@ export class ConcertService {
           concerts.reverse();
           concerts = this.replaceArtistIdsWithArtists(concerts);
           this.updateConcerts(concerts);
-          console.log(concerts);
         }
       });
   }

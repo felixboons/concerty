@@ -29,11 +29,9 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this.http.post(this.url, body).toPromise()
         .then(response => {
-          console.log(response);
           resolve();
         })
         .catch(reason => {
-          console.log(reason);
           reject();
         });
     });

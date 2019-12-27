@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../_services/auth.service';
 import {Router} from '@angular/router';
+import * as $ from 'jquery';
+import {CacheService} from '../../_services/cache.service';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,17 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  failedToLogin = false;
+  emailAutofill: string;
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private cache: CacheService) {
   }
 
   ngOnInit() {
     this.initializeForm();
+
 
     if (this.authService.isAuthenticated()) {
       this.router.navigateByUrl('account');
@@ -24,23 +30,42 @@ export class LoginComponent implements OnInit {
   }
 
   private initializeForm(): void {
+    this.emailAutofill = this.cache.getEmailAutofill();
+
     this.form = new FormGroup({
-      email: new FormControl(null, [
+      email: new FormControl(this.emailAutofill, [
         Validators.required,
         Validators.email
       ]),
       password: new FormControl(null, Validators.required)
     });
+
+    this.cache.removeEmailAutofill();
   }
 
   login(): void {
+    this.failedToLogin = false;
+    this.showLoader();
     const input = this.form.value;
 
     this.authService.login(input.email, input.password)
-      .then(_ => {
+      .then(() => this.router.navigateByUrl('account'))
+      .catch(() => this.failedToLogin = true)
+      .finally(() => this.hideLoader());
+  }
 
-      })
-      .catch(_ => {
-      });
+  hideLoader(): void {
+    const loadElement = $('#loader');
+    const hideWhileLoadingElement = $('.hide-while-loading');
+    loadElement.hide();
+    hideWhileLoadingElement.show();
+  }
+
+  showLoader(): void {
+    const loadElement = $('#loader');
+    const hideWhileLoadingElement = $('.hide-while-loading');
+    loadElement.height(hideWhileLoadingElement.height());
+    loadElement.show();
+    hideWhileLoadingElement.hide();
   }
 }

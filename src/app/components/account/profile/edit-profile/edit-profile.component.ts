@@ -21,13 +21,15 @@ export class EditProfileComponent implements OnInit {
   }
 
   private initializeForm() {
+    const user = this.user;
+
     this.form = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, [
+      firstName: new FormControl(user.firstName, Validators.required),
+      lastName: new FormControl(user.lastName, [
         Validators.required,
         Validators.maxLength(500)
       ]),
-      email: new FormControl(null, [
+      email: new FormControl(user.email, [
         Validators.required,
         Validators.email
       ]),

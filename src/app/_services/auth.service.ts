@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {CacheService} from './cache.service';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {User} from '../_models/user.model';
@@ -12,15 +12,14 @@ import {User} from '../_models/user.model';
 })
 export class AuthService {
   private readonly url = environment.serverUrlPrefix + 'auth/login';
-  isAuthenticatedObs = new BehaviorSubject<User>(null);
+  private currentUser: User;
+  isAuthenticatedSubject = new BehaviorSubject<User>(null);
 
   constructor(private http: HttpClient,
               private userService: UserService,
               private cache: CacheService,
               private router: Router) {
-    const token = this.cache.getToken();
-    const currentUser: User = this.getCurrentUser();
-    this.updateAuthentication(token, currentUser);
+    this.readCurrentUserFromCache();
   }
 
   login(email: string, password: string): Promise<string> {
@@ -30,7 +29,6 @@ export class AuthService {
       this.http.post(this.url, body).toPromise()
         .then(response => {
           this.updateAuthentication(response['token'], response['user']);
-          this.router.navigateByUrl('account');
           resolve();
         })
         .catch(reason => {
@@ -44,7 +42,7 @@ export class AuthService {
     this.cache.removeToken();
     this.cache.removeUser();
     this.router.navigateByUrl('login');
-    this.isAuthenticatedObs.next(null);
+    this.isAuthenticatedSubject.next(null);
   }
 
   isAuthenticated(): boolean {
@@ -54,7 +52,7 @@ export class AuthService {
   }
 
   getCurrentUser(): User {
-    return this.cache.getUser();
+    return this.currentUser;
   }
 
   private getToken(): string {
@@ -65,9 +63,16 @@ export class AuthService {
     if (!token || !user) {
       this.logout();
     } else {
+      this.currentUser = user;
       this.cache.setToken(token);
       this.cache.setUser(user);
-      this.isAuthenticatedObs.next(user);
+      this.isAuthenticatedSubject.next(user);
     }
+  }
+
+  private readCurrentUserFromCache(): void {
+    this.currentUser = this.cache.getUser();
+    const token = this.cache.getToken();
+    this.updateAuthentication(token, this.currentUser);
   }
 }

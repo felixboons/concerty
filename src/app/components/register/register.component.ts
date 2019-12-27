@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../_services/user.service';
 import {User} from '../../_models/user.model';
+import {Router} from '@angular/router';
+import {CacheService} from '../../_services/cache.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-register',
@@ -10,8 +13,11 @@ import {User} from '../../_models/user.model';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+  failedToRegister = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router,
+              private cache: CacheService) { }
 
   ngOnInit() {
     this.initializeForm();
@@ -31,15 +37,32 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
+    this.failedToRegister = false;
+    this.showLoader();
     const input = this.form.value;
     const user: User = new User(input.firstName, input.lastName, input.email, input.password);
 
     this.userService.createUser(user)
       .then(_ => {
-        console.log('ACCOUNT CREATED');
+        this.cache.setEmailAutofill(user.email);
+        this.router.navigateByUrl('/login');
       })
-      .catch(_ => {
-        console.log('FAILED TO CREATE ACCOUNT');
-      })
+      .catch(_ => this.failedToRegister = true)
+      .finally(() => this.hideLoader());
+  }
+
+  hideLoader(): void {
+    const loadElement = $('#loader');
+    const hideWhileLoadingElement = $('.hide-while-loading');
+    loadElement.hide();
+    hideWhileLoadingElement.show();
+  }
+
+  showLoader(): void {
+    const loadElement = $('#loader');
+    const hideWhileLoadingElement = $('.hide-while-loading');
+    loadElement.height(hideWhileLoadingElement.height());
+    loadElement.show();
+    hideWhileLoadingElement.hide();
   }
 }

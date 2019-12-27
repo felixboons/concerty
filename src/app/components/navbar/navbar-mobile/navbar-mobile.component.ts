@@ -16,7 +16,7 @@ export class NavbarMobileComponent implements OnInit {
 
   ngOnInit() {
     this.isAuthenticated = this.authService.isAuthenticated();
-    this.authService.isAuthenticatedObs.subscribe(user => {
+    this.authService.isAuthenticatedSubject.subscribe(user => {
       if (!!user) {
         this.isAdministrator = Role[user.role] === Role.ADMIN;
         this.isAuthenticated = true;

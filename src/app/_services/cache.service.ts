@@ -11,6 +11,7 @@ export class CacheService {
   private readonly lsKeyUser = 'user';
   private readonly lsKeyArtists = 'artists';
   private readonly lsKeyConcerts = 'concerts';
+  private readonly lsEmailAutofill = 'emailAutofill';
 
   constructor() { }
 
@@ -66,5 +67,17 @@ export class CacheService {
 
   removeUser(): void {
     localStorage.removeItem(this.lsKeyUser);
+  }
+
+  setEmailAutofill(email: string): void {
+    localStorage.setItem(this.lsEmailAutofill, email);
+  }
+
+  getEmailAutofill(): string {
+    return localStorage.getItem(this.lsEmailAutofill);
+  }
+
+  removeEmailAutofill(): void {
+    localStorage.removeItem(this.lsEmailAutofill);
   }
 }
