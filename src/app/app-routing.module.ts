@@ -35,7 +35,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardUser],
     children: [
       { path: 'tickets', component: TicketsComponent },
-      { path: 'tickets/:id', component: TicketsComponent },
+      { path: 'items/:id', component: TicketsComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'profile/:id', component: ProfileComponent },
   ]},

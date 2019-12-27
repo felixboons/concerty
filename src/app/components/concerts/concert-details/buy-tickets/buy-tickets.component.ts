@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Concert} from '../../../../_models/concert.model';
 import {NotificationService} from '../../../../_services/notification.service';
 import {TicketType} from '../../../../_enums/ticket-type.enum';
+import {TicketService} from '../../../../_services/ticket.service';
+import {TicketItem} from '../../../../_models/ticket-item.model';
 
 @Component({
   selector: 'app-buy-tickets',
@@ -12,10 +14,11 @@ export class BuyTicketsComponent implements OnInit {
   TicketType = TicketType;
   ticketTypes = TicketType.keys();
   @Input() concert: Concert;
-  ticketAmounts = {};
+  items: TicketItem[] = [];
   totalTicketPrice = 0;
 
-  constructor(private notifier: NotificationService) {
+  constructor(private ticketService: TicketService,
+              private notifier: NotificationService) {
   }
 
   ngOnInit() {
@@ -23,9 +26,13 @@ export class BuyTicketsComponent implements OnInit {
   }
 
   buyTicket(): void {
-    const ticketAmount = this.getTotalTicketAmount();
-    this.notifier.showSuccessNotification('Successfully purchased ticket(s)', this.concert._id);
-    this.resetTicketValues();
+    this.ticketService.buyTicket(this.items, this.concert._id)
+      .then(_ => {
+        const message = 'Successfully purchased ticket(s)';
+        this.notifier.showSuccessNotification(message, this.concert._id);
+      })
+      .catch(_ => console.log('Cannot buy this many tickets'))
+      .finally(() => this.resetTicketValues());
   }
 
   updateTickets(): void {
@@ -43,22 +50,22 @@ export class BuyTicketsComponent implements OnInit {
   private setTotalPrice(): void {
     this.totalTicketPrice = 0;
 
-    for (const type in this.ticketAmounts) {
-      const ticketPrice = this.getTicketPrice(TicketType[type], this.concert.price);
-      const amount = this.ticketAmounts[type];
-      this.totalTicketPrice += amount * ticketPrice;
+    for (const item of this.items) {
+      this.totalTicketPrice += (item.amount * item.price);
     }
   }
 
   private getTotalTicketAmount() {
-    for (const ticketAmount in this.ticketAmounts) {
-      this.totalTicketPrice += +ticketAmount
+    for (const ticketAmount in this.items) {
+      this.totalTicketPrice += +ticketAmount;
     }
   }
 
   private initializeTickets() {
+    this.items = [];
     for (const type of this.ticketTypes) {
-      this.ticketAmounts[type] = 0;
+      const item = new TicketItem(type, this.getTicketPrice(TicketType[type], this.concert.price), 0);
+      this.items.push(item);
     }
   }
 

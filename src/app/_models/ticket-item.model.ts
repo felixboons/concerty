@@ -2,7 +2,7 @@ export class TicketItem {
 
   private readonly _type: string;
   private readonly _price: number;
-  private readonly _amount: number;
+  private _amount: number;
 
   constructor(type: string, price: number, amount: number) {
     this._type = type;
@@ -20,5 +20,9 @@ export class TicketItem {
 
   get amount(): number {
     return this._amount;
+  }
+
+  set amount(value: number) {
+    this._amount = value;
   }
 }

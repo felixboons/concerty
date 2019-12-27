@@ -4,11 +4,11 @@
   <table class="uk-table uk-table-responsive uk-table-divider uk-table-middle
                 uk-margin-remove-bottom">
     <tbody>
-    <tr *ngFor="let type of ticketTypes">
+    <tr *ngFor="let type of ticketTypes; let i = index">
       <td class="uk-text-nowrap">{{ TicketType[type] }}</td>
       <td class="uk-text-nowrap">{{ getTicketPrice(getTicketType(type), concert.price) | prettyPrice }}</td>
       <td class="uk-text-nowrap">
-        <input [(ngModel)]="ticketAmounts[type]" [ngModelOptions]="{ standalone: true }"
+        <input [(ngModel)]="items[i].amount" [ngModelOptions]="{ standalone: true }"
                (input)="updateTickets()"
                class="uk-input" type="number" step="1" min="0">
       </td>
@@ -20,7 +20,11 @@
     </tr>
     <tr class="no-divider">
       <td colspan="3" class="uk-text-nowrap">
-        <a id="buy-tickets-button" (click)="buyTicket()" class="uk-button uk-button-primary uk-text-nowrap">BUY TICKET(S)</a>
+        <button [disabled]="totalTicketPrice === 0" id="buy-tickets-button"
+                class="uk-button uk-button-primary uk-text-nowrap"
+                (click)="buyTicket()">
+          BUY TICKET(S)
+        </button>
       </td>
     </tr>
     </tbody>
