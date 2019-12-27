@@ -1,57 +1,47 @@
-export class User {
-  private id: string;
-  private firstName: string;
-  private lastName: string;
-  private email: string;
-  private password: string;
-  private role: number;
-  private tickets: [string]; // [Ticket]
+import {Role} from '../_enums/role.enum';
 
-  constructor(firstName: string, lastName: string, email: string, password: string, id?: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-    this.id = id;
+export class User {
+  private readonly id: string;
+  private readonly _firstName: string;
+  private readonly _lastName: string;
+  private readonly _email: string;
+  private readonly _password: string;
+  private readonly _role: number;
+  private readonly _tickets: [string]; // [Ticket]
+
+  constructor(firstName: string, lastName: string, email: string, password: string, _id?: string) {
+    this._firstName = firstName;
+    this._lastName = lastName;
+    this._email = email;
+    this._password = password;
+    this.id = _id;
   }
 
-  public getId(): string {
+  get _id(): string {
     return this.id;
   }
 
-  public getName(): string {
-    return `${this.firstName} ${this.lastName}`;
+  get firstName(): string {
+    return this._firstName;
   }
 
-  public getFirstName(): string {
-    return this.firstName;
+  get lastName(): string {
+    return this._lastName;
   }
 
-  public getLastName(): string {
-    return this.lastName;
+  get email(): string {
+    return this._email;
   }
 
-  public getEmail(): string {
-    return this.email;
+  get password(): string {
+    return this._password;
   }
 
-  public getTickets(): [string] {
-    return this.tickets;
+  get role(): number {
+    return this._role;
   }
 
-  public setFirstName(firstName: string): void {
-    this.firstName = firstName;
-  }
-
-  public setLastName(lastName: string): void {
-    this.lastName = lastName;
-  }
-
-  public setEmail(email: string): void {
-    this.email = email;
-  }
-
-  public getPassword(): string {
-    return this.password;
+  get tickets(): [string] {
+    return this._tickets;
   }
 }

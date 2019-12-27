@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
+import {User} from '../../../../_models/user.model';
 
 @Component({
   selector: 'app-edit-profile',
@@ -8,6 +9,7 @@ import * as moment from 'moment';
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileComponent implements OnInit {
+  @Input() user: User;
   form: FormGroup;
   minYear = 1900;
   maxYear = moment().year();

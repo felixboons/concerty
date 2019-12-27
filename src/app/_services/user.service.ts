@@ -20,10 +20,10 @@ export class UserService {
 
   createUser(user: User): Promise<boolean> {
     const body = {
-      firstName: user.getFirstName(),
-      lastName: user.getLastName(),
-      email: user.getEmail(),
-      password: user.getPassword()
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      password: user.password
     };
 
     return new Promise((resolve, reject) => {

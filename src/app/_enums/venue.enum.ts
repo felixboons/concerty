@@ -4,7 +4,7 @@ export enum Venue {
   HONDA_CENTER = 'Honda Center',
   MB_SUPERDOME = 'Mercedes-Benz Superdome',
   BKIA = 'Bukit Kiara Indoor Arena',
-  KGC_YUM_CENTER = 'KFC Yum! Center',
+  KFC_YUM_CENTER = 'KFC Yum! Center',
   POPPODIUM_013 = '013 Poppodium',
   PARADISO = 'Paradiso',
   BRABANTHALLEN = 'Brabanthallen'

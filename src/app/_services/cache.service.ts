@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Artist} from '../_models/artist.model';
 import {Concert} from '../_models/concert.model';
+import {User} from '../_models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CacheService {
   private readonly lsKeyToken = 'token';
+  private readonly lsKeyUser = 'user';
   private readonly lsKeyArtists = 'artists';
   private readonly lsKeyConcerts = 'concerts';
 
@@ -50,5 +52,19 @@ export class CacheService {
 
   removeConcerts(): void {
     localStorage.removeItem(this.lsKeyConcerts);
+  }
+
+  setUser(user: User) {
+    const value = JSON.stringify(user);
+    localStorage.setItem(this.lsKeyUser, value);
+  }
+
+  getUser(): User {
+    const user = localStorage.getItem(this.lsKeyUser);
+    return JSON.parse(user);
+  }
+
+  removeUser(): void {
+    localStorage.removeItem(this.lsKeyUser);
   }
 }
