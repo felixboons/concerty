@@ -21,26 +21,34 @@ export class TicketService {
 
     const body = {
       customerName: currentUser.firstName + ' ' + currentUser.lastName,
-      items: items,
+      items: [],
       concert: concertId
     };
+
+    // Replace _underscore properties names by non-underscore properties.
+    for (const item of items) {
+      body.items.push({
+        type: item.type,
+        price: item.price,
+        amount: item.amount
+      });
+    }
+
     console.log(body);
 
     return new Promise((resolve, reject) => {
       this.http.post(url, body).toPromise()
         .then((user: User) => {
-          const tickets = user.tickets;
-          console.log(tickets);
-          this.updateTickets(tickets);
-          resolve(tickets[0]);
+          this.updateTickets(user);
+          resolve();
         })
         .catch(reason => {
         });
     });
   }
 
-  private updateTickets(ticket): void {
+  private updateTickets(user: User): void {
     this.authService.isAuthenticatedSubject
-      .next(ticket);
+      .next(user);
   }
 }

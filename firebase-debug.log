@@ -1,0 +1,17 @@
+[debug] [2019-12-27T17:53:31.131Z] ----------------------------------------------------------------------
+[debug] [2019-12-27T17:53:31.132Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Felix\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-12-27T17:53:31.133Z] CLI Version:   7.11.0
+[debug] [2019-12-27T17:53:31.133Z] Platform:      win32
+[debug] [2019-12-27T17:53:31.133Z] Node Version:  v10.16.0
+[debug] [2019-12-27T17:53:31.134Z] Time:          Fri Dec 27 2019 18:53:31 GMT+0100 (Central European Standard Time)
+[debug] [2019-12-27T17:53:31.134Z] ----------------------------------------------------------------------
+[debug] [2019-12-27T17:53:31.134Z] 
+[debug] [2019-12-27T17:53:31.148Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-27T17:53:31.149Z] > authorizing via signed-in user
+[debug] [2019-12-27T17:53:31.149Z] [iam] checking project concerty-8a869 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-27T17:53:31.151Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/concerty-8a869:testIamPermissions  
+
+[debug] [2019-12-27T17:54:04.297Z] Error: connect ETIMEDOUT 172.217.17.74:443
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1106:14)
+[error] 
+[error] Error: Server Error. connect ETIMEDOUT 172.217.17.74:443
