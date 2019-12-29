@@ -4,6 +4,7 @@ import {NotificationService} from '../../../../_services/notification.service';
 import {TicketType} from '../../../../_enums/ticket-type.enum';
 import {TicketService} from '../../../../_services/ticket.service';
 import {TicketItem} from '../../../../_models/ticket-item.model';
+import {AuthService} from '../../../../_services/auth.service';
 
 @Component({
   selector: 'app-buy-tickets',
@@ -18,6 +19,7 @@ export class BuyTicketsComponent implements OnInit {
   totalTicketPrice = 0;
 
   constructor(private ticketService: TicketService,
+              private authService: AuthService,
               private notifier: NotificationService) {
   }
 

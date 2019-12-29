@@ -6,7 +6,7 @@ export class User {
   private readonly _lastName: string;
   private readonly _email: string;
   private readonly _password: string;
-  private readonly _role: number;
+  private readonly _role: string;
   private _tickets: Ticket[];
 
   constructor(firstName: string, lastName: string, email: string, password: string, _id?: string) {
@@ -37,7 +37,7 @@ export class User {
     return this._password;
   }
 
-  get role(): number {
+  get role(): string {
     return this._role;
   }
 

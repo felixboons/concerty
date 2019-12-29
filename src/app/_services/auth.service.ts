@@ -6,6 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {User} from '../_models/user.model';
+import {Role} from '../_enums/role.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,10 @@ export class AuthService {
     return !!token && !!user;
   }
 
+  isAdministrator(): boolean {
+    return this.currentUser.role === Role.ADMIN;
+  }
+
   getCurrentUser(): User {
     if (this.currentUser) {
       return this.currentUser;
@@ -64,7 +69,6 @@ export class AuthService {
   }
 
   updateAuthentication(user: User = null): void {
-    console.log(user);
     const token = this.cache.getToken();
     if (!token || !user) {
       this.logout();
