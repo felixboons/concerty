@@ -7,7 +7,7 @@
       <h1 class="uk-heading-small">Tickets</h1>
 
       <div *ngIf="upcomingTickets.length > 0; else noTicketsInfo">
-        <h2>The countdown begins...</h2>
+        <h2>Happening soon!</h2>
         <div class="uk-slider" uk-slider="finite: true">
           <div class="slider-item-wrapper">
             <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m">
@@ -26,7 +26,7 @@
       </ng-template>
 
       <div *ngIf="tickets">
-        <h2>All tickets</h2>
+        <h2 class="uk-margin-top">All tickets</h2>
         <div class="uk-overflow-auto">
           <table class="uk-table uk-table-small uk-table-striped uk-table-middle clickable">
             <thead>

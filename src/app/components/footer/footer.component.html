@@ -20,8 +20,16 @@
 
       <!--      ACCOUNT -->
       <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
+        <h5>ACCOUNT</h5>
+        <ul *ngIf="!isAuthenticated" class="uk-list">
+          <li routerLink="/login" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Log in</a>
+          </li>
+          <li routerLink="/register" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Register</a>
+          </li>
+        </ul>
 
-        <h5 *ngIf="isAuthenticated">ACCOUNT</h5>
         <ul *ngIf=" isAuthenticated" class="uk-list">
           <li routerLink="/account/tickets" routerLinkActive="uk-active">
             <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Tickets</a>

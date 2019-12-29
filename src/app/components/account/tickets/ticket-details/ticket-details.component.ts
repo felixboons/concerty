@@ -29,8 +29,10 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   getTicketItems(ticket: Ticket): TicketItem[] {
-    return this.ticket.items.filter(value => {
-      return value.amount > 0;
-    });
+    if (this.ticket) {
+      return this.ticket.items.filter(value => {
+        return value.amount > 0;
+      });
+    }
   }
 }
