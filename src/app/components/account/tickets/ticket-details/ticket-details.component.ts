@@ -47,7 +47,7 @@ export class TicketDetailsComponent implements OnInit {
   }
 
   getTicket(ticketId: string): Ticket {
-    if (this.currentUser) {
+    if (this.currentUser && this.currentUser.tickets) {
       for (const ticket of this.currentUser.tickets) {
         if (ticket._id === ticketId) {
           return ticket;

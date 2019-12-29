@@ -31,7 +31,9 @@ export class BuyTicketsComponent implements OnInit {
         const message = 'Successfully purchased ticket(s)';
         this.notifier.showSuccessNotification(message, this.concert._id);
       })
-      .catch(_ => console.log('Cannot buy this many tickets'))
+      .catch(_ => {
+        this.notifier.showErrorNotification('Failed to buy ticket(s). There are not this many tickets left.');
+      })
       .finally(() => this.resetTicketValues());
   }
 

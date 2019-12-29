@@ -12,7 +12,8 @@ export class NotificationService {
   showSuccessNotification(message: string, _id?: string): void {
     let navigationalButtonMarkup;
 
-    if (_id) {
+    // if (_id) {
+    if (false) {
       // Navigation only works with href, not routerLink. That means... the page has to reload. DANG IT.
       navigationalButtonMarkup = `
         <a href=\"/account/tickets/${_id}\"

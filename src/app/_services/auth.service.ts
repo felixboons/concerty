@@ -64,6 +64,7 @@ export class AuthService {
   }
 
   updateAuthentication(user: User = null): void {
+    console.log(user);
     const token = this.cache.getToken();
     if (!token || !user) {
       this.logout();

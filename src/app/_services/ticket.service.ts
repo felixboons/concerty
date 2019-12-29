@@ -37,7 +37,8 @@ export class TicketService {
     return new Promise((resolve, reject) => {
       this.http.post<User>(url, body).toPromise()
         .then(user => {
-          this.updateTickets(user);
+          console.log(user[0]);
+          this.updateTickets(user[0]); // Concert is also send in response?
           resolve(user);
         })
         .catch(reason => {
