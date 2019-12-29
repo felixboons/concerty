@@ -34,8 +34,6 @@ export class TicketService {
       });
     }
 
-    console.log(body);
-
     return new Promise((resolve, reject) => {
       this.http.post(url, body).toPromise()
         .then((user: User) => {

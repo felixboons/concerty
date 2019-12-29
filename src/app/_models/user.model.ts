@@ -1,4 +1,4 @@
-import {Role} from '../_enums/role.enum';
+import {Ticket} from './ticket.model';
 
 export class User {
   private readonly id: string;
@@ -7,7 +7,7 @@ export class User {
   private readonly _email: string;
   private readonly _password: string;
   private readonly _role: number;
-  private readonly _tickets: [string]; // [Ticket]
+  private _tickets: Ticket[];
 
   constructor(firstName: string, lastName: string, email: string, password: string, _id?: string) {
     this._firstName = firstName;
@@ -41,7 +41,11 @@ export class User {
     return this._role;
   }
 
-  get tickets(): [string] {
+  get tickets(): Ticket[] {
     return this._tickets;
+  }
+
+  set tickets(value: Ticket[]) {
+    this._tickets = value;
   }
 }

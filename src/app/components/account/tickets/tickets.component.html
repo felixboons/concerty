@@ -1,62 +1,49 @@
-<div class="uk-margin-large-top uk-margin-large-bottom uk-light">
+<router-outlet></router-outlet>
 
-  <h1 class="uk-heading-small">Tickets</h1>
-  <h2>Happening soon!</h2>
+<div class="bg-primary-gradient uk-light">
+  <div class="uk-container">
 
 
-  <h2>Upcoming</h2>
+    <div class="uk-margin-large-top uk-margin-large-bottom">
 
-  <div class="uk-slider" uk-slider="finite: true">
-    <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m">
-      <li *ngFor="let ticket of [1, 2, 3, 4]" class="uk-margin-right">
-        <div>
-          <div class="uk-card uk-card-default">
-            <div class="uk-card-media-top">
-              <img src="./assets/images/concert.jpg" alt="">
-            </div>
-            <div class="uk-card-body">
-              <div class="uk-card-badge uk-label">IN 12 DAYS!</div>
-              <h3 class="uk-card-title uk-margin-small-bottom">15 Jaar De Jeugd</h3>
-              <p class="uk-margin-remove-top">
-                <i class="fad fa-calendar-day uk-margin-small-right"></i>
-                15th of January, 2020
-              </p>
-              <a [routerLink]="['/account/tickets', '128344ID1238']"
-                 class="uk-button uk-button-primary button-preserve-color">SHOW TICKET</a>
-            </div>
-          </div>
+      <h1 class="uk-heading-small">Tickets</h1>
+      <h2>The countdown begins...</h2>
+
+      <div class="uk-slider" uk-slider="finite: true">
+        <div class="slider-item-wrapper">
+          <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m">
+            <li *ngFor="let ticket of tickets" class="uk-margin-right">
+              <app-ticket-thumbnail [ticket]="ticket"></app-ticket-thumbnail>
+          </ul>
         </div>
+      </div>
 
-      </li>
-    </ul>
-  </div>
+      <h2>All tickets</h2>
+      <div class="uk-overflow-auto">
+        <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Image</th>
+            <th>Concert</th>
+            <th>Date</th>
+            <th class="uk-text-right">Tickets</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ticket of tickets">
+            <td class="uk-table-shrink uk-text-nowrap">#{{ ticket._id | prettyId }}</td>
+            <td class="uk-table-shrink uk-text-nowrap">
+              <img src="../../../../assets/images/concert.jpg" alt="" width="50px">
+            </td>
+            <td class="uk-table-expand uk-text-nowrap">{{ ticket.concert.title }}</td>
+            <td class="uk-table-shrink uk-text-nowrap">{{ ticket.concert.date | prettyDate }}</td>
+            <td class="uk-table-shrink uk-text-right uk-text-nowrap">{{ getTotalTickets(ticket.items)}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-  <h2>All tickets</h2>
-  <div class="uk-overflow-auto">
-    <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
-      <thead>
-      <tr>
-        <th>No.</th>
-        <th></th>
-        <th>Concert</th>
-        <th>Date</th>
-        <th class="uk-text-right">Price</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let ticket of tickets">
-        <td class="uk-table-shrink uk-text-nowrap">#12803</td>
-        <td class="uk-table-shrink uk-text-nowrap">
-          <a [routerLink]="['/account/tickets', 'fiewjfwIDowjeijf2o']"
-            class="uk-button uk-button-primary">
-            SHOW TICKET
-          </a>
-        </td>
-        <td class="uk-table-expand uk-text-nowrap">15 Jaar De Jeugd</td>
-        <td class="uk-table-shrink uk-text-nowrap">15 Jan. 2020</td>
-        <td class="uk-table-shrink uk-text-right uk-text-nowrap">&euro;80</td>
-      </tr>
-      </tbody>
-    </table>
   </div>
 </div>

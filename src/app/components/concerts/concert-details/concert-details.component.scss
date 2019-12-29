@@ -3,7 +3,6 @@
 
 .bg-darkgrey {
   background: $color-darkgrey;
-  //background-color: $color-primary;
 }
 
 p {
@@ -12,13 +11,6 @@ p {
 
 i {
   width: 30px;
-}
-
-@media all and (min-width: 1200px) {
-
-  img {
-    margin-bottom: 0 !important;
-  }
 }
 
 .uk-label-copy {

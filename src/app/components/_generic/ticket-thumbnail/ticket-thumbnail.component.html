@@ -1,0 +1,16 @@
+
+<div class="uk-card uk-card-default">
+  <div class="uk-card-media-top">
+    <img src="../../../../assets/images/concert.jpg" alt="">
+  </div>
+  <div class="uk-card-body uk-text-left">
+    <div class="uk-card-badge uk-label">
+      {{ ticket.concert.date | prettyDaysRemaining }}
+    </div>
+    <h3 class="uk-card-title uk-margin-small-bottom">{{ ticket.concert.title }}</h3>
+    <p><i class="fad fa-map-marked-alt"></i>{{ Venue[ticket.concert.venue] }}</p>
+    <p><i class="fad fa-calendar-day"></i>{{ ticket.concert.date | prettyDate }}</p>
+    <a [routerLink]="['/account/tickets', ticket._id]"
+       class="uk-button uk-button-primary button-preserve-color">SHOW TICKET</a>
+  </div>
+</div>

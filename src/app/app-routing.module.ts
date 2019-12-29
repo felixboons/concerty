@@ -16,6 +16,7 @@ import {ProfileComponent} from './components/account/profile/profile.component';
 import {ArtistManagementComponent} from './components/administrator/artist-management/artist-management.component';
 import {ConcertManagementComponent} from './components/administrator/concert-management/concert-management.component';
 import {AdministratorComponent} from './components/administrator/administrator.component';
+import {TicketDetailsComponent} from './components/account/tickets/ticket-details/ticket-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -34,10 +35,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'account', component: AccountComponent, canActivate: [AuthGuardUser],
     children: [
-      { path: 'tickets', component: TicketsComponent },
-      { path: 'items/:id', component: TicketsComponent },
+      { path: 'tickets', component: TicketsComponent, children: [
+          { path: ':id', component: TicketDetailsComponent }
+        ]
+      },
       { path: 'profile', component: ProfileComponent },
-      { path: 'profile/:id', component: ProfileComponent },
   ]},
   { path: 'administrator', component: AdministratorComponent, canActivate: [AuthGuardAdministrator],
     children: [

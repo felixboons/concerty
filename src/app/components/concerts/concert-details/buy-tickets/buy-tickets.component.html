@@ -1,33 +1,35 @@
 <div class="bg-primary uk-padding-large uk-margin-large-bottom uk-light">
-  <h2>Tickets</h2>
+  <div class="uk-container">
+    <h2>Tickets</h2>
 
-  <table class="uk-table uk-table-responsive uk-table-divider uk-table-middle
-                uk-margin-remove-bottom">
-    <tbody>
-    <tr *ngFor="let type of ticketTypes; let i = index">
-      <td class="uk-text-nowrap">{{ TicketType[type] }}</td>
-      <td class="uk-text-nowrap">{{ getTicketPrice(getTicketType(type), concert.price) | prettyPrice }}</td>
-      <td class="uk-text-nowrap">
-        <input [(ngModel)]="items[i].amount" [ngModelOptions]="{ standalone: true }"
-               (input)="updateTickets()"
-               class="uk-input" type="number" step="1" min="0">
-      </td>
-    </tr>
-    <tr>
-      <td class="uk-text-small">TOTAL PRICE</td>
-      <td class="uk-text-small uk-text-bold">{{ totalTicketPrice | prettyPrice }}</td>
-      <td></td>
-    </tr>
-    <tr class="no-divider">
-      <td colspan="3" class="uk-text-nowrap">
-        <button [disabled]="totalTicketPrice === 0" id="buy-tickets-button"
-                class="uk-button uk-button-primary uk-text-nowrap"
-                (click)="buyTicket()">
-          BUY TICKET(S)
-        </button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <table class="uk-table uk-table-responsive uk-table-divider uk-table-middle
+                  uk-margin-remove-bottom">
+      <tbody>
+      <tr *ngFor="let type of ticketTypes; let i = index">
+        <td class="uk-text-nowrap">{{ TicketType[type] }}</td>
+        <td class="uk-text-nowrap">{{ getTicketPrice(getTicketType(type), concert.price) | prettyPrice }}</td>
+        <td class="uk-text-nowrap">
+          <input [(ngModel)]="items[i].amount" [ngModelOptions]="{ standalone: true }"
+                 (input)="updateTickets()"
+                 class="uk-input" type="number" step="1" min="0">
+        </td>
+      </tr>
+      <tr>
+        <td class="uk-text-small">TOTAL PRICE</td>
+        <td class="uk-text-small uk-text-bold">{{ totalTicketPrice | prettyPrice }}</td>
+        <td></td>
+      </tr>
+      <tr class="no-divider">
+        <td colspan="3" class="uk-text-nowrap">
+          <button [disabled]="totalTicketPrice === 0" id="buy-tickets-button"
+                  class="uk-button uk-button-primary uk-text-nowrap"
+                  (click)="buyTicket()">
+            BUY TICKET(S)
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
+  </div>
 </div>

@@ -1,0 +1,32 @@
+
+
+<div *ngIf="ticket" class="uk-background-secondary uk-padding-large uk-light">
+  <div class="uk-container">
+    <h1 class="uk-heading-small">{{ ticket.concert.title }}</h1>
+    <p><i class="fad fa-map-marked-alt"></i>{{ Venue[ticket.concert.venue] }}</p>
+    <p><i class="fad fa-calendar-day"></i>{{ ticket.concert.date | prettyDate }}</p>
+
+    <div class="uk-margin-large-top" uk-grid>
+
+      <div class="uk-width-1-1 uk-width-1-2@m">
+        <img src="../../../../../assets/images/qr-code-placeholder.png" alt="ticket">
+      </div>
+
+      <div class="uk-width-1-1 uk-width-1-2@m uk-flex-first@m">
+        <h3>My tickets</h3>
+        <ul class="uk-list">
+          <li *ngFor="let item of ticket.items">
+            {{ item.type }}
+            {{ item.price }}
+            {{ item.amount }}
+          </li>
+        </ul>
+
+
+        <h3>Practical information</h3>
+        <p>Where to park, scanning ticket at entrance, drug policy, etc...</p>
+      </div>
+    </div>
+
+  </div>
+</div>

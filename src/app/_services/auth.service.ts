@@ -6,6 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {User} from '../_models/user.model';
+import {ConcertService} from './concert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,13 @@ import {User} from '../_models/user.model';
 export class AuthService {
   private readonly url = environment.serverUrlPrefix + 'auth/login';
   private currentUser: User;
-  isAuthenticatedSubject = new BehaviorSubject<User>(null);
+  isAuthenticatedSubject = new BehaviorSubject<User>(this.currentUser);
 
   constructor(private http: HttpClient,
               private userService: UserService,
               private cache: CacheService,
               private router: Router) {
-    this.readCurrentUserFromCache();
+    this.establishLoginSession();
   }
 
   login(email: string, password: string): Promise<string> {
@@ -28,7 +29,10 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.http.post(this.url, body).toPromise()
         .then(response => {
-          this.updateAuthentication(response['token'], response['user']);
+          this.cache.setToken(response['token']);
+          let user = response['user'];
+          user = this.userService.replaceConcertIdsWithConcerts(user);
+          this.updateAuthentication(user);
           resolve();
         })
         .catch(reason => {
@@ -59,12 +63,12 @@ export class AuthService {
     return this.cache.getToken();
   }
 
-  private updateAuthentication(token: string = null, user: User = null): void {
+  private updateAuthentication(user: User = null): void {
+    const token = this.cache.getToken();
     if (!token || !user) {
       this.logout();
     } else {
       this.currentUser = user;
-      this.cache.setToken(token);
       this.cache.setUser(user);
       this.isAuthenticatedSubject.next(user);
     }
@@ -72,7 +76,21 @@ export class AuthService {
 
   private readCurrentUserFromCache(): void {
     this.currentUser = this.cache.getUser();
-    const token = this.cache.getToken();
-    this.updateAuthentication(token, this.currentUser);
+    this.isAuthenticatedSubject.next(this.currentUser);
+  }
+
+  private establishLoginSession() {
+    this.readCurrentUserFromCache();
+
+    if (this.currentUser) {
+      this.userService.getUser(this.currentUser._id)
+        .subscribe(user => {
+          if (!!user) {
+            this.updateAuthentication(user);
+          }
+        });
+    } else {
+      this.logout();
+    }
   }
 }

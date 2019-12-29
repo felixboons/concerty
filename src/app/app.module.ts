@@ -46,6 +46,8 @@ import {PrettyDatePipe} from './_pipes/pretty-date.pipe';
 import {PrettyIdPipe} from './_pipes/pretty-id.pipe';
 import {PrettyDaysRemainingPipe} from './_pipes/pretty-days-remaining.pipe';
 import {PrettyPricePipe} from './_pipes/pretty-price.pipe';
+import {TicketThumbnailComponent} from './components/_generic/ticket-thumbnail/ticket-thumbnail.component';
+import {TicketDetailsComponent} from './components/account/tickets/ticket-details/ticket-details.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,8 @@ import {PrettyPricePipe} from './_pipes/pretty-price.pipe';
     PrettyIdPipe,
     PrettyDaysRemainingPipe,
     PrettyPricePipe,
+    TicketThumbnailComponent,
+    TicketDetailsComponent
   ],
   imports: [
     BrowserModule,

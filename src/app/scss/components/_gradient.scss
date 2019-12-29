@@ -1,0 +1,13 @@
+@import '../../scss/base/colors';
+
+.bg-primary-gradient {
+  // IE6+ compatible. Credits to https://cssgradient.io/.
+  background: rgb(25,81,135);
+  background: -moz-linear-gradient(150deg, rgba(25,81,135,1) 0%, rgba(25,62,115,1) 100%);
+  background: -webkit-linear-gradient(150deg, rgba(25,81,135,1) 0%, rgba(25,62,115,1) 100%);
+  background: linear-gradient(150deg, rgba(25,81,135,1) 0%, rgba(25,62,115,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(
+      startColorstr = "#195187",
+      endColorstr = "#192f5f",
+      GradientType = 1);
+}
