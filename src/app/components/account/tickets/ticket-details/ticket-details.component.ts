@@ -5,6 +5,8 @@ import {UserService} from '../../../../_services/user.service';
 import {Venue} from '../../../../_enums/venue.enum';
 import {TicketType} from '../../../../_enums/ticket-type.enum';
 import {TicketItem} from '../../../../_models/ticket-item.model';
+import {AuthService} from '../../../../_services/auth.service';
+import {User} from '../../../../_models/user.model';
 
 @Component({
   selector: 'app-ticket-details',
@@ -12,20 +14,28 @@ import {TicketItem} from '../../../../_models/ticket-item.model';
   styleUrls: ['./ticket-details.component.scss']
 })
 export class TicketDetailsComponent implements OnInit {
-  ticket: Ticket;
-  Venue = Venue;
   TicketType = TicketType;
+  Venue = Venue;
+  ticket: Ticket;
+  items: TicketItem[];
+  currentUser: User;
+  ticketId: string;
 
-  constructor(private userService: UserService,
+  constructor(private authService: AuthService,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.route.params
       .subscribe(params => {
-        const _id = params.id;
-        this.ticket = this.userService.getTicket(_id);
+        this.ticketId = params.id;
       });
+    this.authService.isAuthenticatedSubject
+      .subscribe(user => {
+        this.currentUser = user;
+        this.ticket = this.getTicket(this.ticketId);
+        this.items = this.getTicketItems(this.ticket);
+      })
   }
 
   getTicketItems(ticket: Ticket): TicketItem[] {
@@ -34,5 +44,16 @@ export class TicketDetailsComponent implements OnInit {
         return value.amount > 0;
       });
     }
+  }
+
+  getTicket(ticketId: string): Ticket {
+    if (this.currentUser) {
+      for (const ticket of this.currentUser.tickets) {
+        if (ticket._id === ticketId) {
+          return ticket;
+        }
+      }
+    }
+    return null;
   }
 }

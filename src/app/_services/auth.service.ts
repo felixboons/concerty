@@ -6,7 +6,6 @@ import {BehaviorSubject} from 'rxjs';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {User} from '../_models/user.model';
-import {ConcertService} from './concert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +19,7 @@ export class AuthService {
               private userService: UserService,
               private cache: CacheService,
               private router: Router) {
+    this.readCurrentUserFromCache();
     this.establishLoginSession();
   }
 
@@ -50,20 +50,20 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    const token = this.getToken();
+    const token = this.cache.getToken();
     const user = this.getCurrentUser();
     return !!token && !!user;
   }
 
   getCurrentUser(): User {
-    return this.currentUser;
+    if (this.currentUser) {
+      return this.currentUser;
+    } else {
+      return this.cache.getUser();
+    }
   }
 
-  private getToken(): string {
-    return this.cache.getToken();
-  }
-
-  private updateAuthentication(user: User = null): void {
+  updateAuthentication(user: User = null): void {
     const token = this.cache.getToken();
     if (!token || !user) {
       this.logout();

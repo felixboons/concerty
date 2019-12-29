@@ -27,7 +27,7 @@ export class BuyTicketsComponent implements OnInit {
 
   buyTicket(): void {
     this.ticketService.buyTicket(this.items, this.concert._id)
-      .then(_ => {
+      .then(user => {
         const message = 'Successfully purchased ticket(s)';
         this.notifier.showSuccessNotification(message, this.concert._id);
       })

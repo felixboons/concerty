@@ -15,7 +15,7 @@ export class TicketService {
               private authService: AuthService) {
   }
 
-  buyTicket(items: TicketItem[], concertId: string): Promise<string> {
+  buyTicket(items: TicketItem[], concertId: string): Promise<User> {
     const currentUser = this.authService.getCurrentUser();
     const url = this.url + currentUser._id + '/tickets';
 
@@ -35,18 +35,18 @@ export class TicketService {
     }
 
     return new Promise((resolve, reject) => {
-      this.http.post(url, body).toPromise()
-        .then((user: User) => {
+      this.http.post<User>(url, body).toPromise()
+        .then(user => {
           this.updateTickets(user);
-          resolve();
+          resolve(user);
         })
         .catch(reason => {
+          reject(null);
         });
     });
   }
 
   private updateTickets(user: User): void {
-    this.authService.isAuthenticatedSubject
-      .next(user);
+    this.authService.updateAuthentication(user);
   }
 }

@@ -53,16 +53,6 @@ export class UserService {
       }));
   }
 
-  getTicket(ticketId: string): Ticket {
-
-    for (const ticket of this.currentUser.tickets) {
-      if (ticket._id === ticketId) {
-        return ticket;
-      }
-    }
-    return null;
-  }
-
   replaceConcertIdsWithConcerts(user: User): User {
     const tickets = user.tickets;
     const _tickets = [];

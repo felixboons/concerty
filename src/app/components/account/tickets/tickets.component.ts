@@ -20,7 +20,7 @@ export class TicketsComponent implements OnInit {
   ngOnInit() {
     this.authService.isAuthenticatedSubject
       .subscribe(user => {
-        if (user) {
+        if (user && user.tickets) {
           this.tickets = user.tickets.reverse();
           this.fillUpcomingTickets();
         }
