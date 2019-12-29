@@ -6,7 +6,7 @@
     <p><i class="fad fa-map-marked-alt"></i>{{ Venue[ticket.concert.venue] }}</p>
     <p><i class="fad fa-calendar-day"></i>{{ ticket.concert.date | prettyDate }}</p>
 
-    <div class="uk-margin-large-top" uk-grid>
+    <div class="uk-margin-large-top uk-grid-large" uk-grid>
 
       <div class="uk-width-1-1 uk-width-1-2@m">
         <img src="../../../../../assets/images/qr-code-placeholder.png" alt="ticket">
@@ -14,13 +14,23 @@
 
       <div class="uk-width-1-1 uk-width-1-2@m uk-flex-first@m">
         <h3>My tickets</h3>
-        <ul class="uk-list">
-          <li *ngFor="let item of ticket.items">
-            {{ item.type }}
-            {{ item.price }}
-            {{ item.amount }}
-          </li>
-        </ul>
+
+        <table class="uk-table uk-table-striped uk-table-small uk-table-middle">
+          <thead>
+            <tr>
+              <td>Type</td>
+              <td>Price</td>
+              <td>Amount</td>
+            </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of getTicketItems(ticket)">
+            <td class="uk-text-nowrap">{{ TicketType[item.type] }}</td>
+            <td class="uk-text-nowrap">{{ item.price | prettyPrice }}</td>
+            <td class="uk-text-nowrap">{{ item.amount }}</td>
+          </tr>
+          </tbody>
+        </table>
 
 
         <h3>Practical information</h3>

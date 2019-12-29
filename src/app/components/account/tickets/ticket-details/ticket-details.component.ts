@@ -4,6 +4,7 @@ import {Ticket} from '../../../../_models/ticket.model';
 import {UserService} from '../../../../_services/user.service';
 import {Venue} from '../../../../_enums/venue.enum';
 import {TicketType} from '../../../../_enums/ticket-type.enum';
+import {TicketItem} from '../../../../_models/ticket-item.model';
 
 @Component({
   selector: 'app-ticket-details',
@@ -27,4 +28,9 @@ export class TicketDetailsComponent implements OnInit {
       });
   }
 
+  getTicketItems(ticket: Ticket): TicketItem[] {
+    return this.ticket.items.filter(value => {
+      return value.amount > 0;
+    });
+  }
 }
