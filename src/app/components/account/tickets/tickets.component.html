@@ -5,20 +5,22 @@
     <div class="uk-margin-large-top uk-margin-large-bottom">
 
       <h1 class="uk-heading-small">Tickets</h1>
-      <h2>The countdown begins...</h2>
 
-      <div class="uk-slider" uk-slider="finite: true">
-        <div class="slider-item-wrapper">
-          <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m">
-            <li *ngFor="let ticket of tickets" class="uk-margin-right">
-              <app-ticket-thumbnail [ticket]="ticket"></app-ticket-thumbnail>
-          </ul>
+      <div *ngIf="upcomingTickets.length > 0">
+        <h2>The countdown begins...</h2>
+        <div class="uk-slider" uk-slider="finite: true">
+          <div class="slider-item-wrapper">
+            <ul class="uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m">
+              <li *ngFor="let ticket of upcomingTickets" class="uk-margin-right">
+                <app-ticket-thumbnail [ticket]="ticket"></app-ticket-thumbnail>
+            </ul>
+          </div>
         </div>
       </div>
 
       <h2>All tickets</h2>
       <div class="uk-overflow-auto">
-        <table class="uk-table uk-table-small uk-table-striped uk-table-middle">
+        <table class="uk-table uk-table-small uk-table-striped uk-table-middle clickable">
           <thead>
           <tr>
             <th>No.</th>
@@ -29,7 +31,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let ticket of tickets">
+          <tr *ngFor="let ticket of tickets"
+              (click)="showTicket(ticket._id)">
             <td class="uk-table-shrink uk-text-nowrap">#{{ ticket._id | prettyId }}</td>
             <td class="uk-table-shrink uk-text-nowrap">
               <img src="../../../../assets/images/concert.jpg" alt="" width="50px">
