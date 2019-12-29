@@ -1,42 +1,44 @@
 
 
-<div *ngIf="ticket" class="uk-background-secondary uk-padding-large uk-light">
-  <div class="uk-container">
-    <h1 class="uk-heading-small">{{ ticket.concert.title }}</h1>
-    <p><i class="fad fa-map-marked-alt"></i>{{ Venue[ticket.concert.venue] }}</p>
-    <p><i class="fad fa-calendar-day"></i>{{ ticket.concert.date | prettyDate }}</p>
+<div *ngIf="ticket" class="uk-background-secondary uk-light">
+  <div class="uk-padding-large uk-padding-remove-left uk-padding-remove-right">
+    <div class="uk-container">
+      <h1 class="uk-heading-small">{{ ticket.concert.title }}</h1>
+      <p><i class="fad fa-map-marked-alt"></i>{{ Venue[ticket.concert.venue] }}</p>
+      <p><i class="fad fa-calendar-day"></i>{{ ticket.concert.date | prettyDate }}</p>
 
-    <div class="uk-margin-large-top uk-grid-large" uk-grid>
+      <div class="uk-margin-large-top uk-grid-large" uk-grid>
 
-      <div class="uk-width-1-1 uk-width-1-2@m">
-        <img src="../../../../../assets/images/qr-code-placeholder.png" alt="ticket">
-      </div>
+        <div class="uk-width-1-1 uk-width-1-2@m">
+          <img src="../../../../../assets/images/qr-code-placeholder.png" alt="ticket">
+        </div>
 
-      <div class="uk-width-1-1 uk-width-1-2@m uk-flex-first@m">
-        <h3>My tickets</h3>
+        <div class="uk-width-1-1 uk-width-1-2@m uk-flex-first@m">
+          <h3>My tickets</h3>
 
-        <table class="uk-table uk-table-striped uk-table-small uk-table-middle">
-          <thead>
-            <tr>
-              <td>Type</td>
-              <td>Price</td>
-              <td>Amount</td>
+          <table class="uk-table uk-table-striped uk-table-small uk-table-middle">
+            <thead>
+              <tr>
+                <td>Type</td>
+                <td>Price</td>
+                <td>Amount</td>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of getTicketItems(ticket)">
+              <td class="uk-text-nowrap">{{ TicketType[item.type] }}</td>
+              <td class="uk-text-nowrap">{{ item.price | prettyPrice }}</td>
+              <td class="uk-text-nowrap uk-text-right">{{ item.amount }}</td>
             </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of getTicketItems(ticket)">
-            <td class="uk-text-nowrap">{{ TicketType[item.type] }}</td>
-            <td class="uk-text-nowrap">{{ item.price | prettyPrice }}</td>
-            <td class="uk-text-nowrap">{{ item.amount }}</td>
-          </tr>
-          </tbody>
-        </table>
+            </tbody>
+          </table>
 
 
-        <h3>Practical information</h3>
-        <p>Where to park, scanning ticket at entrance, drug policy, etc...</p>
+          <h3>Practical information</h3>
+          <p>Where to park, scanning ticket at entrance, drug policy, etc...</p>
+        </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
