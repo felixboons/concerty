@@ -6,7 +6,7 @@
 
       <h1 class="uk-heading-small">Tickets</h1>
 
-      <div *ngIf="upcomingTickets.length > 0">
+      <div *ngIf="upcomingTickets.length > 0; else noTicketsInfo">
         <h2>The countdown begins...</h2>
         <div class="uk-slider" uk-slider="finite: true">
           <div class="slider-item-wrapper">
@@ -17,32 +17,41 @@
           </div>
         </div>
       </div>
+      <ng-template #noTicketsInfo>
+        <div class="uk-margin-small-bottom">
+          <i class="fad fa-info-circle"></i>
+          You haven't purchased any tickets yet.
+        </div>
+        <a routerLink="/concerts" class="uk-button uk-button-primary">BROWSE CONCERTS</a>
+      </ng-template>
 
-      <h2>All tickets</h2>
-      <div class="uk-overflow-auto">
-        <table class="uk-table uk-table-small uk-table-striped uk-table-middle clickable">
-          <thead>
-          <tr>
-            <th>No.</th>
-            <th>Image</th>
-            <th>Concert</th>
-            <th>Date</th>
-            <th class="uk-text-right">Tickets</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let ticket of tickets"
-              (click)="showTicket(ticket._id)">
-            <td class="uk-table-shrink uk-text-nowrap">#{{ ticket._id | prettyId }}</td>
-            <td class="uk-table-shrink uk-text-nowrap">
-              <img src="../../../../assets/images/concert.jpg" alt="" width="50px">
-            </td>
-            <td class="uk-table-expand uk-text-nowrap">{{ ticket.concert.title }}</td>
-            <td class="uk-table-shrink uk-text-nowrap">{{ ticket.concert.date | prettyDate }}</td>
-            <td class="uk-table-shrink uk-text-right uk-text-nowrap">{{ getTotalTickets(ticket.items)}}</td>
-          </tr>
-          </tbody>
-        </table>
+      <div *ngIf="tickets">
+        <h2>All tickets</h2>
+        <div class="uk-overflow-auto">
+          <table class="uk-table uk-table-small uk-table-striped uk-table-middle clickable">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>Image</th>
+              <th>Concert</th>
+              <th>Date</th>
+              <th class="uk-text-right">Tickets</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let ticket of tickets"
+                (click)="showTicket(ticket._id)">
+              <td class="uk-table-shrink uk-text-nowrap">#{{ ticket._id | prettyId }}</td>
+              <td class="uk-table-shrink uk-text-nowrap">
+                <img src="../../../../assets/images/concert.jpg" alt="" width="50px">
+              </td>
+              <td class="uk-table-expand uk-text-nowrap">{{ ticket.concert.title }}</td>
+              <td class="uk-table-shrink uk-text-nowrap">{{ ticket.concert.date | prettyDate }}</td>
+              <td class="uk-table-shrink uk-text-right uk-text-nowrap">{{ getTotalTickets(ticket.items)}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 

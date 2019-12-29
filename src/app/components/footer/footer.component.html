@@ -18,6 +18,30 @@
         </ul>
       </div>
 
+      <!--      ACCOUNT -->
+      <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
+
+        <h5 *ngIf="isAuthenticated">ACCOUNT</h5>
+        <ul *ngIf=" isAuthenticated" class="uk-list">
+          <li routerLink="/account/tickets" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Tickets</a>
+          </li>
+          <li routerLink="/account/profile" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Profile</a>
+          </li>
+        </ul>
+
+        <h5 *ngIf="isAdministrator">ADMINISTRATOR</h5>
+        <ul *ngIf="isAdministrator" class="uk-list">
+          <li routerLink="/administrator/artists" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Artist management</a>
+          </li>
+          <li routerLink="/administrator/concerts" routerLinkActive="uk-active">
+            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Concert management</a>
+          </li>
+        </ul>
+      </div>
+
 <!--      ABOUT CONCERTY -->
       <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
         <h5>ABOUT</h5>
@@ -27,29 +51,6 @@
           </li>
           <li routerLink="/vacancies" routerLinkActive="uk-active">
             <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Vacancies</a>
-          </li>
-        </ul>
-      </div>
-
-<!--      ACCOUNT -->
-      <div class="uk-width-1-1 uk-width-1-2@s uk-width-1-4@m uk-margin-medium-bottom">
-        <h5>ACCOUNT</h5>
-        <ul class="uk-list">
-          <li routerLink="/account/tickets" routerLinkActive="uk-active">
-            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Tickets</a>
-          </li>
-          <li routerLink="/account/profile" routerLinkActive="uk-active">
-            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Profile</a>
-          </li>
-        </ul>
-
-        <h5>ADMINISTRATOR</h5>
-        <ul class="uk-list">
-          <li routerLink="/administrator/artists" routerLinkActive="uk-active">
-            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Artist management</a>
-          </li>
-          <li routerLink="/administrator/concerts" routerLinkActive="uk-active">
-            <a><i class="fad fa-chevron-double-right fa-xs uk-margin-small-right"></i>Concert management</a>
           </li>
         </ul>
       </div>
