@@ -18,12 +18,12 @@ export class ArtistService {
   constructor(private http: HttpClient,
               private cache: CacheService,
               private notifier: NotificationService) {
-    this.readArtistsFromCache();
+    // this.readArtistsFromCache();
     this.getArtists().subscribe(artists => {
       artists.reverse();
       this.artists = artists;
       this.artistsSubject.next(artists);
-      this.cache.setArtists(artists);
+      // this.cache.setArtists(artists);
     });
   }
 
@@ -52,7 +52,7 @@ export class ArtistService {
       .then(artist => {
         this.artists.unshift(artist);
         this.artistsSubject.next(this.artists);
-        this.cache.setArtists(this.artists);
+        // this.cache.setArtists(this.artists);
         this.notify('Successfully created artist');
       })
       .catch(err => {
@@ -69,8 +69,8 @@ export class ArtistService {
     };
 
     const url = this.url + '/' + artist._id;
-    this.http.put(url, body)
-      .pipe(map((response: Artist) => response),
+    this.http.put<Artist>(url, body)
+      .pipe(map(response => response),
         catchError(err => {
           this.notify('Something went wrong', false);
           return throwError('Server responded with unexpected object type');
@@ -80,7 +80,7 @@ export class ArtistService {
         console.log(artist);
         this.artists[index] = artist;
         this.artistsSubject.next(this.artists);
-        this.cache.setArtists(this.artists);
+        // this.cache.setArtists(this.artists);
         this.notify('Successfully edited artist');
       })
       .catch(err => {
@@ -104,7 +104,7 @@ export class ArtistService {
 
         this.artists.splice(index, 1);
         this.artistsSubject.next(this.artists);
-        this.cache.setArtists(this.artists);
+        // this.cache.setArtists(this.artists);
       })
       .catch(err => {
 
@@ -115,7 +115,7 @@ export class ArtistService {
     this.artists = this.cache.getArtists();
   }
 
-  private getArtists(): Observable<Artist[]> {
+  getArtists(): Observable<Artist[]> {
     return this.http
       .get(this.url)
       .pipe(map((response: Artist[]) => response),

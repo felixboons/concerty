@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {ConcertService} from './_services/concert.service';
+import {ArtistService} from './_services/artist.service';
 
 @Component({
   selector: 'app-root',
@@ -9,17 +11,36 @@ import {NavigationEnd, Router} from '@angular/router';
 export class AppComponent {
   private currentUrl: string;
 
-  constructor(private router: Router) {
+  constructor(private concertService: ConcertService,
+              private artistsService: ArtistService,
+              private router: Router) {
+    this.gatherData();
+    this.initializeToTopScrolling();
+  }
+
+  private gatherData(): void {
+    this.artistsService.getArtists()
+      .subscribe(artists => {
+
+    });
+    this.concertService.getConcerts();
+  }
+
+  private initializeToTopScrolling(): void {
     this.router.events
       .subscribe(event => {
         if (event instanceof NavigationEnd) {
           const url = event.url;
 
           if (this.currentUrl !== url) {
-            window.scroll(0, 0)
+            AppComponent.scrollToTop();
             this.currentUrl = url;
           }
         }
       });
+  }
+
+  private static scrollToTop(): void {
+    window.scroll(0, 0);
   }
 }

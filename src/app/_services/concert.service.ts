@@ -20,7 +20,7 @@ export class ConcertService {
               private http: HttpClient,
               private cache: CacheService,
               private notifier: NotificationService) {
-    this.readConcertsFromCache();
+    // this.readConcertsFromCache();
     this.getConcerts()
       .subscribe(concerts => {
         if (concerts.length > 0) {
@@ -29,6 +29,17 @@ export class ConcertService {
           this.updateConcerts(concerts);
         }
       });
+  }
+
+  getConcerts(): Observable<Concert[]> {
+    return this.http
+      .get(this.url)
+      .pipe(map((response: Concert[]) => response),
+        catchError(err => {
+          this.notify('Something went wrong', false);
+          return throwError('Server responded with unexpected object array type');
+        })
+      );
   }
 
   getConcert(_id: string): Concert {
@@ -129,23 +140,12 @@ export class ConcertService {
 
   private updateConcerts(concerts: Concert[]): void {
     this.concerts = concerts;
-    this.cache.setConcerts(concerts);
+    // this.cache.setConcerts(concerts);
     this.concertsSubject.next(concerts);
   }
 
-  private getConcerts(): Observable<Concert[]> {
-    return this.http
-      .get(this.url)
-      .pipe(map((response: Concert[]) => response),
-        catchError(err => {
-          this.notify('Something went wrong', false);
-          return throwError('Server responded with unexpected object array type');
-        })
-      );
-  }
-
   private readConcertsFromCache(): void {
-    this.concerts = this.cache.getConcerts();
+    // this.concerts = this.cache.getConcerts();
   }
 
   private notify(message: string, success = true): void {

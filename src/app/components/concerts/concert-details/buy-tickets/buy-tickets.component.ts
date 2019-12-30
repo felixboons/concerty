@@ -18,8 +18,8 @@ export class BuyTicketsComponent implements OnInit {
   items: TicketItem[] = [];
   totalTicketPrice = 0;
 
-  constructor(private ticketService: TicketService,
-              private authService: AuthService,
+  constructor(private authService: AuthService,
+              private ticketService: TicketService,
               private notifier: NotificationService) {
   }
 
@@ -76,5 +76,9 @@ export class BuyTicketsComponent implements OnInit {
   private resetTicketValues() {
     this.totalTicketPrice = 0;
     this.initializeTickets();
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 }
