@@ -53,10 +53,10 @@ export class EditConcertComponent implements OnInit, OnChanges {
       input.price, input.tickets, input.description, this.selectedArtists, this.concert._id);
     this.concertService.editConcert(concert, this.index);
     this.initializeForm();
-    this.cancelAndReset();
+    this.reset();
   }
 
-  cancelAndReset() {
+  reset() {
     this.formCanceled.emit();
   }
 

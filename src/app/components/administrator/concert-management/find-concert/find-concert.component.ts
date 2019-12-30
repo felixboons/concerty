@@ -24,8 +24,8 @@ export class FindConcertComponent implements OnInit {
   ngOnInit() {
   }
 
-  removeConcert(_id: string): void {
-    this.concertService.deleteConcert(_id);
+  removeConcert(id: string, index: number): void {
+    this.concertService.deleteConcert(id, index);
   }
 
   selectConcert(concert: Concert): void {

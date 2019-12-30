@@ -35,7 +35,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let concert of concerts"
+        <tr *ngFor="let concert of concerts;let i = index"
             (click)="selectConcert(concert)">
           <td class="uk-table-shrink">#{{ concert._id | prettyId }}</td>
           <td class="uk-table-shrink">
@@ -48,7 +48,7 @@
           <td class="uk-table-shrink uk-text-right">{{ concert.ticketsRemaining }}</td>
           <td class="uk-table-shrink uk-text-right">{{ concert.ticketsTotal }}</td>
           <td class="uk-table-shrink uk-text-center">
-            <i (click)="removeConcert(concert._id)" class="fad fa-trash-alt"></i>
+            <i (click)="removeConcert(concert._id, i)" class="fad fa-trash-alt"></i>
           </td>
         </tr>
         </tbody>

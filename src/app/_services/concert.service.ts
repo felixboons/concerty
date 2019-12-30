@@ -21,26 +21,7 @@ export class ConcertService {
               private http: HttpClient,
               private cache: CacheService,
               private notifier: NotificationService) {
-    this.synchronizeConcerts();
-  }
-
-  // TODO: Run this every time data CRUD actions are taken.
-  private synchronizeConcerts(): void {
-      this.artistService.getArtists()
-        .then(artists => {
-
-          return this.getConcerts()
-            .then(concerts => {
-              concerts = ConcertService.convertEmbeddedIdArrayToObjectArray(concerts, artists);
-              this.concerts = concerts;
-              this.concertsSubject.next(concerts);
-              console.log(concerts);
-            })
-        })
-        .catch(err => {
-          this.notifier.showErrorNotification('Something went wrong');
-          console.log(err);
-        });
+    this.synchronize();
   }
 
   getConcerts(): Promise<Concert[]> {
@@ -50,7 +31,7 @@ export class ConcertService {
       return this.http.get<Concert[]>(this.url)
         .pipe(map((response: Concert[]) => response),
           catchError(err => {
-            this.notifier.showErrorNotification('Something went wrong');
+            this.notifier.showErrorNotification('Server error');
             console.log(err);
             return throwError('Server responded with UNEXPECTED object array type');
           })
@@ -58,9 +39,9 @@ export class ConcertService {
     }
   }
 
-  getConcert(_id: string): Concert {
+  getConcert(id: string): Concert {
     for (const concert of this.concerts) {
-      if (concert._id === _id) {
+      if (concert._id === id) {
         return concert;
       }
     }
@@ -68,7 +49,6 @@ export class ConcertService {
   }
 
   createConcert(concert: Concert): void {
-    const artistIds = Concert.getArtistIds(concert.artists); // Should do this in constructor.
     const body = {
       title: concert.title,
       venue: concert.venue,
@@ -76,22 +56,25 @@ export class ConcertService {
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
       description: concert.description,
-      artists: artistIds
+      artists: Concert.getArtistIds(concert.artists)
     };
 
     this.http.post(this.url, body)
       .pipe(map((response: Concert) => response),
         catchError(err => {
           console.log(err);
-          this.notifier.showErrorNotification('Something went wrong');
+          this.notifier.showErrorNotification('Server error');
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
       .then(concert => {
-        concert = this.convertEmbeddedObjectToIdArray(concert);
-        this.concerts.unshift(concert);
-        this.synchronizeConcerts();
-        this.notifier.showSuccessNotification('Successfully created concert');
+
+        this.artistService.getArtists()
+          .then(artists => {
+            concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
+            this.synchronize();
+            this.notifier.showSuccessNotification('Successfully created concert');
+          })
       })
       .catch(err => {
         console.log(err);
@@ -100,7 +83,6 @@ export class ConcertService {
   }
 
   editConcert(concert: Concert, index: number): void {
-    const artistIds = Concert.getArtistIds(concert.artists);
     const body = {
       title: concert.title,
       venue: concert.venue,
@@ -108,22 +90,26 @@ export class ConcertService {
       price: concert.price,
       ticketsTotal: concert.ticketsTotal,
       description: concert.description,
-      artists: artistIds
+      artists: Concert.getArtistIds(concert.artists)
     };
 
-    this.http.put(this.url + '/' + concert._id, body)
-      .pipe(map((response: Concert) => response),
+    this.http.put<Concert>(this.url + '/' + concert._id, body)
+      .pipe(map(response => response),
         catchError(err => {
           console.log(err);
-          this.notifier.showErrorNotification('Something went wrong');
+          this.notifier.showErrorNotification('Server error');
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
       .then(concert => {
-        concert = this.convertEmbeddedObjectToIdArray(concert);
-        this.concerts[index] = concert;
-        this.synchronizeConcerts();
-        this.notifier.showSuccessNotification('Successfully edited concert');
+
+        this.artistService.getArtists()
+          .then(artists => {
+            concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
+            this.concerts[index] = concert;
+            this.synchronize();
+            this.notifier.showSuccessNotification('Successfully edited concert');
+          });
       })
       .catch(err => {
         console.log(err);
@@ -131,22 +117,19 @@ export class ConcertService {
       });
   }
 
-  deleteConcert(_id: string): void {
+  deleteConcert(_id: string, index: number): void {
     const url = this.url + '/' + _id;
 
-    this.http.delete(url).toPromise()
-      .then((concert: Concert) => {
-        concert = this.convertEmbeddedObjectToIdArray(concert);
-        let index;
+    this.http.delete<Concert>(url).toPromise()
+      .then(concert => {
 
-        this.concerts.forEach((value, i) => {
-          if (concert._id === value._id) {
-            index = i;
-          }
-        });
-        this.concerts.splice(index, 1);
-        this.synchronizeConcerts();
-        this.notifier.showSuccessNotification('Successfully deleted concert');
+        this.artistService.getArtists() // Retrieve sub-document data.
+          .then(artists => {
+            concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
+            this.concerts.splice(index, 1);
+            this.synchronize();
+            this.notifier.showSuccessNotification('Successfully deleted concert');
+          });
       })
       .catch(err => {
         console.log(err);
@@ -154,29 +137,37 @@ export class ConcertService {
       });
   }
 
-  private readConcertsFromCache(): void {
-    // this.concerts = this.cache.getConcerts();
+  private synchronize(): void {
+    this.artistService.getArtists()
+      .then(artists => {
+
+        return this.getConcerts()
+          .then(concerts => {
+            concerts = ConcertService.convertEmbeddedIdArraysToObjectArrays(concerts, artists);
+            this.concerts = concerts;
+            this.concertsSubject.next(concerts);
+          })
+      })
+      .catch(err => {
+        this.notifier.showErrorNotification('Server error');
+        console.log(err);
+      });
   }
 
-  private static convertEmbeddedIdArrayToObjectArray(concerts: Concert[], artists: Artist[]): Concert[] {
+  private static convertEmbeddedIdArraysToObjectArrays(concerts: Concert[], artists: Artist[]): Concert[] {
     for (const concert of concerts) {
       concert.artists = Concert.getEmbeddedArtists(concert, artists);
     }
-
     return concerts;
   }
 
 
-  private convertEmbeddedObjectToIdArray(concert: Concert): Concert {
-    const _concert = concert;
-    const _artists = [];
+  private static convertEmbeddedIdArrayToObjectArray(concert: Concert, artists: Artist[]): Concert {
+    concert.artists = Concert.getEmbeddedArtists(concert, artists);
+    return concert;
+  }
 
-    for (const artistId of concert.artists) {
-      const artist = this.artistService.getArtist(artistId.toString()); // Fool the compiler with .toString()
-      _artists.push(artist);
-    }
-
-    _concert.artists = _artists;
-    return _concert;
+  private readConcertsFromCache(): void {
+    // this.concerts = this.cache.getConcerts();
   }
 }
