@@ -34,8 +34,22 @@ export class Concert {
     return artistIds;
   }
 
-  public static getEmbeddedArtists(concert: Concert, artists: Artist[]): Artist[] {
-    return null;
+  public static getEmbeddedArtists(concert: Concert, allArtists: Artist[]): Artist[] {
+    const artistsCopy = concert.artists;
+    concert.artists = []; // empty
+
+    const artists: Artist[] = [];
+
+    for (const _artist of artistsCopy) {
+      const artistId = _artist.toString(); // Artist actually is artistId. Fool it with .toString().
+
+      for (const artist of allArtists) {
+        if (artistId === artist._id) {
+          artists.push(artist);
+        }
+      }
+    }
+    return artists;
   }
 
   get title(): string {

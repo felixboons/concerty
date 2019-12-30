@@ -24,6 +24,7 @@ export class ConcertService {
     this.synchronizeConcerts();
   }
 
+  // TODO: Run this every time data CRUD actions are taken.
   private synchronizeConcerts(): void {
       this.artistService.getArtists()
         .then(artists => {
@@ -31,7 +32,8 @@ export class ConcertService {
           return this.getConcerts()
             .then(concerts => {
               concerts = ConcertService.convertEmbeddedIdArrayToObjectArray(concerts, artists);
-              this.update(concerts);
+              this.concerts = concerts;
+              this.concertsSubject.next(concerts);
               console.log(concerts);
             })
         })
@@ -39,11 +41,6 @@ export class ConcertService {
           this.notifier.showErrorNotification('Something went wrong');
           console.log(err);
         });
-  }
-
-  private update(concerts: Concert[]): void {
-    this.concerts = concerts;
-    this.concertsSubject.next(concerts);
   }
 
   getConcerts(): Promise<Concert[]> {
@@ -162,16 +159,11 @@ export class ConcertService {
   }
 
   private static convertEmbeddedIdArrayToObjectArray(concerts: Concert[], artists: Artist[]): Concert[] {
-    const _concerts = [];
-
     for (const concert of concerts) {
-      const _concert = concert;
-      const _artists = Concert.getEmbeddedArtists(concert, artists);
-      _concert.artists = _artists;
-      _concerts.push(_artists);
+      concert.artists = Concert.getEmbeddedArtists(concert, artists);
     }
 
-    return _concerts;
+    return concerts;
   }
 
 
