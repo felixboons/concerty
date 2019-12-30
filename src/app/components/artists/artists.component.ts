@@ -11,7 +11,6 @@ import {Genre} from '../../_enums/genre.enum';
 export class ArtistsComponent implements OnInit {
   artists: Artist[] = [];
   Genre = Genre;
-  genres = Genre.keys();
 
   constructor(private artistService: ArtistService) {
   }
@@ -19,7 +18,8 @@ export class ArtistsComponent implements OnInit {
   ngOnInit() {
     this.artistService.artistsSubject
       .subscribe(artists => {
-        this.artists = artists
+        this.artists = artists;
+        console.log('ArtistComponent');
       });
   }
 }

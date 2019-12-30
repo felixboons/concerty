@@ -34,6 +34,10 @@ export class Concert {
     return artistIds;
   }
 
+  public static getEmbeddedArtists(concert: Concert, artists: Artist[]): Artist[] {
+    return null;
+  }
+
   get title(): string {
     return this._title;
   }

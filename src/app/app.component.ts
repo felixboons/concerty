@@ -12,21 +12,9 @@ export class AppComponent {
   private currentUrl: string;
 
   constructor(private concertService: ConcertService,
-              private artistsService: ArtistService,
+              private artistService: ArtistService,
               private router: Router) {
-    this.gatherData();
     this.initializeToTopScrolling();
-  }
-
-  private gatherData(): void {
-    this.artistsService.getArtists();
-      // .then(artists => {
-      //   this.concertService.getConcerts();
-      // })
-      // .catch(_ => {
-      //
-      // });
-    this.concertService.getConcerts();
   }
 
   private initializeToTopScrolling(): void {

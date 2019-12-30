@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {BehaviorSubject, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Concert} from '../_models/concert.model';
@@ -7,6 +7,7 @@ import {catchError, map} from 'rxjs/operators';
 import {CacheService} from './cache.service';
 import {NotificationService} from './notification.service';
 import {ArtistService} from './artist.service';
+import {Artist} from '../_models/artist.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,21 +21,44 @@ export class ConcertService {
               private http: HttpClient,
               private cache: CacheService,
               private notifier: NotificationService) {
-    // this.readConcertsFromCache();
     this.synchronizeConcerts();
   }
 
-  getConcerts(): Observable<Concert[]> {
-    console.log('concertService');
-    return this.http
-      .get(this.url)
-      .pipe(map((response: Concert[]) => response),
-        catchError(err => {
+  private synchronizeConcerts(): void {
+      this.artistService.getArtists()
+        .then(artists => {
+
+          return this.getConcerts()
+            .then(concerts => {
+              concerts = ConcertService.convertEmbeddedIdArrayToObjectArray(concerts, artists);
+              this.update(concerts);
+              console.log(concerts);
+            })
+        })
+        .catch(err => {
           this.notifier.showErrorNotification('Something went wrong');
           console.log(err);
-          return throwError('Server responded with unexpected object array type');
-        })
-      );
+        });
+  }
+
+  private update(concerts: Concert[]): void {
+    this.concerts = concerts;
+    this.concertsSubject.next(concerts);
+  }
+
+  getConcerts(): Promise<Concert[]> {
+    if (this.concerts && this.concerts.length > 0) {
+      return new Promise<Concert[]>(resolve => resolve(this.concerts));
+    } else {
+      return this.http.get<Concert[]>(this.url)
+        .pipe(map((response: Concert[]) => response),
+          catchError(err => {
+            this.notifier.showErrorNotification('Something went wrong');
+            console.log(err);
+            return throwError('Server responded with UNEXPECTED object array type');
+          })
+        ).toPromise();
+    }
   }
 
   getConcert(_id: string): Concert {
@@ -67,7 +91,7 @@ export class ConcertService {
         }))
       .toPromise()
       .then(concert => {
-        concert = this.replaceArtistIdWithArtist(concert);
+        concert = this.convertEmbeddedObjectToIdArray(concert);
         this.concerts.unshift(concert);
         this.synchronizeConcerts();
         this.notifier.showSuccessNotification('Successfully created concert');
@@ -99,7 +123,7 @@ export class ConcertService {
         }))
       .toPromise()
       .then(concert => {
-        concert = this.replaceArtistIdWithArtist(concert);
+        concert = this.convertEmbeddedObjectToIdArray(concert);
         this.concerts[index] = concert;
         this.synchronizeConcerts();
         this.notifier.showSuccessNotification('Successfully edited concert');
@@ -115,7 +139,7 @@ export class ConcertService {
 
     this.http.delete(url).toPromise()
       .then((concert: Concert) => {
-        concert = this.replaceArtistIdWithArtist(concert);
+        concert = this.convertEmbeddedObjectToIdArray(concert);
         let index;
 
         this.concerts.forEach((value, i) => {
@@ -133,38 +157,25 @@ export class ConcertService {
       });
   }
 
-  private synchronizeConcerts(): void {
-    this.getConcerts().toPromise()
-      .then(concerts => {
-        this.concerts = concerts;
-        this.concertsSubject.next(concerts);
-      })
-      .catch(_ => console.log('Could\'nt synchronize concerts'));
-  }
-
   private readConcertsFromCache(): void {
     // this.concerts = this.cache.getConcerts();
   }
 
-  private replaceArtistIdsWithArtists(concerts: Concert[]): Concert[] {
+  private static convertEmbeddedIdArrayToObjectArray(concerts: Concert[], artists: Artist[]): Concert[] {
     const _concerts = [];
 
     for (const concert of concerts) {
       const _concert = concert;
-      const _artists = [];
-
-      for (const artistId of _concert.artists) {
-        const artist = this.artistService.getArtist(artistId.toString()); // Fool the compiler with .toString()
-        _artists.push(artist);
-      }
+      const _artists = Concert.getEmbeddedArtists(concert, artists);
       _concert.artists = _artists;
-      _concerts.push(_concert);
+      _concerts.push(_artists);
     }
 
     return _concerts;
   }
 
-  private replaceArtistIdWithArtist(concert: Concert): Concert {
+
+  private convertEmbeddedObjectToIdArray(concert: Concert): Concert {
     const _concert = concert;
     const _artists = [];
 

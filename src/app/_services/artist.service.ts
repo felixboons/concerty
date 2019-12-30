@@ -13,33 +13,32 @@ import {CacheService} from './cache.service';
 export class ArtistService {
   private readonly url = environment.serverUrlPrefix + 'artists';
   private artists: Artist[] = [];
-  artistsSubject = new BehaviorSubject<Artist[]>(null);
+  artistsSubject = new BehaviorSubject<Artist[]>(this.artists);
 
   constructor(private http: HttpClient,
               private cache: CacheService,
               private notifier: NotificationService) {
-    // this.readArtistsFromCache();
+    this.readArtistsFromCache();
     // this.getArtists().subscribe(artists => {
     //   artists.reverse();
     //   this.artists = artists;
     //   this.artistsSubject.next(artists);
-    //   // this.cache.setArtists(artists);
+    // this.cache.setArtists(artists);
     // });
   }
 
-  getArtists(): void {
-    console.log('artistService');
-    this.http
-      .get(this.url)
-      .pipe(map((response: Artist[]) => response),
-        catchError(err => {
-          this.notifier.showErrorNotification('Something went wrong');
-          console.log(err);
-          return throwError('Server responded with unexpected object type');
-        })
-      ).toPromise()
-      .then((res => console.log(res)))
-      .catch(res => console.log(res));
+  getArtists(): Promise<Artist[]> {
+    if (this.artists && this.artists.length > 0) {
+      return new Promise<Artist[]>(resolve => resolve(this.artists));
+    } else {
+      return this.http.get<Artist[]>(this.url)
+        .pipe(map(response => response),
+          catchError(err => {
+            this.notifier.showErrorNotification('Something went wrong');
+            console.log(err);
+            return throwError('Server responded with UNEPTECTED object type');
+          })).toPromise();
+    }
   }
 
   // getArtists(): Observable<Artist[]> {

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Concert} from '../../_models/concert.model';
 import {ConcertService} from '../../_services/concert.service';
-import {Venue} from '../../_enums/venue.enum';
 import {DateHelper} from '../../_helpers/date-helper';
 
 @Component({
@@ -13,7 +12,8 @@ export class ConcertsComponent implements OnInit {
   concerts: Concert[] = [];
   recentlyAddedConcerts: Concert[] = [];
 
-  constructor(private concertService: ConcertService) { }
+  constructor(private concertService: ConcertService) {
+  }
 
   ngOnInit() {
     this.concertService.concertsSubject
@@ -28,7 +28,7 @@ export class ConcertsComponent implements OnInit {
   private initializeRecentlyAddedConcerts() {
     for (const concert of this.concerts) {
       if (DateHelper.isUpcoming(concert.date) &&
-          DateHelper.isRecentlyAdded(concert.createdAt)) {
+        DateHelper.isRecentlyAdded(concert.createdAt)) {
         this.recentlyAddedConcerts.push(concert);
       }
     }
