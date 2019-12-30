@@ -21,22 +21,17 @@ export class ConcertService {
               private cache: CacheService,
               private notifier: NotificationService) {
     // this.readConcertsFromCache();
-    this.getConcerts()
-      .subscribe(concerts => {
-        if (concerts.length > 0) {
-          concerts.reverse();
-          concerts = this.replaceArtistIdsWithArtists(concerts);
-          this.updateConcerts(concerts);
-        }
-      });
+    this.synchronizeConcerts();
   }
 
   getConcerts(): Observable<Concert[]> {
+    console.log('concertService');
     return this.http
       .get(this.url)
       .pipe(map((response: Concert[]) => response),
         catchError(err => {
-          this.notify('Something went wrong', false);
+          this.notifier.showErrorNotification('Something went wrong');
+          console.log(err);
           return throwError('Server responded with unexpected object array type');
         })
       );
@@ -67,19 +62,19 @@ export class ConcertService {
       .pipe(map((response: Concert) => response),
         catchError(err => {
           console.log(err);
-          this.notify('Something went wrong', false);
+          this.notifier.showErrorNotification('Something went wrong');
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
       .then(concert => {
         concert = this.replaceArtistIdWithArtist(concert);
         this.concerts.unshift(concert);
-        this.updateConcerts(this.concerts);
-        this.notify('Successfully created concert');
+        this.synchronizeConcerts();
+        this.notifier.showSuccessNotification('Successfully created concert');
       })
       .catch(err => {
         console.log(err);
-        this.notify('Failed to create concert', false);
+        this.notifier.showErrorNotification('Failed to create concert');
       });
   }
 
@@ -99,19 +94,19 @@ export class ConcertService {
       .pipe(map((response: Concert) => response),
         catchError(err => {
           console.log(err);
-          this.notify('Something went wrong', false);
+          this.notifier.showErrorNotification('Something went wrong');
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
       .then(concert => {
         concert = this.replaceArtistIdWithArtist(concert);
         this.concerts[index] = concert;
-        this.updateConcerts(this.concerts);
-        this.notify('Successfully edited concert');
+        this.synchronizeConcerts();
+        this.notifier.showSuccessNotification('Successfully edited concert');
       })
       .catch(err => {
         console.log(err);
-        this.notify('Failed to edit concert', false);
+        this.notifier.showErrorNotification('Failed to edit concert');
       });
   }
 
@@ -129,31 +124,26 @@ export class ConcertService {
           }
         });
         this.concerts.splice(index, 1);
-        this.updateConcerts(this.concerts);
-        this.notify('Successfully deleted concert');
+        this.synchronizeConcerts();
+        this.notifier.showSuccessNotification('Successfully deleted concert');
       })
       .catch(err => {
         console.log(err);
-        this.notify('Failed to delete concert', false);
+        this.notifier.showErrorNotification('Failed to delete concert');
       });
   }
 
-  private updateConcerts(concerts: Concert[]): void {
-    this.concerts = concerts;
-    // this.cache.setConcerts(concerts);
-    this.concertsSubject.next(concerts);
+  private synchronizeConcerts(): void {
+    this.getConcerts().toPromise()
+      .then(concerts => {
+        this.concerts = concerts;
+        this.concertsSubject.next(concerts);
+      })
+      .catch(_ => console.log('Could\'nt synchronize concerts'));
   }
 
   private readConcertsFromCache(): void {
     // this.concerts = this.cache.getConcerts();
-  }
-
-  private notify(message: string, success = true): void {
-    if (success) {
-      this.notifier.showSuccessNotification(message);
-    } else {
-      this.notifier.showErrorNotification(message);
-    }
   }
 
   private replaceArtistIdsWithArtists(concerts: Concert[]): Concert[] {

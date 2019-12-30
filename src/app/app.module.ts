@@ -48,6 +48,7 @@ import {PrettyDaysRemainingPipe} from './_pipes/pretty-days-remaining.pipe';
 import {PrettyPricePipe} from './_pipes/pretty-price.pipe';
 import {TicketThumbnailComponent} from './components/_generic/ticket-thumbnail/ticket-thumbnail.component';
 import {TicketDetailsComponent} from './components/account/tickets/ticket-details/ticket-details.component';
+import {ErrorInterceptor} from './_interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import {TicketDetailsComponent} from './components/account/tickets/ticket-detail
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // { provide: LOCALE_ID, useValue: 'NL-nl' }
     { provide: LOCALE_ID, useValue: 'EN-en' }
   ],

@@ -11,16 +11,17 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(request.headers);
-    return next.handle(request).pipe(catchError(err => {
-      if ([401, 403].indexOf(err.status) !== -1) {
-        this.authService.logout();
-      }
-      console.log(err);
-      console.log(err);
+    return next.handle(request)
+      .pipe(catchError(err => {
+        console.log(err.status);
+        console.log(err.status);
+        console.log(err);
+        if ([401, 403, 409].indexOf(err.status) !== -1) {
+          this.authService.logout();
+        }
 
-      const error = err.error.message || err.statusText;
-      return throwError(error);
-    }))
+        const error = err.error.message || err.statusText;
+        return throwError(error);
+      }))
   }
 }

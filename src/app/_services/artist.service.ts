@@ -19,13 +19,39 @@ export class ArtistService {
               private cache: CacheService,
               private notifier: NotificationService) {
     // this.readArtistsFromCache();
-    this.getArtists().subscribe(artists => {
-      artists.reverse();
-      this.artists = artists;
-      this.artistsSubject.next(artists);
-      // this.cache.setArtists(artists);
-    });
+    // this.getArtists().subscribe(artists => {
+    //   artists.reverse();
+    //   this.artists = artists;
+    //   this.artistsSubject.next(artists);
+    //   // this.cache.setArtists(artists);
+    // });
   }
+
+  getArtists(): void {
+    console.log('artistService');
+    this.http
+      .get(this.url)
+      .pipe(map((response: Artist[]) => response),
+        catchError(err => {
+          this.notifier.showErrorNotification('Something went wrong');
+          console.log(err);
+          return throwError('Server responded with unexpected object type');
+        })
+      ).toPromise()
+      .then((res => console.log(res)))
+      .catch(res => console.log(res));
+  }
+
+  // getArtists(): Observable<Artist[]> {
+  //   return this.http
+  //     .get<Artist[]>(this.url)
+  //     .pipe(map(response => response),
+  //       catchError(err => {
+  //         console.log(err);
+  //         return throwError('Server responded with unexpected object type');
+  //       })
+  //     );
+  // }
 
   getArtist(_id: string): Artist {
     for (const artist of this.artists) {
@@ -45,19 +71,18 @@ export class ArtistService {
     this.http.post(this.url, body)
       .pipe(map((response: Artist) => response),
         catchError(err => {
-          this.notify('Something went wrong', false);
+          this.notifier.showErrorNotification('Something went wrong');
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
       .then(artist => {
         this.artists.unshift(artist);
         this.artistsSubject.next(this.artists);
-        // this.cache.setArtists(this.artists);
-        this.notify('Successfully created artist');
+        this.notifier.showErrorNotification('Successfully created artist');
       })
       .catch(err => {
         console.log(err);
-        this.notify('Failed to create artist', false);
+        this.notifier.showErrorNotification('Failed to create artist');
       });
   }
 
@@ -72,7 +97,7 @@ export class ArtistService {
     this.http.put<Artist>(url, body)
       .pipe(map(response => response),
         catchError(err => {
-          this.notify('Something went wrong', false);
+          this.notifier.showErrorNotification('Something went wrong');
           return throwError('Server responded with unexpected object type');
         }))
       .toPromise()
@@ -80,11 +105,10 @@ export class ArtistService {
         console.log(artist);
         this.artists[index] = artist;
         this.artistsSubject.next(this.artists);
-        // this.cache.setArtists(this.artists);
-        this.notify('Successfully edited artist');
+        this.notifier.showSuccessNotification('Successfully edited artist');
       })
       .catch(err => {
-        this.notify('Failed to edit artist', false);
+        this.notifier.showErrorNotification('Failed to edit artist');
         console.log(err);
       });
   }
@@ -113,24 +137,5 @@ export class ArtistService {
 
   private readArtistsFromCache(): void {
     this.artists = this.cache.getArtists();
-  }
-
-  getArtists(): Observable<Artist[]> {
-    return this.http
-      .get(this.url)
-      .pipe(map((response: Artist[]) => response),
-        catchError(err => {
-          this.notify('Something went wrong', false);
-          return throwError('Server responded with unexpected object type');
-        })
-      );
-  }
-
-  private notify(message: string, success = true): void {
-    if (success) {
-      this.notifier.showSuccessNotification(message);
-    } else {
-      this.notifier.showErrorNotification(message);
-    }
   }
 }

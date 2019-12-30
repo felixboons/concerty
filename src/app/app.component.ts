@@ -19,10 +19,13 @@ export class AppComponent {
   }
 
   private gatherData(): void {
-    this.artistsService.getArtists()
-      .subscribe(artists => {
-
-    });
+    this.artistsService.getArtists();
+      // .then(artists => {
+      //   this.concertService.getConcerts();
+      // })
+      // .catch(_ => {
+      //
+      // });
     this.concertService.getConcerts();
   }
 
