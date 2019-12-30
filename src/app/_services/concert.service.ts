@@ -7,7 +7,6 @@ import {NotificationService} from './notification.service';
 import {ArtistService} from './artist.service';
 import {Artist} from '../_models/artist.model';
 
-
 // TODO: sort by date.
 
 @Injectable({
@@ -16,7 +15,7 @@ import {Artist} from '../_models/artist.model';
 export class ConcertService {
   private readonly url = environment.serverUrlPrefix + 'concerts';
   private concerts: Concert[] = [];
-  concertsSubject = new BehaviorSubject<Concert[]>(this.concerts);
+  concertsSub = new BehaviorSubject<Concert[]>(this.concerts);
 
   constructor(private http: HttpClient,
               private artistService: ArtistService,
@@ -29,7 +28,8 @@ export class ConcertService {
     if (this.concerts && this.concerts.length > 0) {
       return new Promise<Concert[]>(resolve => resolve(this.concerts));
     } else {
-      return this.http.get<Concert[]>(this.url).toPromise();
+      return this.http.get<Concert[]>(this.url)
+        .toPromise();
     }
   }
 
@@ -122,7 +122,7 @@ export class ConcertService {
   }
 
   private synchronize(): Promise<void> {
-    this.concertsSubject.next(this.concerts);
+    this.concertsSub.next(this.concerts);
 
     return new Promise<void>((resolve, reject) => {
       this.artistService.getArtists()
@@ -133,7 +133,7 @@ export class ConcertService {
               concerts.reverse();
               concerts = ConcertService.convertEmbeddedIdArraysToObjectArrays(concerts, artists);
               this.concerts = concerts;
-              this.concertsSubject.next(concerts);
+              this.concertsSub.next(concerts);
               resolve();
             });
         })

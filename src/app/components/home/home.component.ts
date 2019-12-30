@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
   private subscribeToConcerts() {
-    this.concertService.concertsSubject
+    this.concertService.concertsSub
       .subscribe(concerts => {
         if (concerts) {
           this.concerts = concerts;
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   }
 
   private subscribeToArtists() {
-    this.artistService.artistsSubject
+    this.artistService.artistsSub
       .subscribe(artists => {
         if (artists) {
           this.artists = artists;

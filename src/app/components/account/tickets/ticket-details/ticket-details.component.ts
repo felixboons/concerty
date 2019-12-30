@@ -30,7 +30,7 @@ export class TicketDetailsComponent implements OnInit {
       .subscribe(params => {
         this.ticketId = params.id;
       });
-    this.authService.isAuthenticatedSubject
+    this.authService.currentUserSub
       .subscribe(user => {
         this.currentUser = user;
         this.ticket = this.getTicket(this.ticketId);

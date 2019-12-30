@@ -18,7 +18,7 @@ export class ArtistManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.artistService.artistsSubject
+    this.artistService.artistsSub
       .subscribe(artists => this.artists = artists);
   }
 

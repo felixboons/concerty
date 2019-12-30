@@ -16,7 +16,7 @@ export class ConcertsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.concertService.concertsSubject
+    this.concertService.concertsSub
       .subscribe(concerts => {
         this.concerts = concerts;
         if (concerts) {

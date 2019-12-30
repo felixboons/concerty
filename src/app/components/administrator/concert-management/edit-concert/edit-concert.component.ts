@@ -27,7 +27,7 @@ export class EditConcertComponent implements OnInit, OnChanges {
               private notifier: NotificationService) { }
 
   ngOnInit() {
-    this.artistService.artistsSubject
+    this.artistService.artistsSub
       .subscribe(artists => {
         this.artists = artists;
         this.initializeForm();

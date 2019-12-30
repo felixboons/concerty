@@ -49,7 +49,6 @@ import {PrettyPricePipe} from './_pipes/pretty-price.pipe';
 import {TicketThumbnailComponent} from './components/_generic/ticket-thumbnail/ticket-thumbnail.component';
 import {TicketDetailsComponent} from './components/account/tickets/ticket-details/ticket-details.component';
 import {ErrorInterceptor} from './_interceptors/error.interceptor';
-import {SynchronizationService} from './_services/synchronization.service';
 
 @NgModule({
   declarations: [

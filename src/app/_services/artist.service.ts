@@ -13,7 +13,7 @@ import {Artist} from '../_models/artist.model';
 export class ArtistService {
   private readonly url = environment.serverUrlPrefix + 'artists';
   private artists: Artist[] = [];
-  artistsSubject = new BehaviorSubject<Artist[]>(this.artists);
+  artistsSub = new BehaviorSubject<Artist[]>(this.artists);
 
   constructor(private http: HttpClient,
               private notifier: NotificationService) {
@@ -25,7 +25,8 @@ export class ArtistService {
     if (this.artists && this.artists.length > 0) {
       return new Promise<Artist[]>(resolve => resolve(this.artists));
     } else {
-      return this.http.get<Artist[]>(this.url).toPromise();
+      return this.http.get<Artist[]>(this.url)
+        .toPromise();
     }
   }
 
@@ -60,7 +61,6 @@ export class ArtistService {
     this.http.put<Artist>(url, body)
       .toPromise()
       .then(artist => {
-        console.log(index);
         this.artists[index] = artist;
         this.synchronize()
           .then(_ => this.notifier.showSuccessNotification('Successfully edited artist'));
@@ -86,14 +86,13 @@ export class ArtistService {
   }
 
   private synchronize(): Promise<void> {
-    this.artistsSubject.next(this.artists);
+    this.artistsSub.next(this.artists);
 
     return new Promise<void>((resolve, reject) => {
       this.getArtists()
         .then(artists => {
           this.artists = artists;
-          this.artistsSubject.next(artists);
-          console.log(this.artists);
+          this.artistsSub.next(artists);
           resolve();
         })
         .catch(err => this.notifier.showErrorNotification('Server error'));

@@ -23,9 +23,9 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.artistService.artistsSubject
+    this.artistService.artistsSub
       .subscribe(_ => this.initializePages());
-    this.concertService.concertsSubject
+    this.concertService.concertsSub
       .subscribe(_ => this.initializePages());
   }
 

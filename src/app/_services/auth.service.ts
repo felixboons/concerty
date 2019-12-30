@@ -14,18 +14,17 @@ import {Role} from '../_enums/role.enum';
 export class AuthService {
   private readonly url = environment.serverUrlPrefix + 'auth/login';
   private currentUser: User;
-  isAuthenticatedSubject = new BehaviorSubject<User>(this.currentUser);
+  currentUserSub = new BehaviorSubject<User>(this.currentUser);
 
   constructor(private http: HttpClient,
+              private router: Router,
               private userService: UserService,
-              private cache: CacheService,
-              private router: Router) {
-    this.readCurrentUserFromCache();
+              private cache: CacheService) {
     this.establishLoginSession();
   }
 
   login(email: string, password: string): Promise<string> {
-    const body = {email, password};
+    const body = { email, password };
 
     return new Promise((resolve, reject) => {
       this.http.post(this.url, body).toPromise()
@@ -43,13 +42,6 @@ export class AuthService {
     });
   }
 
-  logout(): void {
-    this.cache.removeToken();
-    this.cache.removeUser();
-    this.router.navigateByUrl('login');
-    this.isAuthenticatedSubject.next(null);
-  }
-
   isAuthenticated(): boolean {
     const token = this.cache.getToken();
     const user = this.getCurrentUser();
@@ -60,11 +52,19 @@ export class AuthService {
     return this.currentUser.role === Role.ADMIN;
   }
 
+  logout(): void {
+    this.cache.removeToken();
+    this.cache.removeUser();
+    this.router.navigateByUrl('login');
+    this.currentUserSub.next(null);
+  }
+
   getCurrentUser(): User {
     if (this.currentUser) {
       return this.currentUser;
     } else {
-      return this.cache.getUser();
+      const user =
+      this.userService.getUser();
     }
   }
 
@@ -73,29 +73,35 @@ export class AuthService {
     if (!token || !user) {
       this.logout();
     } else {
-      this.currentUser = user;
-      this.cache.setUser(user);
-      this.isAuthenticatedSubject.next(user);
     }
   }
 
   private readCurrentUserFromCache(): void {
     this.currentUser = this.cache.getUser();
-    this.isAuthenticatedSubject.next(this.currentUser);
+    this.currentUserSub.next(this.currentUser);
   }
 
   private establishLoginSession() {
-    this.readCurrentUserFromCache();
+    if (this.isAuthenticated()) {
+      this.readCurrentUserFromCache();
 
-    if (this.currentUser) {
-      this.userService.getUser(this.currentUser._id)
-        .subscribe(user => {
-          if (!!user) {
-            this.updateAuthentication(user);
-          }
-        });
+      if (this.currentUser) {
+        this.synchronize()
+          .then(_ => {
+            this.currentUser = user;
+            this.cache.setUser(user);
+            this.currentUserSub.next(user);
+          })
+          .catch(_ => this.logout());
+      }
     } else {
       this.logout();
     }
+  }
+
+  private synchronize(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+
+    })
   }
 }

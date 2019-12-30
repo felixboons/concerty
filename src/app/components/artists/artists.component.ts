@@ -16,10 +16,7 @@ export class ArtistsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.artistService.artistsSubject
-      .subscribe(artists => {
-        this.artists = artists;
-        console.log('ArtistComponent');
-      });
+    this.artistService.artistsSub
+      .subscribe(artists => this.artists = artists);
   }
 }

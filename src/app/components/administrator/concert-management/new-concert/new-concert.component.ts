@@ -22,7 +22,7 @@ export class NewConcertComponent implements OnInit {
   constructor(private concertService: ConcertService,
               private artistService: ArtistService,
               private notifier: NotificationService) {
-    this.artistService.artistsSubject
+    this.artistService.artistsSub
       .subscribe(artists => this.artists = artists);
   }
 

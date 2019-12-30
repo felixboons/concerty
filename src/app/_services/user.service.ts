@@ -2,10 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../_models/user.model';
-import {Observable, Subject, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 import {ConcertService} from './concert.service';
-import {Ticket} from '../_models/ticket.model';
 import {CacheService} from './cache.service';
 
 @Injectable({
@@ -20,8 +18,6 @@ export class UserService {
               private concertService: ConcertService,
               private cache: CacheService) {
     this.readCurrentUserFromCache();
-    this.currentUserSubject
-      .subscribe(user => this.currentUser = user);
   }
 
   createUser(user: User): Promise<boolean> {
@@ -33,7 +29,8 @@ export class UserService {
     };
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.url, body).toPromise()
+      this.http.post<User>(this.url, body)
+        .toPromise()
         .then(response => {
           resolve();
         })
@@ -43,14 +40,9 @@ export class UserService {
     });
   }
 
-  getUser(_id: string): Observable<User> {
-    return this.http.get<User>(this.url + '/' + _id)
-      .pipe(map(user => {
-        return this.replaceConcertIdsWithConcerts(user);
-      }),
-      catchError(err => {
-        return throwError('Server responded with unexpected object array type');
-      }));
+  getUser(id: string): Promise<User> {
+    return this.http.get<User>(this.url + '/' + id)
+      .toPromise();
   }
 
   replaceConcertIdsWithConcerts(user: User): User {
