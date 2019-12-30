@@ -35,12 +35,9 @@ export class Concert {
   }
 
   public static getEmbeddedArtists(concert: Concert, allArtists: Artist[]): Artist[] {
-    const artistsCopy = concert.artists;
-    concert.artists = []; // empty
-
     const artists: Artist[] = [];
 
-    for (const _artist of artistsCopy) {
+    for (const _artist of concert.artists) {
       const artistId = _artist.toString(); // Artist actually is artistId. Fool it with .toString().
 
       for (const artist of allArtists) {

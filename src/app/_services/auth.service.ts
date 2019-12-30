@@ -63,8 +63,7 @@ export class AuthService {
     if (this.currentUser) {
       return this.currentUser;
     } else {
-      const user =
-      this.userService.getUser();
+      this.userService.getUser(this.currentUser._id);
     }
   }
 
@@ -81,8 +80,12 @@ export class AuthService {
     this.currentUserSub.next(this.currentUser);
   }
 
-  private establishLoginSession() {
-    if (this.isAuthenticated()) {
+  private establishLoginSession(): void {
+    if (!this.isAuthenticated()) {
+      this.logout();
+      return;
+    } else {
+    }
       this.readCurrentUserFromCache();
 
       if (this.currentUser) {
@@ -94,14 +97,21 @@ export class AuthService {
           })
           .catch(_ => this.logout());
       }
-    } else {
-      this.logout();
-    }
+
   }
 
   private synchronize(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    this.currentUserSub.next(this.currentUser);
 
+    return new Promise<void>((resolve, reject) => {
+      this.userService.getUser(this.currentUser._id)
+        .then(user => {
+          console.log(user);
+          user = UserService.
+          console.log(user);
+          this.currentUser = user;
+          this.currentUserSub.next(user);
+        })
     })
   }
 }

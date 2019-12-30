@@ -5,14 +5,13 @@ import {User} from '../_models/user.model';
 import {Subject} from 'rxjs';
 import {ConcertService} from './concert.service';
 import {CacheService} from './cache.service';
+import {Concert} from '../_models/concert.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private readonly url = environment.serverUrlPrefix + 'users';
-  currentUser: User;
-  currentUserSubject = new Subject<User>();
 
   constructor(private http: HttpClient,
               private concertService: ConcertService,
@@ -45,7 +44,8 @@ export class UserService {
       .toPromise();
   }
 
-  replaceConcertIdsWithConcerts(user: User): User {
+  static replaceConcertIdsWithConcerts(user: User, concert: Concert): User {
+    console.log(user.tickets);
     const tickets = user.tickets;
     const _tickets = [];
 

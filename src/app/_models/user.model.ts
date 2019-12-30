@@ -17,6 +17,8 @@ export class User {
     this.id = _id;
   }
 
+  public static
+
   get _id(): string {
     return this.id;
   }
