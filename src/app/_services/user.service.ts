@@ -2,10 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../_models/user.model';
-import {Subject} from 'rxjs';
-import {ConcertService} from './concert.service';
-import {CacheService} from './cache.service';
-import {Concert} from '../_models/concert.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +9,7 @@ import {Concert} from '../_models/concert.model';
 export class UserService {
   private readonly url = environment.serverUrlPrefix + 'users';
 
-  constructor(private http: HttpClient,
-              private concertService: ConcertService,
-              private cache: CacheService) {
-    this.readCurrentUserFromCache();
+  constructor(private http: HttpClient) {
   }
 
   createUser(user: User): Promise<boolean> {
@@ -42,25 +35,5 @@ export class UserService {
   getUser(id: string): Promise<User> {
     return this.http.get<User>(this.url + '/' + id)
       .toPromise();
-  }
-
-  static replaceConcertIdsWithConcerts(user: User, concert: Concert): User {
-    console.log(user.tickets);
-    const tickets = user.tickets;
-    const _tickets = [];
-
-    for (const ticket of tickets) {
-      if (ticket.concert) {
-        ticket.concert = this.concertService.getConcert(ticket.concert.toString()); // Fool the compiler with .toString()
-        _tickets.push(ticket);
-      }
-    }
-
-    user.tickets = _tickets;
-    return user;
-  }
-
-  private readCurrentUserFromCache(): void {
-    this.currentUser = this.cache.getUser();
   }
 }

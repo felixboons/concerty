@@ -10,17 +10,19 @@ import {TicketItem} from '../_models/ticket-item.model';
 })
 export class TicketService {
   private url = environment.serverUrlPrefix + 'users/';
+  private currentUser: User;
 
   constructor(private http: HttpClient,
               private authService: AuthService) {
+    this.authService.currentUserSub
+      .subscribe(user => this.currentUser = user);
   }
 
   buyTicket(items: TicketItem[], concertId: string): Promise<User> {
-    const currentUser = this.authService.getCurrentUser();
-    const url = this.url + currentUser._id + '/tickets';
+    const url = this.url + this.currentUser._id + '/tickets';
 
     const body = {
-      customerName: currentUser.firstName + ' ' + currentUser.lastName,
+      customerName: this.currentUser.firstName + ' ' + this.currentUser.lastName,
       items: [],
       concert: concertId
     };
@@ -37,7 +39,7 @@ export class TicketService {
     return new Promise((resolve, reject) => {
       this.http.post<User>(url, body).toPromise()
         .then(user => {
-          console.log(user[0]);
+          console.log(user);
           this.updateTickets(user[0]); // Concert is also send in response?
           resolve(user);
         })
@@ -48,6 +50,7 @@ export class TicketService {
   }
 
   private updateTickets(user: User): void {
-    this.authService.updateAuthentication(user);
+    // TODO: Sync current user
+    // this.authService.
   }
 }

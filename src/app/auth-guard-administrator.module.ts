@@ -11,11 +11,12 @@ export class AuthGuardAdministrator implements CanActivate {
               private router: Router) { }
 
   canActivate(): boolean {
-    const authenticated = this.authService.isAuthenticated();
-    if (authenticated) {
+    const authorized = this.authService.isAdministrator();
+
+    if (authorized) {
       return true;
     } else {
-      this.router.navigateByUrl('login');
+      this.router.navigateByUrl('account');
       return false;
     }
   }

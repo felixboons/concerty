@@ -38,7 +38,7 @@ export class Concert {
     const artists: Artist[] = [];
 
     for (const _artist of concert.artists) {
-      const artistId = _artist.toString(); // Artist actually is artistId. Fool it with .toString().
+      const artistId = _artist.toString(); // Artist actually is an ID. Fool TS with .toString().
 
       for (const artist of allArtists) {
         if (artistId === artist._id) {
