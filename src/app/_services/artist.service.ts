@@ -74,7 +74,6 @@ export class ArtistService {
   deleteArtist(id: string, index: number): void {
     this.http.delete<Artist>(this.url + '/' + id).toPromise()
       .then(artist => {
-
         this.artists.splice(index, 1);
         this.synchronize()
           .then(_ => this.notifier.showSuccessNotification('Successfully deleted artist'));

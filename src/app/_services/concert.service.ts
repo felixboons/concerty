@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Concert} from '../_models/concert.model';
 import {NotificationService} from './notification.service';
 import {ArtistService} from './artist.service';
 import {Artist} from '../_models/artist.model';
+import {catchError, tap} from 'rxjs/operators';
 
 // TODO: sort by date.
 
@@ -25,12 +26,18 @@ export class ConcertService {
   }
 
   getConcerts(): Promise<Concert[]> {
-    if (this.concerts && this.concerts.length > 0) {
-      return new Promise<Concert[]>(resolve => resolve(this.concerts));
-    } else {
-      return this.http.get<Concert[]>(this.url)
-        .toPromise();
-    }
+    return new Promise<Concert[]>((resolve, reject) => {
+      console.log('getConcerts()');
+      console.log(this.concerts);
+
+      if (this.concerts && this.concerts.length > 0) {
+        resolve(this.concerts);
+      } else {
+        return this.http.get<Concert[]>(this.url)
+          .pipe(catchError(err => throwError(err)))
+          .toPromise();
+      }
+    })
   }
 
   getConcert(id: string): Concert {
@@ -55,10 +62,8 @@ export class ConcertService {
 
     this.http.post<Concert>(this.url, body).toPromise()
       .then(concert => {
-
         this.artistService.getArtists()
           .then(artists => {
-
             concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
             this.concerts.unshift(concert);
             this.synchronize()
@@ -85,10 +90,8 @@ export class ConcertService {
     this.http.put<Concert>(this.url + '/' + concert._id, body)
       .toPromise()
       .then(concert => {
-
         this.artistService.getArtists()
           .then(artists => {
-
             concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
             this.concerts[index] = concert;
             this.synchronize()
@@ -123,12 +126,10 @@ export class ConcertService {
 
   private synchronize(): Promise<void> {
     this.concertsSub.next(this.concerts);
-
     return new Promise<void>((resolve, reject) => {
       this.artistService.getArtists()
         .then(artists => {
-
-          return this.getConcerts()
+          this.getConcerts() // TODO: If this doesnt work, return this promise.
             .then(concerts => {
               concerts.reverse();
               concerts = ConcertService.convertEmbeddedIdArraysToObjectArrays(concerts, artists);
@@ -147,7 +148,6 @@ export class ConcertService {
     }
     return concerts;
   }
-
 
   private static convertEmbeddedIdArrayToObjectArray(concert: Concert, artists: Artist[]): Concert {
     concert.artists = Concert.getEmbeddedArtists(concert, artists);
