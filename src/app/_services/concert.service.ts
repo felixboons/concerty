@@ -32,17 +32,12 @@ export class ConcertService {
   }
 
   getConcerts(): Promise<Concert[]> {
-    return new Promise<Concert[]>((resolve, reject) => {
-      console.log('getConcerts()');
-      console.log(this.concerts);
-
-      if (this.concerts && this.concerts.length > 0) {
-        resolve(this.concerts);
-      } else {
-        return this.http.get<Concert[]>(this.url)
-          .toPromise();
-      }
-    });
+    if (this.concerts && this.concerts.length > 0) {
+      return new Promise<Concert[]>((resolve) => resolve(this.concerts));
+    } else {
+      return this.http.get<Concert[]>(this.url)
+        .toPromise();
+    }
   }
 
   getConcert(id: string): Concert {
@@ -118,10 +113,10 @@ export class ConcertService {
       });
   }
 
-  // this.concertsSub.next(this.concerts);
   private synchronize(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    this.concertsSub.next(this.concerts);
 
+    return new Promise<void>((resolve, reject) => {
       this.getConcerts() // TODO: If this doesnt work, return this promise.
         .then(concerts => {
           concerts.reverse();
