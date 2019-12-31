@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../_services/auth.service';
-import {Role} from '../../../_enums/role.enum';
 
 @Component({
   selector: 'app-navbar-mobile',

@@ -2,17 +2,15 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {CacheService} from './cache.service';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, throwError} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {User} from '../_models/user.model';
 import {Role} from '../_enums/role.enum';
 import {ConcertService} from './concert.service';
-import {catchError} from 'rxjs/operators';
+import {NotificationService} from './notification.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   private readonly url = environment.serverUrlPrefix + 'auth/login';
   private currentUser: User;
@@ -22,16 +20,16 @@ export class AuthService {
               private concertService: ConcertService,
               private cache: CacheService,
               private http: HttpClient,
+              private notifier: NotificationService,
               private router: Router) {
     this.establishLoginSession();
   }
 
   login(email: string, password: string): Promise<string> {
-    const body = { email, password };
+    const body = {email, password};
 
     return new Promise((resolve, reject) => {
       this.http.post<User>(this.url, body)
-        .pipe(catchError(err => throwError(err)))
         .toPromise()
         .then(response => {
 
@@ -39,26 +37,22 @@ export class AuthService {
           let user = response['user'];
 
           console.log(response);
-          this.concertService.getConcerts() // TODO: << error: concertService is undefined.
+          return this.concertService.getConcerts() // TODO: << error: concertService is undefined.
             .then(concerts => {
               console.log(concerts);
               user = User.getEmbeddedConcertForTickets(user, concerts);
               this.synchronize()
-                .then(_ => resolve())
-                .catch(_ => {
-                  console.log('fail');
-                  reject();
-                })
+                .then(_ => resolve());
             })
             .catch(err => {
-              console.log('eroorr');
-              reject();
+              this.notifier.showErrorNotification('Server error');
+              console.log(err);
+              reject(err);
             });
         })
         .catch(err => {
           console.log(err);
-          console.log('err');
-          reject();
+          reject(err);
         });
     });
   }
@@ -80,8 +74,7 @@ export class AuthService {
     this.currentUserSub.next(null);
   }
 
-
-  synchronize(): Promise<void> {
+  private synchronize(): Promise<void> {
     this.currentUserSub.next(this.currentUser);
 
     return new Promise<void>((resolve, reject) => {
@@ -95,17 +88,18 @@ export class AuthService {
               this.currentUser = user;
               this.cache.setUser(user);
               this.currentUserSub.next(user);
-              resolve()
+              resolve();
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     });
   }
 
   private establishLoginSession(): void {
     if (!this.isAuthenticated()) {
-      this.logout();
+      this.cache.removeToken();
+      this.cache.removeUser();
     } else {
       this.readCurrentUserFromCache();
       this.synchronize()

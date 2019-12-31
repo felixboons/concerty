@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../_services/auth.service';
 import {Router} from '@angular/router';
-import * as $ from 'jquery';
 import {CacheService} from '../../_services/cache.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
-
 
     if (this.authService.isAuthenticated()) {
       this.router.navigateByUrl('account');
@@ -45,23 +44,23 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.failedToLogin = false;
-    this.showLoader();
+    LoginComponent.showLoader();
     const input = this.form.value;
 
     this.authService.login(input.email, input.password)
       .then(() => this.router.navigateByUrl('account'))
-      .catch(() => this.failedToLogin = true)
-      .finally(() => this.hideLoader());
+      .catch(_ => this.failedToLogin = true)
+      .finally(() => LoginComponent.hideLoader());
   }
 
-  hideLoader(): void {
+  private static hideLoader(): void {
     const loadElement = $('#loader');
     const hideWhileLoadingElement = $('.hide-while-loading');
     loadElement.hide();
     hideWhileLoadingElement.show();
   }
 
-  showLoader(): void {
+  private static showLoader(): void {
     const loadElement = $('#loader');
     const hideWhileLoadingElement = $('.hide-while-loading');
     loadElement.height(hideWhileLoadingElement.height());

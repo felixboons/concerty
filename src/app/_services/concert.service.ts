@@ -6,7 +6,7 @@ import {Concert} from '../_models/concert.model';
 import {NotificationService} from './notification.service';
 import {ArtistService} from './artist.service';
 import {Artist} from '../_models/artist.model';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 
 // TODO: sort by date.
 
@@ -16,13 +16,19 @@ import {catchError, tap} from 'rxjs/operators';
 export class ConcertService {
   private readonly url = environment.serverUrlPrefix + 'concerts';
   private concerts: Concert[] = [];
+  private artists: Artist[] = [];
   concertsSub = new BehaviorSubject<Concert[]>(this.concerts);
 
   constructor(private http: HttpClient,
               private artistService: ArtistService,
               private notifier: NotificationService) {
-    this.synchronize()
-      .then(_ => console.log('Concert data retrieved'));
+    this.artistService.artistsSub
+      .subscribe(artists => {
+        console.log(artists);
+        this.artists = artists;
+        this.synchronize()
+          .then(_ => console.log('Concert data retrieved'));
+      });
   }
 
   getConcerts(): Promise<Concert[]> {
@@ -34,10 +40,9 @@ export class ConcertService {
         resolve(this.concerts);
       } else {
         return this.http.get<Concert[]>(this.url)
-          .pipe(catchError(err => throwError(err)))
           .toPromise();
       }
-    })
+    });
   }
 
   getConcert(id: string): Concert {
@@ -62,13 +67,10 @@ export class ConcertService {
 
     this.http.post<Concert>(this.url, body).toPromise()
       .then(concert => {
-        this.artistService.getArtists()
-          .then(artists => {
-            concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
-            this.concerts.unshift(concert);
-            this.synchronize()
-              .then(_ => this.notifier.showSuccessNotification('Successfully created concert'));
-          });
+        concert = this.convertEmbeddedIdArrayToObjectArray(concert);
+        this.concerts.unshift(concert);
+        this.synchronize()
+          .then(_ => this.notifier.showSuccessNotification('Successfully created concert'));
       })
       .catch(err => {
         console.log(err);
@@ -90,13 +92,10 @@ export class ConcertService {
     this.http.put<Concert>(this.url + '/' + concert._id, body)
       .toPromise()
       .then(concert => {
-        this.artistService.getArtists()
-          .then(artists => {
-            concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
-            this.concerts[index] = concert;
-            this.synchronize()
-              .then(_ => this.notifier.showSuccessNotification('Successfully edited concert'));
-          });
+        concert = this.convertEmbeddedIdArrayToObjectArray(concert);
+        this.concerts[index] = concert;
+        this.synchronize()
+          .then(_ => this.notifier.showSuccessNotification('Successfully edited concert'));
       })
       .catch(err => {
         console.log(err);
@@ -108,15 +107,10 @@ export class ConcertService {
     this.http.delete<Concert>(this.url + '/' + id)
       .toPromise()
       .then(concert => {
-
-        this.artistService.getArtists() // Retrieve sub-document data.
-          .then(artists => {
-
-            concert = ConcertService.convertEmbeddedIdArrayToObjectArray(concert, artists);
-            this.concerts.splice(index, 1);
-            this.synchronize()
-              .then(_ => this.notifier.showSuccessNotification('Successfully deleted concert'));
-          });
+        concert = this.convertEmbeddedIdArrayToObjectArray(concert);
+        this.concerts.splice(index, 1);
+        this.synchronize()
+          .then(_ => this.notifier.showSuccessNotification('Successfully deleted concert'));
       })
       .catch(err => {
         console.log(err);
@@ -124,33 +118,35 @@ export class ConcertService {
       });
   }
 
+  // this.concertsSub.next(this.concerts);
   private synchronize(): Promise<void> {
-    this.concertsSub.next(this.concerts);
     return new Promise<void>((resolve, reject) => {
-      this.artistService.getArtists()
-        .then(artists => {
-          this.getConcerts() // TODO: If this doesnt work, return this promise.
-            .then(concerts => {
-              concerts.reverse();
-              concerts = ConcertService.convertEmbeddedIdArraysToObjectArrays(concerts, artists);
-              this.concerts = concerts;
-              this.concertsSub.next(concerts);
-              resolve();
-            });
+
+      this.getConcerts() // TODO: If this doesnt work, return this promise.
+        .then(concerts => {
+          concerts.reverse();
+          concerts = this.convertEmbeddedIdArraysToObjectArrays(concerts);
+          this.concerts = concerts;
+          this.concertsSub.next(concerts);
+          console.log(this.concerts);
+          resolve();
         })
-        .catch(err => this.notifier.showErrorNotification('Server error'));
+        .catch(err => {
+          console.log(err);
+          this.notifier.showErrorNotification('Server error')
+        });
     });
   }
 
-  private static convertEmbeddedIdArraysToObjectArrays(concerts: Concert[], artists: Artist[]): Concert[] {
+  private convertEmbeddedIdArraysToObjectArrays(concerts: Concert[]): Concert[] {
     for (const concert of concerts) {
-      concert.artists = Concert.getEmbeddedArtists(concert, artists);
+      concert.artists = Concert.getEmbeddedArtists(concert, this.artists);
     }
     return concerts;
   }
 
-  private static convertEmbeddedIdArrayToObjectArray(concert: Concert, artists: Artist[]): Concert {
-    concert.artists = Concert.getEmbeddedArtists(concert, artists);
+  private convertEmbeddedIdArrayToObjectArray(concert: Concert): Concert {
+    concert.artists = Concert.getEmbeddedArtists(concert, this.artists);
     return concert;
   }
 }

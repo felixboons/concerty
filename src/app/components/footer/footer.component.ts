@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import * as moment from 'moment';
 import {AuthService} from '../../_services/auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-footer',
