@@ -9,11 +9,13 @@ import {User} from '../_models/user.model';
 import {Role} from '../_enums/role.enum';
 import {ConcertService} from './concert.service';
 import {NotificationService} from './notification.service';
+import {Concert} from '../_models/concert.model';
 
 @Injectable()
 export class AuthService {
   private readonly url = environment.serverUrlPrefix + 'auth/login';
   private currentUser: User;
+  private concerts: Concert[] = [];
   currentUserSub = new BehaviorSubject<User>(this.currentUser);
 
   constructor(private userService: UserService,
@@ -22,7 +24,11 @@ export class AuthService {
               private http: HttpClient,
               private notifier: NotificationService,
               private router: Router) {
-    this.establishLoginSession();
+    // this.concertService.concertsSub
+    //   .subscribe(concerts => {
+        this.establishLoginSession();
+        // this.concerts = concerts;
+      // });
   }
 
   login(email: string, password: string): Promise<string> {
@@ -32,23 +38,13 @@ export class AuthService {
       this.http.post<User>(this.url, body)
         .toPromise()
         .then(response => {
-
           this.cache.setToken(response['token']);
           let user = response['user'];
+          user = User.getEmbeddedConcertForTickets(user, this.concerts);
+          this.currentUser = user;
 
-          console.log(response);
-          return this.concertService.getConcerts() // TODO: << error: concertService is undefined.
-            .then(concerts => {
-              console.log(concerts);
-              user = User.getEmbeddedConcertForTickets(user, concerts);
-              this.synchronize()
-                .then(_ => resolve());
-            })
-            .catch(err => {
-              this.notifier.showErrorNotification('Server error');
-              console.log(err);
-              reject(err);
-            });
+          this.synchronize()
+            .then(_ => resolve());
         })
         .catch(err => {
           console.log(err);
@@ -80,17 +76,11 @@ export class AuthService {
     return new Promise<void>((resolve, reject) => {
       this.userService.getUser(this.currentUser._id)
         .then(user => {
-
-          this.concertService.getConcerts()
-            .then(concerts => {
-              user = User.getEmbeddedConcertForTickets(user, concerts);
-              console.log(user);
-              this.currentUser = user;
-              this.cache.setUser(user);
-              this.currentUserSub.next(user);
-              resolve();
-            })
-            .catch(err => console.log(err));
+          user = User.getEmbeddedConcertForTickets(user, this.concerts);
+          this.currentUser = user;
+          this.cache.setUser(user);
+          this.currentUserSub.next(user);
+          resolve();
         })
         .catch(err => console.log(err));
     });

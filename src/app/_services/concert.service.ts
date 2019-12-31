@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, throwError} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Concert} from '../_models/concert.model';
 import {NotificationService} from './notification.service';
 import {ArtistService} from './artist.service';
 import {Artist} from '../_models/artist.model';
-import {catchError} from 'rxjs/operators';
 
 // TODO: sort by date.
 
@@ -24,7 +23,6 @@ export class ConcertService {
               private notifier: NotificationService) {
     this.artistService.artistsSub
       .subscribe(artists => {
-        console.log(artists);
         this.artists = artists;
         this.synchronize()
           .then(_ => console.log('Concert data retrieved'));
@@ -128,7 +126,7 @@ export class ConcertService {
         })
         .catch(err => {
           console.log(err);
-          this.notifier.showErrorNotification('Server error')
+          this.notifier.showErrorNotification('Server error');
         });
     });
   }

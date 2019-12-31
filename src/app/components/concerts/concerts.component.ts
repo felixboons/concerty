@@ -18,9 +18,8 @@ export class ConcertsComponent implements OnInit {
   ngOnInit() {
     this.concertService.concertsSub
       .subscribe(concerts => {
-        console.log(concerts);
-        this.concerts = concerts;
         if (concerts) {
+          this.concerts = concerts;
           this.initializeRecentlyAddedConcerts();
         }
       });
