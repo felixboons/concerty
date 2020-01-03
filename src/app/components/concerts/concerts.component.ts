@@ -18,8 +18,7 @@ export class ConcertsComponent implements OnInit {
   ngOnInit() {
     this.concertService.concertsSub
       .subscribe(concerts => {
-        if (concerts) {
-          concerts = Concert.sortByDate(concerts);
+        if (concerts && concerts.length > 0) {
           this.concerts = concerts;
           this.initializeRecentlyAddedConcerts();
         }
@@ -27,6 +26,8 @@ export class ConcertsComponent implements OnInit {
   }
 
   private initializeRecentlyAddedConcerts() {
+    this.recentlyAddedConcerts = [];
+
     for (const concert of this.concerts) {
       if (DateHelper.isUpcoming(concert.date) &&
         DateHelper.isRecentlyAdded(concert.createdAt)) {

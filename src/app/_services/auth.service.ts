@@ -20,15 +20,20 @@ export class AuthService {
 
   constructor(private userService: UserService,
               private concertService: ConcertService,
+              private notifier: NotificationService,
               private cache: CacheService,
               private http: HttpClient,
-              private notifier: NotificationService,
               private router: Router) {
-    // this.concertService.concertsSub
-    //   .subscribe(concerts => {
-        this.establishLoginSession();
-        // this.concerts = concerts;
-      // });
+
+    // TODO: Cannot retrieve concert information (from concertService) embedded in User.
+    // TODO: This is because concertService is undefined when trying to retrieve data.
+
+    this.concertService.concertsSub
+      .subscribe(concerts => {
+        if (concerts && concerts.length > 0) {
+          this.establishLoginSession();
+        }
+      });
   }
 
   login(email: string, password: string): Promise<string> {
@@ -38,6 +43,7 @@ export class AuthService {
       this.http.post<User>(this.url, body)
         .toPromise()
         .then(response => {
+          console.log(response);
           this.cache.setToken(response['token']);
           let user = response['user'];
           user = User.getEmbeddedConcertForTickets(user, this.concerts);
@@ -56,7 +62,7 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = this.cache.getToken();
     const user = this.cache.getUser();
-    return !!token && !!user;
+    return !!token && !!user; // && !!this.currentUser;
   }
 
   isAdministrator(): boolean {
@@ -77,6 +83,7 @@ export class AuthService {
       this.userService.getUser(this.currentUser._id)
         .then(user => {
           user = User.getEmbeddedConcertForTickets(user, this.concerts);
+          console.log(user);
           this.currentUser = user;
           this.cache.setUser(user);
           this.currentUserSub.next(user);

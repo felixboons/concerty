@@ -7,8 +7,6 @@ import {NotificationService} from './notification.service';
 import {ArtistService} from './artist.service';
 import {Artist} from '../_models/artist.model';
 
-// TODO: sort by date.
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,9 +21,11 @@ export class ConcertService {
               private notifier: NotificationService) {
     this.artistService.artistsSub
       .subscribe(artists => {
-        this.artists = artists;
-        this.synchronize()
-          .then(_ => console.log('Concert data retrieved'));
+        if (artists && artists.length > 0) {
+          this.artists = artists;
+          this.synchronize()
+            .then(_ => console.log('Concert data retrieved'));
+        }
       });
   }
 
@@ -121,7 +121,6 @@ export class ConcertService {
           concerts = this.convertEmbeddedIdArraysToObjectArrays(concerts);
           this.concerts = concerts;
           this.concertsSub.next(concerts);
-          console.log(this.concerts);
           resolve();
         })
         .catch(err => {
