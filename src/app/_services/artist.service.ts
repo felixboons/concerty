@@ -5,8 +5,6 @@ import {environment} from '../../environments/environment';
 import {NotificationService} from './notification.service';
 import {Artist} from '../_models/artist.model';
 
-// TODO: sort by updatedAt.
-
 @Injectable({
   providedIn: 'root'
 })

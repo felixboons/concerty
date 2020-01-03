@@ -19,6 +19,7 @@ export class ConcertsComponent implements OnInit {
     this.concertService.concertsSub
       .subscribe(concerts => {
         if (concerts) {
+          concerts = Concert.sortByDate(concerts);
           this.concerts = concerts;
           this.initializeRecentlyAddedConcerts();
         }

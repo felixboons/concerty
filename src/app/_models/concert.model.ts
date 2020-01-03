@@ -26,6 +26,12 @@ export class Concert {
     this._ticketsRemaining = ticketsRemaining;
   }
 
+  public static sortByDate(concerts: Concert[]): Concert[] {
+    return concerts.sort((a, b) => {
+      return new Date(a.date).getMilliseconds() - new Date(b.date).getMilliseconds();
+    })
+  }
+
   public static getArtistIds(artists: Artist[]): string[] {
     let artistIds: string[] = [];
     for (const artist of artists) {

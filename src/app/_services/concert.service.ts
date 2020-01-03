@@ -117,7 +117,7 @@ export class ConcertService {
     return new Promise<void>((resolve, reject) => {
       this.getConcerts() // TODO: If this doesnt work, return this promise.
         .then(concerts => {
-          concerts.reverse();
+          concerts = Concert.sortByDate(concerts);
           concerts = this.convertEmbeddedIdArraysToObjectArrays(concerts);
           this.concerts = concerts;
           this.concertsSub.next(concerts);
