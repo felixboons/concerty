@@ -92,7 +92,10 @@ export class ArtistService {
           this.artistsSub.next(artists);
           resolve();
         })
-        .catch(err => this.notifier.showErrorNotification('Server error'));
+        .catch(err => {
+          console.log(err);
+          this.notifier.showErrorNotification('Server error')
+        });
     });
   }
 }

@@ -19,19 +19,18 @@ export class AuthService {
   currentUserSub = new BehaviorSubject<User>(this.currentUser);
 
   constructor(private userService: UserService,
-              private concertService: ConcertService,
               private notifier: NotificationService,
               private cache: CacheService,
               private http: HttpClient,
-              private router: Router) {
+              private router: Router,
+              private concertService: ConcertService) {
 
-    // TODO: Cannot retrieve concert information (from concertService) embedded in User.
-    // TODO: This is because concertService is undefined when trying to retrieve data.
+    // TODO: ConcertService is not initialized when AuthService is, so logic below doesnt run properly.
 
     this.concertService.concertsSub
       .subscribe(concerts => {
         if (concerts && concerts.length > 0) {
-          this.establishLoginSession();
+          this.convertEmbeddedConcerts(concerts);
         }
       });
   }
@@ -43,13 +42,9 @@ export class AuthService {
       this.http.post<User>(this.url, body)
         .toPromise()
         .then(response => {
-          console.log(response);
           this.cache.setToken(response['token']);
           let user = response['user'];
-          user = User.getEmbeddedConcertForTickets(user, this.concerts);
-          this.currentUser = user;
-
-          this.synchronize()
+          this.synchronize(user)
             .then(_ => resolve());
         })
         .catch(err => {
@@ -59,14 +54,48 @@ export class AuthService {
     });
   }
 
-  isAuthenticated(): boolean {
-    const token = this.cache.getToken();
-    const user = this.cache.getUser();
-    return !!token && !!user; // && !!this.currentUser;
+  isAuthenticated(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      const token = this.cache.getToken();
+      const user = this.cache.getUser();
+
+      if (!!token && !!user) {
+        return this.userService.getUser(user._id)
+          .then(user => {
+            resolve(true);
+            this.synchronize(user);
+          })
+          .catch(_ => {
+            this.logout();
+            reject(false)
+          })
+      }
+    });
   }
 
-  isAdministrator(): boolean {
-    return this.isAuthenticated() && this.currentUser.role === Role.ADMIN;
+
+  // Resolve(true) is admin. resolve(false) is user. Reject is unauthenticated and unauthorized.
+  isAdministrator(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      const token = this.cache.getToken();
+      const user = this.cache.getUser();
+
+      if (!!token && !!user) {
+        return this.userService.getUser(user._id)
+          .then(user => {
+            if (user.role === Role.ADMIN) {
+              resolve(true);
+            } else {
+              reject(true);
+            }
+            this.synchronize(user);
+          })
+          .catch(_ => {
+            this.logout();
+            reject(false)
+          })
+      }
+    });
   }
 
   logout(): void {
@@ -76,36 +105,19 @@ export class AuthService {
     this.currentUserSub.next(null);
   }
 
-  private synchronize(): Promise<void> {
-    this.currentUserSub.next(this.currentUser);
-
+  private synchronize(user: User): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      this.userService.getUser(this.currentUser._id)
-        .then(user => {
-          user = User.getEmbeddedConcertForTickets(user, this.concerts);
-          console.log(user);
-          this.currentUser = user;
-          this.cache.setUser(user);
-          this.currentUserSub.next(user);
-          resolve();
-        })
-        .catch(err => console.log(err));
+      user = User.getEmbeddedConcertForTickets(user, this.concerts);
+      this.currentUser = user;
+      this.cache.setUser(user);
+      this.currentUserSub.next(user);
+      console.log(user);
+      resolve();
     });
   }
 
-  private establishLoginSession(): void {
-    if (!this.isAuthenticated()) {
-      this.cache.removeToken();
-      this.cache.removeUser();
-    } else {
-      this.readCurrentUserFromCache();
-      this.synchronize()
-        .then(_ => console.log('SYNCHRONIZED CURRENT USER DATA'))
-        .catch(_ => this.logout());
-    }
-  }
-
-  private readCurrentUserFromCache(): void {
-    this.currentUser = this.cache.getUser();
+  private convertEmbeddedConcerts(concerts: Concert[]): void {
+    const user = User.getEmbeddedConcertForTickets(this.currentUser, concerts);
+    this.synchronize(user);
   }
 }

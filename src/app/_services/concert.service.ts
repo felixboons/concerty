@@ -30,6 +30,7 @@ export class ConcertService {
   }
 
   getConcerts(): Promise<Concert[]> {
+    console.log(this.concerts);
     if (this.concerts && this.concerts.length > 0) {
       return new Promise<Concert[]>((resolve) => resolve(this.concerts));
     } else {

@@ -15,13 +15,13 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.currentUserSub
-      .subscribe(user => {
-        // if (user) {
-          this.isAuthenticated = this.authService.isAuthenticated();
-          this.isAdministrator = this.authService.isAdministrator();
-        // }
-      });
+    this.authService.isAdministrator()
+      .then(isAdmin => {
+        if (isAdmin) {
+          this.isAdministrator = true;
+        }
+        this.isAuthenticated = true;
+      })
   }
 
   getCurrentYear(): string {
