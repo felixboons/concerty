@@ -9,7 +9,7 @@
         <tr *ngFor="let type of ticketTypes; let i = index">
           <td class="uk-text-nowrap">{{ TicketType[type] }}</td>
           <td class="uk-text-nowrap">{{ getTicketPrice(getTicketType(type), concert.price) | prettyPrice }}</td>
-          <td *ngIf="isAuthenticated()" class="uk-text-nowrap">
+          <td *ngIf="isAuthenticated" class="uk-text-nowrap">
             <input [(ngModel)]="items[i].amount" [ngModelOptions]="{ standalone: true }"
                    (input)="updateTickets()"
                    class="uk-input" type="number" step="1" min="0">
@@ -18,16 +18,16 @@
         <tr>
           <td class="uk-text-small">TOTAL PRICE</td>
           <td class="uk-text-small uk-text-bold">{{ totalTicketPrice | prettyPrice }}</td>
-          <td *ngIf="isAuthenticated()"></td>
+          <td *ngIf="isAuthenticated"></td>
         </tr>
         <tr class="no-divider">
           <td colspan="3" class="uk-text-nowrap">
-            <button *ngIf="isAuthenticated()" [disabled]="totalTicketPrice === 0" id="buy-tickets-button"
+            <button *ngIf="isAuthenticated" [disabled]="totalTicketPrice === 0" id="buy-tickets-button"
                     class="uk-button uk-button-primary uk-text-nowrap"
                     (click)="buyTicket()">
               BUY TICKET(S)
             </button>
-            <div *ngIf="!isAuthenticated()">
+            <div *ngIf="isAuthenticated">
               <p>
                 <i class="fad fa-info-circle"></i>
                 Log in to purchase tickets.
