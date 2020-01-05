@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.isAuthenticatedSubject
+    this.authService.currentUserSub
       .subscribe(user => this.currentUser = user);
   }
 

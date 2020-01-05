@@ -2,29 +2,19 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../_models/user.model';
-import {Observable, Subject, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
-import {ConcertService} from './concert.service';
-import {Ticket} from '../_models/ticket.model';
-import {CacheService} from './cache.service';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private readonly url = environment.serverUrlPrefix + 'users';
-  currentUser: User;
-  currentUserSubject = new Subject<User>();
 
-  constructor(private http: HttpClient,
-              private concertService: ConcertService,
-              private cache: CacheService) {
-    this.readCurrentUserFromCache();
-    this.currentUserSubject
-      .subscribe(user => this.currentUser = user);
+  constructor(private http: HttpClient) {
   }
 
-  createUser(user: User): Promise<boolean> {
+  createUser(user: User): Promise<void> {
     const body = {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -32,43 +22,23 @@ export class UserService {
       password: user.password
     };
 
-    return new Promise((resolve, reject) => {
-      this.http.post(this.url, body).toPromise()
+    return new Promise<void>((resolve, reject) => {
+      this.http.post<User>(this.url, body)
+        .toPromise()
         .then(response => {
+          console.log(response);
           resolve();
         })
-        .catch(reason => {
+        .catch(err => {
+          console.log(err);
           reject();
         });
     });
   }
 
-  getUser(_id: string): Observable<User> {
-    return this.http.get<User>(this.url + '/' + _id)
-      .pipe(map(user => {
-        return this.replaceConcertIdsWithConcerts(user);
-      }),
-      catchError(err => {
-        return throwError('Server responded with unexpected object array type');
-      }));
-  }
-
-  replaceConcertIdsWithConcerts(user: User): User {
-    const tickets = user.tickets;
-    const _tickets = [];
-
-    for (const ticket of tickets) {
-      if (ticket.concert) {
-        ticket.concert = this.concertService.getConcert(ticket.concert.toString()); // Fool the compiler with .toString()
-        _tickets.push(ticket);
-      }
-    }
-
-    user.tickets = _tickets;
-    return user;
-  }
-
-  private readCurrentUserFromCache(): void {
-    this.currentUser = this.cache.getUser();
+  getUser(id: string): Promise<User> {
+    return this.http.get<User>(this.url + '/' + id)
+      .pipe(catchError(err => throwError(err)))
+      .toPromise();
   }
 }

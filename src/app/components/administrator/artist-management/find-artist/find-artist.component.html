@@ -38,7 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let artist of artists"
+        <tr *ngFor="let artist of artists; let i = index"
             (click)="selectArtist(artist)">
           <td class="uk-table-shrink">#{{ artist._id | prettyId }}</td>
           <td class="uk-table-shrink">
@@ -48,7 +48,7 @@
           <td class="uk-table-shrink uk-text-truncate">{{ artist.biography }}</td>
           <td class="uk-table-shrink uk-text-nowrap">{{ Genre[artist.genre] }}</td>
           <td class="uk-table-shrink uk-text-center">
-            <i (click)="removeArtist(artist._id)" class="fad fa-trash-alt"></i>
+            <i (click)="removeArtist(artist._id, i)" class="fad fa-trash-alt"></i>
           </td>
         </tr>
         </tbody>

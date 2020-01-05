@@ -26,7 +26,7 @@
       <td class="uk-table-shrink uk-text-right">{{ concert.ticketsRemaining }}</td>
       <td class="uk-table-shrink uk-text-right">{{ concert.ticketsTotal }}</td>
       <td class="uk-table-shrink uk-text-center">
-        <i (click)="removeConcert(concert._id)" class="fad fa-trash-alt"></i>
+        <i (click)="removeConcert(concert._id, i)" class="fad fa-trash-alt"></i>
       </td>
     </tr>
     </tbody>

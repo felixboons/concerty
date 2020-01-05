@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../_services/auth.service';
-import {Role} from '../../_enums/role.enum';
 
 @Component({
   selector: 'app-navbar',
@@ -8,22 +7,19 @@ import {Role} from '../../_enums/role.enum';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  Role = Role;
   isAuthenticated = false;
   isAdministrator = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated();
-    this.authService.isAuthenticatedSubject.subscribe(user => {
-      if (!!user) {
-        this.isAdministrator = Role[user.role] === Role.ADMIN;
+    this.authService.isAdministrator()
+      .then(isAdmin => {
+        if (isAdmin) {
+          this.isAdministrator = true;
+        }
         this.isAuthenticated = true;
-      } else {
-        this.isAuthenticated = false;
-        this.isAdministrator = false;
-      }
-    });
+      })
   }
 }

@@ -17,6 +17,7 @@ export class BuyTicketsComponent implements OnInit {
   @Input() concert: Concert;
   items: TicketItem[] = [];
   totalTicketPrice = 0;
+  isAuthenticated = false;
 
   constructor(private authService: AuthService,
               private ticketService: TicketService,
@@ -25,6 +26,8 @@ export class BuyTicketsComponent implements OnInit {
 
   ngOnInit() {
     this.initializeTickets();
+    this.authService.isAuthenticated()
+      .then(_ => this.isAuthenticated = true);
   }
 
   buyTicket(): void {
@@ -76,9 +79,5 @@ export class BuyTicketsComponent implements OnInit {
   private resetTicketValues() {
     this.totalTicketPrice = 0;
     this.initializeTickets();
-  }
-
-  isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
   }
 }

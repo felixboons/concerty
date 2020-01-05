@@ -20,7 +20,6 @@ export class Ticket {
     for (const item of items) {
       ticketAmount += item.amount;
     }
-
     return ticketAmount;
   }
 

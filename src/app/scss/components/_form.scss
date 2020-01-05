@@ -1,20 +1,16 @@
 @import '../base/colors';
 
+.text-error i {
+  color: $color-danger;
+}
+
 .uk-light {
 
   .text-info {
     color: white;
   }
 
-  .text-error {
+  .text-error, .text-error i {
     color: $color-lightblue;
-  }
-}
-
-
-.text-error {
-
-  i {
-    color: $color-danger;
   }
 }

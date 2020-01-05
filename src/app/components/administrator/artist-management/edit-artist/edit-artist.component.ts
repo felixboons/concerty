@@ -37,7 +37,6 @@ export class EditArtistComponent implements OnInit, OnChanges {
       this.artist._id
     );
     this.artistService.editArtist(artist, this.index);
-    this.initializeForm();
     this.formCanceled.emit();
   }
 

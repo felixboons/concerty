@@ -23,8 +23,8 @@ export class AllArtistsComponent implements OnInit {
     this.pageOfArtists = pageOfItems;
   }
 
-  removeArtist(_id: string): void {
-    this.artistService.deleteArtist(_id);
+  removeArtist(id: string, index: number): void {
+    this.artistService.deleteArtist(id, index);
   }
 
   getLastDigitsOfId(id: string, digits = 5): string {

@@ -4,6 +4,7 @@ import {Venue} from '../_enums/venue.enum';
 export class Concert {
   private readonly id: string;
   private readonly _createdAt: Date;
+  private readonly _updatedAt: Date;
   private readonly _title: string;
   private readonly _venue: Venue;
   private readonly _date: Date;
@@ -26,12 +27,39 @@ export class Concert {
     this._ticketsRemaining = ticketsRemaining;
   }
 
+  public static sortByLastUpdated(concerts: Concert[]) {
+    return concerts.sort((a, b) => {
+      return new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime();
+    })
+  }
+
+  public static sortByDate(concerts: Concert[]): Concert[] {
+    return concerts.sort((a, b) => {
+      return new Date(a.date).getTime() - new Date(b.date).getTime();
+    })
+  }
+
   public static getArtistIds(artists: Artist[]): string[] {
     let artistIds: string[] = [];
     for (const artist of artists) {
       artistIds.push(artist._id);
     }
     return artistIds;
+  }
+
+  public static getEmbeddedArtists(concert: Concert, allArtists: Artist[]): Artist[] {
+    const artists: Artist[] = [];
+
+    for (const _artist of concert.artists) {
+      const artistId = _artist.toString(); // Artist actually is an ID. Fool TS with .toString().
+
+      for (const artist of allArtists) {
+        if (artistId === artist._id) {
+          artists.push(artist);
+        }
+      }
+    }
+    return artists;
   }
 
   get title(): string {
@@ -76,5 +104,9 @@ export class Concert {
 
   get createdAt(): Date {
     return this._createdAt;
+  }
+
+  get updatedAt(): Date {
+    return this._updatedAt;
   }
 }

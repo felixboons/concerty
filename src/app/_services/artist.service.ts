@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {NotificationService} from './notification.service';
 import {Artist} from '../_models/artist.model';
-import {CacheService} from './cache.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,25 +11,20 @@ import {CacheService} from './cache.service';
 export class ArtistService {
   private readonly url = environment.serverUrlPrefix + 'artists';
   private artists: Artist[] = [];
-  artistsSubject = new BehaviorSubject<Artist[]>(null);
+  artistsSub = new BehaviorSubject<Artist[]>(this.artists);
 
   constructor(private http: HttpClient,
-              private cache: CacheService,
               private notifier: NotificationService) {
-    // this.readArtistsFromCache();
-    this.getArtists().subscribe(artists => {
-      artists.reverse();
-      this.artists = artists;
-      this.artistsSubject.next(artists);
-      // this.cache.setArtists(artists);
-    });
+    this.synchronize()
+      .then(_ => console.log('Artist data retrieved'));
   }
 
-  getArtist(_id: string): Artist {
-    for (const artist of this.artists) {
-      if (artist._id === _id) {
-        return artist;
-      }
+  getArtists(): Promise<Artist[]> {
+    if (this.artists && this.artists.length > 0) {
+      return new Promise<Artist[]>(resolve => resolve(this.artists));
+    } else {
+      return this.http.get<Artist[]>(this.url)
+        .toPromise();
     }
   }
 
@@ -42,22 +35,16 @@ export class ArtistService {
       biography: artist.biography
     };
 
-    this.http.post(this.url, body)
-      .pipe(map((response: Artist) => response),
-        catchError(err => {
-          this.notify('Something went wrong', false);
-          return throwError('Server responded with unexpected object type');
-        }))
+    this.http.post<Artist>(this.url, body)
       .toPromise()
       .then(artist => {
         this.artists.unshift(artist);
-        this.artistsSubject.next(this.artists);
-        // this.cache.setArtists(this.artists);
-        this.notify('Successfully created artist');
+        this.synchronize()
+          .then(_ => this.notifier.showErrorNotification('Successfully created artist'));
       })
       .catch(err => {
         console.log(err);
-        this.notify('Failed to create artist', false);
+        this.notifier.showErrorNotification('Failed to create artist');
       });
   }
 
@@ -70,67 +57,45 @@ export class ArtistService {
 
     const url = this.url + '/' + artist._id;
     this.http.put<Artist>(url, body)
-      .pipe(map(response => response),
-        catchError(err => {
-          this.notify('Something went wrong', false);
-          return throwError('Server responded with unexpected object type');
-        }))
       .toPromise()
       .then(artist => {
-        console.log(artist);
         this.artists[index] = artist;
-        this.artistsSubject.next(this.artists);
-        // this.cache.setArtists(this.artists);
-        this.notify('Successfully edited artist');
+        this.synchronize()
+          .then(_ => this.notifier.showSuccessNotification('Successfully edited artist'));
       })
       .catch(err => {
-        this.notify('Failed to edit artist', false);
+        this.notifier.showErrorNotification('Failed to edit artist');
         console.log(err);
       });
   }
 
-  deleteArtist(_id: string): void {
-    const url = this.url + '/' + _id;
-
-    this.http.delete(url).toPromise()
-      .then((artist: Artist) => {
-        let index;
-
-        this.artists.forEach((value, i) => {
-          if (artist._id === value._id) {
-            index = i;
-          }
-        });
-
+  deleteArtist(id: string, index: number): void {
+    this.http.delete<Artist>(this.url + '/' + id).toPromise()
+      .then(artist => {
         this.artists.splice(index, 1);
-        this.artistsSubject.next(this.artists);
-        // this.cache.setArtists(this.artists);
+        this.synchronize()
+          .then(_ => this.notifier.showSuccessNotification('Successfully deleted artist'));
       })
       .catch(err => {
-
+        this.notifier.showErrorNotification('Failed to delete artist');
+        console.log(err);
       });
   }
 
-  private readArtistsFromCache(): void {
-    this.artists = this.cache.getArtists();
-  }
+  private synchronize(): Promise<void> {
+    this.artistsSub.next(this.artists);
 
-  getArtists(): Observable<Artist[]> {
-    return this.http
-      .get(this.url)
-      .pipe(map((response: Artist[]) => response),
-        catchError(err => {
-          this.notify('Something went wrong', false);
-          return throwError('Server responded with unexpected object type');
+    return new Promise<void>((resolve, reject) => {
+      this.getArtists()
+        .then(artists => {
+          this.artists = artists;
+          this.artistsSub.next(artists);
+          resolve();
         })
-      );
-  }
-
-  private notify(message: string, success = true): void {
-    if (success) {
-      this.notifier.showSuccessNotification(message);
-    } else {
-      this.notifier.showErrorNotification(message);
-    }
+        .catch(err => {
+          console.log(err);
+          this.notifier.showErrorNotification('Server error')
+        });
+    });
   }
 }

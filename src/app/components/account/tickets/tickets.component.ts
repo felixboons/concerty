@@ -18,7 +18,7 @@ export class TicketsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.authService.isAuthenticatedSubject
+    this.authService.currentUserSub
       .subscribe(user => {
         if (user && user.tickets) {
           this.tickets = user.tickets.reverse();

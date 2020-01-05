@@ -7,16 +7,9 @@ import {AuthService} from './_services/auth.service';
 })
 export class AuthGuardAdministrator implements CanActivate {
 
-  constructor(private authService: AuthService,
-              private router: Router) { }
+  constructor(private authService: AuthService) { }
 
-  canActivate(): boolean {
-    const authenticated = this.authService.isAuthenticated();
-    if (authenticated) {
-      return true;
-    } else {
-      this.router.navigateByUrl('login');
-      return false;
-    }
+  canActivate(): Promise<boolean> {
+    return this.authService.isAdministrator();
   }
 }

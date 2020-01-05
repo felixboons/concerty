@@ -7,39 +7,94 @@ import {UserService} from './user.service';
 import {Router} from '@angular/router';
 import {User} from '../_models/user.model';
 import {Role} from '../_enums/role.enum';
+import {ConcertService} from './concert.service';
+import {NotificationService} from './notification.service';
+import {Concert} from '../_models/concert.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   private readonly url = environment.serverUrlPrefix + 'auth/login';
   private currentUser: User;
-  isAuthenticatedSubject = new BehaviorSubject<User>(this.currentUser);
+  private concerts: Concert[] = [];
+  currentUserSub = new BehaviorSubject<User>(this.currentUser);
 
-  constructor(private http: HttpClient,
-              private userService: UserService,
+  constructor(private userService: UserService,
+              private notifier: NotificationService,
               private cache: CacheService,
-              private router: Router) {
-    this.readCurrentUserFromCache();
-    this.establishLoginSession();
+              private http: HttpClient,
+              private router: Router,
+              private concertService: ConcertService) {
+
+    // TODO: ConcertService is not initialized when AuthService is, so logic below doesnt run properly.
+
+    this.concertService.concertsSub
+      .subscribe(concerts => {
+        if (concerts && concerts.length > 0) {
+          this.convertEmbeddedConcerts(concerts);
+        }
+      });
   }
 
   login(email: string, password: string): Promise<string> {
     const body = {email, password};
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.url, body).toPromise()
+      this.http.post<User>(this.url, body)
+        .toPromise()
         .then(response => {
           this.cache.setToken(response['token']);
           let user = response['user'];
-          user = this.userService.replaceConcertIdsWithConcerts(user);
-          this.updateAuthentication(user);
-          resolve();
+          this.synchronize(user)
+            .then(_ => resolve());
         })
-        .catch(reason => {
-          this.updateAuthentication();
-          reject();
+        .catch(err => {
+          console.log(err);
+          reject(err);
         });
+    });
+  }
+
+  isAuthenticated(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      const token = this.cache.getToken();
+      const user = this.cache.getUser();
+
+      if (!!token && !!user) {
+        return this.userService.getUser(user._id)
+          .then(user => {
+            resolve(true);
+            this.synchronize(user);
+          })
+          .catch(_ => {
+            this.logout();
+            reject(false)
+          })
+      }
+    });
+  }
+
+
+  // Resolve(true) is admin. resolve(false) is user. Reject is unauthenticated and unauthorized.
+  isAdministrator(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      const token = this.cache.getToken();
+      const user = this.cache.getUser();
+
+      if (!!token && !!user) {
+        return this.userService.getUser(user._id)
+          .then(user => {
+            if (user.role === Role.ADMIN) {
+              resolve(true);
+            } else {
+              reject(true);
+            }
+            this.synchronize(user);
+          })
+          .catch(_ => {
+            this.logout();
+            reject(false)
+          })
+      }
     });
   }
 
@@ -47,55 +102,22 @@ export class AuthService {
     this.cache.removeToken();
     this.cache.removeUser();
     this.router.navigateByUrl('login');
-    this.isAuthenticatedSubject.next(null);
+    this.currentUserSub.next(null);
   }
 
-  isAuthenticated(): boolean {
-    const token = this.cache.getToken();
-    const user = this.getCurrentUser();
-    return !!token && !!user;
-  }
-
-  isAdministrator(): boolean {
-    return this.currentUser.role === Role.ADMIN;
-  }
-
-  getCurrentUser(): User {
-    if (this.currentUser) {
-      return this.currentUser;
-    } else {
-      return this.cache.getUser();
-    }
-  }
-
-  updateAuthentication(user: User = null): void {
-    const token = this.cache.getToken();
-    if (!token || !user) {
-      this.logout();
-    } else {
+  private synchronize(user: User): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      user = User.getEmbeddedConcertForTickets(user, this.concerts);
       this.currentUser = user;
       this.cache.setUser(user);
-      this.isAuthenticatedSubject.next(user);
-    }
+      this.currentUserSub.next(user);
+      console.log(user);
+      resolve();
+    });
   }
 
-  private readCurrentUserFromCache(): void {
-    this.currentUser = this.cache.getUser();
-    this.isAuthenticatedSubject.next(this.currentUser);
-  }
-
-  private establishLoginSession() {
-    this.readCurrentUserFromCache();
-
-    if (this.currentUser) {
-      this.userService.getUser(this.currentUser._id)
-        .subscribe(user => {
-          if (!!user) {
-            this.updateAuthentication(user);
-          }
-        });
-    } else {
-      this.logout();
-    }
+  private convertEmbeddedConcerts(concerts: Concert[]): void {
+    const user = User.getEmbeddedConcertForTickets(this.currentUser, concerts);
+    this.synchronize(user);
   }
 }

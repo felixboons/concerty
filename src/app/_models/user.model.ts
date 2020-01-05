@@ -1,4 +1,5 @@
 import {Ticket} from './ticket.model';
+import {Concert} from './concert.model';
 
 export class User {
   private readonly id: string;
@@ -15,6 +16,26 @@ export class User {
     this._email = email;
     this._password = password;
     this.id = _id;
+  }
+
+  public static getEmbeddedConcertForTickets(user: User, concerts: Concert[]): User {
+    console.log(concerts);
+    const tickets: Ticket[] = [];
+
+    for (const ticket of user.tickets) {
+      for (const concert of concerts) {
+        const concertId = ticket.concert.toString(); // Concert is actually an ID. Fool TS with .toString().
+
+        if (concert._id === concertId) {
+          ticket.concert = concert;
+          console.log(ticket);
+        }
+      }
+      tickets.push(ticket);
+    }
+
+    user.tickets = tickets;
+    return user;
   }
 
   get _id(): string {

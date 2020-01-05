@@ -27,6 +27,32 @@ export class CacheService {
     localStorage.removeItem(this.lsKeyToken);
   }
 
+  setUser(user: User) {
+    const value = JSON.stringify(user);
+    localStorage.setItem(this.lsKeyUser, value);
+  }
+
+  getUser(): User {
+    const user = localStorage.getItem(this.lsKeyUser);
+    return JSON.parse(user);
+  }
+
+  removeUser(): void {
+    localStorage.removeItem(this.lsKeyUser);
+  }
+
+  setEmailAutofill(email: string): void {
+    localStorage.setItem(this.lsEmailAutofill, email);
+  }
+
+  getEmailAutofill(): string {
+    return localStorage.getItem(this.lsEmailAutofill);
+  }
+
+  removeEmailAutofill(): void {
+    localStorage.removeItem(this.lsEmailAutofill);
+  }
+
   setArtists(artists: Artist[]): void {
     const value = JSON.stringify(artists);
     localStorage.setItem(this.lsKeyArtists, value);
@@ -53,31 +79,5 @@ export class CacheService {
 
   removeConcerts(): void {
     localStorage.removeItem(this.lsKeyConcerts);
-  }
-
-  setUser(user: User) {
-    const value = JSON.stringify(user);
-    localStorage.setItem(this.lsKeyUser, value);
-  }
-
-  getUser(): User {
-    const user = localStorage.getItem(this.lsKeyUser);
-    return JSON.parse(user);
-  }
-
-  removeUser(): void {
-    localStorage.removeItem(this.lsKeyUser);
-  }
-
-  setEmailAutofill(email: string): void {
-    localStorage.setItem(this.lsEmailAutofill, email);
-  }
-
-  getEmailAutofill(): string {
-    return localStorage.getItem(this.lsEmailAutofill);
-  }
-
-  removeEmailAutofill(): void {
-    localStorage.removeItem(this.lsEmailAutofill);
   }
 }
