@@ -28,6 +28,7 @@ export class ConcertService {
             .then(concerts => {
               concerts = Concert.sortByDate(concerts);
               concerts = this.convertEmbeddedIdArraysToObjectArrays(concerts);
+              concerts.reverse();
               this.concerts = concerts;
               this.concertsSub.next(concerts);
             })
