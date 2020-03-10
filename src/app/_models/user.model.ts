@@ -19,7 +19,6 @@ export class User {
   }
 
   public static getEmbeddedConcertForTickets(user: User, concerts: Concert[]): User {
-    console.log(concerts);
     const tickets: Ticket[] = [];
 
     for (const ticket of user.tickets) {
@@ -28,7 +27,6 @@ export class User {
 
         if (concert._id === concertId) {
           ticket.concert = concert;
-          console.log(ticket);
         }
       }
       tickets.push(ticket);

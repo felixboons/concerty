@@ -26,13 +26,12 @@ export class AuthService {
               private concertService: ConcertService) {
 
     // TODO: ConcertService is not initialized when AuthService is, so logic below doesnt run properly.
-
-    this.concertService.concertsSub
-      .subscribe(concerts => {
-        if (concerts && concerts.length > 0) {
-          this.convertEmbeddedConcerts(concerts);
-        }
-      });
+    // this.concertService.concertsSub
+    //   .subscribe(concerts => {
+    //     if (concerts && concerts.length > 0) {
+    //       this.convertEmbeddedConcerts(concerts);
+    //     }
+    //   });
   }
 
   login(email: string, password: string): Promise<string> {
