@@ -74,6 +74,7 @@ export class AuthService {
 
 
   // Resolve(true) is admin. resolve(false) is user. Reject is unauthenticated and unauthorized.
+  // TODO: This leaves a lot to the imagination! Don't do this!
   isAdministrator(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       const token = this.cache.getToken();

@@ -14,12 +14,15 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.isAdministrator()
-      .then(isAdmin => {
-        if (isAdmin) {
-          this.isAdministrator = true;
+    this.authService.currentUserSub
+      .subscribe(user => {
+        if (user) {
+          this.isAuthenticated = true
+          this.isAdministrator = user.role === 'ADMIN'
+        } else {
+          this.isAuthenticated = false
+          this.isAdministrator = false
         }
-        this.isAuthenticated = true;
       })
   }
 }
