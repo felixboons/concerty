@@ -16,7 +16,7 @@ export class ArtistService {
   constructor(private http: HttpClient,
               private notifier: NotificationService) {
     this.synchronize()
-      .then(_ => console.log('Artist data retrieved'));
+      .then();
   }
 
   getArtists(): Promise<Artist[]> {
@@ -43,7 +43,7 @@ export class ArtistService {
           .then(_ => this.notifier.showSuccessNotification('Successfully created artist'));
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         this.notifier.showErrorNotification('Failed to create artist');
       });
   }
@@ -65,7 +65,7 @@ export class ArtistService {
       })
       .catch(err => {
         this.notifier.showErrorNotification('Failed to edit artist');
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -78,7 +78,7 @@ export class ArtistService {
       })
       .catch(err => {
         this.notifier.showErrorNotification('Failed to delete artist');
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -93,7 +93,7 @@ export class ArtistService {
           resolve();
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           this.notifier.showErrorNotification('Server error')
         });
     });

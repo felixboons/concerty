@@ -23,14 +23,22 @@ export class ConcertService {
       .subscribe(artists => {
         if (artists && artists.length > 0) {
           this.artists = artists;
-          this.synchronize()
-            .then(_ => console.log('Concert data retrieved'));
+
+          this.getConcerts() // TODO: If this doesnt work, return this promise.
+            .then(concerts => {
+              concerts = Concert.sortByDate(concerts);
+              concerts = this.convertEmbeddedIdArraysToObjectArrays(concerts);
+              this.concerts = concerts;
+              this.concertsSub.next(concerts);
+            })
+            .catch(err => {
+              this.notifier.showErrorNotification('Server error');
+            });
         }
       });
   }
 
   getConcerts(): Promise<Concert[]> {
-    console.log(this.concerts);
     if (this.concerts && this.concerts.length > 0) {
       return new Promise<Concert[]>((resolve) => resolve(this.concerts));
     } else {
@@ -63,11 +71,10 @@ export class ConcertService {
       .then(concert => {
         concert = this.convertEmbeddedIdArrayToObjectArray(concert);
         this.concerts.unshift(concert);
-        this.synchronize()
-          .then(_ => this.notifier.showSuccessNotification('Successfully created concert'));
+        this.notifier.showSuccessNotification('Successfully created concert');
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         this.notifier.showErrorNotification('Failed to create concert');
       });
   }
@@ -88,11 +95,10 @@ export class ConcertService {
       .then(concert => {
         concert = this.convertEmbeddedIdArrayToObjectArray(concert);
         this.concerts[index] = concert;
-        this.synchronize()
-          .then(_ => this.notifier.showSuccessNotification('Successfully edited concert'));
+        this.notifier.showSuccessNotification('Successfully edited concert');
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         this.notifier.showErrorNotification('Failed to edit concert');
       });
   }
@@ -103,32 +109,12 @@ export class ConcertService {
       .then(concert => {
         concert = this.convertEmbeddedIdArrayToObjectArray(concert);
         this.concerts.splice(index, 1);
-        this.synchronize()
-          .then(_ => this.notifier.showSuccessNotification('Successfully deleted concert'));
+        this.notifier.showSuccessNotification('Successfully deleted concert');
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         this.notifier.showErrorNotification('Failed to delete concert');
       });
-  }
-
-  private synchronize(): Promise<void> {
-    this.concertsSub.next(this.concerts);
-
-    return new Promise<void>((resolve, reject) => {
-      this.getConcerts() // TODO: If this doesnt work, return this promise.
-        .then(concerts => {
-          concerts = Concert.sortByDate(concerts);
-          concerts = this.convertEmbeddedIdArraysToObjectArrays(concerts);
-          this.concerts = concerts;
-          this.concertsSub.next(concerts);
-          resolve();
-        })
-        .catch(err => {
-          console.log(err);
-          this.notifier.showErrorNotification('Server error');
-        });
-    });
   }
 
   private convertEmbeddedIdArraysToObjectArrays(concerts: Concert[]): Concert[] {

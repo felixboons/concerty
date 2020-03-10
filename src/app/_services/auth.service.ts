@@ -26,7 +26,6 @@ export class AuthService {
               private concertService: ConcertService) {
 
     // TODO: ConcertService is not initialized when AuthService is, so logic below doesnt run properly.
-
     // this.concertService.concertsSub
     //   .subscribe(concerts => {
     //     if (concerts && concerts.length > 0) {
@@ -48,7 +47,7 @@ export class AuthService {
             .then(_ => resolve());
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           reject(err);
         });
     });
@@ -111,7 +110,6 @@ export class AuthService {
       this.currentUser = user;
       this.cache.setUser(user);
       this.currentUserSub.next(user);
-      console.log(user);
       resolve();
     });
   }
