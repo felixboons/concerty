@@ -40,7 +40,7 @@ export class ArtistService {
       .then(artist => {
         this.artists.unshift(artist);
         this.synchronize()
-          .then(_ => this.notifier.showErrorNotification('Successfully created artist'));
+          .then(_ => this.notifier.showSuccessNotification('Successfully created artist'));
       })
       .catch(err => {
         console.log(err);
