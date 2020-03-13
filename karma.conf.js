@@ -16,7 +16,7 @@ module.exports = function (config) {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     coverageIstanbulReporter: {
-      dir: require('path').join(__dirname, './coverage/tastic-items-client'),
+      dir: require('path').join(__dirname, './coverage/concerty-client'),
       reports: ['html', 'lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },
@@ -32,7 +32,6 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-
     singleRun: false,
     restartOnFileChange: true
   });
