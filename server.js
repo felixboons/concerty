@@ -17,7 +17,7 @@ const options = {
   setHeaders: (res, path, stat) => {
     res.set(
       'Content-Security-Policy',
-      "default-src 'self' https://concerty-client.herokuapp.com/; script-src 'self' https://concerty-client.herokuapp.com/; connect-src https://concerty-client.herokuapp.com/ 'self'; img-src 'self' www.google.com; style-src 'self' 'unsafe-inline';"
+      "default-src 'self' https://concerty-server.herokuapp.com/; script-src 'self' https://concerty-server.herokuapp.com/; connect-src https://concerty-server.herokuapp.com/ 'self'; img-src 'self' www.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://pro.fontawesome.com; font-src *"
     )
   }
 };
