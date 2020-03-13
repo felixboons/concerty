@@ -1,0 +1,20 @@
+steps:
+  # Install
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+
+  # Test
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'test']
+  - name: 'gcr.io/cloud-builders/sonarqube'
+    args: ['run', 'test']
+
+  # Build
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build']
+
+  # Deploy
+  - name: 'gcr.io/$PROJECT_ID/firebase'
+    args: ['deploy']
+
+  timeout: 180s
