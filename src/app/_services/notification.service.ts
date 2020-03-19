@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Notification} from 'UIkit';
+import * as UIkit from 'UIkit';
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +66,6 @@ export class NotificationService {
       pos: 'bottom-left',
       timeout: this.timeout
     };
-    Notification(notificationMarkup, options);
+    UIkit.notification(notificationMarkup, options);
   }
 }
