@@ -8,8 +8,8 @@ import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/home/home.component';
 import {AboutComponent} from './components/about/about.component';
 import {RegisterComponent} from './components/register/register.component';
-import {AuthGuardUser} from './auth-guard-user.module';
-import {AuthGuardAdministrator} from './auth-guard-administrator.module';
+import {AuthUserGuard} from './auth-user.guard';
+import {AuthAdministratorGuard} from './auth-administrator.guard';
 import {AccountComponent} from './components/account/account.component';
 import {TicketsComponent} from './components/account/tickets/tickets.component';
 import {ProfileComponent} from './components/account/profile/profile.component';
@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'account', component: AccountComponent, canActivate: [AuthGuardUser],
+  { path: 'account', component: AccountComponent, canActivate: [AuthUserGuard],
     children: [
       { path: 'tickets', component: TicketsComponent, children: [
           { path: ':id', component: TicketDetailsComponent }
@@ -41,7 +41,7 @@ const routes: Routes = [
       },
       { path: 'profile', component: ProfileComponent },
   ]},
-  { path: 'administrator', component: AdministratorComponent, canActivate: [AuthGuardAdministrator],
+  { path: 'administrator', component: AdministratorComponent, canActivate: [AuthAdministratorGuard],
     children: [
       { path: 'artists', component: ArtistManagementComponent },
       { path: 'concerts', component: ConcertManagementComponent },

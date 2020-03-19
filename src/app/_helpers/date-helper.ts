@@ -3,6 +3,7 @@ import * as moment from 'moment';
 export class DateHelper {
 
   static getPrettyDate(date: Date): string {
+    moment.locale('nl');
     return moment(date).format('LL');
   }
 

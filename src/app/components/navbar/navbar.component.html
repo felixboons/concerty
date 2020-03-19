@@ -22,7 +22,7 @@
 
         <div *ngIf="isAuthenticated; else loginButton" class="uk-navbar-item uk-padding-remove-right">
           <div class="uk-inline">
-            <a class="uk-button uk-button-primary" type="button">
+            <a class="uk-button uk-button-primary account-button" type="button">
               ACCOUNT
             </a>
             <div uk-dropdown>
@@ -41,7 +41,7 @@
                 </li>
 
                 <!--      Administrator -->
-                <li *ngIf="isAdministrator" class="uk-nav-header">ADMINISTRATOR</li>
+                <li *ngIf="isAdministrator" class="uk-nav-header administrator-links">ADMINISTRATOR</li>
                 <li *ngIf="isAdministrator" routerLink="/administrator/artists" routerLinkActive="uk-active">
                   <a><i class="fad fa-user-music"></i>ARTIST MANAGEMENT</a>
                 </li>

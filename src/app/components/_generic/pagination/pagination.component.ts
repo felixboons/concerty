@@ -11,11 +11,11 @@ import paginate from 'jw-paginate';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Output() changePage = new EventEmitter<any>(true);
   @Input() items: Array<any> = [];
   @Input() initialPage = 1;
   @Input() pageSize = 6;
   @Input() maxPages;
+  @Output() changePage = new EventEmitter<any>(true);
   pager: any = {};
 
   constructor(private artistService: ArtistService,

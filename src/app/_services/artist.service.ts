@@ -23,29 +23,33 @@ export class ArtistService {
     if (this.artists && this.artists.length > 0) {
       return new Promise<Artist[]>(resolve => resolve(this.artists));
     } else {
-      return this.http.get<Artist[]>(this.url)
-        .toPromise();
+      return this.http.get<Artist[]>(this.url).toPromise();
     }
   }
 
-  createArtist(artist: Artist): void {
+  createArtist(artist: Artist): Promise<boolean> {
     const body = {
       name: artist.name,
       genre: artist.genre,
       biography: artist.biography
     };
 
-    this.http.post<Artist>(this.url, body)
-      .toPromise()
-      .then(artist => {
-        this.artists.unshift(artist);
-        this.synchronize()
-          .then(_ => this.notifier.showSuccessNotification('Successfully created artist'));
-      })
-      .catch(err => {
-        // console.log(err);
-        this.notifier.showErrorNotification('Failed to create artist');
-      });
+    return new Promise((resolve, reject) => {
+      this.http.post<Artist>(this.url, body)
+        .toPromise()
+        .then(artist => {
+          this.artists.unshift(artist);
+          this.synchronize()
+            .then(_ => {
+              this.notifier.showSuccessNotification('Successfully created artist');
+              resolve(true);
+            });
+        })
+        .catch(err => {
+          resolve(false);
+          this.notifier.showErrorNotification('Failed to create artist');
+        });
+    });
   }
 
   editArtist(artist: any, index: number): void {

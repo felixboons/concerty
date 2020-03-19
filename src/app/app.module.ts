@@ -92,7 +92,7 @@ import {AuthService} from './_services/auth.service';
     PrettyDaysRemainingPipe,
     PrettyPricePipe,
     TicketThumbnailComponent,
-    TicketDetailsComponent
+    TicketDetailsComponent,
   ],
   imports: [
     BrowserModule,

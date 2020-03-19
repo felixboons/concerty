@@ -10,11 +10,11 @@ import * as moment from 'moment';
   styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent implements OnInit, OnChanges {
-  @ViewChild('datepicker', null) datepicker: MatDatepicker<Date>;
   @Input() date: Date;
-  today: Date = new Date();
   @Output() dateValueChanged = new EventEmitter<Date>();
   @Output() datepickerTouched = new EventEmitter();
+  @ViewChild('datepicker', null) datepicker: MatDatepicker<Date>;
+  today: Date = new Date();
 
   constructor() {
   }
