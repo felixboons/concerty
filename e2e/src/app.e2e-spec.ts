@@ -1,16 +1,16 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('App root', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display upcoming concerts', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to tastic-items-client!');
+    expect(page.getTitleText()).toEqual('Upcoming concerts');
   });
 
   afterEach(async () => {

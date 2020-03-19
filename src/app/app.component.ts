@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {ConcertService} from './_services/concert.service';
 import {ArtistService} from './_services/artist.service';
-declare var UIkit: any;
 
 @Component({
   selector: 'app-root',
