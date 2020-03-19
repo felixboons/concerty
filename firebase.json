@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/tastic-tickets-client",
+    "public": "dist/concerty-client",
     "ignore": [
       "firebase.json",
       "**/.*",

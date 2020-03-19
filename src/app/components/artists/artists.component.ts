@@ -38,7 +38,6 @@ export class ArtistsComponent implements OnInit {
     }
 
     this.discoverArtists = discoverArtists;
-    console.log(this.discoverArtists);
   }
 
   private shuffle(o) {
