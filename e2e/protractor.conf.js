@@ -3,7 +3,6 @@
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 
 const { SpecReporter } = require('jasmine-spec-reporter');
-let UIkit;
 
 /**
  * @type { import("protractor").Config }
