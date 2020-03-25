@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Concert} from '../../../_models/concert.model';
 import {ConcertService} from '../../../_services/concert.service';
 import * as $ from 'jquery';
-import * as UIkit from 'UIkit';
+import * as UIkit from 'uikit';
 
 @Component({
   selector: 'app-concert-management',

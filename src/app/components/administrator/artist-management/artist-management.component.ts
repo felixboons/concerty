@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Artist} from '../../../_models/artist.model';
 import {ArtistService} from '../../../_services/artist.service';
 import * as $ from 'jquery';
-import * as UIkit from 'UIkit';
+import * as UIkit from 'uikit';
 
 @Component({
   selector: 'app-artist-management',

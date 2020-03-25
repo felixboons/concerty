@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import * as UIkit from 'UIkit';
+import * as UIkit from 'uikit';
 
 @Injectable({
   providedIn: 'root'
