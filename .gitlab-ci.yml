@@ -53,8 +53,6 @@ end2end:
     NODE_ENV: development
   before_script:
     - npm install --no-optional
-    - webdriver-manager version
-    - webdriver-manager version
   script:
     - google-chrome --version
     - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
