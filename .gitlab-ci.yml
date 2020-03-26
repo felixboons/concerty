@@ -57,7 +57,8 @@ end2end:
     - webdriver --version
     - chromedriver --version
   script:
-    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
+#    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
+    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=80.0.3987.106
     - npm run e2e
 
 #
