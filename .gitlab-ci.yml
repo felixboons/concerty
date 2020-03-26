@@ -46,19 +46,19 @@ unittests:
 #
 # Run end-to-end tests
 #
-end2end:
-  image: markhobson/node-chrome:latest
-  stage: test
-  variables:
-    NODE_ENV: development
-  before_script:
-    - rm -rf node_modules
-    - rm -f package-lock.json
-    - npm i
-  script:
-#    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
-#    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=80.0.3987.106
-    - npm run e2e
+#end2end:
+#  image: markhobson/node-chrome:latest
+#  stage: test
+#  variables:
+#    NODE_ENV: development
+#  before_script:
+#    - rm -rf node_modules
+#    - rm -f package-lock.json
+#    - npm i
+#  script:
+##    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
+##    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=80.0.3987.106
+#    - npm run e2e
 
 production:
   stage: deploy
