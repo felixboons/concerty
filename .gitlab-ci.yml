@@ -7,6 +7,9 @@
 #
 image: node:latest
 
+before_script:
+  - npm install -g firebase-tools
+
 stages:
   - test
   - metrics
@@ -62,10 +65,9 @@ unittests:
 
 production:
   stage: deploy
-  image: ruby:latest
+  image: markhobson/node-chrome:latest
   before_script:
     - npm i --no-optional
-    - npm i -g firebase-tools
   script:
     - ng b --prod
     - firebase deploy --token $FIREBASE_TOKEN
