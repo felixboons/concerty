@@ -38,7 +38,7 @@ unittests:
     # DB_PORT: $DB_PORT
     # DB_DATABASE: $DB_DATABASE
   before_script:
-    - npm install --no-optional
+    - npm i --no-optional
   script:
     - npm run test
     # - npm run sonar
@@ -47,12 +47,12 @@ unittests:
 # Run end-to-end tests
 #
 end2end:
-  image: markhobson/node-chrome:latest
+  image: markhobson/node-chromef:latest
   stage: test
   variables:
     NODE_ENV: development
   before_script:
-    - npm install --no-optional
+    - npm i --no-optional
   script:
 #    - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
     - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=80.0.3987.106
@@ -67,10 +67,15 @@ end2end:
 production:
   stage: deploy
   image: ruby:latest
+  before_script:
+    - npm i --no-optional
+    - npm i -g firebase-tools
   script:
+    - ng b --prod
+    - firebase deploy --token $FIREBASE_TOKEN
     # Get your key at https://dashboard.heroku.com/account
     # and add it to your project environment variables at GitLab.
-    - echo "Heroku API key = $HEROKU_API_KEY"
+#    - echo "Heroku API key = $HEROKU_API_KEY"
     # The name of your app at Heroku. See https://dashboard.heroku.com/apps.
 #    - echo "Heroku app name = $HEROKU_APP_NAME"
 #    - apt-get update -qy
