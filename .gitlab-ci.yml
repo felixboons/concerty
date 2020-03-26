@@ -53,9 +53,9 @@ end2end:
     NODE_ENV: development
   before_script:
     - npm install --no-optional
-      - google-chrome --version
-      - webdriver --version
-      - chromedriver --version
+    - google-chrome --version
+    - webdriver --version
+    - chromedriver --version
   script:
     - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
     - npm run e2e
@@ -74,10 +74,10 @@ production:
     # and add it to your project environment variables at GitLab.
     - echo "Heroku API key = $HEROKU_API_KEY"
     # The name of your app at Heroku. See https://dashboard.heroku.com/apps.
-    - echo "Heroku app name = $HEROKU_APP_NAME"
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+#    - echo "Heroku app name = $HEROKU_APP_NAME"
+#    - apt-get update -qy
+#    - apt-get install -y ruby-dev
+#    - gem install dpl
+#    - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
   only:
     - master
