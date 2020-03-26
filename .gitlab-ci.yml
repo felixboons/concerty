@@ -46,9 +46,6 @@ unittests:
     - npm run test
     # - npm run sonar
 
-#
-# Run end-to-end tests
-#
 #end2end:
 #  image: markhobson/node-chrome:latest
 #  stage: test

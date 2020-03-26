@@ -4,8 +4,8 @@ import {DateHelper} from './date-helper';
 describe('DateHelper', () => {
 
   it('can detect upcoming dates', () => {
-    const todayPlusOneMillisecond = moment().add(1, 'ms').toDate();
-    const todayMinusOneMillisecond = moment().subtract(1, 'ms').toDate();
+    const todayPlusOneMillisecond = moment().add(1, 's').toDate();
+    const todayMinusOneMillisecond = moment().subtract(1, 's').toDate();
 
     const isUpcoming = DateHelper.isUpcoming(todayPlusOneMillisecond);
     const isUpcoming2 = DateHelper.isUpcoming(todayMinusOneMillisecond);
