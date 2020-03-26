@@ -47,7 +47,7 @@ unittests:
 # Run end-to-end tests
 #
 end2end:
-  image: markhobson/node-chromef:latest
+  image: markhobson/node-chrome:latest
   stage: test
   variables:
     NODE_ENV: development
