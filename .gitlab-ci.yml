@@ -52,10 +52,10 @@ end2end:
   variables:
     NODE_ENV: development
   before_script:
-    - google-chrome --version
-    - webdriver --version
-    - chromedriver --version
     - npm install --no-optional
+      - google-chrome --version
+      - webdriver --version
+      - chromedriver --version
   script:
     - node ./node_modules/protractor/bin/webdriver-manager update --versions.chrome=76.0.3809.100
     - npm run e2e
