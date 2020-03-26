@@ -8,7 +8,7 @@
     "test": "ng test --code-coverage --no-watch --no-progress --browsers=ChromeHeadlessCI",
     "sonar": "sonar-scanner",
     "lint": "ng lint",
-    "e2e": "ng e2e --webdriverUpdate=false"
+    "e2e": "ng e2e"
   },
   "private": false,
   "dependencies": {
