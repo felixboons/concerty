@@ -4,7 +4,8 @@ import {AuthService} from '../../_services/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  providers: [AuthService]
 })
 export class NavbarComponent implements OnInit {
   isAuthenticated = false;

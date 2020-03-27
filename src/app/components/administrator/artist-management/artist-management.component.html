@@ -27,11 +27,13 @@
       </a>
       <div class="uk-accordion-content uk-margin-bottom uk-margin-remove-top">
         <div *ngIf="selectedArtist; else editArtistInfo">
-          <app-edit-artist [artist]="selectedArtist" [index]="selectedArtistIndex"
-                           (formCanceled)="editArtistCanceled()"></app-edit-artist>
+          <app-edit-artist [artist]="selectedArtist"
+                           [index]="selectedArtistIndex"
+                           (formCanceled)="editArtistCanceled()"
+                           class="edit-artist-component"></app-edit-artist>
         </div>
         <ng-template #editArtistInfo>
-          <p class="text-info">
+          <p class="edit-artist-info text-info">
             <i class="fad fa-info-circle uk-margin-small-right"></i>
             <span>Select a concert to edit it.</span>
           </p>

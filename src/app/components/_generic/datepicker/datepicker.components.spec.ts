@@ -9,10 +9,10 @@ describe('Datepicker', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DatepickerComponent ],
+      declarations: [DatepickerComponent],
       schemas: [NO_ERRORS_SCHEMA]
     })
-      .compileComponents();
+      .compileComponents(); // Not required, since Angular compiles everything - including spec files.
   }));
 
   beforeEach(() => {
