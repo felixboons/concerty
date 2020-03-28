@@ -1,4 +1,3 @@
-
 <a *ngIf="!clickToAdd" [href]="'#' + uniqueModalId" uk-toggle type="search"
    class="uk-button uk-button-primary">
   Search artist by ID, name or genre
@@ -39,7 +38,8 @@
         </thead>
         <tbody>
         <tr *ngFor="let artist of artists; let i = index"
-            (click)="selectArtist(artist)">
+            (click)="selectArtist(artist)"
+            class="artist-table">
           <td class="uk-table-shrink">#{{ artist._id | prettyId }}</td>
           <td class="uk-table-shrink">
             <img class="uk-preserve-width" src="./assets/images/tydolla.png" width="50" alt="">

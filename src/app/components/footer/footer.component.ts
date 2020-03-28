@@ -18,10 +18,10 @@ export class FooterComponent implements OnInit {
     this.authService.currentUserSub
       .subscribe(user => {
         if (user) {
-          this.isAuthenticated = true
+          this.isAuthenticated = true;
           this.isAdministrator = user.role === 'ADMIN'
         } else {
-          this.isAuthenticated = false
+          this.isAuthenticated = false;
           this.isAdministrator = false
         }
       })

@@ -12,7 +12,7 @@ import * as moment from 'moment';
 export class DatepickerComponent implements OnInit, OnChanges {
   @Input() date: Date;
   @Output() dateValueChanged = new EventEmitter<Date>();
-  @Output() datepickerTouched = new EventEmitter();
+  @Output() datepickerTouched = new EventEmitter<void>();
   @ViewChild('datepicker', null) datepicker: MatDatepicker<Date>;
   today: Date = new Date();
 

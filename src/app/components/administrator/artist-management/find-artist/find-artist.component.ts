@@ -36,8 +36,8 @@ export class FindArtistComponent implements OnInit {
       this.artistSelectedToEdit.emit(artist);
     }
 
-    // Close search component.
-    $('.uk-close').click();
+    // Close search component modal.
+    $('button.uk-close').click();
   }
 
   search(): void {

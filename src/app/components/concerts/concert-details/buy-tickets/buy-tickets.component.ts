@@ -25,9 +25,10 @@ export class BuyTicketsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.initializeTickets();
-    this.authService.isAuthenticated()
-      .then(_ => this.isAuthenticated = true);
+    this.authService.currentUserSub
+      .subscribe(user => {
+        this.isAuthenticated = !!user;
+      })
   }
 
   buyTicket(): void {
