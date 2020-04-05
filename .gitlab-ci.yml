@@ -22,6 +22,21 @@ variables:
   DOCKER_HOST: tcp://docker:2375/
   DOCKER_DRIVER: overlay2
 
+sonarqube:
+  image: markhobson/node-chrome:latest
+  stage: test
+  variables:
+    NODE_ENV: development
+    # DB_USER: $DB_USER
+    # DB_PASSWORD: $DB_PASSWORD
+    # DB_HOST: $DB_HOST
+    # DB_PORT: $DB_PORT
+    # DB_DATABASE: $DB_DATABASE
+  before_script:
+    - npm i --no-optional
+  script:
+    - npm run sonar
+
 unittests:
   image: markhobson/node-chrome:latest
   stage: test

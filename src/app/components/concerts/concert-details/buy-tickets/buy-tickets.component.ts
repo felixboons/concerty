@@ -28,6 +28,7 @@ export class BuyTicketsComponent implements OnInit {
     this.authService.currentUserSub
       .subscribe(user => {
         this.isAuthenticated = !!user;
+        this.initializeTickets();
       })
   }
 

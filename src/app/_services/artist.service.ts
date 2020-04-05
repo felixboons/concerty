@@ -15,8 +15,11 @@ export class ArtistService {
 
   constructor(private http: HttpClient,
               private notifier: NotificationService) {
-    this.synchronize()
-      .then();
+    this.getArtists()
+      .then(artists => {
+        this.artists = artists;
+        this.artistsSub.next(artists);
+      })
   }
 
   getArtists(): Promise<Artist[]> {
@@ -27,7 +30,7 @@ export class ArtistService {
     }
   }
 
-  createArtist(artist: Artist): Promise<boolean> {
+  createArtist(artist: Artist): Promise<Artist[]> {
     const body = {
       name: artist.name,
       genre: artist.genre,
@@ -39,15 +42,13 @@ export class ArtistService {
         .toPromise()
         .then(artist => {
           this.artists.unshift(artist);
-          this.synchronize()
-            .then(_ => {
-              this.notifier.showSuccessNotification('Successfully created artist');
-              resolve(true);
-            });
+          this.artistsSub.next(this.artists);
+          this.notifier.showSuccessNotification('Successfully created artist');
+          resolve(this.artists);
         })
         .catch(err => {
-          resolve(false);
           this.notifier.showErrorNotification('Failed to create artist');
+          resolve(this.artists);
         });
     });
   }
@@ -64,12 +65,11 @@ export class ArtistService {
       .toPromise()
       .then(artist => {
         this.artists[index] = artist;
-        this.synchronize()
-          .then(_ => this.notifier.showSuccessNotification('Successfully edited artist'));
+        this.artistsSub.next(this.artists);
+        this.notifier.showSuccessNotification('Successfully edited artist');
       })
       .catch(err => {
         this.notifier.showErrorNotification('Failed to edit artist');
-        // console.log(err);
       });
   }
 
@@ -77,29 +77,11 @@ export class ArtistService {
     this.http.delete<Artist>(this.url + '/' + id).toPromise()
       .then(artist => {
         this.artists.splice(index, 1);
-        this.synchronize()
-          .then(_ => this.notifier.showSuccessNotification('Successfully deleted artist'));
+        this.artistsSub.next(this.artists);
+        this.notifier.showSuccessNotification('Successfully deleted artist');
       })
       .catch(err => {
         this.notifier.showErrorNotification('Failed to delete artist');
-        // console.log(err);
       });
-  }
-
-  private synchronize(): Promise<void> {
-    this.artistsSub.next(this.artists);
-
-    return new Promise<void>((resolve, reject) => {
-      this.getArtists()
-        .then(artists => {
-          this.artists = artists;
-          this.artistsSub.next(artists);
-          resolve();
-        })
-        .catch(err => {
-          // console.log(err);
-          this.notifier.showErrorNotification('Server error')
-        });
-    });
   }
 }

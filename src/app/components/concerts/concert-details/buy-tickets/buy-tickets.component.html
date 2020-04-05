@@ -27,7 +27,7 @@
                     (click)="buyTicket()">
               BUY TICKET(S)
             </button>
-            <div *ngIf="isAuthenticated">
+            <div *ngIf="!isAuthenticated">
               <p>
                 <i class="fad fa-info-circle"></i>
                 Log in to purchase tickets.
