@@ -23,7 +23,7 @@ variables:
   DOCKER_DRIVER: overlay2
 
 sonarqube:
-  image: markhobson/node-chrome:latest
+  image: sonarsource/sonar-scanner-cli:latest
   stage: test
   variables:
     NODE_ENV: development
@@ -51,7 +51,6 @@ unittests:
     - npm i --no-optional
   script:
     - npm run test
-    # - npm run sonar
 
 #end2end:
 #  image: markhobson/node-chrome:latest
