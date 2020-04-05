@@ -43,11 +43,10 @@ export class AuthService {
         .then(response => {
           this.cache.setToken(response['token']);
           let user = response['user'];
-          this.synchronize(user)
-            .then(_ => resolve());
+          this.emitCurrentUser(user);
+          resolve();
         })
         .catch(err => {
-          // console.log(err);
           reject(err);
         });
     });
@@ -61,8 +60,10 @@ export class AuthService {
       if (!!token && !!user) {
         return this.userService.getUser(user._id)
           .then(user => {
-            resolve(true);
-            this.synchronize(user);
+            if (user) {
+              this.emitCurrentUser(user);
+              resolve(true);
+            }
           })
           .catch(_ => {
             this.logout();
@@ -86,9 +87,8 @@ export class AuthService {
             if (user.role === Role.ADMIN) {
               resolve(true);
             } else {
-              reject(true);
+              resolve(false);
             }
-            this.synchronize(user);
           })
           .catch(_ => {
             this.logout();
@@ -105,18 +105,10 @@ export class AuthService {
     this.currentUserSub.next(null);
   }
 
-  private synchronize(user: User): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      user = User.getEmbeddedConcertForTickets(user, this.concerts);
-      this.currentUser = user;
-      this.cache.setUser(user);
-      this.currentUserSub.next(user);
-      resolve();
-    });
-  }
-
-  private convertEmbeddedConcerts(concerts: Concert[]): void {
-    const user = User.getEmbeddedConcertForTickets(this.currentUser, concerts);
-    this.synchronize(user);
+  private emitCurrentUser(user: User): void {
+    user = User.getEmbeddedConcertForTickets(user, this.concerts);
+    this.currentUser = user;
+    this.cache.setUser(user);
+    this.currentUserSub.next(user);
   }
 }

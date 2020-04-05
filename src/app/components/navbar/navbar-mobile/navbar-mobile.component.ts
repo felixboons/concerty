@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../../_services/auth.service';
 
 @Component({
@@ -7,19 +7,12 @@ import {AuthService} from '../../../_services/auth.service';
   styleUrls: ['./navbar-mobile.component.scss']
 })
 export class NavbarMobileComponent implements OnInit {
-  isAuthenticated = false;
-  isAdministrator = false;
+  @Input() isAuthenticated = false;
+  @Input() isAdministrator = false;
 
-  constructor(private authService: AuthService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.authService.isAdministrator()
-      .then(isAdmin => {
-        if (isAdmin) {
-          this.isAdministrator = true;
-        }
-        this.isAuthenticated = true;
-      })
   }
 }

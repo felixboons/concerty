@@ -20,7 +20,7 @@
           </li>
         </ul>
 
-        <div *ngIf="isAuthenticated; else loginButton" class="uk-navbar-item uk-padding-remove-right">
+        <div *ngIf="isAuthenticated" class="uk-navbar-item uk-padding-remove-right">
           <div class="uk-inline">
             <a class="uk-button uk-button-primary account-button" type="button">
               ACCOUNT
@@ -53,18 +53,16 @@
           </div>
         </div>
 
-        <ng-template #loginButton>
-          <div class="uk-navbar-item uk-padding-remove-right">
-            <a routerLink="login" routerLinkActive="uk-active"
-               class="login-button uk-button uk-button-primary">
-              LOG IN
-            </a>
-            <a routerLink="register" routerLinkActive="uk-active"
-               class="register-button uk-button uk-button-default uk-margin-small-left">
-              REGISTER
-            </a>
-          </div>
-        </ng-template>
+        <div *ngIf="!isAuthenticated" class="uk-navbar-item uk-padding-remove-right">
+          <a routerLink="login" routerLinkActive="uk-active"
+             class="login-button uk-button uk-button-primary">
+            LOG IN
+          </a>
+          <a routerLink="register" routerLinkActive="uk-active"
+             class="register-button uk-button uk-button-default uk-margin-small-left">
+            REGISTER
+          </a>
+        </div>
       </div>
 
     <!--  Mobile toggle menu -->
@@ -83,4 +81,5 @@
   </div>
 </div>
 
-<app-navbar-mobile></app-navbar-mobile>
+<app-navbar-mobile [isAuthenticated]="isAuthenticated"
+                   [isAdministrator]="isAdministrator"></app-navbar-mobile>
